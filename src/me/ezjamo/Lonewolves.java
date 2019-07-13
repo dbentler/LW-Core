@@ -173,6 +173,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     		if (args[0].equals("reload")) {
     		reloadConfig();
     		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aTest."));
     		}
     		if (!(args[0].equals("reload"))) {
     		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
