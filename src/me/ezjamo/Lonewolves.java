@@ -56,7 +56,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 {
 
     public static Lonewolves plugin;
-    public static String NO_PERMS = ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this.");
+    public static String NO_PERMS = ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this..");
     
     public HashMap<UUID, ItemStack[]> contents;
     public HashMap<UUID, ItemStack[]> armorContents;
