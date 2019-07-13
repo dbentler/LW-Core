@@ -69,23 +69,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         
     }
     
-    public boolean previous(Player player) {
-        return this.contents.containsKey(player.getUniqueId()) && this.armorContents.containsKey(player.getUniqueId());
-    }
-    
-    public void saveInventory(Player player) {
-        this.contents.put(player.getUniqueId(), player.getInventory().getContents());
-        this.armorContents.put(player.getUniqueId(), player.getInventory().getArmorContents());
-    }
-    
-    public void loadInventory(Player player) {
-        PlayerInventory playerInventory = player.getInventory();
-        playerInventory.setContents((ItemStack[])this.contents.get(player.getUniqueId()));
-        playerInventory.setArmorContents((ItemStack[])this.armorContents.get(player.getUniqueId()));
-        this.contents.remove(player.getUniqueId());
-        this.armorContents.remove(player.getUniqueId());
-    }
-    
     public static Economy econ = null;
 
     private boolean setupEconomy() {
