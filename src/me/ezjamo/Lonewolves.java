@@ -157,11 +157,9 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		
 	public void onDisable() {
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
+    			staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     			staff.setGameMode(GameMode.SURVIVAL);
     					}
-    	for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-			player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-					}
     				}
 	    	
 	
@@ -171,21 +169,21 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	
     	if (label.equalsIgnoreCase("lw")) {
     		if (player.hasPermission("lw.reload"))
-    		if (args.length == 1)
-    		if (args[0].equals("reload"))
+    		if (args.length == 1) {
+    		if (args[0].equals("reload")) {
+    		reloadConfig();
     		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
-        	reloadConfig();
+    		}
+    		if (!(args[0].equals("reload"))) {
+    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
+    		}
     	}
-    	if (label.equalsIgnoreCase("lw")) {
+    		if (args.length == 0) {
+    		if (player.hasPermission("lw.reload"))
+    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
     		if (!player.hasPermission("lw.reload"))
-    		if (args.length == 1)
-    		if (args[0].equals("reload"))
-    		player.sendMessage(Lonewolves.NO_PERMS);
-    	}
-    	if (label.equalsIgnoreCase("lw")) {
-    		if (!player.hasPermission("lw.reload"))
-    		if (args.length == 0)
-    		player.sendMessage(Lonewolves.NO_PERMS);
+    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
+    		}
     	}
 		return false;
     }
