@@ -77,22 +77,27 @@ Scoreboard:
 - '&dOnline: &f%server_online%'
 - '&dBalance: &f%vault_eco_balance_formatted%'
 - ''
-- '&aFaction: &r%factionsuuid_faction_name%'
+- '&aFaction: &r%mvdw_factionsuuid_faction_name%'
 - ''
 - '&cKills: &f%statistic_player_kills%'
 - '&cDeaths: &f%statistic_deaths%'
 
+Scoreboard Koth:
+- ''
+- '&dKOTH: &f%koth%'
+- '&dTime: &f%time%'
+
 Stats:
 - '&8[&f&lLone&4&lWolves&8]'
 - '&fYour Stats:'
-- '&cKills: &f%statistic_player_kills%'
 - '&cDeaths: &f%statistic_deaths%'
+- '&aKills: &f%statistic_player_kills%'
 
 Stats Others:
 - '&8[&f&lLone&4&lWolves&8]'
-- '&f%target%''s Stats:'
-- '&cKills: &f%targetkills%'
+- '&7%target%''s &fStats:'
 - '&cDeaths: &f%targetdeaths%'
+- '&aKills: &f%targetkills%'
 
 # All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
 blocked:

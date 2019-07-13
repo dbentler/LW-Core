@@ -63,10 +63,10 @@ public class ScoreboardAdapter implements AssembleAdapter {
 		toReturn.add(ChatColor.translateAlternateColorCodes('&', placeholders));
 		}
 			if (!kothPlugin.getKothHandler().getRunningKoths().isEmpty()) {
-				toReturn.add(ChatColor.translateAlternateColorCodes('&',""));
-				toReturn.add(ChatColor.translateAlternateColorCodes('&', "&cKOTH: &f" + kothPlugin.getKothHandler().getRunningKoth().getKoth().getName()));
-				toReturn.add(ChatColor.translateAlternateColorCodes('&', "&cTime: &f" + kothPlugin.getKothHandler().getRunningKoth().getTimeObject().getTimeLeftFormatted()));
+				for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard Koth")) {
+				toReturn.add(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%koth%", kothPlugin.getKothHandler().getRunningKoth().getKoth().getName()).replaceAll("%time%", kothPlugin.getKothHandler().getRunningKoth().getTimeObject().getTimeLeftFormatted())));
         }
+			}
         toReturn.add(ChatColor.translateAlternateColorCodes('&',"&7&m-----------------"));
 		return toReturn;
 	}

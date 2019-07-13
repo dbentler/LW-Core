@@ -42,6 +42,7 @@ commands:
   kit:
   preview:
   stats:
+  demote:
    
 permissions:
   lw.helpop:
@@ -70,3 +71,5 @@ permissions:
     description: 'Opens a kits GUI.'
   lw.preview:
     description: 'Shows a preview of the selected kit.'
+  lw.demote:
+    description: 'Demotes the specified user.'
