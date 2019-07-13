@@ -1,0 +1,72 @@
+name: LW-Essentials
+main: me.ezjamo.Lonewolves
+author: EzJamo & DeathRealms
+description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
+softdepend: [PlaceholderAPI]
+depend: [KoTH, Vault, Essentials]
+version: 2.4
+
+commands:
+  request:
+    aliases:
+      - helpop
+  mod:
+    aliases:
+      - h
+      - staff
+  sc:
+    aliases:
+      - staffchat
+  acc:
+    aliases:
+      - adminchat
+  distance:
+   aliases: [dist]
+  links:
+   aliases: [link, forums] 
+  help:
+  lw:
+  rules:
+  setslots:
+  spawn:
+  freeze:
+  nv:
+  hub:
+  admin:
+  commands:
+    usage: /<command>
+  inv:
+  ping:
+  startkoth:
+  kits:
+  kit:
+  preview:
+  stats:
+   
+permissions:
+  lw.helpop:
+    description: Helpop/request.
+    default: op
+  lw.mod:
+    description: 'Toggle mod mode.'
+    default: op
+  lw.color:
+    description: 'Chat color.'
+    default: op
+  lw.helpopr:
+    description: 'Helpop receive.'
+    default: op
+  lw.staffchat:
+    description: 'Chat for staff.'
+  lw.slots:
+    description: 'Set server slots.'
+  lw.nv:
+    description: 'Gives nightvision.'
+  lw.switchinv:
+    description: 'Switches between a blank inventory and your previous one.'
+  lw.koth:
+    description: 'Opens a GUI to start a koth.'
+  lw.kits:
+    description: 'Opens a kits GUI.'
+  lw.preview:
+    description: 'Shows a preview of the selected kit.'

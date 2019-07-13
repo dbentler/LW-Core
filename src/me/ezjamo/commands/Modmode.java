@@ -1,0 +1,84 @@
+package me.ezjamo.commands;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
+import me.ezjamo.Lonewolves;
+import me.ezjamo.managers.ModModeManager;
+
+public class Modmode implements CommandExecutor
+{
+	
+    public static ArrayList<String> modmode;
+    public HashMap<UUID, ItemStack[]> contents;
+    public HashMap<UUID, ItemStack[]> armorContents;
+    
+    static {
+        Modmode.modmode = new ArrayList<String>();
+        
+    }
+    
+    public Modmode() {
+        this.contents = new HashMap<UUID, ItemStack[]>();
+        this.armorContents = new HashMap<UUID, ItemStack[]>();
+    }
+    
+    public boolean previous(Player player) {
+        return this.contents.containsKey(player.getUniqueId()) && this.armorContents.containsKey(player.getUniqueId());
+    }
+    
+    public void saveInventory(Player player) {
+        this.contents.put(player.getUniqueId(), player.getInventory().getContents());
+        this.armorContents.put(player.getUniqueId(), player.getInventory().getArmorContents());
+    }
+    
+    public void loadInventory(Player player) {
+        PlayerInventory playerInventory = player.getInventory();
+        playerInventory.setContents((ItemStack[])this.contents.get(player.getUniqueId()));
+        playerInventory.setArmorContents((ItemStack[])this.armorContents.get(player.getUniqueId()));
+        this.contents.remove(player.getUniqueId());
+        this.armorContents.remove(player.getUniqueId());
+    }
+    
+    
+    public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] arg3) {
+    	Player player = (Player) sender;
+        if (cmd.getName().equalsIgnoreCase("mod")) {
+            if (!player.hasPermission("lw.mod")) {
+                player.sendMessage(Lonewolves.NO_PERMS);
+                return true;
+            }
+            if (!(player instanceof Player)) {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cPlayer only command."));
+                return true;
+            }
+            if (arg3.length != 0) {
+                player.sendMessage("Invalid usage");
+                return true;
+            }
+            if (Modmode.modmode.contains(player.getName())) {
+                Modmode.modmode.remove(player.getName());
+                ModModeManager.remove(Bukkit.getPlayer(player.getName()));
+                player.performCommand("inv prev");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fStaffmode set to &cfalse"));
+                
+                return true;
+                }
+            }
+        	player.performCommand("inv new");
+            Modmode.modmode.add(player.getName());
+            ModModeManager.put(Bukkit.getPlayer(player.getName()));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fStaffmode set to &atrue"));
+        return true;
+    	}
+	}

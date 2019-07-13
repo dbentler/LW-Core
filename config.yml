@@ -1,0 +1,162 @@
+# Messages
+Help:
+- '&7&m----------------------------------------------------'
+- '&6&lServer Help &8- &f(1/2)'
+- '&7&m----------------------------------------------------'
+- '&e/f help &8- &7View the help page for Factions.'
+- '&e/tpa &8- &7Request to teleport to a player.'
+- '&e/warp &8- &7View all the available warps.'
+- '&e/shop &8- &7Use this to Buy or Sell your items.'
+- '&e/sell &8- &7Use this to Sell your items.'
+- '&e/kits &8- &7View all of the kits, and right click for a preview.'
+- '&e/ah &8- &7View items players have put up for sale, or list your own.'
+- '&e/distance &8- &7See how many blocks out you are from spawn.'
+- '&e/links &8- &7Shows you useful links for the server.'
+- '&e/lottery help &8- &7View the help page for the Lottery'
+- '&7&m-------------------- &e/help 2 &7&m-----------------------'
+
+Help 2:
+- '&7&m----------------------------------------------------'
+- '&6&lServer Help &8- &f(2/2)'
+- '&7&m----------------------------------------------------'
+- '&e/trade &f<playername> &8- &7Trade items with another player.'
+- '&e/rules &8- &7View all of the server rules.'
+- '&e/preview &f<kit> &8- &7Shows you a preview of the specified kit.'
+- '&e/nv &8- &7Enable/Disable the night vision effect.'
+- '&e/ping &f<playername> &8- &7View your own or another players ping.'
+- '&e/stats &f<playername> &8- &7View your own or another players stats.'
+- '&7&m-------------------- &eLast Page &7&m-----------------------'
+
+Links:
+- '&3&lForums: &ahttps://lonewolvs.net'
+- '&3&lStore: &ahttp://store.lonewolves.net'
+- '&3&lDiscord: &ahttps://lonewolves.net/discord'
+
+Rules:
+- '&7&m----------------------------------------------------'
+- '&c&lServer Rules &8- &f(1/2)'
+- '&7&m----------------------------------------------------'
+- '&e[1] &7No advertising.'
+- '&e[2] &7No spamming.'
+- '&e[3] &7No disrespecting players or staff.'
+- '&e[4] &7No death remarks/threats.'
+- '&e[5] &7No racism.'
+- '&e[6] &7No inapproriate nicknames or links.'
+- '&e[7] &7No abusing helpop.'
+- '&e[8] &7No impersonating players or staff.'
+- '&e[9] &7No hacking.'
+- '&e[10] &7No exploiting glitches.'
+- '&7&m-------------------- &e/rules 2 &7&m-----------------------'
+
+Rules 2:
+- '&7&m----------------------------------------------------'
+- '&c&lServer Rules &8- &f(2/2)'
+- '&7&m----------------------------------------------------'
+- '&e[11] &7No bypassing a mute or ban.'
+- '&e[12] &7No DDoS/Dox threats.'
+- '&e[13] &7No harassing players.'
+- '&e[14] &7No charging back.'
+- '&e[15] &7No trapping.'
+- '&e[16] &7No "bitch claiming".'
+- '&7&m-------------------- &eLast Page &7&m-----------------------'
+
+NightVision On:
+- '&8[&f&lLone&4&lWolves&8] &aYou have enabled your night vision effects.'
+
+NightVision Off:
+- '&8[&f&lLone&4&lWolves&8] &cYou have disabled your night vision effects.'
+
+Ping:
+- '&8[&f&lLone&4&lWolves&8] &fPing: %ping%'
+
+Ping Others:
+- '&8[&f&lLone&4&lWolves&8] &f%target%''s ping is %ping%'
+
+Scoreboard:
+- '&7&m-----------------'
+- '&dOnline: &f%server_online%'
+- '&dBalance: &f%vault_eco_balance_formatted%'
+- ''
+- '&aFaction: &r%factionsuuid_faction_name%'
+- ''
+- '&cKills: &f%statistic_player_kills%'
+- '&cDeaths: &f%statistic_deaths%'
+
+Stats:
+- '&8[&f&lLone&4&lWolves&8]'
+- '&fYour Stats:'
+- '&cKills: &f%statistic_player_kills%'
+- '&cDeaths: &f%statistic_deaths%'
+
+Stats Others:
+- '&8[&f&lLone&4&lWolves&8]'
+- '&f%target%''s Stats:'
+- '&cKills: &f%targetkills%'
+- '&cDeaths: &f%targetdeaths%'
+
+# All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
+blocked:
+    - FURNACE
+    - CHEST
+    - TRAPPED_CHEST
+    - BEACON
+    - DISPENSER
+    - DROPPER
+    - HOPPER
+    - WORKBENCH
+    - ENCHANTMENT_TABLE
+    - ENDER_CHEST
+    - ANVIL
+    - BED_BLOCK
+    - FENCE_GATE
+    - SPRUCE_FENCE_GATE
+    - BIRCH_FENCE_GATE
+    - ACACIA_FENCE_GATE
+    - JUNGLE_FENCE_GATE
+    - DARK_OAK_FENCE_GATE
+    - IRON_DOOR_BLOCK
+    - WOODEN_DOOR
+    - SPRUCE_DOOR
+    - BIRCH_DOOR
+    - JUNGLE_DOOR
+    - ACACIA_DOOR
+    - DARK_OAK_DOOR
+    - WOOD_BUTTON
+    - STONE_BUTTON
+    - TRAP_DOOR
+    - IRON_TRAPDOOR
+    - DIODE_BLOCK_OFF
+    - DIODE_BLOCK_ON
+    - REDSTONE_COMPARATOR_OFF
+    - REDSTONE_COMPARATOR_ON
+    - FENCE
+    - SPRUCE_FENCE
+    - BIRCH_FENCE
+    - JUNGLE_FENCE
+    - DARK_OAK_FENCE
+    - ACACIA_FENCE
+    - NETHER_FENCE
+    - BREWING_STAND
+    - CAULDRON
+    - SIGN_POST
+    - WALL_SIGN
+    - SIGN
+    - LEVER
+    - BLACK_SHULKER_BOX
+    - BLUE_SHULKER_BOX
+    - BROWN_SHULKER_BOX
+    - CYAN_SHULKER_BOX
+    - GRAY_SHULKER_BOX
+    - GREEN_SHULKER_BOX
+    - LIGHT_BLUE_SHULKER_BOX
+    - LIME_SHULKER_BOX
+    - MAGENTA_SHULKER_BOX
+    - ORANGE_SHULKER_BOX
+    - PINK_SHULKER_BOX
+    - PURPLE_SHULKER_BOX
+    - RED_SHULKER_BOX
+    - SILVER_SHULKER_BOX
+    - WHITE_SHULKER_BOX
+    - YELLOW_SHULKER_BOX
+    - DAYLIGHT_DETECTOR_INVERTED
+    - DAYLIGHT_DETECTOR
