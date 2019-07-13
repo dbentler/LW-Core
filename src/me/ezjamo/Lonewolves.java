@@ -158,6 +158,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onDisable() {
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
     			staff.setGameMode(GameMode.SURVIVAL);
+    			Assemble assemble = new Assemble(this, new ScoreboardAdapter());
+    			assemble.getBoards().clear();
     					}
     				}
 	    	
