@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="C:/Users/love1/Desktop/Servers/server.jar"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Servers/lombok.jar"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Servers/PlaceholderAPI-2.10.3.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Servers/Citizens.jar"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Servers/Factions-2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Servers/KOTH.jar"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Servers/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Users/love1/Desktop/Backups/LoneWolves 7-2-19 05-06/paper.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/KOTH.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/Vault.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/PlaceholderAPI-2.10.3.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/Factions-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/lombok.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/TacoSpigot-1.8.8.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Music/iTunes/Citizens.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

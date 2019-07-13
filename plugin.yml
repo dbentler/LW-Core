@@ -33,6 +33,7 @@ commands:
   nv:
   hub:
   admin:
+  removemm:
   commands:
     usage: /<command>
   inv:
