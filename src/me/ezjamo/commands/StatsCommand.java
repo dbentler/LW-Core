@@ -2,7 +2,6 @@ package me.ezjamo.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Statistic;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,8 +30,8 @@ public class StatsCommand implements CommandExecutor {
                 else
                 	if (target != null) {
                 		for (final String message : Lonewolves.plugin.getConfig().getStringList("Stats Others")) {
-                			String placeholders = PlaceholderAPI.setPlaceholders(p, message);
-                			p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders.replaceAll("%target%", target.getPlayer().getName()).replaceAll("%targetkills%", Integer.toString(target.getPlayer().getStatistic(Statistic.PLAYER_KILLS))).replaceAll("%targetdeaths%", Integer.toString(target.getPlayer().getStatistic(Statistic.DEATHS)))));
+                			String placeholders = PlaceholderAPI.setPlaceholders(target, message);
+                			p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
                 			}
                 	}
             }
