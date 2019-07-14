@@ -30,6 +30,7 @@ import me.ezjamo.commands.LinksCommand;
 import me.ezjamo.commands.Modmode;
 import me.ezjamo.commands.NightVisionCommand;
 import me.ezjamo.commands.PingCommand;
+import me.ezjamo.commands.PlaytimeCommand;
 import me.ezjamo.commands.PreviewCommand;
 import me.ezjamo.commands.RemoveModModeCommand;
 import me.ezjamo.commands.RulesCommand;
@@ -131,6 +132,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("stats").setExecutor(new StatsCommand());
     	this.getCommand("demote").setExecutor(new DemoteCommand());
     	this.getCommand("removemm").setExecutor(new RemoveModModeCommand());
+    	this.getCommand("playtime").setExecutor(new PlaytimeCommand());
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);

@@ -95,9 +95,15 @@ Stats:
 
 Stats Others:
 - '&8[&f&lLone&4&lWolves&8]'
-- '&7%target%''s &fStats:'
-- '&cDeaths: &f%targetdeaths%'
-- '&aKills: &f%targetkills%'
+- '&7%player_name%''s &fStats:'
+- '&cDeaths: &f%statistic_deaths%'
+- '&aKills: &f%statistic_player_kills%'
+
+Playtime:
+- '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+
+Playtime Others:
+- '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
 
 # All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
 blocked:
