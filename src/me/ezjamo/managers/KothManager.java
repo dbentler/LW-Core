@@ -24,9 +24,15 @@ public class KothManager implements Listener {
 			if (e.getCurrentItem() == null) {
 				return;
 			}
-			if ( e.getSlot() == 0 )
+			if ( e.getSlot() == 0 ) {
 				p.performCommand("koth start Crow 5");
 				p.closeInventory();
+			}
+				
+			if ( e.getSlot() == 1) {
+				p.performCommand("koth start Goliath 5");
+				p.closeInventory();
+			}
 		}
 }
 }

@@ -16,6 +16,7 @@ public class KothCommand implements CommandExecutor {
 
     	Inventory koth = Bukkit.getServer().createInventory(null, 27, Utils.chat("&fLone&4Wolves &fKoths"));
     	Utils.createItem(koth, 399, 1, 0, "&dCrow Koth", "&fStart &dCrow &fkoth for 5 minutes.");
+    	Utils.createItem(koth, 399, 1, 1, "&dGoliath Koth", "&fStart &dGoliath &fkoth for 5 minutes.");
         p.openInventory(koth);
 
    }
