@@ -13,6 +13,7 @@ public class WildToolsFixManager implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
+		if (e.getPlayer().getItemInHand().getEnchantments().size() == 0) {
 		if (!e.getPlayer().getItemInHand().hasItemMeta() && (!e.getPlayer().getInventory().getItemInHand().getType().equals(Material.GOLD_AXE)))
 			return;
 
@@ -21,7 +22,8 @@ public class WildToolsFixManager implements Listener {
 			if (!fPlayer.isInOwnTerritory()) {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou can only use build wands in your own claim."));
-					}	
+						}	
 				}
+			}
 		}
 }
