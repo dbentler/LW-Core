@@ -43,6 +43,7 @@ import me.ezjamo.managers.ChatManager;
 import me.ezjamo.managers.CitizensManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
+import me.ezjamo.managers.FFLYManager;
 import me.ezjamo.managers.FreezeManager;
 import me.ezjamo.managers.KitsManager;
 import me.ezjamo.managers.KothManager;
@@ -50,6 +51,7 @@ import me.ezjamo.managers.LWManagers;
 import me.ezjamo.managers.ModModeManager;
 import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.WeatherManager;
+import me.ezjamo.managers.WildToolsFixManager;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 
@@ -101,7 +103,9 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new CitizensManager(), this);
         Bukkit.getPluginManager().registerEvents(new DepthStriderManager(), this);
         Bukkit.getPluginManager().registerEvents(new DispenerArmorListener(), this);
+        Bukkit.getPluginManager().registerEvents(new FFLYManager(), this);
         Bukkit.getPluginManager().registerEvents(new WeatherManager(), this);
+        Bukkit.getPluginManager().registerEvents(new WildToolsFixManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
