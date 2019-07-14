@@ -30,7 +30,7 @@ public class KitsManager implements Listener {
 					p.performCommand("preview vip");
 				}
 			if (e.getClick().isLeftClick()) {
-				p.performCommand("essentials:kit vip");
+				p.performCommand("ekit vip");
 				p.closeInventory();
 			}
 		}
@@ -39,7 +39,7 @@ public class KitsManager implements Listener {
 					p.performCommand("preview vip+");
 				}
 			if (e.getClick().isLeftClick()) {
-				p.performCommand("essentials:kit vip+");
+				p.performCommand("ekit vip+");
 				p.closeInventory();
 			}
 		}
@@ -48,7 +48,7 @@ public class KitsManager implements Listener {
 					p.performCommand("preview mvp");
 				}
 			if (e.getClick().isLeftClick()) {
-				p.performCommand("essentials:kit mvp");
+				p.performCommand("ekit mvp");
 				p.closeInventory();
 			}
 		}
@@ -57,7 +57,7 @@ public class KitsManager implements Listener {
 					p.performCommand("preview noble");
 				}
 			if (e.getClick().isLeftClick()) {
-				p.performCommand("essentials:kit noble");
+				p.performCommand("ekit noble");
 				p.closeInventory();
 			}
 		}
@@ -66,7 +66,7 @@ public class KitsManager implements Listener {
 					p.performCommand("preview mystic");
 				}
 			if (e.getClick().isLeftClick()) {
-				p.performCommand("essentials:kit mystic");
+				p.performCommand("ekit mystic");
 				p.closeInventory();
 			}
 		}
@@ -75,7 +75,7 @@ public class KitsManager implements Listener {
 					p.performCommand("preview kingpin");
 				}
 			if (e.getClick().isLeftClick()) {
-				p.performCommand("essentials:kit kingpin");
+				p.performCommand("ekit kingpin");
 				p.closeInventory();
 			}
 		}
