@@ -75,3 +75,5 @@ permissions:
     description: 'Shows a preview of the selected kit.'
   lw.demote:
     description: 'Demotes the specified user.'
+  lw.flybypass:
+    description: 'Lets user bypass fly disable in other faction claims.'

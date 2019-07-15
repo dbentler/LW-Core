@@ -11,7 +11,7 @@ public class FFLYManager implements Listener {
 	
     @EventHandler
     public void onFly(PlayerMoveEvent e) {
-         if (!e.getPlayer().isFlying() || e.getPlayer().hasPermission("lw.fly") || e.getFrom().getBlockY() == e.getTo().getBlockY()) 
+         if (!e.getPlayer().isFlying() || e.getPlayer().hasPermission("lw.flybypass") || e.getFrom().getBlockY() == e.getTo().getBlockY()) 
              return;
         FPlayer fPlayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
         if (fPlayer.isInNeutralTerritory()) {
