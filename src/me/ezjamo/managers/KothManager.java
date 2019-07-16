@@ -33,6 +33,16 @@ public class KothManager implements Listener {
 				p.performCommand("koth start Goliath 5");
 				p.closeInventory();
 			}
+			
+			if ( e.getSlot() == 2) {
+				p.performCommand("koth start Triumph 5");
+				p.closeInventory();
+			}
+			
+			if ( e.getSlot() == 3) {
+				p.performCommand("koth start End 5");
+				p.closeInventory();
+			}
 		}
 }
 }
