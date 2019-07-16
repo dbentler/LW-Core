@@ -5,18 +5,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
-import net.minecraft.server.v1_8_R3.EntityPlayer;
 
  
 public class PingCommand implements CommandExecutor {
-
-	
-	public int getPing(Player p) { CraftPlayer cp = (CraftPlayer) p; EntityPlayer ep = cp.getHandle(); return ep.ping; }
-	
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
@@ -24,7 +19,8 @@ public class PingCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("ping")) {
 			if (args.length < 1)
 			for (final String message : Lonewolves.plugin.getConfig().getStringList("Ping")) {
-	        p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%ping%", Integer.toString(getPing(p)))));
+				String placeholders = PlaceholderAPI.setPlaceholders(p, message);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
 			}
             else {
                 Player target = Bukkit.getPlayer(args[0]);
@@ -34,7 +30,8 @@ public class PingCommand implements CommandExecutor {
                 else
                 	if (target != null) {
                 		for (final String message : Lonewolves.plugin.getConfig().getStringList("Ping Others")) {
-                			p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%target%", target.getPlayer().getName()).replaceAll("%ping%", Integer.toString(getPing(p)))));
+                			String placeholders = PlaceholderAPI.setPlaceholders(target, message);
+            				p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
                 			}
                 	}
             }			

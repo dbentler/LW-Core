@@ -67,10 +67,10 @@ NightVision Off:
 - '&8[&f&lLone&4&lWolves&8] &cYou have disabled your night vision effects.'
 
 Ping:
-- '&8[&f&lLone&4&lWolves&8] &fPing: %ping%'
+- '&8[&f&lLone&4&lWolves&8] &fPing: %player_ping%'
 
 Ping Others:
-- '&8[&f&lLone&4&lWolves&8] &f%target%''s ping is %ping%'
+- '&8[&f&lLone&4&lWolves&8] &f%player_name%''s ping is %player_ping%'
 
 Scoreboard:
 - '&7&m-----------------'
