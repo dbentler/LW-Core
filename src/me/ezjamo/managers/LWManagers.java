@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
 public class LWManagers implements Listener {
@@ -32,7 +34,7 @@ public class LWManagers implements Listener {
                  PotionEffectType effecttype = potion.getType().getEffectType();
                 if (effecttype == PotionEffectType.INCREASE_DAMAGE) {
                     event.setCancelled(true);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fStrength II is currently disabled."));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStrength II is currently disabled."));
                 }
             }
         }
@@ -45,7 +47,7 @@ public class LWManagers implements Listener {
 			if (p.getLocation().getBlockY() >= 128) {
 				e.setCancelled(true);
 				p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 86, 0.5));
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou cannot place blocks above the nether."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
 			}
 			else
 				return;
@@ -53,12 +55,32 @@ public class LWManagers implements Listener {
 	}
 	
 	@EventHandler
-	public void onSpawnerPlace(BlockPlaceEvent e) {
+	public void onSpawnerPlace(PlayerInteractEvent e) {
 		Player p = (Player) e.getPlayer();
+		ItemStack i = e.getPlayer().getItemInHand();
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
+			if (e.getAction() == Action.RIGHT_CLICK_BLOCK && i.getType() == Material.MOB_SPAWNER && i.getItemMeta().hasDisplayName()) {
+				if (i.getItemMeta().getDisplayName().contains("Skeleton")) {
+					e.setCancelled(true);
+					p.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &fYou cannot spawn skeletons in the nether"));
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void SpawnerToggle(BlockPlaceEvent e) {
+		Player p = (Player) e.getPlayer();
+		if (p.getWorld().getName().equalsIgnoreCase("world_nether") || p.getWorld().getName().equalsIgnoreCase("world")) {
+			boolean enabled = Lonewolves.plugin.getConfig().getBoolean("enable-spawner-placement");
+			if (enabled) {
+				return;
+			}
+			if (!enabled) {
 			if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
 				e.setCancelled(true);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou cannot place spawners in the nether."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fSpawn placement is now disabled."));
+			}
 			}
 			else
 				return;
