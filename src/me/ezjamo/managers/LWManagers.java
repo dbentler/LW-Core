@@ -79,7 +79,7 @@ public class LWManagers implements Listener {
 			if (!enabled) {
 			if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
 				e.setCancelled(true);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fSpawn placement is now disabled."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fSpawn placement is now disabled."));
 			}
 			}
 			else
@@ -91,7 +91,7 @@ public class LWManagers implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (!player.hasPlayedBefore()) {
-			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 179, (float) 4.5);
+			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 			player.teleport(loc);
 		}
 	}
@@ -99,7 +99,7 @@ public class LWManagers implements Listener {
 	@EventHandler
 	public void setRespawnLocation(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
-		Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 179, (float) 4.5);
+		Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 		event.setRespawnLocation(loc);
 	}
 }
