@@ -46,7 +46,7 @@ public class ScoreboardAdapter implements AssembleAdapter {
 	
 	@Override
 	public String getTitle(Player player) {
-		return ChatColor.RED.toString() + "LoneWolves";
+		return ChatColor.translateAlternateColorCodes('&', "&f&lLone&4&lWolves");
 	}
 
 	@Override
