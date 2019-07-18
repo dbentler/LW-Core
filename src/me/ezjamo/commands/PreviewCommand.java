@@ -15,10 +15,10 @@ public class PreviewCommand implements CommandExecutor {
 	
 	public static void vip(Player player) {
 		Inventory vip = Bukkit.createInventory(null, 54, Utils.chat("&eVIP Preview"));
-		Utils.Enchant2(vip, 306, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 0, "", "");
-		Utils.Enchant2(vip, 307, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 1, "", "");
-		Utils.Enchant2(vip, 308, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 2, "", "");
-		Utils.Enchant2(vip, 309, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 3, "", "");
+		Utils.createItem(vip, 310, 1, 0, "", "");
+		Utils.createItem(vip, 311, 1, 1, "", "");
+		Utils.createItem(vip, 312, 1, 2, "", "");
+		Utils.createItem(vip, 313, 1, 3, "", "");
 		Utils.Enchant2(vip, 267, Enchantment.DAMAGE_ALL, 1, Enchantment.DURABILITY, 1, 1, 4, "", "");
 		Utils.createItem(vip, 261, 1, 5, "", "");
 		Utils.createItem(vip, 262, 64, 6, "", "");
@@ -34,19 +34,19 @@ public class PreviewCommand implements CommandExecutor {
 	
 	public static void vipplus(Player player) {
 		Inventory vipplus = Bukkit.createInventory(null, 54, Utils.chat("&bVIP+ Preview"));
-		Utils.createItem(vipplus, 310, 1, 0, "", "");
-		Utils.createItem(vipplus, 311, 1, 1, "", "");
-		Utils.createItem(vipplus, 312, 1, 2, "", "");
-		Utils.createItem(vipplus, 313, 1, 3, "", "");
+		Utils.Enchant1(vipplus, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 0, "", "");
+		Utils.Enchant1(vipplus, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 1, "", "");
+		Utils.Enchant1(vipplus, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 2, "", "");
+		Utils.Enchant1(vipplus, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 3, "", "");
 		Utils.Enchant2(vipplus, 276, Enchantment.DAMAGE_ALL, 1, Enchantment.DURABILITY, 1, 1, 4, "", "");
 		Utils.Enchant1(vipplus, 261, Enchantment.ARROW_DAMAGE, 1, 1, 5, "", "");
 		Utils.createItem(vipplus, 262, 64, 6, "", "");
 		Utils.createItem(vipplus, 384, 64, 7, "", "");
 		Utils.createItem(vipplus, 384, 64, 8, "", "");
 		Utils.createItem(vipplus, 384, 32, 9, "", "");
-		Utils.createItem(vipplus, 278, 1, 10, "", "");
-		Utils.createItem(vipplus, 279, 1, 11, "", "");
-		Utils.createItem(vipplus, 277, 1, 12, "", "");
+		Utils.Enchant1(vipplus, 278, Enchantment.DIG_SPEED, 1, 1, 10, "", "");
+		Utils.Enchant1(vipplus, 279, Enchantment.DIG_SPEED, 1, 1, 11, "", "");
+		Utils.Enchant1(vipplus, 277, Enchantment.DIG_SPEED, 1, 1, 12, "", "");
 		Utils.createItem(vipplus, 49, 16, 13, "", "");
 		Utils.createItem(vipplus, 264, 24, 14, "", "");
 		Utils.createItem(vipplus, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
@@ -55,14 +55,14 @@ public class PreviewCommand implements CommandExecutor {
 	
 	public static void mvp(Player player) {
 		Inventory mvp = Bukkit.createInventory(null, 54, Utils.chat("&cMVP Preview"));
-		Utils.Enchant1(mvp, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 0, "", "");
-		Utils.Enchant1(mvp, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 1, "", "");
-		Utils.Enchant1(mvp, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 2, "", "");
-		Utils.Enchant1(mvp, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 3, "", "");
+		Utils.Enchant1(mvp, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 0, "", "");
+		Utils.Enchant1(mvp, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 1, "", "");
+		Utils.Enchant1(mvp, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 2, "", "");
+		Utils.Enchant1(mvp, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 3, "", "");
 		Utils.Enchant2(mvp, 276, Enchantment.DAMAGE_ALL, 2, Enchantment.DURABILITY, 1, 1, 4, "", "");
-		Utils.Enchant2(mvp, 278, Enchantment.DIG_SPEED, 1, Enchantment.DURABILITY, 1, 1, 5, "", "");
-		Utils.Enchant2(mvp, 277, Enchantment.DIG_SPEED, 1, Enchantment.DURABILITY, 1, 1, 6, "", "");
-		Utils.Enchant2(mvp, 279, Enchantment.DIG_SPEED, 1, Enchantment.DURABILITY, 1, 1, 7, "", "");
+		Utils.Enchant2(mvp, 278, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 5, "", "");
+		Utils.Enchant2(mvp, 277, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 6, "", "");
+		Utils.Enchant2(mvp, 279, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 7, "", "");
 		Utils.Enchant3(mvp, 261, Enchantment.ARROW_DAMAGE, 2, Enchantment.ARROW_KNOCKBACK, 1, Enchantment.DURABILITY, 1, 1, 8, "", "");
 		Utils.createItem(mvp, 262, 64, 9, "", "");
 		Utils.createItem(mvp, 264, 34, 10, "", "");
@@ -77,16 +77,16 @@ public class PreviewCommand implements CommandExecutor {
 
 	public static void noble(Player player) {
 		Inventory noble = Bukkit.createInventory(null, 54, Utils.chat("&3Noble Preview"));
-		Utils.Enchant2(noble, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 0, "", "");
-		Utils.Enchant2(noble, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 1, "", "");
-		Utils.Enchant2(noble, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 2, "", "");
-		Utils.Enchant2(noble, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 2, Enchantment.DURABILITY, 1, 1, 3, "", "");
+		Utils.Enchant2(noble, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 0, "", "");
+		Utils.Enchant2(noble, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 1, "", "");
+		Utils.Enchant2(noble, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 2, "", "");
+		Utils.Enchant2(noble, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 3, "", "");
 		Utils.Enchant3(noble, 276, Enchantment.DAMAGE_ALL, 3, Enchantment.DURABILITY, 2, Enchantment.FIRE_ASPECT, 1, 1, 4, "", "");
 		Utils.Enchant4(noble, 261, Enchantment.ARROW_DAMAGE, 2, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 2, 1, 5, "", "");
 		Utils.createItem(noble, 262, 64, 6, "", "");
-		Utils.Enchant2(noble, 278, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 2, 1, 7, "", "");
-		Utils.Enchant2(noble, 279, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 2, 1, 8, "", "");
-		Utils.Enchant2(noble, 277, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 2, 1, 9, "", "");
+		Utils.Enchant2(noble, 278, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 7, "", "");
+		Utils.Enchant2(noble, 279, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 8, "", "");
+		Utils.Enchant2(noble, 277, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 9, "", "");
 		Utils.createItem(noble, 384, 64, 10, "", "");
 		Utils.createItem(noble, 384, 64, 11, "", "");
 		Utils.createItem(noble, 384, 64, 12, "", "");
@@ -100,14 +100,14 @@ public class PreviewCommand implements CommandExecutor {
 	
 	public static void mystic(Player player) {
 		Inventory mystic = Bukkit.createInventory(null, 54, Utils.chat("&5Mystic Preview"));
-		Utils.Enchant2(mystic, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 2, 1, 0, "", "");
-		Utils.Enchant2(mystic, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 2, 1, 1, "", "");
-		Utils.Enchant2(mystic, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 2, 1, 2, "", "");
-		Utils.Enchant2(mystic, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 2, 1, 3, "", "");
+		Utils.Enchant1(mystic, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 0, "", "");
+		Utils.Enchant1(mystic, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 1, "", "");
+		Utils.Enchant1(mystic, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 2, "", "");
+		Utils.Enchant1(mystic, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 3, "", "");
 		Utils.Enchant3(mystic, 276, Enchantment.DAMAGE_ALL, 4, Enchantment.DURABILITY, 3, Enchantment.FIRE_ASPECT, 1, 1, 4, "", "");
-		Utils.Enchant2(mystic, 278, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 3, 1, 5, "", "");
-		Utils.Enchant2(mystic, 279, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 3, 1, 6, "", "");
-		Utils.Enchant2(mystic, 277, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 3, 1, 7, "", "");
+		Utils.Enchant2(mystic, 278, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 5, "", "");
+		Utils.Enchant2(mystic, 279, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 6, "", "");
+		Utils.Enchant2(mystic, 277, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 7, "", "");
 		Utils.Enchant5(mystic, 261, Enchantment.ARROW_DAMAGE, 3, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 3, Enchantment.ARROW_INFINITE, 1, 1, 8, "", "");
 		Utils.createItem(mystic, 262, 64, 9, "", "");
 		Utils.createItem(mystic, 384, 64, 10, "", "");
@@ -132,9 +132,9 @@ public class PreviewCommand implements CommandExecutor {
 		Utils.Enchant3(kingpin, 276, Enchantment.DAMAGE_ALL, 5, Enchantment.DURABILITY, 3, Enchantment.FIRE_ASPECT, 2, 1, 4, "", "");
 		Utils.Enchant5(kingpin, 261, Enchantment.ARROW_DAMAGE, 5, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 3, Enchantment.ARROW_INFINITE, 1, 1, 5, "", "");
 		Utils.createItem(kingpin, 262, 64, 6, "", "");
-		Utils.Enchant2(kingpin, 278, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 7, "", "");
-		Utils.Enchant2(kingpin, 279, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 8, "", "");
-		Utils.Enchant2(kingpin, 277, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 9, "", "");
+		Utils.Enchant2(kingpin, 278, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 7, "", "");
+		Utils.Enchant2(kingpin, 279, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 8, "", "");
+		Utils.Enchant2(kingpin, 277, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 9, "", "");
 		Utils.createItem(kingpin, 384, 64, 10, "", "");
 		Utils.createItem(kingpin, 384, 64, 11, "", "");
 		Utils.createItem(kingpin, 384, 64, 12, "", "");
@@ -154,47 +154,47 @@ public class PreviewCommand implements CommandExecutor {
         if (label.equalsIgnoreCase("preview")) {
         if (player.hasPermission("lw.preview"))
         	if (args.length == 1)
-        		if (args[0].equals("vip"))
+        		if (args[0].equalsIgnoreCase("vip"))
             PreviewCommand.vip(player);
         }
         if (label.equalsIgnoreCase("preview")) {
             if (player.hasPermission("lw.preview"))
             	if (args.length == 1)
-            		if (args[0].equals("vip+"))
+            		if (args[0].equalsIgnoreCase("vip+"))
                 PreviewCommand.vipplus(player);
             }
         if (label.equalsIgnoreCase("preview")) {
             if (player.hasPermission("lw.preview"))
             	if (args.length == 1)
-            		if (args[0].equals("mvp"))
+            		if (args[0].equalsIgnoreCase("mvp"))
                 PreviewCommand.mvp(player);
             }
         if (label.equalsIgnoreCase("preview")) {
             if (player.hasPermission("lw.preview"))
             	if (args.length == 1)
-            		if (args[0].equals("noble"))
+            		if (args[0].equalsIgnoreCase("noble"))
                 PreviewCommand.noble(player);
             }
         if (label.equalsIgnoreCase("preview")) {
             if (player.hasPermission("lw.preview"))
             	if (args.length == 1)
-            		if (args[0].equals("mystic"))
+            		if (args[0].equalsIgnoreCase("mystic"))
                 PreviewCommand.mystic(player);
             }
         if (label.equalsIgnoreCase("preview")) {
             if (player.hasPermission("lw.preview"))
             	if (args.length == 1)
-            		if (args[0].equals("kingpin"))
+            		if (args[0].equalsIgnoreCase("kingpin"))
                 PreviewCommand.kingpin(player);
             }
         	if (label.equalsIgnoreCase("preview")) {
         		if (args.length == 1)
-        			if (!args[0].equals("vip"))
-        			if (!args[0].equals("vip+"))
-        			if (!args[0].equals("mvp"))
-            		if (!args[0].equals("noble"))
-            		if (!args[0].equals("mystic"))
-            		if (!args[0].equals("kingpin"))
+        			if (!args[0].equalsIgnoreCase("vip"))
+        			if (!args[0].equalsIgnoreCase("vip+"))
+        			if (!args[0].equalsIgnoreCase("mvp"))
+            		if (!args[0].equalsIgnoreCase("noble"))
+            		if (!args[0].equalsIgnoreCase("mystic"))
+            		if (!args[0].equalsIgnoreCase("kingpin"))
         			player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &cInvalid kit."));
         	}
         	

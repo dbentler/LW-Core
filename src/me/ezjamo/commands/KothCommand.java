@@ -19,6 +19,7 @@ public class KothCommand implements CommandExecutor {
     	Utils.createItem(koth, 399, 1, 1, "&dGoliath Koth", "&fStart &dGoliath &fkoth for 5 minutes.");
     	Utils.createItem(koth, 399, 1, 2, "&dTriumph Koth", "&fStart &dTriumph &fkoth for 5 minutes.");
     	Utils.createItem(koth, 399, 1, 3, "&dEnd Koth", "&fStart &dEnd &fkoth for 5 minutes.");
+    	Utils.createItem(koth, 399, 1, 4, "&dMines Koth", "&fStart &dMines &fkoth for 5 minutes.");
         p.openInventory(koth);
 
    }

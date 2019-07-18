@@ -25,7 +25,7 @@ public class KitsManager implements Listener {
 			if (e.getCurrentItem() == null) {
 				return;
 			}
-			if ( e.getSlot() == 11 ) {
+			if ( e.getRawSlot() == 11 ) {
 				if (e.getClick().isRightClick()) {
 					p.performCommand("preview vip");
 				}
@@ -34,7 +34,7 @@ public class KitsManager implements Listener {
 				p.closeInventory();
 			}
 		}
-			if ( e.getSlot() == 13 ) {
+			if ( e.getRawSlot() == 13 ) {
 				if (e.getClick().isRightClick()) {
 					p.performCommand("preview vip+");
 				}
@@ -43,7 +43,7 @@ public class KitsManager implements Listener {
 				p.closeInventory();
 			}
 		}
-			if ( e.getSlot() == 15 ) {
+			if ( e.getRawSlot() == 15 ) {
 				if (e.getClick().isRightClick()) {
 					p.performCommand("preview mvp");
 				}
@@ -52,7 +52,7 @@ public class KitsManager implements Listener {
 				p.closeInventory();
 			}
 		}
-			if ( e.getSlot() == 29 ) {
+			if ( e.getRawSlot() == 29 ) {
 				if (e.getClick().isRightClick()) {
 					p.performCommand("preview noble");
 				}
@@ -61,7 +61,7 @@ public class KitsManager implements Listener {
 				p.closeInventory();
 			}
 		}
-			if ( e.getSlot() == 31 ) {
+			if ( e.getRawSlot() == 31 ) {
 				if (e.getClick().isRightClick()) {
 					p.performCommand("preview mystic");
 				}
@@ -70,7 +70,7 @@ public class KitsManager implements Listener {
 				p.closeInventory();
 			}
 		}
-			if ( e.getSlot() == 33 ) {
+			if ( e.getRawSlot() == 33 ) {
 				if (e.getClick().isRightClick()) {
 					p.performCommand("preview kingpin");
 				}

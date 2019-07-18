@@ -24,23 +24,28 @@ public class KothManager implements Listener {
 			if (e.getCurrentItem() == null) {
 				return;
 			}
-			if ( e.getSlot() == 0 ) {
+			if ( e.getRawSlot() == 0 ) {
 				p.performCommand("koth start Crow 5");
 				p.closeInventory();
 			}
 				
-			if ( e.getSlot() == 1) {
+			if ( e.getRawSlot() == 1) {
 				p.performCommand("koth start Goliath 5");
 				p.closeInventory();
 			}
 			
-			if ( e.getSlot() == 2) {
+			if ( e.getRawSlot() == 2) {
 				p.performCommand("koth start Triumph 5");
 				p.closeInventory();
 			}
 			
-			if ( e.getSlot() == 3) {
+			if ( e.getRawSlot() == 3) {
 				p.performCommand("koth start End 5");
+				p.closeInventory();
+			}
+			
+			if ( e.getRawSlot() == 4) {
+				p.performCommand("koth start Mines 5");
 				p.closeInventory();
 			}
 		}
