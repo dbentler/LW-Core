@@ -20,6 +20,7 @@ import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.AdminChat;
 import me.ezjamo.commands.DemoteCommand;
 import me.ezjamo.commands.DistanceCommand;
+import me.ezjamo.commands.FTopCommand;
 import me.ezjamo.commands.FreezeCommand;
 import me.ezjamo.commands.HelpCommand;
 import me.ezjamo.commands.Helpop;
@@ -133,6 +134,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("demote").setExecutor(new DemoteCommand());
     	this.getCommand("removemm").setExecutor(new RemoveModModeCommand());
     	this.getCommand("playtime").setExecutor(new PlaytimeCommand());
+    	this.getCommand("ftop").setExecutor(new FTopCommand());
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);
