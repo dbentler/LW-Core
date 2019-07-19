@@ -99,6 +99,45 @@ public class KitsCommand implements CommandExecutor {
         if (!player.hasPermission("essentials.kits.kingpin")) {
             Utils.createItemByte(kits, 160, 15, 1, 33, "&4Kingpin", "&7Status: &4Unavailable", "&7Right click to preview.");
         }
+        
+        if (player.hasPermission("essentials.kits.member")) {
+            String unsetMember = "%essentials_kit_time_until_available_member%";
+            String setMember = PlaceholderAPI.setPlaceholders(player, unsetMember);
+            if (!unsetMember.equalsIgnoreCase("0")) {
+            	Utils.createItemByte(kits, 160, 1, 1, 0, "&7Member", "&7Available In: &a" + setMember);
+            }
+            if (setMember.equalsIgnoreCase("0")) {
+            Utils.createItemByte(kits, 160, 8, 1, 0, "&7Member", "&7Status: &aAvailable");
+            }
+        }
+        if (!player.hasPermission("essentials.kits.member")) {
+        }
+        
+        if (player.hasPermission("essentials.kits.beta")) {
+            String unsetBeta = "%essentials_kit_time_until_available_beta%";
+            String setBeta = PlaceholderAPI.setPlaceholders(player, unsetBeta);
+            if (!unsetBeta.equalsIgnoreCase("0")) {
+            	Utils.createItemByte(kits, 160, 1, 1, 8, "&6Beta", "&7Available In: &a" + setBeta);
+            }
+            if (setBeta.equalsIgnoreCase("0")) {
+            Utils.createItemByte(kits, 160, 1, 1, 8, "&6Beta", "&7Status: &aAvailable");
+            }
+        }
+        if (!player.hasPermission("essentials.kits.beta")) {
+        }
+        
+        if (player.hasPermission("essentials.kits.tournament")) {
+            String unsetTournament = "%essentials_kit_time_until_available_tournament%";
+            String setTournament = PlaceholderAPI.setPlaceholders(player, unsetTournament);
+            if (!unsetTournament.equalsIgnoreCase("0")) {
+            	Utils.createItemByte(kits, 160, 1, 1, 36, "&aTournament", "&7Available In: &a" + setTournament);
+            }
+            if (setTournament.equalsIgnoreCase("0")) {
+            Utils.createItemByte(kits, 160, 6, 1, 36, "&aTournament", "&7Status: &aAvailable");
+            }
+        }
+        if (!player.hasPermission("essentials.kits.tournament")) {
+        }
         player.openInventory(kits);
     }
    

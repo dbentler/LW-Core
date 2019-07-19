@@ -72,10 +72,5 @@ public class ChatManager implements Listener
             event.setCancelled(true);
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou have said a blacklisted word."));
     	}
-    	else if
-    		(event.getMessage().equalsIgnoreCase("nazi") || event.getMessage().contains("daddy")) {
-    		event.setCancelled(true);
-    		p.chat("father figure");
-    	}	
     }
 }

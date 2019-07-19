@@ -45,6 +45,7 @@ commands:
   stats:
   demote:
   playtime:
+  ftop:
    
 permissions:
   lw.helpop:

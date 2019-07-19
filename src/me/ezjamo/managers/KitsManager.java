@@ -78,7 +78,36 @@ public class KitsManager implements Listener {
 				p.performCommand("ekit kingpin");
 				p.closeInventory();
 			}
+		}//need to finish below this
+			if ( e.getRawSlot() == 0 ) {
+				if (e.getClick().isRightClick()) {
+					p.performCommand("preview member");
+				}
+			if (e.getClick().isLeftClick()) {
+				p.performCommand("ekit member");
+				p.closeInventory();
+			}
 		}
+			if ( e.getRawSlot() == 8 ) {
+				if (e.getClick().isRightClick()) {
+					p.performCommand("preview beta");
+				}
+			if (e.getClick().isLeftClick()) {
+				p.performCommand("ekit beta");
+				p.closeInventory();
+			}
+		}
+			if (p.hasPermission("essentials.kits.tournament")) {
+			if ( e.getRawSlot() == 36 ) {
+			if (e.getClick().isLeftClick()) {
+				p.performCommand("ekit tournament");
+				p.closeInventory();
+			}
+		}
+			}
+			if (!p.hasPermission("essentials.kits.tournament")) {
+				e.setCancelled(true);
+			}
 		}
 }
 }
