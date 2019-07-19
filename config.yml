@@ -1,5 +1,14 @@
-# Messages
+#------------------------------------------------------------------------
+#                         LoneWolves-Core
+#                          lonewolves.net
+#                      lonewolves.net/discord
+#                   Coded by EzJamo and DeathRealms
+#------------------------------------------------------------------------
+
+#Disables all spawner placement (use after spawner place date)
 enable-spawner-placement: true
+
+# /Help command
 Help:
 - '&7&m----------------------------------------------------'
 - '&6&lServer Help &8- &f(1/2)'
@@ -16,6 +25,7 @@ Help:
 - '&e/lottery help &8- &7View the help page for the Lottery'
 - '&7&m-------------------- &e/help 2 &7&m-----------------------'
 
+#/Help command 2nd page
 Help 2:
 - '&7&m----------------------------------------------------'
 - '&6&lServer Help &8- &f(2/2)'
@@ -28,11 +38,13 @@ Help 2:
 - '&e/stats &f<playername> &8- &7View your own or another players stats.'
 - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
+#Links
 Links:
 - '&3&lForums: &ahttps://lonewolvs.net'
 - '&3&lStore: &ahttp://store.lonewolves.net'
 - '&3&lDiscord: &ahttps://lonewolves.net/discord'
 
+#/Rules command
 Rules:
 - '&7&m----------------------------------------------------'
 - '&c&lServer Rules &8- &f(1/2)'
@@ -49,6 +61,7 @@ Rules:
 - '&e[10] &7No exploiting glitches.'
 - '&7&m-------------------- &e/rules 2 &7&m-----------------------'
 
+#/Rules command 2nd page
 Rules 2:
 - '&7&m----------------------------------------------------'
 - '&c&lServer Rules &8- &f(2/2)'
@@ -61,18 +74,21 @@ Rules 2:
 - '&e[16] &7No "bitch claiming".'
 - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
+#Nightvision toggle messages.
 NightVision On:
 - '&8[&f&lLone&4&lWolves&8] &aYou have enabled your night vision effects.'
 
 NightVision Off:
 - '&8[&f&lLone&4&lWolves&8] &cYou have disabled your night vision effects.'
 
+#Ping info
 Ping:
 - '&8[&f&lLone&4&lWolves&8] &fPing: %player_ping%'
 
 Ping Others:
 - '&8[&f&lLone&4&lWolves&8] &f%player_name%''s ping is %player_ping%'
 
+#Scoreboard messages.
 Scoreboard:
 - '&7&m-----------------'
 - '&dOnline: &f%server_online%'
@@ -104,6 +120,7 @@ Stats Others:
 - '      &aPlaytime: &e%statistic_time_played%'
 - '&4&m----------------------------'
 
+#Playtime info
 Playtime:
 - '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
 
@@ -111,6 +128,7 @@ Playtime Others:
 - '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
 
 # All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
+# This shouldn't have to be messed with.
 blocked:
     - FURNACE
     - CHEST
@@ -158,21 +176,3 @@ blocked:
     - WALL_SIGN
     - SIGN
     - LEVER
-    - BLACK_SHULKER_BOX
-    - BLUE_SHULKER_BOX
-    - BROWN_SHULKER_BOX
-    - CYAN_SHULKER_BOX
-    - GRAY_SHULKER_BOX
-    - GREEN_SHULKER_BOX
-    - LIGHT_BLUE_SHULKER_BOX
-    - LIME_SHULKER_BOX
-    - MAGENTA_SHULKER_BOX
-    - ORANGE_SHULKER_BOX
-    - PINK_SHULKER_BOX
-    - PURPLE_SHULKER_BOX
-    - RED_SHULKER_BOX
-    - SILVER_SHULKER_BOX
-    - WHITE_SHULKER_BOX
-    - YELLOW_SHULKER_BOX
-    - DAYLIGHT_DETECTOR_INVERTED
-    - DAYLIGHT_DETECTOR
