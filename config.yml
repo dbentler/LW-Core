@@ -70,8 +70,7 @@ Rules 2:
 - '&e[12] &7No DDoS/Dox threats.'
 - '&e[13] &7No harassing players.'
 - '&e[14] &7No charging back.'
-- '&e[15] &7No trapping.'
-- '&e[16] &7No "bitch claiming".'
+- '&e[15] &7No "bitch claiming".'
 - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
 #Nightvision toggle messages.
@@ -126,6 +125,11 @@ Playtime:
 
 Playtime Others:
 - '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+
+FTOP Worth:
+- '&4&m--------&8[&2Faction Top Worth&8]&4&m--------'
+- '&eDiamond Block'
+- '&4&m--------------------------------'
 
 # All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
 # This shouldn't have to be messed with.

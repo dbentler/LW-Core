@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
@@ -91,6 +92,9 @@ public class LWManagers implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (!player.hasPlayedBefore()) {
+			String unsetPlayer = "%player_name%";
+            String setPlayer = PlaceholderAPI.setPlaceholders(player, unsetPlayer);
+			event.setJoinMessage(Utils.chat("&fWelcome &4") + setPlayer + " " + Utils.chat("&fto &lLone&4&lWolves&f!"));
 			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 			player.teleport(loc);
 		}

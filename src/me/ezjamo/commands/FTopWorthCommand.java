@@ -5,17 +5,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FTopCommand implements CommandExecutor {
+import me.ezjamo.Lonewolves;
+import net.md_5.bungee.api.ChatColor;
+
+public class FTopWorthCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
-		if (label.equalsIgnoreCase("ftop")) {
-		if (args.length == 1) {
-		if (args[0].equalsIgnoreCase("update")) {
-			player.performCommand("factiontop update");
-		}
-		}
+		if (label.equalsIgnoreCase("worth")) {
+			for (final String message : Lonewolves.plugin.getConfig().getStringList("FTOP Worth")) {
+        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+    }
 		}
 		return false;
 	}
