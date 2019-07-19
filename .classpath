@@ -6,7 +6,11 @@
 	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/Factions-2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/KOTH.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/PlaceholderAPI-2.10.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/Justin/Documents/eclipse-workspace/bukkit-1.8.8-R0.1-20160129.103334-36-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/Vault.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Justin/Documents/eclipse-workspace/lombok.jar"/>
 	<classpathentry kind="output" path="bin"/>
