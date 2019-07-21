@@ -154,6 +154,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     			staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     			staff.setGameMode(GameMode.SURVIVAL);
     					}
+    	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
+    	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
     				}
 	    	
 	
