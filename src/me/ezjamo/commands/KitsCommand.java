@@ -111,7 +111,7 @@ public class KitsCommand implements CommandExecutor {
             }
         }
         if (!player.hasPermission("essentials.kits.member")) {
-        	Utils.createItemByte(kits, 160, 15, 1, 33, "&4Member", "&7Status: &4Unavailable", "&7Right click to preview.");
+        	Utils.createItemByte(kits, 160, 15, 1, 0, "&4Member", "&7Status: &4Unavailable", "&7Right click to preview.");
         }
         
         if (player.hasPermission("essentials.kits.beta")) {
@@ -125,7 +125,7 @@ public class KitsCommand implements CommandExecutor {
             }
         }
         if (!player.hasPermission("essentials.kits.beta")) {
-        	Utils.createItemByte(kits, 160, 15, 1, 33, "&4Beta", "&7Status: &4Unavailable", "&7Right click to preview.");
+        	Utils.createItemByte(kits, 160, 15, 1, 8, "&4Beta", "&7Status: &4Unavailable", "&7Right click to preview.");
         }
         
         if (player.hasPermission("essentials.kits.tournament")) {
