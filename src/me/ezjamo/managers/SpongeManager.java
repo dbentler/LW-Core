@@ -69,7 +69,7 @@ public class SpongeManager implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onFlow(final BlockFromToEvent evt) {
         final Block block = evt.getBlock();
-        if (block.getType().equals((Object)Material.LAVA) || block.getType().equals((Object)Material.STATIONARY_LAVA) || block.getType().equals((Object)Material.WATER) || block.getType().equals((Object)Material.STATIONARY_WATER)) {
+        if (block.getType().equals(Material.WATER) || block.getType().equals(Material.STATIONARY_WATER)) {
             final int bx = block.getX();
             final int by = block.getY();
             final int bz = block.getZ();
