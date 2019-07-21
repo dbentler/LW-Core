@@ -111,8 +111,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new WeatherManager(), this);
         Bukkit.getPluginManager().registerEvents(new WildToolsFixManager(), this);
         Bukkit.getPluginManager().registerEvents(new SpongeManager(), this);
-        //Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
-        //Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
     	this.getCommand("mod").setExecutor(new Modmode());
     	this.getCommand("sc").setExecutor(new StaffChat());

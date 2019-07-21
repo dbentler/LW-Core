@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -105,5 +106,10 @@ public class LWManagers implements Listener {
 		Player player = event.getPlayer();
 		Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 		event.setRespawnLocation(loc);
+	}
+	
+	@EventHandler
+	public void setDeathMessage(PlayerDeathEvent event) {
+		event.setDeathMessage(null);
 	}
 }
