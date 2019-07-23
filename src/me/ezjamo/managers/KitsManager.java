@@ -98,14 +98,22 @@ public class KitsManager implements Listener {
 			}
 		}
 			if (p.hasPermission("essentials.kits.tournament")) {
-			if ( e.getRawSlot() == 36 ) {
+			if ( e.getRawSlot() == 44 ) {
 			if (e.getClick().isLeftClick()) {
 				p.performCommand("ekit tournament");
 				p.closeInventory();
 			}
 		}
 			}
-			if (!p.hasPermission("essentials.kits.tournament")) {
+			if (p.hasPermission("essentials.kits.youtuber")) {
+				if ( e.getRawSlot() == 36 ) {
+				if (e.getClick().isLeftClick()) {
+					p.performCommand("ekit youtuber");
+					p.closeInventory();
+				}
+			}
+				}
+			if (!p.hasPermission("essentials.kits.youtuber")) {
 				e.setCancelled(true);
 			}
 		}

@@ -46,6 +46,7 @@ commands:
   stats:
   demote:
   playtime:
+   aliases: [pt]
   worth:
    
 permissions:

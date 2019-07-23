@@ -132,13 +132,26 @@ public class KitsCommand implements CommandExecutor {
             String unsetTournament = "%essentials_kit_time_until_available_tournament%";
             String setTournament = PlaceholderAPI.setPlaceholders(player, unsetTournament);
             if (!unsetTournament.equalsIgnoreCase("0")) {
-            	Utils.createItemByte(kits, 160, 1, 1, 36, "&aTournament", "&7Available In: &a" + setTournament);
+            	Utils.createItemByte(kits, 160, 1, 1, 44, "&aTournament", "&7Available In: &a" + setTournament);
             }
             if (setTournament.equalsIgnoreCase("0")) {
-            Utils.createItemByte(kits, 160, 6, 1, 36, "&aTournament", "&7Status: &aAvailable");
+            Utils.createItemByte(kits, 160, 6, 1, 44, "&aTournament", "&7Status: &aAvailable");
             }
         }
         if (!player.hasPermission("essentials.kits.tournament")) {
+        }
+        
+        if (player.hasPermission("essentials.kits.youtuber")) {
+            String unsetYoutuber = "%essentials_kit_time_until_available_youtuber%";
+            String setYoutuber = PlaceholderAPI.setPlaceholders(player, unsetYoutuber);
+            if (!unsetYoutuber.equalsIgnoreCase("0")) {
+            	Utils.createItem(kits, 160, 1, 36, "&fYou&4Tuber", "&7Available In: &a" + setYoutuber);
+            }
+            if (setYoutuber.equalsIgnoreCase("0")) {
+            Utils.createItem(kits, 160, 1, 36, "&fYou&4Tuber", "&7Status: &aAvailable");
+            }
+        }
+        if (!player.hasPermission("essentials.kits.beta")) {
         }
         player.openInventory(kits);
     }

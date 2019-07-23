@@ -96,6 +96,7 @@ public class LWManagers implements Listener {
 			String unsetPlayer = "%player_name%";
             String setPlayer = PlaceholderAPI.setPlaceholders(player, unsetPlayer);
 			event.setJoinMessage(Utils.chat("&fWelcome &4") + setPlayer + " " + Utils.chat("&fto &lLone&4&lWolves&f!"));
+			player.performCommand("ekit member");
 			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 			player.teleport(loc);
 		}
