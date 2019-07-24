@@ -36,13 +36,15 @@ Help 2:
 - '&e/nv &8- &7Enable/Disable the night vision effect.'
 - '&e/ping &f<playername> &8- &7View your own or another players ping.'
 - '&e/stats &f<playername> &8- &7View your own or another players stats.'
+- '&e/auc &8- &7Start a live auction for players to bid on.'
 - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
 #Links
 Links:
-- '&3&lForums: &ahttps://lonewolvs.net'
+- '&3&lForums: &ahttps://lonewolves.net'
 - '&3&lStore: &ahttp://store.lonewolves.net'
 - '&3&lDiscord: &ahttps://lonewolves.net/discord'
+- '&3&lBans: &ahttps://lonewolves.net/bans'
 
 #/Rules command
 Rules:
@@ -70,7 +72,11 @@ Rules 2:
 - '&e[12] &7No DDoS/Dox threats.'
 - '&e[13] &7No harassing players.'
 - '&e[14] &7No charging back.'
-- '&e[15] &7No "bitch claiming".'
+- '&e[15] &7No trapping.'
+- '&e[16] &7No combat logging.'
+- '&e[17] &7No "bitch claiming".'
+- '&e[18] &7No voting on alts.'
+- '&e[19] &7No general toxicity towards players or staff.'
 - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
 #Nightvision toggle messages.
@@ -101,6 +107,8 @@ Scoreboard:
 Scoreboard Koth:
 - ''
 - '&dKOTH: &f%koth%'
+- '&dX: &f%x%'
+- '&dZ: &f%z%'
 - '&dTime: &f%time%'
 
 Stats:
@@ -128,8 +136,61 @@ Playtime Others:
 
 FTOP Worth:
 - '&4&m--------&8[&2Faction Top Worth&8]&4&m--------'
-- '&eDiamond Block'
+- '&aCave Spider &8- &e$5,000'
+- '&aSpider &8- &e$15,000'
+- '&aZombie &8- &e$15,000'
+- '&aSkeleton &8- &e$15,000'
+- '&aBlaze &8- &e$18,000'
+- '&aCreeper &8- &e$35,000'
+- '&aIron Golem &8- &e$50,000'
 - '&4&m--------------------------------'
+
+#/Commands messages
+Helper Commands:
+- '&7&m----------------------------------------------------'
+- '&d&lHelper Commands'
+- '&7&m----------------------------------------------------'
+- '&e/invsee &f<playername>'
+- '&e/checkmute &f<playername>'
+- '&e/clearchat'
+- '&e/mute'
+- '&e/ipmute'
+- '&e/kick'
+- '&e/mutechat'
+- '&e/tempmute'
+- '&e/unmute'
+- '&e/warn'
+- '&e/unwarn'
+- '&e/warnings'
+- '&e/punish'
+- '&e/sc'
+- '&e/sct'
+- '&7&m-------------------- &eLast Page &7&m-----------------------'
+Mod Commands:
+- '&7&m----------------------------------------------------'
+- '&9&lMod Commands'
+- '&7&m----------------------------------------------------'
+- '&e/checkban &f<playername>'
+- '&e/alts &f<playername>'
+- '&e/co i'
+- '&e/afk'
+- '&e/fly'
+- '&e/god'
+- '&e/socialspy'
+- '&e/tp'
+- '&e/tphere'
+- '&e/tpo'
+- '&e/tpohere'
+- '&e/ban'
+- '&e/tempban'
+- '&e/banip'
+- '&e/banlist'
+- '&e/unban'
+- '&e/mod'
+- '&e/freeze'
+- '&e/inv'
+- '&e/v'
+- '&7&m-------------------- &eLast Page &7&m-----------------------'
 
 # All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
 # This shouldn't have to be messed with.

@@ -18,6 +18,7 @@ import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.AdminChat;
+import me.ezjamo.commands.CmdsCommand;
 import me.ezjamo.commands.DemoteCommand;
 import me.ezjamo.commands.DistanceCommand;
 import me.ezjamo.commands.ESpawnCommand;
@@ -139,6 +140,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("removemm").setExecutor(new RemoveModModeCommand());
     	this.getCommand("playtime").setExecutor(new PlaytimeCommand());
     	this.getCommand("worth").setExecutor(new FTopWorthCommand());
+    	this.getCommand("commands").setExecutor(new CmdsCommand());
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);

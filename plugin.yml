@@ -36,7 +36,6 @@ commands:
   admin:
   removemm:
   commands:
-    usage: /<command>
   inv:
   ping:
   startkoth:
