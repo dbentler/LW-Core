@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/PlaceholderAPI-2.10.3.jar"/>
 	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/Vault.jar"/>
 	<classpathentry kind="lib" path="/Users/jameson/Desktop/LW-Core Depend/KOTH.jar"/>
+	<classpathentry kind="lib" path="/Users/jameson/Desktop/LoneWolvesPvP/plugins/Citizens.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

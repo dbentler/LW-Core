@@ -1,7 +1,6 @@
 package me.ezjamo.managers;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,7 +30,6 @@ import me.ezjamo.commands.Modmode;
 @SuppressWarnings("deprecation")
 public class ModModeManager implements Listener
 {
-    private static Random random;
     int clickcount;
     private static ArrayList<Player> players;
     private static ItemStack vanishv;
@@ -40,8 +38,7 @@ public class ModModeManager implements Listener
     private static ItemMeta vanishmnv;
     
     static {
-        ModModeManager.random = new Random();
-        ModModeManager.players = new ArrayList<Player>();
+        ModModeManager.setPlayers(new ArrayList<Player>());
         ModModeManager.vanishv = new ItemStack(351, 1, (short)8);
         ModModeManager.vanishmv = ModModeManager.vanishv.getItemMeta();
         ModModeManager.vanishnv = new ItemStack(351, 1, (short)10);
@@ -54,7 +51,7 @@ public class ModModeManager implements Listener
     
     
     @EventHandler
-    public void noModFight(EntityDamageByEntityEvent e) {
+    public void onAttack(EntityDamageByEntityEvent e) {
         if (!(e.getEntity() instanceof Player)) {
             return;
         }
@@ -123,6 +120,13 @@ public class ModModeManager implements Listener
             }
         }
     }
+    @EventHandler
+   public void onMinerClick(InventoryClickEvent e) { 
+    	if (e.getInventory().getSize() == 45) {
+    		
+    		
+    	}
+    }
     
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
@@ -136,20 +140,14 @@ public class ModModeManager implements Listener
    
     
     @EventHandler
-    public void pickup(PlayerPickupItemEvent e) {
-        if (e.getPlayer() == null) {
-            return;
-        }
+    public void onPickup(PlayerPickupItemEvent e) {
         if (Modmode.modmode.contains(e.getPlayer().getName())) {
             e.setCancelled(true);
         }
     }
     
     @EventHandler
-    public void pickup(PlayerDropItemEvent e) {
-        if (e.getPlayer() == null) {
-            return;
-        }
+    public void onDrop(PlayerDropItemEvent e) {
         if (Modmode.modmode.contains(e.getPlayer().getName())) {
             e.setCancelled(true);
         }
@@ -157,9 +155,6 @@ public class ModModeManager implements Listener
     
     @EventHandler
     public void placeBl(BlockPlaceEvent e) {
-        if (e.getPlayer() == null) {
-            return;
-        }
         if (e.getBlock() == null) {
             return;
         }
@@ -179,10 +174,6 @@ public class ModModeManager implements Listener
         if (Modmode.modmode.contains(e.getPlayer().getName())) {
             e.setCancelled(true);
         }
-    }
-    
-    public int reverseNumber(int num, int min, int max) {
-        return max + min - num;
     }
     
 	@EventHandler
@@ -270,23 +261,11 @@ public class ModModeManager implements Listener
             e.getPlayer().performCommand("vanish");
             return;
         }
-        if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&9Random Teleport"))) {
-            ModModeManager.players.clear();
-            for (Player p3 : Bukkit.getOnlinePlayers()) {
-                if (!p3.hasPermission("lw.mod") && !p3.isOp() && !p3.equals(e.getPlayer())) {
-                    ModModeManager.players.add(p3);
-                }
-            }
-            if (ModModeManager.players.size() == 0) {
-                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&9There aren't any players to teleport to."));
-                return;
-            }
-            int player = ModModeManager.random.nextInt(ModModeManager.players.size());
-            e.getPlayer().teleport(ModModeManager.players.get(player));
-            e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&cTeleported to &e" + ModModeManager.players.get(player).getName() + "."));
+        if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&9Online Miners"))) {
+        	this.xrayers(e.getPlayer());
         }
         else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&9Online Staff Members"))) {
-            e.getPlayer().openInventory(this.setupStaffInv());
+        	e.getPlayer().openInventory(this.setupStaffInv());
         }
     }
     
@@ -319,6 +298,29 @@ public class ModModeManager implements Listener
         return k;
     }
     
+    
+    
+	public void xrayers(Player p) {
+		
+		 Inventory inv = Bukkit.getServer().createInventory(null, 45, ChatColor.BLUE + "Online Miners");
+		 int cout = 0;
+		 for (Player miners : Bukkit.getOnlinePlayers()) {
+			 if (miners.getLocation().getY() < 35) {
+	                ItemStack xray = new ItemStack(Material.SKULL_ITEM, 1, (short)SkullType.PLAYER.ordinal());
+	                SkullMeta xraymeta = (SkullMeta)xray.getItemMeta();
+	                xraymeta.setOwner(miners.getName());
+	                xraymeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9" + miners.getName()));
+	                xray.setItemMeta((ItemMeta)xraymeta); 
+	                ++cout;
+	                inv.setItem(cout - 1, xray);
+			 }
+		 }
+	       		 p.getPlayer().openInventory(inv);
+		 
+		}
+
+   
+    
     public static void put(Player p) {
         ModModeManager.vanishmv.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cVanished"));
         ModModeManager.vanishv.setItemMeta(ModModeManager.vanishmv);
@@ -328,10 +330,10 @@ public class ModModeManager implements Listener
         if (!p.getGameMode().equals(GameMode.CREATIVE) && p.hasPermission("lw.mod")) {
             p.setGameMode(GameMode.CREATIVE);
         }
-        ItemStack randomTp = new ItemStack(Material.GOLD_PICKAXE);
-        ItemMeta randomTpMeta = randomTp.getItemMeta();
-        randomTpMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Random Teleport"));
-        randomTp.setItemMeta(randomTpMeta);
+        ItemStack miner = new ItemStack(Material.GOLD_PICKAXE);
+        ItemMeta minerMeta = miner.getItemMeta();
+        minerMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Online Miners"));
+        miner.setItemMeta(minerMeta);
 		ItemStack invinspect = new ItemStack(340);
         ItemMeta invinspectm = invinspect.getItemMeta();
         invinspectm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Inventory Inspector"));
@@ -344,7 +346,7 @@ public class ModModeManager implements Listener
         ItemMeta staffrm = staff.getItemMeta();
         staffrm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Online Staff Members"));
         staff.setItemMeta(staffrm);
-        p.getInventory().setItem(0, randomTp);
+        p.getInventory().setItem(0, miner);
         p.getInventory().setItem(1, invinspect);
         p.getInventory().setItem(6, staff);
         p.getInventory().setItem(7, toolcompass);
@@ -356,5 +358,15 @@ public class ModModeManager implements Listener
             p.setGameMode(GameMode.SURVIVAL);
             p.getInventory().clear();
         }	
-    }	
+    }
+
+
+	public static ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+
+	public static void setPlayers(ArrayList<Player> players) {
+		ModModeManager.players = players;
+	}	
 }

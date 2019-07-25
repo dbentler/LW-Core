@@ -8,11 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import com.massivecraft.factions.Board;
-import com.massivecraft.factions.FLocation;
-import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.FPlayers;
-
 public class SpongeManager implements Listener {
 	
 	private int radius;
@@ -24,13 +19,11 @@ public class SpongeManager implements Listener {
 	}
 	
     
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST)
     private void onPlace(BlockPlaceEvent evt) {
         if (!evt.isCancelled()) {
             final Block block = evt.getBlock();
             if (block.getType().equals(Material.SPONGE)) {
-                final FPlayer fplayer = FPlayers.getInstance().getByPlayer(evt.getPlayer());
                      int bx = block.getX();
                      int by = block.getY();
                      int bz = block.getZ();
@@ -47,7 +40,7 @@ public class SpongeManager implements Listener {
                 }
             }
         }
-    }
+    
     
     @EventHandler(priority = EventPriority.HIGHEST)
     private void onFlow(BlockFromToEvent evt) {
