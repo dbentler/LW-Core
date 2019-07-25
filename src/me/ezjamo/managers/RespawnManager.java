@@ -9,9 +9,10 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 public class RespawnManager implements Listener {
 	
 	@EventHandler
-	public void onRespawn(PlayerRespawnEvent e) {
-		e.getPlayer().teleport(new Location(Bukkit.getWorld("world"), 0.5, 80.0, 0.5));	
-					}	
+	public void setRespawnLocation(PlayerRespawnEvent event) {
+		Location loc = new Location(Bukkit.getWorld("world"), 0.500, 80, 0.500, 180, (float) 4.5);
+		event.setRespawnLocation(loc);
+	}
 			}
 
 

@@ -11,7 +11,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
@@ -100,13 +99,6 @@ public class LWManagers implements Listener {
 			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 			player.teleport(loc);
 		}
-	}
-	
-	@EventHandler
-	public void setRespawnLocation(PlayerRespawnEvent event) {
-		Player player = event.getPlayer();
-		Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
-		event.setRespawnLocation(loc);
 	}
 	
 	@EventHandler
