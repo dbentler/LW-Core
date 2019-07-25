@@ -120,12 +120,6 @@ public class ModModeManager implements Listener
             }
         }
     }
-    @EventHandler
-   public void onMinerClick(InventoryClickEvent e) { 
-    	if (e.getInventory().getName().equalsIgnoreCase(ChatColor.BLUE + "Miners")) {
-    		e.getWhoClicked().teleport(miners.getName())
-    	}
-    }
     
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
