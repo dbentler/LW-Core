@@ -122,9 +122,8 @@ public class ModModeManager implements Listener
     }
     @EventHandler
    public void onMinerClick(InventoryClickEvent e) { 
-    	if (e.getInventory().getSize() == 45) {
-    		
-    		
+    	if (e.getInventory().getName().equalsIgnoreCase(ChatColor.BLUE + "Miners")) {
+    		e.getWhoClicked().teleport(miners.getName())
     	}
     }
     
@@ -313,8 +312,8 @@ public class ModModeManager implements Listener
 	                xray.setItemMeta((ItemMeta)xraymeta); 
 	                ++cout;
 	                inv.setItem(cout - 1, xray);
-			 }
-		 }
+			 	}
+		 	}
 	       		 p.getPlayer().openInventory(inv);
 		 
 		}
