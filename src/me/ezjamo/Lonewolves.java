@@ -54,6 +54,7 @@ import me.ezjamo.managers.KothManager;
 import me.ezjamo.managers.LWManagers;
 import me.ezjamo.managers.ModModeManager;
 import me.ezjamo.managers.PreviewManager;
+import me.ezjamo.managers.RespawnManager;
 import me.ezjamo.managers.SpongeManager;
 import me.ezjamo.managers.WeatherManager;
 import me.ezjamo.managers.WildToolsFixManager;
