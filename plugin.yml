@@ -47,6 +47,10 @@ commands:
   playtime:
    aliases: [pt]
   worth:
+  scoreboard:
+    aliases:
+      - fb
+      - sb
    
 permissions:
   lw.helpop:

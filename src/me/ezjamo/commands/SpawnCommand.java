@@ -11,7 +11,12 @@ public class SpawnCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String commandlabel, String[] args) {
         Player p = (Player) sender;
         if(cmd.getName().equalsIgnoreCase("spawn")) {
-        	p.performCommand("warp spawn");
+        	if (args.length < 1) {
+        		p.performCommand("warp spawn");
+        	}
+        	if (args.length == 1) {
+        		p.performCommand("warp spawn " + args[0]);
+        	}
         }
 		return true;
     }
