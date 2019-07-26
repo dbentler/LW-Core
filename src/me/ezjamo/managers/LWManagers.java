@@ -15,8 +15,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
+import io.github.thatkawaiisam.assemble.Assemble;
+import io.github.thatkawaiisam.assemble.AssembleStyle;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
+import me.ezjamo.ScoreboardAdapter;
 import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
@@ -92,6 +95,12 @@ public class LWManagers implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (!player.hasPlayedBefore()) {
+			for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+				all.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+    					}
+			Assemble assemble = new Assemble(Lonewolves.plugin, new ScoreboardAdapter());
+			assemble.setTicks(16);
+			assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
 			String unsetPlayer = "%player_name%";
             String setPlayer = PlaceholderAPI.setPlaceholders(player, unsetPlayer);
 			event.setJoinMessage(Utils.chat("&fWelcome &4") + setPlayer + " " + Utils.chat("&fto &lLone&4&lWolves&f!"));
