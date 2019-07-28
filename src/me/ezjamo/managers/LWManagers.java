@@ -15,11 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
-import io.github.thatkawaiisam.assemble.Assemble;
-import io.github.thatkawaiisam.assemble.AssembleStyle;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
-import me.ezjamo.ScoreboardAdapter;
 import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
