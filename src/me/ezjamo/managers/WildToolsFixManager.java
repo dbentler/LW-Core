@@ -18,7 +18,7 @@ public class WildToolsFixManager implements Listener {
 			return;
 
 		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
-		if (e.getPlayer().getItemInHand().hasItemMeta() && e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&f&lLone&4&lWolves &f&lBuild Wand"))) {
+		if (e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&f&lLone&4&lWolves &f&lBuild Wand"))) {
 			if (!fPlayer.isInOwnTerritory()) {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou can only use build wands in your own claim."));

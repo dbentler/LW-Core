@@ -1,7 +1,7 @@
 package me.ezjamo.commands;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
