@@ -24,13 +24,13 @@ public class CmdsCommand implements CommandExecutor {
 			
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("helper")) {
-					for (final String message : Lonewolves.plugin.getConfig().getStringList("Helper Commands")) {
+					for (final String message : Lonewolves.plugin.getConfig().getStringList("Commands.Helper")) {
 		        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 		    }
 				}
 				
 				if (args[0].equalsIgnoreCase("mod")) {
-					for (final String message : Lonewolves.plugin.getConfig().getStringList("Mod Commands")) {
+					for (final String message : Lonewolves.plugin.getConfig().getStringList("Commands.Mod")) {
 		        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 		    }
 				}

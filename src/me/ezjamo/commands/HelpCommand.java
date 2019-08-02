@@ -15,16 +15,16 @@ public class HelpCommand implements CommandExecutor {
     	Player player = (Player) sender;
     	if (label.equalsIgnoreCase("help")) {
     	if (args.length == 0)
-        	for (final String message : Lonewolves.plugin.getConfig().getStringList("Help")) {
+        	for (String message : Lonewolves.plugin.getConfig().getStringList("Help.1")) {
         		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-    }
+        	}
     	}
     	if (label.equalsIgnoreCase("help")) {
     	if (args.length == 1)
     		if (args[0].equals("2"))
-        	for (final String message : Lonewolves.plugin.getConfig().getStringList("Help 2")) {
+        	for (String message : Lonewolves.plugin.getConfig().getStringList("Help.2")) {
         		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-    }
+        	}
     	}
     	if (label.equalsIgnoreCase("help")) {
     	if (args.length == 1)
@@ -32,5 +32,5 @@ public class HelpCommand implements CommandExecutor {
         		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown command, type /help"));
     	}
 		return false;
-    }
+	}
 }

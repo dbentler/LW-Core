@@ -10,74 +10,74 @@ enable-spawner-placement: true
 
 # /Help command
 Help:
-- '&7&m----------------------------------------------------'
-- '&6&lServer Help &8- &f(1/2)'
-- '&7&m----------------------------------------------------'
-- '&e/f help &8- &7View the help page for Factions.'
-- '&e/tpa &8- &7Request to teleport to a player.'
-- '&e/warp &8- &7View all the available warps.'
-- '&e/shop &8- &7Use this to Buy or Sell your items.'
-- '&e/sell &8- &7Use this to Sell your items.'
-- '&e/kits &8- &7View all of the kits, and right click for a preview.'
-- '&e/ah &8- &7View items players have put up for sale, or list your own.'
-- '&e/distance &8- &7See how many blocks out you are from spawn.'
-- '&e/links &8- &7Shows you useful links for the server.'
-- '&e/lottery help &8- &7View the help page for the Lottery'
-- '&7&m-------------------- &e/help 2 &7&m-----------------------'
+  1:
+  - '&7&m----------------------------------------------------'
+  - '&6&lServer Help &8- &f(1/2)'
+  - '&7&m----------------------------------------------------'
+  - '&e/f help &8- &7View the help page for Factions.'
+  - '&e/tpa &8- &7Request to teleport to a player.'
+  - '&e/warp &8- &7View all the available warps.'
+  - '&e/shop &8- &7Use this to Buy or Sell your items.'
+  - '&e/sell &8- &7Use this to Sell your items.'
+  - '&e/kits &8- &7View all of the kits, and right click for a preview.'
+  - '&e/ah &8- &7View items players have put up for sale, or list your own.'
+  - '&e/distance &8- &7See how many blocks out you are from spawn.'
+  - '&e/links &8- &7Shows you useful links for the server.'
+  - '&e/lottery help &8- &7View the help page for the Lottery'
+  - '&7&m-------------------- &e/help 2 &7&m-----------------------'
+  
+  2:
+  - '&7&m----------------------------------------------------'
+  - '&6&lServer Help &8- &f(2/2)'
+  - '&7&m----------------------------------------------------'
+  - '&e/trade &f<playername> &8- &7Trade items with another player.'
+  - '&e/rules &8- &7View all of the server rules.'
+  - '&e/preview &f<kit> &8- &7Shows you a preview of the specified kit.'
+  - '&e/nv &8- &7Enable/Disable the night vision effect.'
+  - '&e/ping &f<playername> &8- &7View your own or another players ping.'
+  - '&e/stats &f<playername> &8- &7View your own or another players stats.'
+  - '&e/auc &8- &7Start a live auction for players to bid on.'
+  - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
-#/Help command 2nd page
-Help 2:
-- '&7&m----------------------------------------------------'
-- '&6&lServer Help &8- &f(2/2)'
-- '&7&m----------------------------------------------------'
-- '&e/trade &f<playername> &8- &7Trade items with another player.'
-- '&e/rules &8- &7View all of the server rules.'
-- '&e/preview &f<kit> &8- &7Shows you a preview of the specified kit.'
-- '&e/nv &8- &7Enable/Disable the night vision effect.'
-- '&e/ping &f<playername> &8- &7View your own or another players ping.'
-- '&e/stats &f<playername> &8- &7View your own or another players stats.'
-- '&e/auc &8- &7Start a live auction for players to bid on.'
-- '&7&m-------------------- &eLast Page &7&m-----------------------'
+# /Rules command
+Rules:
+  1:
+  - '&7&m----------------------------------------------------'
+  - '&c&lServer Rules &8- &f(1/2)'
+  - '&7&m----------------------------------------------------'
+  - '&e[1] &7No advertising.'
+  - '&e[2] &7No spamming.'
+  - '&e[3] &7No disrespecting players or staff.'
+  - '&e[4] &7No death remarks/threats.'
+  - '&e[5] &7No racism.'
+  - '&e[6] &7No inapproriate nicknames or links.'
+  - '&e[7] &7No abusing helpop.'
+  - '&e[8] &7No impersonating players or staff.'
+  - '&e[9] &7No hacking.'
+  - '&e[10] &7No exploiting glitches.'
+  - '&7&m-------------------- &e/rules 2 &7&m-----------------------'
 
+  2:
+  - '&7&m----------------------------------------------------'
+  - '&c&lServer Rules &8- &f(2/2)'
+  - '&7&m----------------------------------------------------'
+  - '&e[11] &7No bypassing a mute or ban.'
+  - '&e[12] &7No DDoS/Dox threats.'
+  - '&e[13] &7No harassing players.'
+  - '&e[14] &7No charging back.'
+  - '&e[15] &7No combat logging.'
+  - '&e[16] &7No "bitch claiming".'
+  - '&e[17] &7No voting on alts.'
+  - '&e[18] &7No general toxicity towards players or staff.'
+  - '&e[19] &7No more than 10 alts.'
+  - '&7&m-------------------- &eLast Page &7&m-----------------------'
+  
 #Links
 Links:
 - '&3&lForums: &ahttps://lonewolves.net'
 - '&3&lStore: &ahttp://store.lonewolves.net'
 - '&3&lDiscord: &ahttps://lonewolves.net/discord'
 - '&3&lBans: &ahttps://lonewolves.net/bans'
-
-#/Rules command
-Rules:
-- '&7&m----------------------------------------------------'
-- '&c&lServer Rules &8- &f(1/2)'
-- '&7&m----------------------------------------------------'
-- '&e[1] &7No advertising.'
-- '&e[2] &7No spamming.'
-- '&e[3] &7No disrespecting players or staff.'
-- '&e[4] &7No death remarks/threats.'
-- '&e[5] &7No racism.'
-- '&e[6] &7No inapproriate nicknames or links.'
-- '&e[7] &7No abusing helpop.'
-- '&e[8] &7No impersonating players or staff.'
-- '&e[9] &7No hacking.'
-- '&e[10] &7No exploiting glitches.'
-- '&7&m-------------------- &e/rules 2 &7&m-----------------------'
-
-#/Rules command 2nd page
-Rules 2:
-- '&7&m----------------------------------------------------'
-- '&c&lServer Rules &8- &f(2/2)'
-- '&7&m----------------------------------------------------'
-- '&e[11] &7No bypassing a mute or ban.'
-- '&e[12] &7No DDoS/Dox threats.'
-- '&e[13] &7No harassing players.'
-- '&e[14] &7No charging back.'
-- '&e[15] &7No trapping.'
-- '&e[16] &7No combat logging.'
-- '&e[17] &7No "bitch claiming".'
-- '&e[18] &7No voting on alts.'
-- '&e[19] &7No general toxicity towards players or staff.'
-- '&7&m-------------------- &eLast Page &7&m-----------------------'
 
 #Nightvision toggle messages.
 NightVision On:
@@ -86,46 +86,47 @@ NightVision On:
 NightVision Off:
 - '&8[&f&lLone&4&lWolves&8] &cYou have disabled your night vision effects.'
 
-#Ping info
+# /Ping command
 Ping:
-- '&8[&f&lLone&4&lWolves&8] &fPing: %player_ping%'
+  Self:
+  - '&8[&f&lLone&4&lWolves&8] &fPing: %player_ping%'
 
-Ping Others:
-- '&8[&f&lLone&4&lWolves&8] &f%player_name%''s ping is %player_ping%'
+  Others:
+  - '&8[&f&lLone&4&lWolves&8] &f%player_name%''s ping is %player_ping%'
 
 #Scoreboard messages.
 Scoreboard:
-- '&7&m-----------------'
-- '&dOnline: &f%server_online%'
-- '&dBalance: &f%vault_eco_balance_formatted%'
-- ''
-- '&aFaction: &r%mvdw_factionsuuid_faction_name%'
-- ''
-- '&cKills: &f%statistic_player_kills%'
-- '&cDeaths: &f%statistic_deaths%'
-
-Scoreboard Koth:
-- ''
-- '&dKOTH: &f%koth%'
-- '&dX: &f%x%'
-- '&dZ: &f%z%'
-- '&dTime: &f%time%'
+  Default:
+  - '&7&m-----------------'
+  - '&dOnline: &f%server_online%'
+  - '&dBalance: &f%vault_eco_balance_formatted%'
+  - ''
+  - '&aFaction: &r%mvdw_factionsuuid_faction_name%'
+  - ''
+  - '&cKills: &f%statistic_player_kills%'
+  - '&cDeaths: &f%statistic_deaths%'
+  Koth:
+  - ''
+  - '&dKOTH: &f%koth%'
+  - '&dX: &f%x%'
+  - '&dZ: &f%z%'
+  - '&dTime: &f%time%'
 
 Stats:
-- '&4&m--------&8[&fYour Stats&8]&4&m--------'
-- '      &aKills: &e%statistic_player_kills%'
-- '      &aDeaths: &e%statistic_deaths%'
-- '      &aVotes: &e%superbvote_votes%'
-- '      &aPlaytime: &e%statistic_time_played%'
-- '&4&m--------------------------'
-
-Stats Others:
-- '&4&m--------&8[&f%player_name%''s&8]&4&m--------'
-- '      &aKills: &e%statistic_player_kills%'
-- '      &aDeaths: &e%statistic_deaths%'
-- '      &aVotes: &e%superbvote_votes%'
-- '      &aPlaytime: &e%statistic_time_played%'
-- '&4&m----------------------------'
+  Self:
+  - '&4&m--------&8[&fYour Stats&8]&4&m--------'
+  - '      &aKills: &e%statistic_player_kills%'
+  - '      &aDeaths: &e%statistic_deaths%'
+  - '      &aVotes: &e%superbvote_votes%'
+  - '      &aPlaytime: &e%statistic_time_played%'
+  - '&4&m--------------------------'
+  Others:
+  - '&4&m--------&8[&f%player_name%''s&8]&4&m--------'
+  - '      &aKills: &e%statistic_player_kills%'
+  - '      &aDeaths: &e%statistic_deaths%'
+  - '      &aVotes: &e%superbvote_votes%'
+  - '      &aPlaytime: &e%statistic_time_played%'
+  - '&4&m----------------------------'
 
 #Playtime info
 Playtime:
@@ -146,51 +147,52 @@ FTOP Worth:
 - '&4&m--------------------------------'
 
 #/Commands messages
-Helper Commands:
-- '&7&m----------------------------------------------------'
-- '&d&lHelper Commands'
-- '&7&m----------------------------------------------------'
-- '&e/invsee &f<playername>'
-- '&e/checkmute &f<playername>'
-- '&e/clearchat'
-- '&e/mute'
-- '&e/ipmute'
-- '&e/kick'
-- '&e/mutechat'
-- '&e/tempmute'
-- '&e/unmute'
-- '&e/warn'
-- '&e/unwarn'
-- '&e/warnings'
-- '&e/punish'
-- '&e/sc'
-- '&e/sct'
-- '&7&m-------------------- &eLast Page &7&m-----------------------'
-Mod Commands:
-- '&7&m----------------------------------------------------'
-- '&9&lMod Commands'
-- '&7&m----------------------------------------------------'
-- '&e/checkban &f<playername>'
-- '&e/alts &f<playername>'
-- '&e/co i'
-- '&e/afk'
-- '&e/fly'
-- '&e/god'
-- '&e/socialspy'
-- '&e/tp'
-- '&e/tphere'
-- '&e/tpo'
-- '&e/tpohere'
-- '&e/ban'
-- '&e/tempban'
-- '&e/banip'
-- '&e/banlist'
-- '&e/unban'
-- '&e/mod'
-- '&e/freeze'
-- '&e/inv'
-- '&e/v'
-- '&7&m-------------------- &eLast Page &7&m-----------------------'
+Commands:
+  Helper:
+  - '&7&m----------------------------------------------------'
+  - '&d&lHelper Commands'
+  - '&7&m----------------------------------------------------'
+  - '&e/invsee &f<playername>'
+  - '&e/checkmute &f<playername>'
+  - '&e/clearchat'
+  - '&e/mute'
+  - '&e/ipmute'
+  - '&e/kick'
+  - '&e/mutechat'
+  - '&e/tempmute'
+  - '&e/unmute'
+  - '&e/warn'
+  - '&e/unwarn'
+  - '&e/warnings'
+  - '&e/punish'
+  - '&e/sc'
+  - '&e/sct'
+  - '&7&m-------------------- &eLast Page &7&m-----------------------'
+  Mod:
+  - '&7&m----------------------------------------------------'
+  - '&9&lMod Commands'
+  - '&7&m----------------------------------------------------'
+  - '&e/checkban &f<playername>'
+  - '&e/alts &f<playername>'
+  - '&e/co i'
+  - '&e/afk'
+  - '&e/fly'
+  - '&e/god'
+  - '&e/socialspy'
+  - '&e/tp'
+  - '&e/tphere'
+  - '&e/tpo'
+  - '&e/tpohere'
+  - '&e/ban'
+  - '&e/tempban'
+  - '&e/banip'
+  - '&e/banlist'
+  - '&e/unban'
+  - '&e/mod'
+  - '&e/freeze'
+  - '&e/inv'
+  - '&e/v'
+  - '&7&m-------------------- &eLast Page &7&m-----------------------'
 
 # All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
 # This shouldn't have to be messed with.

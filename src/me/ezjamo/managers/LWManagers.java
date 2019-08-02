@@ -8,12 +8,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
-
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
@@ -97,6 +97,16 @@ public class LWManagers implements Listener {
 			player.performCommand("ekit member");
 			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
 			player.teleport(loc);
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerKill(PlayerDeathEvent event) {
+		Player player = event.getEntity();
+		Player killer = player.getKiller();
+		if (killer.hasPermission("lw.lightning")) {
+			Location loc = new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY() + 1.0, player.getLocation().getZ());
+			loc.getWorld().strikeLightningEffect(loc);
 		}
 	}
 }

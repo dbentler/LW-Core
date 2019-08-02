@@ -58,12 +58,12 @@ public class ScoreboardAdapter implements AssembleAdapter {
 			  Lonewolves.plugin.getLogger().log(Level.SEVERE, "KoTH by Subside is needed for LW-Essentials.");
 		}
 		KothPlugin kothPlugin = (KothPlugin) koth;
-		for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard")) {
+		for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Default")) {
 		String placeholders = PlaceholderAPI.setPlaceholders(player, message);
 		toReturn.add(ChatColor.translateAlternateColorCodes('&', placeholders));
 		}
 			if (!kothPlugin.getKothHandler().getRunningKoths().isEmpty()) {
-				for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard Koth")) {
+				for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Koth")) {
 				toReturn.add(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%koth%", kothPlugin.getKothHandler().getRunningKoth().getKoth().getName())
 						.replaceAll("%time%", kothPlugin.getKothHandler().getRunningKoth().getTimeObject().getTimeLeftFormatted())
 						.replaceAll("%x%", Integer.toString(kothPlugin.getKothHandler().getRunningKoth().getKoth().getMiddle().getBlockX()))

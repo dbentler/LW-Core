@@ -16,14 +16,14 @@ public class RulesCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (label.equalsIgnoreCase("rules")) {
             	if (args.length == 0)
-                	for (final String message : Lonewolves.plugin.getConfig().getStringList("Rules")) {
+                	for (final String message : Lonewolves.plugin.getConfig().getStringList("Rules.1")) {
                 		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
             }
             	}
             	if (label.equalsIgnoreCase("rules")) {
             	if (args.length == 1)
             		if (args[0].equals("2"))
-                	for (final String message : Lonewolves.plugin.getConfig().getStringList("Rules 2")) {
+                	for (final String message : Lonewolves.plugin.getConfig().getStringList("Rules.2")) {
                 		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
             }
             	}
