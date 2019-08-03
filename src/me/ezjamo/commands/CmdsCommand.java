@@ -47,7 +47,7 @@ public class CmdsCommand implements CommandExecutor {
 		}
 		}
 		}
-		return false;
+		return true;
 	}
 
 }

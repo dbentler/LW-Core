@@ -170,6 +170,6 @@ public class KitsCommand implements CommandExecutor {
             }
         if(!player.hasPermission("lw.kits"))
             player.sendMessage(Lonewolves.NO_PERMS);
-        return false;
+        return true;
     }
 }

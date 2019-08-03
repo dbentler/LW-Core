@@ -32,6 +32,6 @@ public class HelpCommand implements CommandExecutor {
     			}
     		}
     	}
-		return false;
+		return true;
 	}
 }
