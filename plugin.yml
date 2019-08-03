@@ -36,11 +36,12 @@ commands:
   admin:
   removemm:
   commands:
+   aliases: [cmds]
   inv:
   ping:
   startkoth:
   kits:
-  kit:
+   aliases: [kit]
   preview:
   stats:
   demote:

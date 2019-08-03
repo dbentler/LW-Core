@@ -160,16 +160,14 @@ public class KitsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
-        if (label.equalsIgnoreCase("kits")) {
-        if (player.hasPermission("lw.kits"))
-            KitsCommand.kits(player);
+        if (cmd.getName().equalsIgnoreCase("kits")) {
+        	if (player.hasPermission("lw.kits")) {
+        		KitsCommand.kits(player);
+        	}
+        	if(!player.hasPermission("lw.kits")) {
+        		player.sendMessage(Lonewolves.NO_PERMS);
+        	}
         }
-        if (label.equalsIgnoreCase("kit")) {
-            if (player.hasPermission("lw.kits"))
-                KitsCommand.kits(player);
-            }
-        if(!player.hasPermission("lw.kits"))
-            player.sendMessage(Lonewolves.NO_PERMS);
         return true;
     }
 }

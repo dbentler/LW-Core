@@ -151,61 +151,43 @@ public class PreviewCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
-        if (label.equalsIgnoreCase("preview")) {
-        if (player.hasPermission("lw.preview"))
-        	if (args.length == 1)
-        		if (args[0].equalsIgnoreCase("vip"))
-            PreviewCommand.vip(player);
-        }
-        if (label.equalsIgnoreCase("preview")) {
-            if (player.hasPermission("lw.preview"))
-            	if (args.length == 1)
-            		if (args[0].equalsIgnoreCase("vip+"))
-                PreviewCommand.vipplus(player);
-            }
-        if (label.equalsIgnoreCase("preview")) {
-            if (player.hasPermission("lw.preview"))
-            	if (args.length == 1)
-            		if (args[0].equalsIgnoreCase("mvp"))
-                PreviewCommand.mvp(player);
-            }
-        if (label.equalsIgnoreCase("preview")) {
-            if (player.hasPermission("lw.preview"))
-            	if (args.length == 1)
-            		if (args[0].equalsIgnoreCase("noble"))
-                PreviewCommand.noble(player);
-            }
-        if (label.equalsIgnoreCase("preview")) {
-            if (player.hasPermission("lw.preview"))
-            	if (args.length == 1)
-            		if (args[0].equalsIgnoreCase("mystic"))
-                PreviewCommand.mystic(player);
-            }
-        if (label.equalsIgnoreCase("preview")) {
-            if (player.hasPermission("lw.preview"))
-            	if (args.length == 1)
-            		if (args[0].equalsIgnoreCase("kingpin"))
-                PreviewCommand.kingpin(player);
-            }
-        	if (label.equalsIgnoreCase("preview")) {
-        		if (args.length == 1)
+        if (cmd.getName().equalsIgnoreCase("preview")) {
+        	if (player.hasPermission("lw.preview")) {
+        		if (args.length == 0) {
+        			player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &f/preview <kit>"));
+        		}
+        		if (args.length == 1) {
+        			if (args[0].equalsIgnoreCase("vip")) {
+        				PreviewCommand.vip(player);
+        			}
+        			if (args[0].equalsIgnoreCase("vip+")) {
+        				PreviewCommand.vipplus(player);
+        			}
+        			if (args[0].equalsIgnoreCase("mvp")) {
+        				PreviewCommand.mvp(player);
+        			}
+        			if (args[0].equalsIgnoreCase("noble")) {
+        				PreviewCommand.noble(player);
+        			}
+        			if (args[0].equalsIgnoreCase("mystic")) {
+        				PreviewCommand.mystic(player);
+        			}
+        			if (args[0].equalsIgnoreCase("kingpin")) {
+        				PreviewCommand.kingpin(player);
+        			}
         			if (!args[0].equalsIgnoreCase("vip"))
-        			if (!args[0].equalsIgnoreCase("vip+"))
-        			if (!args[0].equalsIgnoreCase("mvp"))
-            		if (!args[0].equalsIgnoreCase("noble"))
-            		if (!args[0].equalsIgnoreCase("mystic"))
-            		if (!args[0].equalsIgnoreCase("kingpin"))
-        			player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &cInvalid kit."));
+        				if (!args[0].equalsIgnoreCase("vip+"))
+        					if (!args[0].equalsIgnoreCase("mvp"))
+        						if (!args[0].equalsIgnoreCase("noble"))
+        							if (!args[0].equalsIgnoreCase("mystic"))
+        								if (!args[0].equalsIgnoreCase("kingpin"))
+        									player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &cInvalid kit."));
+        		}
         	}
-        	
-        if (label.equalsIgnoreCase("preview")) {
-        if(player.hasPermission("lw.preview"))
-        	if (!(args.length == 1))
-        		player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] /preview (kit)"));
+        	if(!player.hasPermission("lw.preview")) {
+        		player.sendMessage(Lonewolves.NO_PERMS);
+        	}
         }
-        	
-        if(!player.hasPermission("lw.preview"))
-            player.sendMessage(Lonewolves.NO_PERMS);
-        return false;
+        return true;
     }
 }

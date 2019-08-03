@@ -132,7 +132,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("espawn").setExecutor(new ESpawnCommand());
     	this.getCommand("startkoth").setExecutor(new KothCommand());
     	this.getCommand("kits").setExecutor(new KitsCommand());
-    	this.getCommand("kit").setExecutor(new KitsCommand());
     	this.getCommand("preview").setExecutor(new PreviewCommand());
     	this.getCommand("stats").setExecutor(new StatsCommand());
     	this.getCommand("demote").setExecutor(new DemoteCommand());
@@ -165,7 +164,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	Player player = (Player) sender;
     	
-    	if (label.equalsIgnoreCase("lw")) {
+    	if (cmd.getName().equalsIgnoreCase("lw")) {
     		if (player.hasPermission("lw.reload"))
     		if (args.length == 1) {
     		if (args[0].equals("reload")) {

@@ -27,7 +27,7 @@ public class KothCommand implements CommandExecutor {
 	@Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	Player player = (Player) sender;
-    	if (label.equalsIgnoreCase("startkoth")) {
+    	if (cmd.getName().equalsIgnoreCase("startkoth")) {
     	if (player.hasPermission("lw.koth"))
         	KothCommand.koth(player);
     	

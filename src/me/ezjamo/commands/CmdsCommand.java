@@ -15,7 +15,7 @@ public class CmdsCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
 		
-		if (label.equalsIgnoreCase("commands")) {
+		if (cmd.getName().equalsIgnoreCase("commands")) {
 		if (player.hasPermission("litebans.mute")) {
 			if (args.length == 0) {
 				player.sendMessage(Utils.chat("&cUsage: &7/commands <rank>"));
