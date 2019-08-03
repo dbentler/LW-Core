@@ -45,7 +45,6 @@ import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
 import me.ezjamo.managers.ChatManager;
-import me.ezjamo.managers.CitizensManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
 import me.ezjamo.managers.FFLYManager;
@@ -97,9 +96,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		Assemble assemble = new Assemble(this, new ScoreboardAdapter());
 		assemble.setTicks(16);
 		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
-    	getConfig().options().copyDefaults(true);
-    	saveConfig();
-    	saveDefaultConfig();
+    	this.saveDefaultConfig();
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
         Bukkit.getPluginManager().registerEvents(this, (this));
         Bukkit.getPluginManager().registerEvents(new ModModeManager(), this);
@@ -107,7 +104,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new FreezeManager(), this);
         Bukkit.getPluginManager().registerEvents(new FreezeCommand(), this);
         Bukkit.getPluginManager().registerEvents(new LWManagers(), this);
-        Bukkit.getPluginManager().registerEvents(new CitizensManager(), this);
         Bukkit.getPluginManager().registerEvents(new DepthStriderManager(), this);
         Bukkit.getPluginManager().registerEvents(new DispenerArmorListener(), this);
         Bukkit.getPluginManager().registerEvents(new FFLYManager(), this);
