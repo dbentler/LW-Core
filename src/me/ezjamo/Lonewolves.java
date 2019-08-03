@@ -163,26 +163,26 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	Player player = (Player) sender;
-    	
     	if (cmd.getName().equalsIgnoreCase("lw")) {
-    		if (player.hasPermission("lw.reload"))
-    		if (args.length == 1) {
-    		if (args[0].equals("reload")) {
-    		reloadConfig();
-    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    		if (player.hasPermission("lw.reload")) {
+    			if (args.length == 1) {
+    				if (args[0].equalsIgnoreCase("reload")) {
+    					reloadConfig();
+    					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    				}
+    				if (!args[0].equalsIgnoreCase("reload")) {
+    					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
+    				}
+    			}
+    			if (args.length == 0) {
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
+				}
     		}
-    		if (!(args[0].equals("reload"))) {
-    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
+    		if (!player.hasPermission("lw.reload")) {
+    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
     		}
     	}
-    		if (args.length == 0) {
-    		if (player.hasPermission("lw.reload"))
-    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
-    		if (!player.hasPermission("lw.reload"))
-    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
-    		}
-    	}
-		return false;
+		return true;
     }
 
     public void onPluginMessageReceived(String channel, Player player, byte[] bytemessage) {

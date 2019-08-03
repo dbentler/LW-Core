@@ -16,38 +16,24 @@ public class CmdsCommand implements CommandExecutor {
 		Player player = (Player) sender;
 		
 		if (cmd.getName().equalsIgnoreCase("commands")) {
-		if (player.hasPermission("litebans.mute")) {
 			if (args.length == 0) {
 				player.sendMessage(Utils.chat("&cUsage: &7/commands <rank>"));
-				player.sendMessage(Utils.chat("&cExample: &7/commands helper"));
+				player.sendMessage(Utils.chat("&cExample: &7/commands vip"));
 			}
 			
 			if (args.length == 1) {
-				if (args[0].equalsIgnoreCase("helper")) {
-					for (final String message : Lonewolves.plugin.getConfig().getStringList("Commands.Helper")) {
-		        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-		    }
+				String rank = args[0];
+				if (args[0].equalsIgnoreCase(rank)) {
+					for (String message : Lonewolves.plugin.getConfig().getStringList("Commands." + rank)) {
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+					}
 				}
 				
-				if (args[0].equalsIgnoreCase("mod")) {
-					for (final String message : Lonewolves.plugin.getConfig().getStringList("Commands.Mod")) {
-		        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-		    }
-				}
-				
-				if (!args[0].equalsIgnoreCase("helper")) {
-				if (!args[0].equalsIgnoreCase("mod"))
-					player.sendMessage(Utils.chat("&cInvalid Rank"));
-				}
+				if (Lonewolves.plugin.getConfig().getStringList("Commands." + rank).isEmpty()) {
+					player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &cInvalid Rank"));
+	    		}
 			}
-		}
-		if (args.length == 0 | args.length == 1) {
-		if (!player.hasPermission("litebans.mute")) {
-			player.sendMessage(Lonewolves.NO_PERMS);
-		}
-		}
 		}
 		return true;
 	}
-
 }

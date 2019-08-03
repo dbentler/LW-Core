@@ -22,7 +22,7 @@ public class HelpCommand implements CommandExecutor {
     		}
     		if (args.length == 1) {
     			String page = args[0];
-    			if (args[0].equals(page)) {
+    			if (args[0].equalsIgnoreCase(page)) {
     				for (String message : Lonewolves.plugin.getConfig().getStringList("Help." + page)) {
     					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     				}
