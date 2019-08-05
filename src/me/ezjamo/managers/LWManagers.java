@@ -44,10 +44,15 @@ public class LWManagers implements Listener {
 	public void onBlockPlace(BlockPlaceEvent e) {
 		Player p = (Player) e.getPlayer();
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
-			if (p.getLocation().getBlockY() >= 128) {
-				e.setCancelled(true);
-				p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 86, 0.5));
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
+			if (!p.hasPermission("lw.nether.place")) {
+				if (p.getLocation().getBlockY() >= 128) {
+					e.setCancelled(true);
+					p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 86, 0.5));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
+				}
+				if (p.hasPermission("lw.nether.place")) {
+					return;
+				}
 			}
 			else
 				return;
@@ -107,6 +112,9 @@ public class LWManagers implements Listener {
 		if (killer.hasPermission("lw.lightning")) {
 			Location loc = new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY() + 1.0, player.getLocation().getZ());
 			loc.getWorld().strikeLightningEffect(loc);
+		}
+		if (!killer.hasPermission("lw.lightning")) {
+			return;
 		}
 	}
 }
