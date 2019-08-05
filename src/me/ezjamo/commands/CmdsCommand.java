@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
@@ -25,7 +26,8 @@ public class CmdsCommand implements CommandExecutor {
 				String rank = args[0];
 				if (args[0].equalsIgnoreCase(rank)) {
 					for (String message : Lonewolves.plugin.getConfig().getStringList("Commands." + rank)) {
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+						String placeholders = PlaceholderAPI.setPlaceholders(player, message);
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
 					}
 				}
 				
