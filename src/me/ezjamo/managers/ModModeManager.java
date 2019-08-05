@@ -25,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import de.myzelyam.api.vanish.VanishAPI;
 import me.ezjamo.commands.Modmode;
 
 @SuppressWarnings("deprecation")
@@ -343,7 +344,13 @@ public class ModModeManager implements Listener
         p.getInventory().setItem(1, invinspect);
         p.getInventory().setItem(6, staff);
         p.getInventory().setItem(7, toolcompass);
-        p.getInventory().setItem(8, ModModeManager.vanishnv);
+        boolean isVanished = VanishAPI.isInvisible(p);
+        if (isVanished) {
+        	p.getInventory().setItem(8, ModModeManager.vanishv);
+        }
+        if (!isVanished) {
+        	p.getInventory().setItem(8, ModModeManager.vanishnv);
+        }
     }
 
     public static void remove(Player p) {
