@@ -1,6 +1,7 @@
 package me.ezjamo.managers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -39,9 +40,9 @@ public class ModModeManager implements Listener {
     
     static {
         ModModeManager.setPlayers(new ArrayList<Player>());
-        ModModeManager.vanishv = new ItemStack(351, 1, (short)8);
+        ModModeManager.vanishv = new ItemStack(351, 1, (short)10);
         ModModeManager.vanishmv = ModModeManager.vanishv.getItemMeta();
-        ModModeManager.vanishnv = new ItemStack(351, 1, (short)10);
+        ModModeManager.vanishnv = new ItemStack(351, 1, (short)1);
         ModModeManager.vanishmnv = ModModeManager.vanishnv.getItemMeta();
     }
     
@@ -241,21 +242,30 @@ public class ModModeManager implements Listener {
         if (!Modmode.modmode.contains(e.getPlayer().getName()) || e.getPlayer().getItemInHand() == null || e.getPlayer().getItemInHand().getItemMeta() == null || !e.getPlayer().getItemInHand().hasItemMeta()) {
             return;
         }
-        if (!e.getAction().equals(Action.RIGHT_CLICK_AIR) && !e.getAction().equals((Object)Action.RIGHT_CLICK_BLOCK)) {
+        if (!e.getAction().equals(Action.RIGHT_CLICK_AIR) && !e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
-        if (e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&cVanished"))) {
+        if (e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&aVanished"))) {
             e.getPlayer().getInventory().setItem(8, ModModeManager.vanishnv);
             e.getPlayer().performCommand("vanish");
             return;
         }
-        if (e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&aVisible"))) {
+        if (e.getPlayer().getInventory().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&7&oVisible"))) {
             e.getPlayer().getInventory().setItem(8, ModModeManager.vanishv);
             e.getPlayer().performCommand("vanish");
             return;
         }
         if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&9Online Miners"))) {
-        	this.xrayers(e.getPlayer());
+        	xrayers(e.getPlayer());
+        }
+        if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&9Random Teleport"))) {
+        	Random r = new Random();
+            for(Player online : Bukkit.getServer().getOnlinePlayers()) {
+                players.add(online);
+            }
+            int index = r.nextInt(players.size());
+            Player loc = (Player) players.get(index);
+            e.getPlayer().teleport(loc);
         }
         else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(ChatColor.translateAlternateColorCodes('&', "&9Online Staff Members"))) {
         	e.getPlayer().openInventory(this.setupStaffInv());
@@ -303,7 +313,7 @@ public class ModModeManager implements Listener {
 	                SkullMeta xraymeta = (SkullMeta)xray.getItemMeta();
 	                xraymeta.setOwner(miners.getName());
 	                xraymeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9" + miners.getName()));
-	                xray.setItemMeta((ItemMeta)xraymeta); 
+	                xray.setItemMeta(xraymeta); 
 	                ++cout;
 	                inv.setItem(cout - 1, xray);
 			 	}
@@ -315,15 +325,15 @@ public class ModModeManager implements Listener {
    
     
     public static void put(Player p) {
-        ModModeManager.vanishmv.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cVanished"));
+        ModModeManager.vanishmv.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&aVanished"));
         ModModeManager.vanishv.setItemMeta(ModModeManager.vanishmv);
-        ModModeManager.vanishmnv.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&aVisible"));
+        ModModeManager.vanishmnv.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&7&oVisible"));
         ModModeManager.vanishnv.setItemMeta(ModModeManager.vanishmnv);
         p.getInventory().clear();
         if (!p.getGameMode().equals(GameMode.CREATIVE) && p.hasPermission("lw.mod")) {
             p.setGameMode(GameMode.CREATIVE);
         }
-        ItemStack miner = new ItemStack(Material.GOLD_PICKAXE);
+        ItemStack miner = new ItemStack(Material.DIAMOND_PICKAXE);
         ItemMeta minerMeta = miner.getItemMeta();
         minerMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Online Miners"));
         miner.setItemMeta(minerMeta);
@@ -331,18 +341,18 @@ public class ModModeManager implements Listener {
         ItemMeta invinspectm = invinspect.getItemMeta();
         invinspectm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Inventory Inspector"));
         invinspect.setItemMeta(invinspectm);
-        ItemStack toolcompass = new ItemStack(Material.COMPASS);
-        ItemMeta toolcompassm = toolcompass.getItemMeta();
-        toolcompassm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Teleport Compass"));
-        toolcompass.setItemMeta(toolcompassm);
+        ItemStack toolrandom = new ItemStack(Material.NETHER_STAR);
+        ItemMeta toolrandomm = toolrandom.getItemMeta();
+        toolrandomm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Random Teleport"));
+        toolrandom.setItemMeta(toolrandomm);
 		ItemStack staff = new ItemStack(Material.ENDER_CHEST);
         ItemMeta staffrm = staff.getItemMeta();
         staffrm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Online Staff Members"));
         staff.setItemMeta(staffrm);
         p.getInventory().setItem(0, miner);
-        p.getInventory().setItem(1, invinspect);
+        p.getInventory().setItem(2, invinspect);
         p.getInventory().setItem(6, staff);
-        p.getInventory().setItem(7, toolcompass);
+        p.getInventory().setItem(4, toolrandom);
         if (VanishCommand.vanish.contains(p)) {
         	p.getInventory().setItem(8, ModModeManager.vanishv);
         }
