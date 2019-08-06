@@ -159,7 +159,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	}
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
-    				}
+	}
 	    	
 	
 	
