@@ -81,7 +81,7 @@ public class ModModeManager implements Listener {
                 Player target = Bukkit.getPlayer(e.getInventory().getTitle().substring("&cInventory of &e".length()));
                 if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&bFreeze Player"))) {
                     if (Modmode.modmode.contains(target.getName())) {
-                        (e.getWhoClicked()).sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThat person is in staffmode, this action can not be completed at this time..."));
+                        (e.getWhoClicked()).sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThis player is in staffmode, this action can not be completed at this time..."));
                         return;
                     }
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7You have been frozen by a staff member. Please join our &cDiscord &7at www.lonewolves.net/discord"));
