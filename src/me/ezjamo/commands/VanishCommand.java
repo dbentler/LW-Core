@@ -85,7 +85,7 @@ public class VanishCommand implements CommandExecutor {
 							vanish.remove(target);
 							target.spigot().setCollidesWithEntities(true);
 							TABAPI.setTagPrefixTemporarily(target, "%rel_factionsuuid_relation_color%");
-							TABAPI.setCustomTabNameTemporarily(target, "%rel_factionsuuid_relation_color%" + player.getName());
+							TABAPI.setCustomTabNameTemporarily(target, "%rel_factionsuuid_relation_color%" + target.getName());
 							target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are no longer vanished!"));
 							player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &a" + target.getName() + " &ais no longer vanished!"));
 							return true;
