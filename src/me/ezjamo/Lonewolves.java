@@ -44,6 +44,7 @@ import me.ezjamo.commands.StaffChat;
 import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
+import me.ezjamo.commands.VanishCommand;
 import me.ezjamo.managers.ChatManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
@@ -56,13 +57,13 @@ import me.ezjamo.managers.ModModeManager;
 import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.RespawnManager;
 import me.ezjamo.managers.SpongeManager;
+import me.ezjamo.managers.VanishManager;
 import me.ezjamo.managers.WeatherManager;
 import me.ezjamo.managers.WildToolsFixManager;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 
-public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener
-{
+public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
 
     public static Lonewolves plugin;
     public static String NO_PERMS = ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this.");
@@ -73,7 +74,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     public Lonewolves() {
         this.contents = new HashMap<UUID, ItemStack[]>();
         this.armorContents = new HashMap<UUID, ItemStack[]>();
-        
     }
     
     public static Economy econ = null;
@@ -111,6 +111,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new WildToolsFixManager(), this);
         Bukkit.getPluginManager().registerEvents(new SpongeManager(), this);
         Bukkit.getPluginManager().registerEvents(new RespawnManager(), this);
+        Bukkit.getPluginManager().registerEvents(new VanishManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
@@ -140,6 +141,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("worth").setExecutor(new FTopWorthCommand());
     	this.getCommand("commands").setExecutor(new CmdsCommand());
     	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand());
+    	this.getCommand("vanish").setExecutor(new VanishCommand());
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);
@@ -169,6 +171,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     				if (args[0].equalsIgnoreCase("reload")) {
     					reloadConfig();
     					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    					Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
     				}
     				if (!args[0].equalsIgnoreCase("reload")) {
     					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
@@ -188,5 +191,5 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     public void onPluginMessageReceived(String channel, Player player, byte[] bytemessage) {
         if (!channel.equals("BungeeCord"))
             return;
-    		}
-        }
+    }
+}

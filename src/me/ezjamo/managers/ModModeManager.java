@@ -25,12 +25,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import de.myzelyam.api.vanish.VanishAPI;
 import me.ezjamo.commands.Modmode;
+import me.ezjamo.commands.VanishCommand;
 
 @SuppressWarnings("deprecation")
-public class ModModeManager implements Listener
-{
+public class ModModeManager implements Listener {
     int clickcount;
     private static ArrayList<Player> players;
     private static ItemStack vanishv;
@@ -344,11 +343,10 @@ public class ModModeManager implements Listener
         p.getInventory().setItem(1, invinspect);
         p.getInventory().setItem(6, staff);
         p.getInventory().setItem(7, toolcompass);
-        boolean isVanished = VanishAPI.isInvisible(p);
-        if (isVanished) {
+        if (VanishCommand.vanish.contains(p)) {
         	p.getInventory().setItem(8, ModModeManager.vanishv);
         }
-        if (!isVanished) {
+        if (!VanishCommand.vanish.contains(p)) {
         	p.getInventory().setItem(8, ModModeManager.vanishnv);
         }
     }

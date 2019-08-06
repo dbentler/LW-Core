@@ -4,7 +4,7 @@ author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
 softdepend: [PlaceholderAPI]
 depend: [KoTH, Vault, Essentials]
-version: 2.6
+version: 2.7
 
 commands:
   request:
@@ -52,6 +52,9 @@ commands:
     aliases:
       - fb
       - sb
+  vanish:
+    aliases:
+      - v
    
 permissions:
   lw.helpop:
@@ -82,5 +85,11 @@ permissions:
     description: 'Shows a preview of the selected kit.'
   lw.demote:
     description: 'Demotes the specified user.'
-  lw.flybypass:
+  lw.fly.bypass:
     description: 'Lets user bypass fly disable in other faction claims.'
+  lw.vanish:
+    description: 'Lets users become invisable to other players online.'
+  lw.vanish.others:
+    description: 'Lets users vanish other players.'
+  lw.vanish.see:
+    description: 'Lets users see other vanished players.'
