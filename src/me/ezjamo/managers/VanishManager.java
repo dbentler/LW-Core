@@ -47,7 +47,7 @@ public class VanishManager implements Listener {
 			event.setCancelled(true);
 		}
 		if (!VanishCommand.vanish.contains(event.getEntity())) {
-			event.setCancelled(false);
+			return;
 		}
 	}
 	
