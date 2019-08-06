@@ -37,7 +37,7 @@ public class VanishCommand implements CommandExecutor {
 						player.spigot().setCollidesWithEntities(false);
 						TABAPI.setTagPrefixTemporarily(player, "&7&o");
 						TABAPI.setCustomTabNameTemporarily(player, "&7&o" + player.getName());
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &cYou are now invisable!"));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are now vanished!"));
 						return true;
 					}
 					else {
@@ -48,7 +48,7 @@ public class VanishCommand implements CommandExecutor {
 						player.spigot().setCollidesWithEntities(true);
 						TABAPI.setTagPrefixTemporarily(player, "%rel_factionsuuid_relation_color%");
 						TABAPI.setCustomTabNameTemporarily(player, "%rel_factionsuuid_relation_color%" + player.getName());
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are no longer invisable!"));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &cYou are no longer vanished!"));
 						return true;
 					}
 				}
@@ -74,8 +74,8 @@ public class VanishCommand implements CommandExecutor {
 							target.spigot().setCollidesWithEntities(false);
 							TABAPI.setTagPrefixTemporarily(target, "&7&o");
 							TABAPI.setCustomTabNameTemporarily(target, "&7&o" + target.getName());
-							target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &cYou are now invisable!"));
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &c" + target.getName() + "&c is now invisable!"));
+							target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are now vanished!"));
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &c" + target.getName() + "&c is now vanished!"));
 							return true;
 						}
 						else {
@@ -86,8 +86,8 @@ public class VanishCommand implements CommandExecutor {
 							target.spigot().setCollidesWithEntities(true);
 							TABAPI.setTagPrefixTemporarily(target, "%rel_factionsuuid_relation_color%");
 							TABAPI.setCustomTabNameTemporarily(target, "%rel_factionsuuid_relation_color%" + player.getName());
-							target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are no longer invisable!"));
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &a" + target.getName() + " &ais no longer invisable!"));
+							target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are no longer vanished!"));
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &a" + target.getName() + " &ais no longer vanished!"));
 							return true;
 						}
 					}
@@ -97,10 +97,10 @@ public class VanishCommand implements CommandExecutor {
 						}
 						if (args[0].equalsIgnoreCase("status")) {
 							if (vanish.contains(player)) {
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &cYou are currently invisible."));
+								player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &cYou are currently vanished."));
 							}
 							if (!vanish.contains(player)) {
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are currently visible."));
+								player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are currently not vanished."));
 							}
 						}
 					}
