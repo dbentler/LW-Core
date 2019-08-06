@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -37,7 +38,17 @@ public class VanishManager implements Listener {
 			event.setCancelled(true);
 		}
 		if (!VanishCommand.vanish.contains(event.getPlayer())) {
-			event.setCancelled(false);
+			return;
+		}
+	}
+	
+	@EventHandler
+	public void onHungerLoss(FoodLevelChangeEvent event) {
+		if (VanishCommand.vanish.contains(event.getEntity())) {
+			event.setCancelled(true);
+		}
+		if (!VanishCommand.vanish.contains(event.getEntity())) {
+			return;
 		}
 	}
 	
@@ -53,14 +64,11 @@ public class VanishManager implements Listener {
 	
 	@EventHandler
 	public void onPlayerDamageByBlock(EntityDamageByBlockEvent event) {
-		if (event.getDamager() instanceof Player && VanishCommand.vanish.contains(event.getEntity())) {
+		if (VanishCommand.vanish.contains(event.getEntity())) {
 			event.setCancelled(true);
 		}
-		if (event.getEntity() instanceof Player && VanishCommand.vanish.contains(event.getEntity())) {
-			event.setCancelled(true);
-		}
-		if (event.getDamager() instanceof Player && !VanishCommand.vanish.contains(event.getEntity())) {
-			event.setCancelled(false);
+		if (!VanishCommand.vanish.contains(event.getEntity())) {
+			return;
 		}
 	}
 	
@@ -70,7 +78,7 @@ public class VanishManager implements Listener {
 			event.setCancelled(true);
 		}
 		if (!VanishCommand.vanish.contains(event.getTarget())) {
-			event.setCancelled(false);
+			return;
 		}
 	}
 }
