@@ -16,6 +16,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
+import lombok.Getter;
 import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.AdminChat;
 import me.ezjamo.commands.CmdsCommand;
@@ -45,6 +46,7 @@ import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
 import me.ezjamo.commands.VanishCommand;
+import me.ezjamo.managers.ActionBarMgr;
 import me.ezjamo.managers.ChatManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
@@ -59,6 +61,7 @@ import me.ezjamo.managers.RespawnManager;
 import me.ezjamo.managers.SilentOpenChest;
 import me.ezjamo.managers.SpongeManager;
 import me.ezjamo.managers.VanishManager;
+import me.ezjamo.managers.VersionUtil;
 import me.ezjamo.managers.WeatherManager;
 import me.ezjamo.managers.WildToolsFixManager;
 import net.md_5.bungee.api.ChatColor;
@@ -66,6 +69,10 @@ import net.milkbowl.vault.economy.Economy;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
 
+	@Getter
+    private VersionUtil versionUtil;
+	@Getter
+    private ActionBarMgr actionBarMgr;
     public static Lonewolves plugin;
     public static String NO_PERMS = ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this.");
     
@@ -144,6 +151,9 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("commands").setExecutor(new CmdsCommand());
     	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand());
     	this.getCommand("vanish").setExecutor(new VanishCommand());
+    	versionUtil = new VersionUtil(this);
+    	if (versionUtil.isOneDotXOrHigher(8))
+            actionBarMgr = new ActionBarMgr(this);
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);
@@ -153,7 +163,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         }
     }
 	
-		
 	public void onDisable() {
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
     			staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
@@ -163,7 +172,13 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
 	}
 	    	
-	
+	public String getMessage(String path, Object... additionalPlayerInfo) {
+        String message = this.getConfig().getString("Messages." + path);
+        if (message == null) {
+            message = this.getConfig().getString("Messages." + path);
+        }
+        return message;
+    }
 	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	Player player = (Player) sender;

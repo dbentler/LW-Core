@@ -8,6 +8,9 @@
 # Disables all spawner placement (use after spawner place date)
 enable-spawner-placement: true
 
+Messages:
+  ActionBarMessage: '&aYou are invisible to other players!'
+
 #/help command
 #To add another page copy the format below and replace "1" with the page number.
 Help:
@@ -181,6 +184,7 @@ Commands:
     - '&d/warn'
     - '&d/unwarn'
     - '&d/warnings'
+    - '&d/history'
     - '&d/punish'
     - '&d/sc'
     - '&d/sct'

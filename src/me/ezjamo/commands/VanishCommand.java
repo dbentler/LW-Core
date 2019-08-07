@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.ezjamo.Lonewolves;
+import me.ezjamo.managers.ActionBarMgr;
 import me.neznamy.tab.bukkit.api.TABAPI;
 
 @SuppressWarnings("deprecation")
@@ -34,6 +35,7 @@ public class VanishCommand implements CommandExecutor {
 							}
 						}
 						vanish.add(player);
+						ActionBarMgr.addActionBar(player);
 						player.spigot().setCollidesWithEntities(false);
 						TABAPI.setTagPrefixTemporarily(player, "&7&o");
 						TABAPI.setCustomTabNameTemporarily(player, "&7&o" + player.getName());
@@ -45,6 +47,7 @@ public class VanishCommand implements CommandExecutor {
 							online.showPlayer(player);
 						}
 						vanish.remove(player);
+						ActionBarMgr.removeActionBar(player);
 						player.spigot().setCollidesWithEntities(true);
 						TABAPI.setTagPrefixTemporarily(player, "%rel_factionsuuid_relation_color%");
 						TABAPI.setCustomTabNameTemporarily(player, "%rel_factionsuuid_relation_color%" + player.getName());
