@@ -109,11 +109,13 @@ public class LWManagers implements Listener {
 	public void onPlayerKill(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 		Player killer = player.getKiller();
-		if (killer.hasPermission("lw.lightning") && killer instanceof Player) {
-			Location loc = new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY() + 1.0, player.getLocation().getZ());
-			loc.getWorld().strikeLightningEffect(loc);
+		if (killer.hasPermission("lw.lightning")) {
+			if (killer instanceof Player && player instanceof Player) {
+				Location loc = new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY() + 1.0, player.getLocation().getZ());
+				loc.getWorld().strikeLightningEffect(loc);
+			}
 		}
-		if (!(killer instanceof Player) && !killer.hasPermission("lw.lightning")) {
+		if (!(killer instanceof Player) || !(player instanceof Player) || !killer.hasPermission("lw.lightning")) {
 			return;
 		}
 	}

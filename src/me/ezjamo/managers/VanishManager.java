@@ -1,13 +1,16 @@
 package me.ezjamo.managers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -79,6 +82,20 @@ public class VanishManager implements Listener {
 		}
 		if (!VanishCommand.vanish.contains(event.getTarget())) {
 			return;
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		if (VanishCommand.vanish.contains(event.getPlayer())) {
+			if (event.getAction().equals(Action.PHYSICAL)) {
+				if (event.getClickedBlock().getType() == Material.STONE_PLATE || event.getClickedBlock().getType() == Material.WOOD_PLATE) {
+					event.setCancelled(true);
+				}
+			}
+			if (!VanishCommand.vanish.contains(event.getPlayer())) {
+				return;
+			}
 		}
 	}
 }

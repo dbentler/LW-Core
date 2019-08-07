@@ -56,6 +56,7 @@ import me.ezjamo.managers.LWManagers;
 import me.ezjamo.managers.ModModeManager;
 import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.RespawnManager;
+import me.ezjamo.managers.SilentOpenChest;
 import me.ezjamo.managers.SpongeManager;
 import me.ezjamo.managers.VanishManager;
 import me.ezjamo.managers.WeatherManager;
@@ -112,6 +113,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new SpongeManager(), this);
         Bukkit.getPluginManager().registerEvents(new RespawnManager(), this);
         Bukkit.getPluginManager().registerEvents(new VanishManager(), this);
+        Bukkit.getPluginManager().registerEvents(new SilentOpenChest(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
