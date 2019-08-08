@@ -5,8 +5,18 @@
 #                   Coded by EzJamo and DeathRealms
 #------------------------------------------------------------------------
 
-# Disables all spawner placement (use after spawner place date)
+#Server Options
+#Disables all spawner placement (use after spawner place date)
 enable-spawner-placement: true
+
+#Disables strength 2 potions
+disable-strength-2: true
+
+#Disables placing blocks on top of the nether
+disable-top-of-nether-place: true
+
+#Disables placing skeleton spawners in the nether
+disable-skeleton-spawners-nether: true
 
 Messages:
   ActionBarMessage: '&aYou are invisible to other players!'
@@ -106,7 +116,7 @@ Scoreboard:
     - '&dOnline: &f%server_online%'
     - '&dBalance: &f%vault_eco_balance_formatted%'
     - ''
-    - '&aFaction: &r%mvdw_factionsuuid_faction_name%'
+    - '&aFaction: &r%factionsuuid_faction_name%'
     - ''
     - '&cKills: &f%statistic_player_kills%'
     - '&cDeaths: &f%statistic_deaths%'

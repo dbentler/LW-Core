@@ -33,8 +33,14 @@ public class LWManagers implements Listener {
                  Potion potion = Potion.fromItemStack(it);
                  PotionEffectType effecttype = potion.getType().getEffectType();
                 if (effecttype == PotionEffectType.INCREASE_DAMAGE) {
-                    event.setCancelled(true);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStrength II is currently disabled."));
+                	boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-strength-2");
+                	if (enabled) {
+                		event.setCancelled(true);
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStrength II is currently disabled."));
+                	}
+                	if (!enabled) {
+                		return;
+                	}
                 }
             }
         }
@@ -46,9 +52,15 @@ public class LWManagers implements Listener {
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
 			if (!p.hasPermission("lw.nether.place")) {
 				if (p.getLocation().getBlockY() >= 128) {
-					e.setCancelled(true);
-					p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 86, 0.5));
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
+					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-top-of-nether-place");
+					if (enabled) {
+						e.setCancelled(true);
+						p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 86, 0.5));
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
+					}
+					if (!enabled) {
+						return;
+					}
 				}
 				if (p.hasPermission("lw.nether.place")) {
 					return;
@@ -66,8 +78,14 @@ public class LWManagers implements Listener {
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
 			if (e.getAction() == Action.RIGHT_CLICK_BLOCK && i.getType() == Material.MOB_SPAWNER && i.getItemMeta().hasDisplayName()) {
 				if (i.getItemMeta().getDisplayName().contains("Skeleton")) {
-					e.setCancelled(true);
-					p.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &fYou cannot spawn skeletons in the nether"));
+					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-skeleton-spawners-nether");
+					if (enabled) {
+						e.setCancelled(true);
+						p.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &fYou cannot spawn skeletons in the nether"));
+					}
+					if (!enabled) {
+						return;
+					}
 				}
 			}
 		}
