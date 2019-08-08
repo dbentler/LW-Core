@@ -165,8 +165,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	
 	public void onDisable() {
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
-    			staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-    			staff.setGameMode(GameMode.SURVIVAL);
+    		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+    		staff.setGameMode(GameMode.SURVIVAL);
     	}
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");

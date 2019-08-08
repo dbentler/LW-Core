@@ -8,6 +8,7 @@ import static org.bukkit.Material.CHEST;
 import static org.bukkit.Material.ENDER_CHEST;
 import static org.bukkit.Material.TRAPPED_CHEST;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,6 @@ import com.google.common.collect.ImmutableList;
 
 import lombok.Data;
 import me.ezjamo.Lonewolves;
-import me.ezjamo.commands.VanishCommand;
 
 public class SilentOpenChest implements Listener {
 
@@ -60,7 +60,8 @@ public class SilentOpenChest implements Listener {
         if (!(e.getWhoClicked() instanceof Player))
             return;
         Player p = (Player) e.getWhoClicked();
-        if (!VanishCommand.vanish.contains(p)) return;
+        File file = new File("plugins//LW-Essentials//Vanished//" + p.getName() + ".yml");
+        if (!file.exists()) return;
         if (!playerStateInfoMap.containsKey(p)) return;
         if (p.getGameMode() != GameMode.SURVIVAL && p.getGameMode() != GameMode.ADVENTURE
                 && p.getGameMode() != GameMode.CREATIVE) {
@@ -97,7 +98,8 @@ public class SilentOpenChest implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChestInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if (!VanishCommand.vanish.contains(p)) return;
+        File file = new File("plugins//LW-Essentials//Vanished//" + p.getName() + ".yml");
+        if (!file.exists()) return;
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (p.getGameMode() == GameMode.SPECTATOR) return;
         //noinspection deprecation
@@ -161,9 +163,10 @@ public class SilentOpenChest implements Listener {
                                 List<PlayerInfoData> infoDataList = new ArrayList<>(
                                         event.getPacket().getPlayerInfoDataLists().read(0));
                                 Player receiver = event.getPlayer();
+                                File file = new File("plugins//LW-Essentials//Vanished//" + receiver.getName() + ".yml");
                                 for (PlayerInfoData infoData : ImmutableList.copyOf(infoDataList)) {
-                                    if (!VanishCommand.vanish.contains(receiver)
-                                            && VanishCommand.vanish.contains(receiver)) {
+                                    if (!file.exists()
+                                            && file.exists()) {
                                         Player vanishedTabPlayer = Bukkit.getPlayer(infoData.getProfile().getUUID());
                                         if (infoData.getGameMode() == EnumWrappers.NativeGameMode.SPECTATOR
                                                 && hasSilentlyOpenedChest(vanishedTabPlayer)
@@ -185,23 +188,23 @@ public class SilentOpenChest implements Listener {
                                 }
                                 event.getPacket().getPlayerInfoDataLists().write(0, infoDataList);
                             } else if (event.getPacketType() == GAME_STATE_CHANGE) {
-                                if (VanishCommand.vanish.contains(
-                                        event.getPlayer())) {
+                            	File file = new File("plugins//LW-Essentials//Vanished//" + event.getPlayer().getName() + ".yml");
+                                if (file.exists()) {
                                     if (event.getPacket().getIntegers().read(0) != 3) return;
                                     if (!hasSilentlyOpenedChest(event.getPlayer())) return;
                                     event.setCancelled(true);
                                 }
                             } else if (event.getPacketType() == ABILITIES) {
-                                if (VanishCommand.vanish.contains(
-                                        event.getPlayer())) {
+                            	File file = new File("plugins//LW-Essentials//Vanished//" + event.getPlayer().getName() + ".yml");
+                                if (file.exists()) {
                                     if (!hasSilentlyOpenedChest(event.getPlayer())) return;
                                     event.setCancelled(true);
                                 }
                             } else if (event.getPacketType() == ENTITY_METADATA) {
                                 int entityID = event.getPacket().getIntegers().read(0);
                                 if (entityID == event.getPlayer().getEntityId()) {
-                                    if (VanishCommand.vanish.contains(
-                                            event.getPlayer())) {
+                                	File file = new File("plugins//LW-Essentials//Vanished//" + event.getPlayer().getName() + ".yml");
+                                    if (file.exists()) {
                                         if (!hasSilentlyOpenedChest(event.getPlayer())) return;
                                         event.setCancelled(true);
                                     }

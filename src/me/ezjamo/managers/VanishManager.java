@@ -1,5 +1,7 @@
 package me.ezjamo.managers;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,87 +15,115 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import me.ezjamo.commands.VanishCommand;
 
 public class VanishManager implements Listener {
 	
-	@EventHandler
+	@EventHandler 
 	public void onPlayerJoin(PlayerJoinEvent event) {
+		VanishCommand.vanish.add(event.getPlayer());
 		for (Player player : VanishCommand.vanish) {
-			if (VanishCommand.vanish.contains(player)) {
-				event.getPlayer().hidePlayer(player);
-				if (event.getPlayer().hasPermission("lw.vanish.see")) {
-					event.getPlayer().showPlayer(player);
+			File file = new File("plugins//LW-Essentials//Vanished//" + player.getName() + ".yml");
+			if (file.exists()) {
+				if (VanishCommand.vanish.contains(player)) {
+					if (event.getPlayer().hasPermission("lw.vanish")) {
+						ActionBarMgr.addActionBar(event.getPlayer());
+					}
+					event.getPlayer().hidePlayer(player);
+					for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+						if (online.hasPermission("lw.vanish.see")) {
+							event.getPlayer().showPlayer(player);
+						}
+						else {
+							online.hidePlayer(player);
+						}
+					}
 				}
 			}
-			for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+			if (!file.exists()) {
+				ActionBarMgr.removeActionBar(event.getPlayer());
 				if (!VanishCommand.vanish.contains(player)) {
-					online.showPlayer(player);
+					for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+						online.showPlayer(player);
+					}
 				}
 			}
 		}
 	}
 	
 	@EventHandler
+	public void onPlayerLeave(PlayerQuitEvent event) {
+		ActionBarMgr.addActionBar(event.getPlayer());
+		VanishCommand.vanish.remove(event.getPlayer());
+	}
+	
+	@EventHandler
 	public void onPlayerPickup(PlayerPickupItemEvent event) {
-		if (VanishCommand.vanish.contains(event.getPlayer())) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getPlayer().getName() + ".yml");
+		if (file.exists()) {
 			event.setCancelled(true);
 		}
-		if (!VanishCommand.vanish.contains(event.getPlayer())) {
+		if (!file.exists()) {
 			return;
 		}
 	}
 	
 	@EventHandler
 	public void onHungerLoss(FoodLevelChangeEvent event) {
-		if (VanishCommand.vanish.contains(event.getEntity())) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getEntity().getName() + ".yml");
+		if (file.exists()) {
 			event.setCancelled(true);
 		}
-		if (!VanishCommand.vanish.contains(event.getEntity())) {
+		if (!file.exists()) {
 			return;
 		}
 	}
 	
 	@EventHandler
 	public void onPlayerDamage(EntityDamageEvent event) {
-		if (VanishCommand.vanish.contains(event.getEntity())) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getEntity().getName() + ".yml");
+		if (file.exists()) {
 			event.setCancelled(true);
 		}
-		if (!VanishCommand.vanish.contains(event.getEntity())) {
+		if (!file.exists()) {
 			return;
 		}
 	}
 	
 	@EventHandler
 	public void onPlayerDamageByBlock(EntityDamageByBlockEvent event) {
-		if (VanishCommand.vanish.contains(event.getEntity())) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getEntity().getName() + ".yml");
+		if (file.exists()) {
 			event.setCancelled(true);
 		}
-		if (!VanishCommand.vanish.contains(event.getEntity())) {
+		if (!file.exists()) {
 			return;
 		}
 	}
 	
 	@EventHandler
 	public void onEntityTarget(EntityTargetEvent event) {
-		if (VanishCommand.vanish.contains(event.getTarget())) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getTarget().getName() + ".yml");
+		if (file.exists()) {
 			event.setCancelled(true);
 		}
-		if (!VanishCommand.vanish.contains(event.getTarget())) {
+		if (!file.exists()) {
 			return;
 		}
 	}
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		if (VanishCommand.vanish.contains(event.getPlayer())) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getPlayer().getName() + ".yml");
+		if (file.exists()) {
 			if (event.getAction().equals(Action.PHYSICAL)) {
 				if (event.getClickedBlock().getType() == Material.STONE_PLATE || event.getClickedBlock().getType() == Material.WOOD_PLATE) {
 					event.setCancelled(true);
 				}
 			}
-			if (!VanishCommand.vanish.contains(event.getPlayer())) {
+			if (!file.exists()) {
 				return;
 			}
 		}
