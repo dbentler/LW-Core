@@ -60,7 +60,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 public void run() {
                 	freezemenu(p);
                 }
-            }, 2L);
+            }, 1L);
         }
     
 	
