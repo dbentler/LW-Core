@@ -13,6 +13,4 @@ public class RespawnManager implements Listener {
 		Location loc = new Location(Bukkit.getWorld("world"), 0.500, 80, 0.500, 180, (float) 4.5);
 		event.setRespawnLocation(loc);
 	}
-			}
-
-
+}
