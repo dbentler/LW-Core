@@ -25,5 +25,13 @@ public class WildToolsFixManager implements Listener {
 				}
 			}
 		}
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && i.getType() == Material.SHEARS && i.getItemMeta().hasDisplayName()) {
+			if (i.getItemMeta().getDisplayName().contains("LoneWolves SellWand")) {
+				if (!fPlayer.isInOwnTerritory()) {
+					e.setCancelled(true);
+					e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou can only use sell wands in your own claim."));
+				}
+			}
+		}
 	}
 }
