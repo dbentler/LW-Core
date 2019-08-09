@@ -102,8 +102,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onEnable() {
     	this.getServer().getConsoleSender().sendMessage("");
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("          &fLone&4Wolves-&fCore v2.7"));
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("                &aEnabled!"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.7"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&aEnabled!"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
 		plugin = this;
@@ -175,8 +175,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onDisable() {
 		this.getServer().getConsoleSender().sendMessage("");
 		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("          &fLone&4Wolves-&fCore v2.7"));
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("                &cDisabled"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.7"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&cDisabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {

@@ -127,7 +127,10 @@ public class VanishManager implements Listener {
 		File file = new File("plugins//LW-Essentials//Vanished//" + event.getPlayer().getName() + ".yml");
 		if (file.exists()) {
 			if (event.getAction().equals(Action.PHYSICAL)) {
-				if (event.getClickedBlock().getType() == Material.STONE_PLATE || event.getClickedBlock().getType() == Material.WOOD_PLATE) {
+				if (event.getClickedBlock().getType() == Material.STONE_PLATE ||
+					event.getClickedBlock().getType() == Material.WOOD_PLATE ||
+					event.getClickedBlock().getType() == Material.IRON_PLATE ||
+					event.getClickedBlock().getType() == Material.GOLD_PLATE) {
 					event.setCancelled(true);
 				}
 			}
