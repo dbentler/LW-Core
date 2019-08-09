@@ -28,8 +28,10 @@ public class VanishManager implements Listener {
 			File file = new File("plugins//LW-Essentials//Vanished//" + player.getName() + ".yml");
 			if (file.exists()) {
 				if (VanishCommand.vanish.contains(player)) {
+					ActionBarMgr.removeActionBar(event.getPlayer());
 					if (event.getPlayer().hasPermission("lw.vanish")) {
 						ActionBarMgr.addActionBar(event.getPlayer());
+						player.spigot().setCollidesWithEntities(false);
 					}
 					event.getPlayer().hidePlayer(player);
 					for (Player online : Bukkit.getServer().getOnlinePlayers()) {
@@ -55,7 +57,14 @@ public class VanishManager implements Listener {
 	
 	@EventHandler
 	public void onPlayerLeave(PlayerQuitEvent event) {
-		ActionBarMgr.addActionBar(event.getPlayer());
+		for (Player player : VanishCommand.vanish) { 
+			File file = new File("plugins//LW-Essentials//Vanished//" + player.getName() + ".yml");
+			if (file.exists()) {
+				if (VanishCommand.vanish.contains(player)) {
+					ActionBarMgr.removeActionBar(event.getPlayer());
+				}
+			}
+		}
 		VanishCommand.vanish.remove(event.getPlayer());
 	}
 	
