@@ -100,6 +100,12 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     
     @Override
 	public void onEnable() {
+    	this.getServer().getConsoleSender().sendMessage("");
+    	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("          &fLone&4Wolves-&fCore v2.7"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("                &aEnabled!"));
+    	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage("");
 		plugin = this;
 		Assemble assemble = new Assemble(this, new ScoreboardAdapter());
 		assemble.setTicks(16);
@@ -167,6 +173,12 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     }
 	
 	public void onDisable() {
+		this.getServer().getConsoleSender().sendMessage("");
+		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("          &fLone&4Wolves-&fCore v2.7"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("                &cDisabled"));
+    	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage("");
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     		staff.setGameMode(GameMode.SURVIVAL);
@@ -185,14 +197,19 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     }
 	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    	Player player = (Player) sender;
     	if (cmd.getName().equalsIgnoreCase("lw")) {
+    		if (!(sender instanceof Player) && args[0].equalsIgnoreCase("reload")) {
+    			reloadConfig();
+    			sender.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    			return true;
+    		}
+    		Player player = (Player) sender;
     		if (player.hasPermission("lw.reload")) {
     			if (args.length == 1) {
     				if (args[0].equalsIgnoreCase("reload")) {
     					reloadConfig();
     					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
-    					Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    					this.getServer().getConsoleSender().sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
     				}
     				if (!args[0].equalsIgnoreCase("reload")) {
     					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
