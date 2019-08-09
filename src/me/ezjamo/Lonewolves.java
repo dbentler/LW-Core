@@ -161,12 +161,16 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
             getLogger().severe("LW-Essentials requires vault.");
             getServer().getPluginManager().disablePlugin(this);
         }
+    	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
+    		VanishCommand.vanish.add(staff);
+    	}
     }
 	
 	public void onDisable() {
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     		staff.setGameMode(GameMode.SURVIVAL);
+    		VanishCommand.vanish.remove(staff);
     	}
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
