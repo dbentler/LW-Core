@@ -105,12 +105,11 @@ public class VanishManager implements Listener {
 	
 	@EventHandler
 	public void onEntityTarget(EntityTargetEvent event) {
-		File file = new File("plugins//LW-Essentials//Vanished//" + event.getTarget().getName() + ".yml");
-		if (file.exists()) {
-			event.setCancelled(true);
-		}
-		if (!file.exists()) {
-			return;
+		for (Player player : VanishCommand.vanish) {
+			File file = new File("plugins//LW-Essentials//Vanished//" + player.getName() + ".yml");
+			if (file.exists()) {
+				event.setCancelled(true);
+			}
 		}
 	}
 	
