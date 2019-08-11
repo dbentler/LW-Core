@@ -103,7 +103,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getServer().getConsoleSender().sendMessage("");
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.7"));
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&aEnabled!"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&aEnabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
 		plugin = this;

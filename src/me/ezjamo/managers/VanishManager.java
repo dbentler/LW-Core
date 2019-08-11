@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -99,6 +100,14 @@ public class VanishManager implements Listener {
 		if (!file.exists()) {
 			return;
 		}
+	}
+	
+	@EventHandler
+	public void onPlayerAttack(EntityDamageByEntityEvent event) {
+		File file = new File("plugins//LW-Essentials//Vanished//" + event.getDamager().getName() + ".yml");
+		if (file.exists()) {
+            event.setCancelled(true);
+        }
 	}
 	
 	@EventHandler
