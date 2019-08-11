@@ -20,8 +20,8 @@ public class Modmode implements CommandExecutor
 {
 	
     public static ArrayList<String> modmode;
-    public HashMap<UUID, ItemStack[]> contents;
-    public HashMap<UUID, ItemStack[]> armorContents;
+    public static HashMap<UUID, ItemStack[]> contents;
+    public static HashMap<UUID, ItemStack[]> armorContents;
     
     static {
         Modmode.modmode = new ArrayList<String>();
@@ -29,25 +29,25 @@ public class Modmode implements CommandExecutor
     }
     
     public Modmode() {
-        this.contents = new HashMap<UUID, ItemStack[]>();
-        this.armorContents = new HashMap<UUID, ItemStack[]>();
+        contents = new HashMap<UUID, ItemStack[]>();
+        armorContents = new HashMap<UUID, ItemStack[]>();
     }
     
     public boolean previous(Player player) {
-        return this.contents.containsKey(player.getUniqueId()) && this.armorContents.containsKey(player.getUniqueId());
+        return contents.containsKey(player.getUniqueId()) && armorContents.containsKey(player.getUniqueId());
     }
     
     public void saveInventory(Player player) {
-        this.contents.put(player.getUniqueId(), player.getInventory().getContents());
-        this.armorContents.put(player.getUniqueId(), player.getInventory().getArmorContents());
+        contents.put(player.getUniqueId(), player.getInventory().getContents());
+        armorContents.put(player.getUniqueId(), player.getInventory().getArmorContents());
     }
     
-    public void loadInventory(Player player) {
+    public static void loadInventory(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        playerInventory.setContents((ItemStack[])this.contents.get(player.getUniqueId()));
-        playerInventory.setArmorContents((ItemStack[])this.armorContents.get(player.getUniqueId()));
-        this.contents.remove(player.getUniqueId());
-        this.armorContents.remove(player.getUniqueId());
+        playerInventory.setContents((ItemStack[])contents.get(player.getUniqueId()));
+        playerInventory.setArmorContents((ItemStack[])armorContents.get(player.getUniqueId()));
+        contents.remove(player.getUniqueId());
+        armorContents.remove(player.getUniqueId());
     }
     
     
@@ -63,22 +63,22 @@ public class Modmode implements CommandExecutor
                 return true;
             }
             if (arg3.length != 0) {
-                player.sendMessage("Invalid usage");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUsage: &7/mod"));
                 return true;
             }
             if (Modmode.modmode.contains(player.getName())) {
                 Modmode.modmode.remove(player.getName());
                 ModModeManager.remove(Bukkit.getPlayer(player.getName()));
-                player.performCommand("inv prev");
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fStaffmode set to &cfalse"));
+                loadInventory(player);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStaff mode &cdisabled"));
                 
                 return true;
                 }
             }
-        	player.performCommand("inv new");
+        	this.saveInventory(player);
             Modmode.modmode.add(player.getName());
             ModModeManager.put(Bukkit.getPlayer(player.getName()));
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fStaffmode set to &atrue"));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStaff mode &aenabled"));
         return true;
     	}
 	}

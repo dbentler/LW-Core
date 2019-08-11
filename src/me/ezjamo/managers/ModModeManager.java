@@ -128,7 +128,7 @@ public class ModModeManager implements Listener {
     	if (Modmode.modmode.contains(e.getPlayer().getName())) {
     		Modmode.modmode.remove(e.getPlayer().getName());
     		ModModeManager.remove(p);
-    		e.getPlayer().performCommand("inv prev");
+    		Modmode.loadInventory(p);
     			}
     		}
    
