@@ -10,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.managers.ActionBarMgr;
@@ -53,6 +54,7 @@ public class VanishCommand implements CommandExecutor {
 						player.spigot().setCollidesWithEntities(false);
 						TABAPI.setTagPrefixPermanently(player, "&7&o");
 						TABAPI.setCustomTabNamePermanently(player, "&7&o" + player.getName());
+						player.setMetadata("vanished", new FixedMetadataValue(Lonewolves.plugin, true));
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aYou are now vanished!"));
 						return true;
 					}
@@ -62,6 +64,7 @@ public class VanishCommand implements CommandExecutor {
 								online.showPlayer(player);
 							}
 							ActionBarMgr.removeActionBar(player);
+							player.removeMetadata("vanished", Lonewolves.plugin);
 							player.spigot().setCollidesWithEntities(true);
 							TABAPI.setTagPrefixPermanently(player, "%rel_factionsuuid_relation_color%");
 							TABAPI.setCustomTabNamePermanently(player, "%rel_factionsuuid_relation_color%" + player.getName());
