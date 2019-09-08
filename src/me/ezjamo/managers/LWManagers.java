@@ -3,6 +3,7 @@ package me.ezjamo.managers;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -100,10 +101,10 @@ public class LWManagers implements Listener {
 				return;
 			}
 			if (!enabled) {
-			if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
-				e.setCancelled(true);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fSpawn placement is now disabled."));
-			}
+				if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
+					e.setCancelled(true);
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fSpawn placement is now disabled."));
+				}
 			}
 			else
 				return;
@@ -113,12 +114,20 @@ public class LWManagers implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		SpawnManager spawnCoords = SpawnManager.getManager();
+		World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
+		double x = spawnCoords.getConfig().getDouble("spawn.x");
+		double y = spawnCoords.getConfig().getDouble("spawn.y");
+		double z = spawnCoords.getConfig().getDouble("spawn.z");
+		float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
+		float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
+		Location loc = new Location(w, x, y, z, yaw, pitch);
 		if (!player.hasPlayedBefore()) {
-			String unsetPlayer = "%player_name%";
-            String setPlayer = PlaceholderAPI.setPlaceholders(player, unsetPlayer);
-			event.setJoinMessage(Utils.chat("&fWelcome &4") + setPlayer + " " + Utils.chat("&fto &lLone&4&lWolves&f!"));
-			player.performCommand("ekit member");
-			Location loc = new Location(player.getWorld(), 0.500, 80, 0.500, 180, (float) 4.5);
+			String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
+            String message = Lonewolves.plugin.getMessage("welcome-message");
+            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
+			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
+			Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " +  player.getName());
 			player.teleport(loc);
 		}
 	}

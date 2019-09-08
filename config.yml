@@ -21,8 +21,12 @@ disable-skeleton-spawners-nether: true
 #The amount of time it takes for a player to teleport to spawn.
 spawn-delay: 4
 
+#Name of the essentials kit new players receive when they first join
+first-join-kit: member
+
 Messages:
   ActionBarMessage: '&aYou are invisible to other players!'
+  welcome-message: '&fWelcome &4%player_name% &fto &lLone&4&lWolves&f! &4#%server_unique_joins%'
 
 #/help command
 #To add another page copy the format below and replace "1" with the page number.
