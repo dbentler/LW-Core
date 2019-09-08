@@ -22,7 +22,6 @@ import me.ezjamo.commands.AdminChat;
 import me.ezjamo.commands.CmdsCommand;
 import me.ezjamo.commands.DemoteCommand;
 import me.ezjamo.commands.DistanceCommand;
-import me.ezjamo.commands.ESpawnCommand;
 import me.ezjamo.commands.FTopWorthCommand;
 import me.ezjamo.commands.FreezeCommand;
 import me.ezjamo.commands.HelpCommand;
@@ -40,6 +39,7 @@ import me.ezjamo.commands.RemoveModModeCommand;
 import me.ezjamo.commands.RulesCommand;
 import me.ezjamo.commands.ScoreboardCommand;
 import me.ezjamo.commands.SetSlotsCommand;
+import me.ezjamo.commands.SetSpawnCommand;
 import me.ezjamo.commands.SpawnCommand;
 import me.ezjamo.commands.StaffChat;
 import me.ezjamo.commands.StaffOnOff;
@@ -59,6 +59,7 @@ import me.ezjamo.managers.ModModeManager;
 import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.RespawnManager;
 import me.ezjamo.managers.SilentOpenChest;
+import me.ezjamo.managers.SpawnManager;
 import me.ezjamo.managers.SpongeManager;
 import me.ezjamo.managers.VanishManager;
 import me.ezjamo.managers.VersionUtil;
@@ -102,7 +103,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onEnable() {
     	this.getServer().getConsoleSender().sendMessage("");
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.7"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.8"));
     	this.getServer().getConsoleSender().sendMessage(Utils.chat("&aEnabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
@@ -111,6 +112,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		assemble.setTicks(16);
 		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
     	this.saveDefaultConfig();
+    	SpawnManager.getManager().setupFiles();
+    	SpawnManager.getManager().reloadConfig();
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
         Bukkit.getPluginManager().registerEvents(this, (this));
         Bukkit.getPluginManager().registerEvents(new ModModeManager(), this);
@@ -127,6 +130,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new RespawnManager(), this);
         Bukkit.getPluginManager().registerEvents(new VanishManager(), this);
         Bukkit.getPluginManager().registerEvents(new SilentOpenChest(), this);
+        Bukkit.getPluginManager().registerEvents(new SpawnManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
@@ -144,8 +148,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("inv").setExecutor(new SwitchInventoryCommand());
     	this.getCommand("ping").setExecutor(new PingCommand());
     	this.getCommand("hub").setExecutor(new HubCommand());
+    	this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
     	this.getCommand("spawn").setExecutor(new SpawnCommand());
-    	this.getCommand("espawn").setExecutor(new ESpawnCommand());
     	this.getCommand("startkoth").setExecutor(new KothCommand());
     	this.getCommand("kits").setExecutor(new KitsCommand());
     	this.getCommand("preview").setExecutor(new PreviewCommand());
@@ -175,7 +179,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onDisable() {
 		this.getServer().getConsoleSender().sendMessage("");
 		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.7"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.8"));
     	this.getServer().getConsoleSender().sendMessage(Utils.chat("&cDisabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");

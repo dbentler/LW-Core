@@ -4,7 +4,7 @@ author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
 softdepend: [PlaceholderAPI]
 depend: [KoTH, Vault, Essentials]
-version: 2.7
+version: 2.8
 
 commands:
   request:
@@ -28,8 +28,9 @@ commands:
   lw:
   rules:
   setslots:
+  setspawn:
   spawn:
-  espawn:
+   aliases: [espawn]
   freeze:
   nv:
   hub:
