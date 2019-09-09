@@ -1,6 +1,5 @@
 package me.ezjamo.managers;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import de.myzelyam.api.vanish.VanishAPI;
 import me.ezjamo.commands.Modmode;
 
 @SuppressWarnings("deprecation")
@@ -353,11 +353,11 @@ public class ModModeManager implements Listener {
         p.getInventory().setItem(2, invinspect);
         p.getInventory().setItem(6, staff);
         p.getInventory().setItem(4, toolrandom);
-        File file = new File("plugins//LW-Essentials//Vanished//" + p.getName() + ".yml");
-        if (file.exists()) {
+        boolean isVanished = VanishAPI.isInvisible(p);
+        if (isVanished) {
         	p.getInventory().setItem(8, ModModeManager.vanishv);
         }
-        if (!file.exists()) {
+        if (!isVanished) {
         	p.getInventory().setItem(8, ModModeManager.vanishnv);
         }
     }

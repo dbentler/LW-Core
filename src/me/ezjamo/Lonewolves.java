@@ -16,7 +16,6 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
-import lombok.Getter;
 import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.AdminChat;
 import me.ezjamo.commands.CmdsCommand;
@@ -45,8 +44,6 @@ import me.ezjamo.commands.StaffChat;
 import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
-import me.ezjamo.commands.VanishCommand;
-import me.ezjamo.managers.ActionBarMgr;
 import me.ezjamo.managers.ChatManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
@@ -58,22 +55,14 @@ import me.ezjamo.managers.LWManagers;
 import me.ezjamo.managers.ModModeManager;
 import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.RespawnManager;
-import me.ezjamo.managers.SilentOpenChest;
 import me.ezjamo.managers.SpawnManager;
 import me.ezjamo.managers.SpongeManager;
-import me.ezjamo.managers.VanishManager;
-import me.ezjamo.managers.VersionUtil;
 import me.ezjamo.managers.WeatherManager;
 import me.ezjamo.managers.WildToolsFixManager;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
-
-	@Getter
-    private VersionUtil versionUtil;
-	@Getter
-    private ActionBarMgr actionBarMgr;
     public static Lonewolves plugin;
     public static String NO_PERMS = ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this.");
     
@@ -128,8 +117,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new WildToolsFixManager(), this);
         Bukkit.getPluginManager().registerEvents(new SpongeManager(), this);
         Bukkit.getPluginManager().registerEvents(new RespawnManager(), this);
-        Bukkit.getPluginManager().registerEvents(new VanishManager(), this);
-        Bukkit.getPluginManager().registerEvents(new SilentOpenChest(), this);
         Bukkit.getPluginManager().registerEvents(new SpawnManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -160,10 +147,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("worth").setExecutor(new FTopWorthCommand());
     	this.getCommand("commands").setExecutor(new CmdsCommand());
     	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand());
-    	this.getCommand("vanish").setExecutor(new VanishCommand());
-    	versionUtil = new VersionUtil(this);
-    	if (versionUtil.isOneDotXOrHigher(8))
-            actionBarMgr = new ActionBarMgr(this);
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);
@@ -171,9 +154,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
             getLogger().severe("LW-Essentials requires vault.");
             getServer().getPluginManager().disablePlugin(this);
         }
-    	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
-    		VanishCommand.vanish.add(staff);
-    	}
     }
 	
 	public void onDisable() {
@@ -186,7 +166,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     		staff.setGameMode(GameMode.SURVIVAL);
-    		VanishCommand.vanish.remove(staff);
     	}
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");

@@ -53,9 +53,6 @@ commands:
     aliases:
       - fb
       - sb
-  vanish:
-    aliases:
-      - v
    
 permissions:
   lw.helpop:
@@ -88,9 +85,3 @@ permissions:
     description: 'Demotes the specified user.'
   lw.fly.bypass:
     description: 'Lets user bypass fly disable in other faction claims.'
-  lw.vanish:
-    description: 'Lets users become invisable to other players online.'
-  lw.vanish.others:
-    description: 'Lets users vanish other players.'
-  lw.vanish.see:
-    description: 'Lets users see other vanished players.'
