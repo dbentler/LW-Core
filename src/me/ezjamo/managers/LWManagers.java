@@ -123,14 +123,14 @@ public class LWManagers implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		SpawnManager spawnCoords = SpawnManager.getManager();
-		World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
-		double x = spawnCoords.getConfig().getDouble("spawn.x");
-		double y = spawnCoords.getConfig().getDouble("spawn.y");
-		double z = spawnCoords.getConfig().getDouble("spawn.z");
-		float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
-		float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
-		Location loc = new Location(w, x, y, z, yaw, pitch);
 		if (!player.hasPlayedBefore()) {
+			World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
+			double x = spawnCoords.getConfig().getDouble("spawn.x");
+			double y = spawnCoords.getConfig().getDouble("spawn.y");
+			double z = spawnCoords.getConfig().getDouble("spawn.z");
+			float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
+			float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
+			Location loc = new Location(w, x, y, z, yaw, pitch);
 			String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
             String message = Lonewolves.plugin.getMessage("welcome-message");
             String placeholders = PlaceholderAPI.setPlaceholders(player, message);
