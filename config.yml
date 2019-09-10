@@ -18,6 +18,9 @@ disable-top-of-nether-place: true
 #Disables placing skeleton spawners in the nether
 disable-skeleton-spawners-nether: true
 
+#Disables weather on the server.
+disable-weather: true
+
 #The amount of time it takes for a player to teleport to spawn.
 spawn-delay: 4
 
