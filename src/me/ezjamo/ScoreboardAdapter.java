@@ -55,7 +55,7 @@ public class ScoreboardAdapter implements AssembleAdapter {
 		final List<String> toReturn = new ArrayList<>();
 		Plugin koth = Lonewolves.plugin.getServer().getPluginManager().getPlugin("KoTH");
 		if (koth == null) {
-			  Lonewolves.plugin.getLogger().log(Level.SEVERE, "KoTH by Subside is needed for LW-Essentials.");
+			  Lonewolves.plugin.getLogger().log(Level.SEVERE, "KoTH by Subside is needed for LW-Core.");
 		}
 		KothPlugin kothPlugin = (KothPlugin) koth;
 		for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Default")) {

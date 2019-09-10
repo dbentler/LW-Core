@@ -39,7 +39,7 @@ public class SwitchInventoryCommand implements CommandExecutor {
 		
 		ArrayList<ItemStack> list = new ArrayList<>();
 		String playername = p.getName();
-		File file = new File("plugins//LW-Essentials//Inventories//" + playername + ".yml");
+		File file = new File("plugins//LW-Core//Inventories//" + playername + ".yml");
 		
 		if (label.equalsIgnoreCase("inv")) {
 			if (args.length == 1)
@@ -92,7 +92,7 @@ public class SwitchInventoryCommand implements CommandExecutor {
 }
 
 	public void checkOrder() {
-		File file = new File("plugins//LW-Essentials//Inventories");
+		File file = new File("plugins//LW-Core//Inventories");
 		if(!file.exists()) {
 			file.mkdir();
 		}

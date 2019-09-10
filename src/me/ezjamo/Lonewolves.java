@@ -151,7 +151,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	new KitsManager(this);
     	new PreviewManager(this);
     	if(!(setupEconomy())) {
-            getLogger().severe("LW-Essentials requires vault.");
+            getLogger().severe("LW-Core requires vault.");
             getServer().getPluginManager().disablePlugin(this);
         }
     }
