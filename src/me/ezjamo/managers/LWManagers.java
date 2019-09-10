@@ -51,20 +51,25 @@ public class LWManagers implements Listener {
 	public void onBlockPlace(BlockPlaceEvent e) {
 		Player p = (Player) e.getPlayer();
 		SpawnManager spawnCoords = SpawnManager.getManager();
-		World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
-		double x = spawnCoords.getConfig().getDouble("spawn.x");
-		double y = spawnCoords.getConfig().getDouble("spawn.y");
-		double z = spawnCoords.getConfig().getDouble("spawn.z");
-		float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
-		float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
-		Location loc = new Location(w, x, y, z, yaw, pitch);
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
 			if (!p.hasPermission("lw.nether.place")) {
 				if (p.getLocation().getBlockY() >= 128) {
 					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-top-of-nether-place");
 					if (enabled) {
 						e.setCancelled(true);
-						p.teleport(loc);
+						if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
+							p.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
+						}
+						if (spawnCoords.getConfig().getConfigurationSection("spawn") != null) {
+							World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
+							double x = spawnCoords.getConfig().getDouble("spawn.x");
+							double y = spawnCoords.getConfig().getDouble("spawn.y");
+							double z = spawnCoords.getConfig().getDouble("spawn.z");
+							float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
+							float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
+							Location loc = new Location(w, x, y, z, yaw, pitch);
+							p.teleport(loc);
+						}
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
 					}
 					if (!enabled) {
