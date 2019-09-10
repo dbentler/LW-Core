@@ -18,6 +18,9 @@ disable-top-of-nether-place: true
 #Disables placing skeleton spawners in the nether
 disable-skeleton-spawners-nether: true
 
+#Disables the depth strider enchantment on boots
+disable-depth-strider: true
+
 #Disables weather on the server.
 disable-weather: true
 
