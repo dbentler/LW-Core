@@ -45,6 +45,7 @@ import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
 import me.ezjamo.managers.ChatManager;
+import me.ezjamo.managers.CustomCmdsManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
 import me.ezjamo.managers.FFLYManager;
@@ -118,6 +119,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new SpongeManager(), this);
         Bukkit.getPluginManager().registerEvents(new RespawnManager(), this);
         Bukkit.getPluginManager().registerEvents(new SpawnManager(), this);
+        Bukkit.getPluginManager().registerEvents(new CustomCmdsManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());

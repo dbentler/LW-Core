@@ -188,6 +188,12 @@ FTOP Worth:
     - '&aEmerald Block &8- &e$500'
     - '&aBeacon &8- &e$3000'
     - '&4&m--------------------------------'
+    
+#Custom Command Messages
+#To give players permission for these commands they need the permission "lw.customcmd.<command>"
+Custom Commands:
+  example: #This will be the the command
+    - '&6I''m an example custom command' #This is the message it will send the player. You can also do multiple lines.
   
 #/commands messages
 Commands:
