@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 
  
 public class PingCommand implements CommandExecutor {
@@ -17,24 +18,22 @@ public class PingCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("ping")) {
-			if (args.length < 1)
-			for (String message : Lonewolves.plugin.getConfig().getStringList("Ping.Self")) {
-				String placeholders = PlaceholderAPI.setPlaceholders(p, message);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
+			if (args.length < 1) {
+				String self = Lonewolves.plugin.getConfig().getString("Ping.Self");
+				String placeholders = PlaceholderAPI.setPlaceholders(p, self);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + placeholders));
 			}
-            else {
-                Player target = Bukkit.getPlayer(args[0]);
-                if (target == null) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cPlayer not found"));
-                }
-                else
-                	if (target != null) {
-                		for (String message : Lonewolves.plugin.getConfig().getStringList("Ping.Others")) {
-                			String placeholders = PlaceholderAPI.setPlaceholders(target, message);
-            				p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
-                			}
-                	}
-            }			
+			if (args.length == 1) {
+				Player target = Bukkit.getPlayer(args[0]);
+				if (target == null) {
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cPlayer not found"));
+				}
+				if (target != null) {
+					String others = Lonewolves.plugin.getConfig().getString("Ping.Others");
+					String placeholders = PlaceholderAPI.setPlaceholders(target, others);
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + placeholders));
+				}
+			}
 		}
 		return true;
 	}

@@ -186,11 +186,13 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	if (cmd.getName().equalsIgnoreCase("lw")) {
-    		if (!(sender instanceof Player) && args[0].equalsIgnoreCase("reload")) {
-    			reloadConfig();
-    			Messages.load();
-    			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
-    			return true;
+    		if (!(sender instanceof Player)) {
+    			if (args[0].equalsIgnoreCase("reload")) {
+    				reloadConfig();
+        			Messages.load();
+        			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
+        			return true;
+    			}
     		}
     		Player player = (Player) sender;
     		if (player.hasPermission("lw.reload")) {

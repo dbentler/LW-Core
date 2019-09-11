@@ -1,5 +1,7 @@
 package me.ezjamo.commands;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,33 +11,34 @@ import org.bukkit.potion.PotionEffectType;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import net.md_5.bungee.api.ChatColor;
 
 public class NightVisionCommand implements CommandExecutor {
 
 
 public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
      Player p = (Player) sender;
-    if (cmd.getName().equalsIgnoreCase("nv") && sender instanceof Player) {
+    if (cmd.getName().equalsIgnoreCase("nv")) {
         if (!p.hasPermission("lw.nv")) {
             p.sendMessage(Messages.prefix + Messages.noPermission);
             return true;
         }
-        if (args.length == 0) {
-            if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
-            	for (String message : Lonewolves.plugin.getConfig().getStringList("NightVision Off")) {
-            	p.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        if (args.length < 1) {
+        	if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
+        		String disabled = Lonewolves.plugin.getConfig().getString("NightVision.Disabled");
+        		Bukkit.getLogger().info(Messages.prefix + disabled);
+    			p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + disabled));
                 p.removePotionEffect(PotionEffectType.NIGHT_VISION);
                 return true;
-            }
-            }
-            for (String message : Lonewolves.plugin.getConfig().getStringList("NightVision On")) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 9000000, 2));
-            return true;
-        }
-        }
-    	}
+        	}
+        	else {
+        		String enabled = Lonewolves.plugin.getConfig().getString("NightVision.Enabled");
+        		Bukkit.getLogger().info(Messages.prefix + enabled);
+    			p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + enabled));
+    			p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 9000000, 2));
+    			return true;
+        	}
+		}
+    }
     return true;
 	}
 }

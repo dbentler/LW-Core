@@ -108,19 +108,14 @@ Links:
   - '&3&lBans: &ahttps://lonewolves.net/bans'
 
 #/nv command.
-NightVision On:
-  - '&8[&f&lLone&4&lWolves&8] &aYou have enabled your night vision effects.'
-
-NightVision Off:
-  - '&8[&f&lLone&4&lWolves&8] &cYou have disabled your night vision effects.'
+NightVision:
+  Enabled: '&aYou have enabled your night vision effects.'
+  Disabled: '&cYou have disabled your night vision effects.'
 
 #/Ping command
 Ping:
-  Self:
-    - '&8[&f&lLone&4&lWolves&8] &fPing: %player_ping%'
-
-  Others:
-    - '&8[&f&lLone&4&lWolves&8] &f%player_name%''s ping is %player_ping%'
+  Self: '&fPing: %player_ping%'
+  Others: '&f%player_name%''s ping is %player_ping%'
 
 #Scoreboard messages.
 Scoreboard:
@@ -160,10 +155,8 @@ Stats:
 
 #/playtime command
 Playtime:
-  Self:
-    - '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
-  Others:
-    - '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+  Self: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+  Others: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
 
 #/worth command
 FTOP Worth:
