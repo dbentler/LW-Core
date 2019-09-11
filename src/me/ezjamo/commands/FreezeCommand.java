@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 
 public class FreezeCommand implements CommandExecutor, Listener {
 	
@@ -79,7 +80,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
             else {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target == null) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThis player is not online or doesn't exist !"));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThis player is not online or doesn't exist!"));
                 }
                 else if (FreezeCommand.frozenPlayers.contains(target.getUniqueId())) {
                     FreezeCommand.frozenPlayers.remove(target.getUniqueId());
@@ -94,7 +95,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
             } 
         }
         else {
-            player.sendMessage(Lonewolves.NO_PERMS);
+            player.sendMessage(Messages.prefix + Messages.noPermission);
         }
         return true;
     }

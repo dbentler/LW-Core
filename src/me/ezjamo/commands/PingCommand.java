@@ -18,7 +18,7 @@ public class PingCommand implements CommandExecutor {
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("ping")) {
 			if (args.length < 1)
-			for (final String message : Lonewolves.plugin.getConfig().getStringList("Ping.Self")) {
+			for (String message : Lonewolves.plugin.getConfig().getStringList("Ping.Self")) {
 				String placeholders = PlaceholderAPI.setPlaceholders(p, message);
 				p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
 			}
@@ -29,7 +29,7 @@ public class PingCommand implements CommandExecutor {
                 }
                 else
                 	if (target != null) {
-                		for (final String message : Lonewolves.plugin.getConfig().getStringList("Ping.Others")) {
+                		for (String message : Lonewolves.plugin.getConfig().getStringList("Ping.Others")) {
                 			String placeholders = PlaceholderAPI.setPlaceholders(target, message);
             				p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
                 			}

@@ -124,6 +124,7 @@ Ping:
 
 #Scoreboard messages.
 Scoreboard:
+  Title: '&f&lLone&4&lWolves'
   Default:
     - '&7&m-----------------'
     - '&dOnline: &f%server_online%'

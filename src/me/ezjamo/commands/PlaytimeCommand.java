@@ -19,7 +19,7 @@ public class PlaytimeCommand implements CommandExecutor {
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("playtime")) {
 			if (args.length < 1)
-			for (final String message : Lonewolves.plugin.getConfig().getStringList("Playtime.Self")) {
+			for (String message : Lonewolves.plugin.getConfig().getStringList("Playtime.Self")) {
 			String placeholders = PlaceholderAPI.setPlaceholders(p, message);
 	        p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
 			}
@@ -27,14 +27,14 @@ public class PlaytimeCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
 				OfflinePlayer offline = Bukkit.getOfflinePlayer(args[0]);
                 if (target == null) {
-                	for (final String message : Lonewolves.plugin.getConfig().getStringList("Playtime.Others")) {
+                	for (String message : Lonewolves.plugin.getConfig().getStringList("Playtime.Others")) {
             			String placeholders = PlaceholderAPI.setPlaceholders(offline, message);
             			p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
             			}
                 }
                 else
                 	if (target != null) {
-                		for (final String message : Lonewolves.plugin.getConfig().getStringList("Playtime.Others")) {
+                		for (String message : Lonewolves.plugin.getConfig().getStringList("Playtime.Others")) {
                 			String placeholders = PlaceholderAPI.setPlaceholders(target, message);
                 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
                 			}

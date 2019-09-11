@@ -12,6 +12,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import me.ezjamo.Messages;
 import net.md_5.bungee.api.ChatColor;
 
 public class ChatManager implements Listener
@@ -70,7 +71,7 @@ public class ChatManager implements Listener
     			|| event.getMessage().equalsIgnoreCase("n!gg3r")
     			|| event.getMessage().equalsIgnoreCase("n!gger")) {
             event.setCancelled(true);
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou have said a blacklisted word."));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have said a blacklisted word."));
     	}
     }
 }

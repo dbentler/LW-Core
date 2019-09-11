@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import net.md_5.bungee.api.ChatColor;
 
 public class CustomCmdsManager implements Listener {
@@ -26,7 +27,7 @@ public class CustomCmdsManager implements Listener {
 					}
 				}
 				if (!event.getPlayer().hasPermission("lw.customcmd." + command)) {
-					event.getPlayer().sendMessage(Lonewolves.NO_PERMS);
+					event.getPlayer().sendMessage(Messages.prefix + Messages.noPermission);
 				}
 			}
 		}

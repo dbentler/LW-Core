@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import me.ezjamo.Messages;
 import me.ezjamo.commands.FreezeCommand;
 import net.md_5.bungee.api.ChatColor;
 
@@ -30,7 +31,7 @@ public class FreezeManager implements Listener {
 	 if (FreezeCommand.frozenPlayers.contains(e.getPlayer().getUniqueId())) {
      	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
     		if (staff.hasPermission("rank.helper")) {
-    			staff.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &f" + e.getPlayer().getDisplayName() + " has &clogged out &fwhile frozen!"));
+    			staff.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&f" + e.getPlayer().getDisplayName() + " has &clogged out &fwhile frozen!"));
     			FreezeCommand.frozenPlayers.remove(e.getPlayer().getUniqueId());
     		}
      	}
@@ -39,7 +40,7 @@ public class FreezeManager implements Listener {
  @EventHandler
  public void onPlayerCommandpreProcess(PlayerCommandPreprocessEvent e) {
 	 if (FreezeCommand.frozenPlayers.contains(e.getPlayer().getUniqueId())) {
-		 e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fyou cannot execute commands while frozen."));
+		 e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fyou cannot execute commands while frozen."));
 		 e.setCancelled(true);
 	 }
 	 else

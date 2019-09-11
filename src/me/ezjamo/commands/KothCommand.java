@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
 public class KothCommand implements CommandExecutor {
@@ -32,7 +32,7 @@ public class KothCommand implements CommandExecutor {
         	KothCommand.koth(player);
     	
     	if(!player.hasPermission("lw.koth"))
-    		player.sendMessage(Lonewolves.NO_PERMS);
+    		player.sendMessage(Messages.prefix + Messages.noPermission);
     	}
 		return false;
     }

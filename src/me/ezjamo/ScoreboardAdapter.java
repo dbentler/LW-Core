@@ -46,7 +46,8 @@ public class ScoreboardAdapter implements AssembleAdapter {
 	
 	@Override
 	public String getTitle(Player player) {
-		return ChatColor.translateAlternateColorCodes('&', "&f&lLone&4&lWolves");
+		String title = Lonewolves.plugin.getConfig().getString("Scoreboard.Title");
+		return ChatColor.translateAlternateColorCodes('&', title);
 	}
 
 	@Override
@@ -58,12 +59,12 @@ public class ScoreboardAdapter implements AssembleAdapter {
 			  Lonewolves.plugin.getLogger().log(Level.SEVERE, "KoTH by Subside is needed for LW-Core.");
 		}
 		KothPlugin kothPlugin = (KothPlugin) koth;
-		for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Default")) {
+		for (String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Default")) {
 		String placeholders = PlaceholderAPI.setPlaceholders(player, message);
 		toReturn.add(ChatColor.translateAlternateColorCodes('&', placeholders));
 		}
 			if (!kothPlugin.getKothHandler().getRunningKoths().isEmpty()) {
-				for (final String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Koth")) {
+				for (String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Koth")) {
 				toReturn.add(ChatColor.translateAlternateColorCodes('&', message.replaceAll("%koth%", kothPlugin.getKothHandler().getRunningKoth().getKoth().getName())
 						.replaceAll("%time%", kothPlugin.getKothHandler().getRunningKoth().getTimeObject().getTimeLeftFormatted())
 						.replaceAll("%x%", Integer.toString(kothPlugin.getKothHandler().getRunningKoth().getKoth().getMiddle().getBlockX()))

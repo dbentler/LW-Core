@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.ScoreboardAdapter;
 
 public class ScoreboardCommand implements CommandExecutor {
@@ -35,7 +36,7 @@ public class ScoreboardCommand implements CommandExecutor {
 					if (!ScoreboardCommand.scoreboard.contains(player.getName())) {
 						ScoreboardCommand.scoreboard.add(player.getName());
 						player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fScoreboard has been turned &coff&f."));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fScoreboard has been turned &coff&f."));
 						return true;
 				}
 					if (ScoreboardCommand.scoreboard.contains(player.getName())) {
@@ -46,7 +47,7 @@ public class ScoreboardCommand implements CommandExecutor {
 						Assemble assemble = new Assemble(Lonewolves.plugin, new ScoreboardAdapter());
 						assemble.setTicks(16);
 						assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fScoreboard has been turned &aon&f."));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fScoreboard has been turned &aon&f."));
 				}
 				}
 				if (!args[0].equalsIgnoreCase("toggle")) {

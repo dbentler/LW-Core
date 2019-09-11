@@ -6,28 +6,31 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import me.ezjamo.Messages;
+import me.ezjamo.managers.SpawnManager;
  
 public class DistanceCommand implements CommandExecutor {
+	
  
-@Override
-public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if  (!(sender instanceof Player)) {
-        sender.sendMessage("Only players may check their distance from spawn!");
-        return true;
-    }
-   
-    Player p = (Player) sender;
-   
-    Location pLocation = p.getLocation();
-    int x2 = pLocation.getBlockX();
-    int z2 = pLocation.getBlockZ();
-   
-    int spawn_x = -0;
-    int spawn_y = 0;
-   
-    int dist = (int) Math.sqrt((Math.pow(x2 - spawn_x, 2)) + (Math.pow(z2 - spawn_y, 2)));
-   
-    p.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + ChatColor.BOLD + "Lone" +  ChatColor.DARK_RED + ChatColor.BOLD + "Wolves" + ChatColor.DARK_GRAY + "] " + ChatColor.WHITE + "Your distance from spawn is " + ChatColor.DARK_RED + dist + ChatColor.WHITE + " block(s).");
-    return false;
-}
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		Player player = (Player) sender;
+		SpawnManager spawnCoords = SpawnManager.getManager();
+		
+		if  (!(sender instanceof Player)) {
+			sender.sendMessage("Only players may check their distance from spawn!");
+			return true;
+		}
+		
+		Location pLocation = player.getLocation();
+		int x2 = pLocation.getBlockX();
+		int z2 = pLocation.getBlockZ();
+		double spawnX = spawnCoords.getConfig().getDouble("spawn.x");
+		double spawnZ = spawnCoords.getConfig().getDouble("spawn.z");
+		int dist = (int) Math.sqrt((Math.pow(x2 - spawnX, 2)) + (Math.pow(z2 - spawnZ, 2)));
+		
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYour distance from spawn is &4" + dist + " &fblock(s)."));
+		return true;
+	}
 }

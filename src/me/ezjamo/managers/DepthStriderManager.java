@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.armorequipevent.ArmorEquipEvent;
 
 public class DepthStriderManager implements Listener {
@@ -19,7 +20,7 @@ public class DepthStriderManager implements Listener {
 					&& e.getNewArmorPiece().getType() != Material.AIR
 					&& e.getNewArmorPiece().containsEnchantment(Enchantment.DEPTH_STRIDER)) {
 				e.getNewArmorPiece().removeEnchantment(Enchantment.DEPTH_STRIDER);
-				e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fDepth Strider has been removed from your boots because it's currently &cdisabled."));
+				e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fDepth Strider has been removed from your boots because it's currently &cdisabled."));
 			}
 			if (!enabled) {
 				return;

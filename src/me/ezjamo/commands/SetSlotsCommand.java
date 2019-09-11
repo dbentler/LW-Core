@@ -1,6 +1,5 @@
 package me.ezjamo.commands;
 
-
 import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
@@ -9,7 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 
 
 public class SetSlotsCommand implements CommandExecutor
@@ -17,7 +16,7 @@ public class SetSlotsCommand implements CommandExecutor
 	
     public boolean onCommand(CommandSender sender,Command command,String alias,String[] args) {
         if (!sender.hasPermission("lw.slots")) {
-            sender.sendMessage(Lonewolves.NO_PERMS);
+            sender.sendMessage(Messages.prefix + Messages.noPermission);
             return true;
         }
         if (args.length == 0) {

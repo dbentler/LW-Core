@@ -11,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 
+import me.ezjamo.Messages;
+
 public class WildToolsFixManager implements Listener {
 
 	@EventHandler
@@ -21,7 +23,7 @@ public class WildToolsFixManager implements Listener {
 			if (i.getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&f&lLone&4&lWolves &f&lBuild Wand"))) {
 				if (!fPlayer.isInOwnTerritory()) {
 					e.setCancelled(true);
-					e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou can only use build wands in your own claim."));
+					e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou can only use build wands in your own claim."));
 				}
 			}
 		}
@@ -29,7 +31,7 @@ public class WildToolsFixManager implements Listener {
 			if (i.getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&f&lLone&4&lWolves &f&lSell&4&lWand"))) {
 				if (!fPlayer.isInOwnTerritory()) {
 					e.setCancelled(true);
-					e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&l[&f&lLone&4&lWolves&8&l] &fYou can only use sell wands in your own claim."));
+					e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou can only use sell wands in your own claim."));
 				}
 			}
 		}

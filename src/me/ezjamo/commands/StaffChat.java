@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.managers.ChatManager;
 import net.md_5.bungee.api.ChatColor;
 
@@ -33,7 +33,7 @@ public class StaffChat implements CommandExecutor
             }
         }
         else {
-            player.sendMessage(Lonewolves.NO_PERMS);
+            player.sendMessage(Messages.prefix + Messages.noPermission);
         		}
         	}
 		return true;

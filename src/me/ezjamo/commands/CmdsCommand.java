@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
@@ -32,7 +33,7 @@ public class CmdsCommand implements CommandExecutor {
 				}
 				
 				if (Lonewolves.plugin.getConfig().getStringList("Commands." + rank).isEmpty()) {
-					player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &cInvalid Rank"));
+					player.sendMessage(Utils.chat(Messages.prefix + "&cInvalid Rank"));
 	    		}
 			}
 		}

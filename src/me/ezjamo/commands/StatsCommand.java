@@ -20,7 +20,7 @@ public class StatsCommand implements CommandExecutor {
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("stats")) {
 			if (args.length < 1)
-			for (final String message : Lonewolves.plugin.getConfig().getStringList("Stats.Self")) {
+			for (String message : Lonewolves.plugin.getConfig().getStringList("Stats.Self")) {
 			String placeholders = PlaceholderAPI.setPlaceholders(p, message);
 	        p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
 			}
@@ -28,14 +28,14 @@ public class StatsCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 OfflinePlayer offline = Bukkit.getOfflinePlayer(args[0]);
                 if (target == null) {
-                	for (final String message : Lonewolves.plugin.getConfig().getStringList("Stats.Others")) {
+                	for (String message : Lonewolves.plugin.getConfig().getStringList("Stats.Others")) {
             			String placeholders = PlaceholderAPI.setPlaceholders(offline, message);
             			p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
             			}
                 }
                 else
                 	if (target != null) {
-                		for (final String message : Lonewolves.plugin.getConfig().getStringList("Stats.Others")) {
+                		for (String message : Lonewolves.plugin.getConfig().getStringList("Stats.Others")) {
                 			String placeholders = PlaceholderAPI.setPlaceholders(target, message);
                 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
                 			}

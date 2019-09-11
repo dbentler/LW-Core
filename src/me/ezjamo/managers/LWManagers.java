@@ -17,6 +17,7 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
@@ -37,7 +38,7 @@ public class LWManagers implements Listener {
                 	boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-strength-2");
                 	if (enabled) {
                 		event.setCancelled(true);
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStrength II is currently disabled."));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fStrength II is currently disabled."));
                 	}
                 	if (!enabled) {
                 		return;
@@ -70,7 +71,7 @@ public class LWManagers implements Listener {
 							Location loc = new Location(w, x, y, z, yaw, pitch);
 							p.teleport(loc);
 						}
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou cannot place blocks above the nether."));
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou cannot place blocks above the nether."));
 					}
 					if (!enabled) {
 						return;
@@ -95,7 +96,7 @@ public class LWManagers implements Listener {
 					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-skeleton-spawners-nether");
 					if (enabled) {
 						e.setCancelled(true);
-						p.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &fYou cannot spawn skeletons in the nether"));
+						p.sendMessage(Utils.chat(Messages.prefix + "&fYou cannot spawn skeletons in the nether"));
 					}
 					if (!enabled) {
 						return;
@@ -116,7 +117,7 @@ public class LWManagers implements Listener {
 			if (!enabled) {
 				if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
 					e.setCancelled(true);
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fSpawn placement is now disabled."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fSpawner placement is now disabled."));
 				}
 			}
 			else

@@ -13,6 +13,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.ezjamo.Messages;
+
 public class SwitchInventoryCommand implements CommandExecutor {
 
 	@Override
@@ -23,7 +25,7 @@ public class SwitchInventoryCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("inv")) {
 			if (args.length == 0)
 	        if (!p.hasPermission("lw.switchinv")) {
-	            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this."));
+	            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + Messages.noPermission));
 	            return true;
 	        }
 	        if (!(p instanceof Player)) {
@@ -66,7 +68,7 @@ public class SwitchInventoryCommand implements CommandExecutor {
 				p.sendMessage("The specified path could not be found.");
 			}
 			p.getInventory().clear();
-			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou have switched to a blank inventory."));
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have switched to a blank inventory."));
 					
 		}
 		}
@@ -84,7 +86,7 @@ public class SwitchInventoryCommand implements CommandExecutor {
 				contents[i] = (ItemStack) list1.get(i);
 			}
 			p.getInventory().setContents(contents);
-			p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou have switched to your previous inventory."));
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have switched to your previous inventory."));
 			file.delete();
 		}
 		}

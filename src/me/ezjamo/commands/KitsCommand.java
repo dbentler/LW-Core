@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.Utils;
  
 public class KitsCommand implements CommandExecutor {
@@ -165,7 +165,7 @@ public class KitsCommand implements CommandExecutor {
         		KitsCommand.kits(player);
         	}
         	if(!player.hasPermission("lw.kits")) {
-        		player.sendMessage(Lonewolves.NO_PERMS);
+        		player.sendMessage(Messages.prefix + Messages.noPermission);
         	}
         }
         return true;

@@ -8,7 +8,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
 public class PreviewCommand implements CommandExecutor {
@@ -154,7 +154,7 @@ public class PreviewCommand implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("preview")) {
         	if (player.hasPermission("lw.preview")) {
         		if (args.length == 0) {
-        			player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &f/preview <kit>"));
+        			player.sendMessage(Utils.chat(Messages.prefix + "&f/preview <kit>"));
         		}
         		if (args.length == 1) {
         			if (args[0].equalsIgnoreCase("vip")) {
@@ -181,11 +181,11 @@ public class PreviewCommand implements CommandExecutor {
         						if (!args[0].equalsIgnoreCase("noble"))
         							if (!args[0].equalsIgnoreCase("mystic"))
         								if (!args[0].equalsIgnoreCase("kingpin"))
-        									player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &cInvalid kit."));
+        									player.sendMessage(Utils.chat(Messages.prefix + "&cInvalid kit."));
         		}
         	}
         	if(!player.hasPermission("lw.preview")) {
-        		player.sendMessage(Lonewolves.NO_PERMS);
+        		player.sendMessage(Messages.prefix + Messages.noPermission);
         	}
         }
         return true;

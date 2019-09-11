@@ -1,6 +1,7 @@
 package me.ezjamo.managers;
 
 import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.commands.SpawnCommand;
 
 import java.io.File;
@@ -74,7 +75,7 @@ public class SpawnManager implements Listener {
         if (event.getFrom().getBlockX() != event.getTo().getBlockX() || event.getFrom().getBlockZ() != event.getTo().getBlockZ() || event.getFrom().getBlockY() != event.getTo().getBlockY()) {
             BukkitTask task = SpawnCommand.tasks.get(player);
             if (task != null) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &cTeleportation cancelled!"));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&cTeleportation cancelled!"));
                 task.cancel();
                 SpawnCommand.tasks.remove(player);
             }

@@ -49,6 +49,7 @@ import me.ezjamo.managers.CustomCmdsManager;
 import me.ezjamo.managers.DepthStriderManager;
 import me.ezjamo.managers.DispenerArmorListener;
 import me.ezjamo.managers.FFLYManager;
+import me.ezjamo.managers.FileManager;
 import me.ezjamo.managers.FreezeManager;
 import me.ezjamo.managers.KitsManager;
 import me.ezjamo.managers.KothManager;
@@ -65,7 +66,7 @@ import net.milkbowl.vault.economy.Economy;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
     public static Lonewolves plugin;
-    public static String NO_PERMS = ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this.");
+    public FileManager manager;
     
     public HashMap<UUID, ItemStack[]> contents;
     public HashMap<UUID, ItemStack[]> armorContents;
@@ -98,10 +99,12 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
 		plugin = this;
+		manager = new FileManager(this);
 		Assemble assemble = new Assemble(this, new ScoreboardAdapter());
 		assemble.setTicks(16);
 		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
     	this.saveDefaultConfig();
+    	Messages.load();
     	SpawnManager.getManager().setupFiles();
     	SpawnManager.getManager().reloadConfig();
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
@@ -185,7 +188,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	if (cmd.getName().equalsIgnoreCase("lw")) {
     		if (!(sender instanceof Player) && args[0].equalsIgnoreCase("reload")) {
     			reloadConfig();
-    			sender.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    			Messages.load();
+    			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
     			return true;
     		}
     		Player player = (Player) sender;
@@ -193,19 +197,20 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     			if (args.length == 1) {
     				if (args[0].equalsIgnoreCase("reload")) {
     					reloadConfig();
-    					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
-    					this.getServer().getConsoleSender().sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &aConfig Reloaded."));
+    					Messages.load();
+    					player.sendMessage(Messages.prefix + Messages.reloadConfig);
+    					this.getServer().getConsoleSender().sendMessage(Messages.prefix + Messages.reloadConfig);
     				}
     				if (!args[0].equalsIgnoreCase("reload")) {
-    					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fInvalid command."));
+    					player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fInvalid command."));
     				}
     			}
     			if (args.length == 0) {
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&f" + plugin.getDescription().getFullName()));
 				}
     		}
     		if (!player.hasPermission("lw.reload")) {
-    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &f" + plugin.getDescription().getFullName()));
+    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&f" + plugin.getDescription().getFullName()));
     		}
     	}
 		return true;

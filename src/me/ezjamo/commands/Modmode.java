@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
 import me.ezjamo.managers.ModModeManager;
 
 public class Modmode implements CommandExecutor
@@ -55,7 +55,7 @@ public class Modmode implements CommandExecutor
     	Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("mod")) {
             if (!player.hasPermission("lw.mod")) {
-                player.sendMessage(Lonewolves.NO_PERMS);
+                player.sendMessage(Messages.prefix + Messages.noPermission);
                 return true;
             }
             if (!(player instanceof Player)) {
@@ -70,7 +70,7 @@ public class Modmode implements CommandExecutor
                 Modmode.modmode.remove(player.getName());
                 ModModeManager.remove(Bukkit.getPlayer(player.getName()));
                 loadInventory(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStaff mode &cdisabled"));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fStaff mode &cdisabled"));
                 
                 return true;
                 }
@@ -78,7 +78,7 @@ public class Modmode implements CommandExecutor
         	this.saveInventory(player);
             Modmode.modmode.add(player.getName());
             ModModeManager.put(Bukkit.getPlayer(player.getName()));
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&f&lLone&4&lWolves&8] &fStaff mode &aenabled"));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fStaff mode &aenabled"));
         return true;
     	}
 	}
