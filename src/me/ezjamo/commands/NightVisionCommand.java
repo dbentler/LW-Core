@@ -1,6 +1,5 @@
 package me.ezjamo.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,14 +24,12 @@ public boolean onCommand(CommandSender sender, Command cmd, String label, String
         if (args.length < 1) {
         	if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
         		String disabled = Lonewolves.plugin.getConfig().getString("NightVision.Disabled");
-        		Bukkit.getLogger().info(Messages.prefix + disabled);
     			p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + disabled));
                 p.removePotionEffect(PotionEffectType.NIGHT_VISION);
                 return true;
         	}
         	else {
         		String enabled = Lonewolves.plugin.getConfig().getString("NightVision.Enabled");
-        		Bukkit.getLogger().info(Messages.prefix + enabled);
     			p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + enabled));
     			p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 9000000, 2));
     			return true;

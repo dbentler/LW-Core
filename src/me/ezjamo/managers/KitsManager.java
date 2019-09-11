@@ -20,7 +20,7 @@ public class KitsManager implements Listener {
 		Player p = (Player) e.getWhoClicked();
 		String title = e.getInventory().getTitle();
 		
-		if (title.equals(Utils.chat("&fLone&4Wolves &fKits"))) {
+		if (title.equals(Utils.msg("&fLone&4Wolves &fKits"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;

@@ -96,7 +96,7 @@ public class LWManagers implements Listener {
 					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-skeleton-spawners-nether");
 					if (enabled) {
 						e.setCancelled(true);
-						p.sendMessage(Utils.chat(Messages.prefix + "&fYou cannot spawn skeletons in the nether"));
+						p.sendMessage(Utils.msg(Messages.prefix + "&fYou cannot spawn skeletons in the nether"));
 					}
 					if (!enabled) {
 						return;

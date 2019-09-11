@@ -19,7 +19,7 @@ public class KothManager implements Listener {
 		Player p = (Player) e.getWhoClicked();
 		String title = e.getInventory().getTitle();
 		
-		if (title.equals(Utils.chat("&fLone&4Wolves &fKoths"))) {
+		if (title.equals(Utils.msg("&fLone&4Wolves &fKoths"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;

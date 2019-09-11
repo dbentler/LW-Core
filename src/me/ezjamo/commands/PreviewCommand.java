@@ -14,7 +14,7 @@ import me.ezjamo.Utils;
 public class PreviewCommand implements CommandExecutor {
 	
 	public static void vip(Player player) {
-		Inventory vip = Bukkit.createInventory(null, 54, Utils.chat("&eVIP Preview"));
+		Inventory vip = Bukkit.createInventory(null, 54, Utils.msg("&eVIP Preview"));
 		Utils.createItem(vip, 310, 1, 0, "", "");
 		Utils.createItem(vip, 311, 1, 1, "", "");
 		Utils.createItem(vip, 312, 1, 2, "", "");
@@ -33,7 +33,7 @@ public class PreviewCommand implements CommandExecutor {
 	}
 	
 	public static void vipplus(Player player) {
-		Inventory vipplus = Bukkit.createInventory(null, 54, Utils.chat("&bVIP+ Preview"));
+		Inventory vipplus = Bukkit.createInventory(null, 54, Utils.msg("&bVIP+ Preview"));
 		Utils.Enchant1(vipplus, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 0, "", "");
 		Utils.Enchant1(vipplus, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 1, "", "");
 		Utils.Enchant1(vipplus, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 2, "", "");
@@ -54,7 +54,7 @@ public class PreviewCommand implements CommandExecutor {
 	}
 	
 	public static void mvp(Player player) {
-		Inventory mvp = Bukkit.createInventory(null, 54, Utils.chat("&cMVP Preview"));
+		Inventory mvp = Bukkit.createInventory(null, 54, Utils.msg("&cMVP Preview"));
 		Utils.Enchant1(mvp, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 0, "", "");
 		Utils.Enchant1(mvp, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 1, "", "");
 		Utils.Enchant1(mvp, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 2, "", "");
@@ -76,7 +76,7 @@ public class PreviewCommand implements CommandExecutor {
 	}
 
 	public static void noble(Player player) {
-		Inventory noble = Bukkit.createInventory(null, 54, Utils.chat("&3Noble Preview"));
+		Inventory noble = Bukkit.createInventory(null, 54, Utils.msg("&3Noble Preview"));
 		Utils.Enchant2(noble, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 0, "", "");
 		Utils.Enchant2(noble, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 1, "", "");
 		Utils.Enchant2(noble, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 2, "", "");
@@ -99,7 +99,7 @@ public class PreviewCommand implements CommandExecutor {
 	}
 	
 	public static void mystic(Player player) {
-		Inventory mystic = Bukkit.createInventory(null, 54, Utils.chat("&5Mystic Preview"));
+		Inventory mystic = Bukkit.createInventory(null, 54, Utils.msg("&5Mystic Preview"));
 		Utils.Enchant1(mystic, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 0, "", "");
 		Utils.Enchant1(mystic, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 1, "", "");
 		Utils.Enchant1(mystic, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 2, "", "");
@@ -124,7 +124,7 @@ public class PreviewCommand implements CommandExecutor {
 	}
 	
 	public static void kingpin(Player player) {
-		Inventory kingpin = Bukkit.createInventory(null, 54, Utils.chat("&2Kingpin Preview"));
+		Inventory kingpin = Bukkit.createInventory(null, 54, Utils.msg("&2Kingpin Preview"));
 		Utils.Enchant2(kingpin, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 0, "", "");
 		Utils.Enchant2(kingpin, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 1, "", "");
 		Utils.Enchant2(kingpin, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 2, "", "");
@@ -154,7 +154,7 @@ public class PreviewCommand implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("preview")) {
         	if (player.hasPermission("lw.preview")) {
         		if (args.length == 0) {
-        			player.sendMessage(Utils.chat(Messages.prefix + "&f/preview <kit>"));
+        			player.sendMessage(Utils.msg(Messages.prefix + "&f/preview <kit>"));
         		}
         		if (args.length == 1) {
         			if (args[0].equalsIgnoreCase("vip")) {
@@ -181,7 +181,7 @@ public class PreviewCommand implements CommandExecutor {
         						if (!args[0].equalsIgnoreCase("noble"))
         							if (!args[0].equalsIgnoreCase("mystic"))
         								if (!args[0].equalsIgnoreCase("kingpin"))
-        									player.sendMessage(Utils.chat(Messages.prefix + "&cInvalid kit."));
+        									player.sendMessage(Utils.msg(Messages.prefix + "&cInvalid kit."));
         		}
         	}
         	if(!player.hasPermission("lw.preview")) {

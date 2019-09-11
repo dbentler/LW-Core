@@ -28,7 +28,7 @@ public class FTopWorthCommand implements CommandExecutor {
     				}
     			}
     			if (Lonewolves.plugin.getConfig().getStringList("FTOP Worth." + page).isEmpty()) {
-    				player.sendMessage(Utils.chat("&fUnknown command. Type \"/help\" for help."));
+    				player.sendMessage(Utils.msg("&fUnknown command. Type \"/help\" for help."));
     			}
     		}
 		}

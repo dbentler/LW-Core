@@ -19,8 +19,8 @@ public class CmdsCommand implements CommandExecutor {
 		
 		if (cmd.getName().equalsIgnoreCase("commands")) {
 			if (args.length == 0) {
-				player.sendMessage(Utils.chat("&cUsage: &7/commands <rank>"));
-				player.sendMessage(Utils.chat("&cExample: &7/commands vip"));
+				player.sendMessage(Utils.msg("&cUsage: &7/commands <rank>"));
+				player.sendMessage(Utils.msg("&cExample: &7/commands vip"));
 			}
 			
 			if (args.length == 1) {
@@ -33,7 +33,7 @@ public class CmdsCommand implements CommandExecutor {
 				}
 				
 				if (Lonewolves.plugin.getConfig().getStringList("Commands." + rank).isEmpty()) {
-					player.sendMessage(Utils.chat(Messages.prefix + "&cInvalid Rank"));
+					player.sendMessage(Utils.msg(Messages.prefix + "&cInvalid Rank"));
 	    		}
 			}
 		}

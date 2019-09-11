@@ -28,7 +28,7 @@ public class HelpCommand implements CommandExecutor {
     				}
     			}
     			if (Lonewolves.plugin.getConfig().getStringList("Help." + page).isEmpty()) {
-    				player.sendMessage(Utils.chat("&fUnknown command. Type \"/help\" for help."));
+    				player.sendMessage(Utils.msg("&fUnknown command. Type \"/help\" for help."));
     			}
     		}
     	}

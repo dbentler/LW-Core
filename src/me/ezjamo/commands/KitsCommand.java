@@ -15,7 +15,7 @@ public class KitsCommand implements CommandExecutor {
    
 	
     public static void kits(Player player) {
-        Inventory kits = Bukkit.createInventory(null, 45, Utils.chat("&fLone&4Wolves &fKits"));
+        Inventory kits = Bukkit.createInventory(null, 45, Utils.msg("&fLone&4Wolves &fKits"));
         if (player.hasPermission("essentials.kits.vip")) {
             String unsetVIP = "%essentials_kit_time_until_available_vip%";
             String setVIP = PlaceholderAPI.setPlaceholders(player, unsetVIP);

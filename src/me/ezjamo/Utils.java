@@ -12,7 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 	
-	public static String chat (String s) {
+	public static String msg(String s) {
 		return ChatColor.translateAlternateColorCodes('&', s);
 	}
 	
@@ -26,9 +26,9 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -47,9 +47,9 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount, (short) byteId);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -68,10 +68,10 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		meta.addEnchant(enchant, level, false);
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -90,11 +90,11 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -113,12 +113,12 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		meta.addEnchant(enchant11, level11, false);
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -137,13 +137,13 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		meta.addEnchant(enchant11, level11, false);
 		meta.addEnchant(enchant111, level111, false);
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -162,14 +162,14 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (Utils.msg(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		meta.addEnchant(enchant11, level11, false);
 		meta.addEnchant(enchant111, level111, false);
 		meta.addEnchant(enchant1111, level1111, false);
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(Utils.msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);

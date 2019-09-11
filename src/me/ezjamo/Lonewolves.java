@@ -94,8 +94,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onEnable() {
     	this.getServer().getConsoleSender().sendMessage("");
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.8"));
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&aEnabled"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.msg("&fLone&4Wolves-&fCore v2.8"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.msg("&aEnabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
 		plugin = this;
@@ -151,7 +151,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("playtime").setExecutor(new PlaytimeCommand());
     	this.getCommand("worth").setExecutor(new FTopWorthCommand());
     	this.getCommand("commands").setExecutor(new CmdsCommand());
-    	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand());
+    	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand(assemble));
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);
@@ -164,8 +164,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	public void onDisable() {
 		this.getServer().getConsoleSender().sendMessage("");
 		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&fLone&4Wolves-&fCore v2.8"));
-    	this.getServer().getConsoleSender().sendMessage(Utils.chat("&cDisabled"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.msg("&fLone&4Wolves-&fCore v2.8"));
+    	this.getServer().getConsoleSender().sendMessage(Utils.msg("&cDisabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
     	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
