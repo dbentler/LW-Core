@@ -10,18 +10,25 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import io.github.thatkawaiisam.assemble.Assemble;
-import io.github.thatkawaiisam.assemble.AssembleStyle;
-import me.ezjamo.Lonewolves;
+import io.github.thatkawaiisam.assemble.AssembleBoard;
+import io.github.thatkawaiisam.assemble.events.AssembleBoardCreateEvent;
+import io.github.thatkawaiisam.assemble.events.AssembleBoardDestroyEvent;
+import lombok.Getter;
 import me.ezjamo.Messages;
-import me.ezjamo.ScoreboardAdapter;
 
+@Getter
 public class ScoreboardCommand implements CommandExecutor {
 	public static ArrayList<String> scoreboard;
 	
 	static {
         ScoreboardCommand.scoreboard = new ArrayList<String>();
-        
     }
+	
+	private Assemble assemble;
+
+	public ScoreboardCommand(Assemble assemble) {
+		this.assemble = assemble;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -33,20 +40,28 @@ public class ScoreboardCommand implements CommandExecutor {
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("toggle")) {
-					if (!ScoreboardCommand.scoreboard.contains(player.getName())) {
-						ScoreboardCommand.scoreboard.add(player.getName());
-						player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+					if (getAssemble().getBoards().containsKey(player.getUniqueId())) {
+						AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
+
+						Bukkit.getPluginManager().callEvent(destroyEvent);
+						if (destroyEvent.isCancelled()) {
+							return true;
+						}
+
+						getAssemble().getBoards().remove(player.getUniqueId());
+						player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fScoreboard has been turned &coff&f."));
 						return true;
 				}
-					if (ScoreboardCommand.scoreboard.contains(player.getName())) {
-						ScoreboardCommand.scoreboard.remove(player.getName());
-						for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-							all.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-			    					}
-						Assemble assemble = new Assemble(Lonewolves.plugin, new ScoreboardAdapter());
-						assemble.setTicks(16);
-						assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
+					if (!getAssemble().getBoards().containsKey(player.getUniqueId())) {
+						AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
+
+						Bukkit.getPluginManager().callEvent(createEvent);
+						if (createEvent.isCancelled()) {
+							return true;
+						}
+
+						getAssemble().getBoards().put(player.getUniqueId(), new AssembleBoard(player, getAssemble()));
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fScoreboard has been turned &aon&f."));
 				}
 				}
@@ -55,6 +70,6 @@ public class ScoreboardCommand implements CommandExecutor {
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 }
