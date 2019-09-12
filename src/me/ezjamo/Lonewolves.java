@@ -44,6 +44,7 @@ import me.ezjamo.commands.StaffChat;
 import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
+import me.ezjamo.managers.BlockedWordsManager;
 import me.ezjamo.managers.ChatManager;
 import me.ezjamo.managers.CustomCmdsManager;
 import me.ezjamo.managers.DepthStriderManager;
@@ -107,6 +108,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	Messages.load();
     	SpawnManager.getManager().setupFiles();
     	SpawnManager.getManager().reloadConfig();
+    	BlockedWordsManager.getManager().setupFiles();
+    	BlockedWordsManager.getManager().reloadConfig();
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
         Bukkit.getPluginManager().registerEvents(this, (this));
         Bukkit.getPluginManager().registerEvents(new ModModeManager(), this);
@@ -123,6 +126,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new RespawnManager(), this);
         Bukkit.getPluginManager().registerEvents(new SpawnManager(), this);
         Bukkit.getPluginManager().registerEvents(new CustomCmdsManager(), this);
+        Bukkit.getPluginManager().registerEvents(new BlockedWordsManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
@@ -176,7 +180,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
 	}
 	    	
-	public String getMessage(String path, Object... additionalPlayerInfo) {
+	public String getMessage(String path) {
         String message = this.getConfig().getString("Messages." + path);
         if (message == null) {
             message = this.getConfig().getString("Messages." + path);
@@ -190,6 +194,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     			if (args[0].equalsIgnoreCase("reload")) {
     				reloadConfig();
         			Messages.load();
+        			BlockedWordsManager.getManager().reloadConfig();
         			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
         			return true;
     			}
@@ -200,6 +205,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     				if (args[0].equalsIgnoreCase("reload")) {
     					reloadConfig();
     					Messages.load();
+    					BlockedWordsManager.getManager().reloadConfig();
     					player.sendMessage(Messages.prefix + Messages.reloadConfig);
     					this.getServer().getConsoleSender().sendMessage(Messages.prefix + Messages.reloadConfig);
     				}
