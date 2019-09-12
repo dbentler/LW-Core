@@ -12,7 +12,10 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
 public class ChatManager implements Listener
@@ -43,35 +46,37 @@ public class ChatManager implements Listener
     
 
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
-		e.setJoinMessage(null);
-		
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		String join = Lonewolves.plugin.getConfig().getString("join-message");
+		String placeholders = PlaceholderAPI.setPlaceholders(event.getPlayer(), join);
+		if (join.equalsIgnoreCase("none")) {
+			event.setJoinMessage(null);
+		}
+		else {
+			event.setJoinMessage(Utils.msg(placeholders));
+		}
 	}
 	
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent e) {
-		e.setQuitMessage(null);
-		
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		String quit = Lonewolves.plugin.getConfig().getString("quit-message");
+		String placeholders = PlaceholderAPI.setPlaceholders(event.getPlayer(), quit);
+		if (quit.equalsIgnoreCase("none")) {
+			event.setQuitMessage(null);
+		}
+		else {
+			event.setQuitMessage(Utils.msg(placeholders));
+		}
 	}
 	
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
-    	Player p = (Player) event.getPlayer();
-    	if (event.getMessage().equalsIgnoreCase("nigger")
-    			|| event.getMessage().equalsIgnoreCase("n1gger") 
-    			|| event.getMessage().equalsIgnoreCase("n1gg3r") 
-    			|| event.getMessage().equalsIgnoreCase("nigg")
-    			|| event.getMessage().equalsIgnoreCase("n1g")
-    			|| event.getMessage().equalsIgnoreCase("ni99er")
-    			|| event.getMessage().equalsIgnoreCase("n1igg3r")
-    			|| event.getMessage().equalsIgnoreCase("nigler")
-    			|| event.getMessage().equalsIgnoreCase("N!I!G!G!3!R")
-    			|| event.getMessage().equalsIgnoreCase("n!gg3r")
-    			|| event.getMessage().equalsIgnoreCase("rape")
-    			|| event.getMessage().equalsIgnoreCase("n!gg3r")
-    			|| event.getMessage().equalsIgnoreCase("n!gger")) {
-            event.setCancelled(true);
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have said a blacklisted word."));
+    	Player player = (Player) event.getPlayer();
+    	for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
+    		if (event.getMessage().equalsIgnoreCase(blockedwords)) {
+    			event.setCancelled(true);
+    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have said a blacklisted word."));
+    		}
     	}
     }
 }

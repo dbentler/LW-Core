@@ -24,6 +24,11 @@ disable-depth-strider: true
 #Disables weather on the server.
 disable-weather: true
 
+#Changes the default join and quit messages. Set to "none" to disable them.
+#Use "%player_name%" to get the players name.
+join-message: 'none'
+quit-message: 'none'
+
 #The amount of time it takes for a player to teleport to spawn.
 spawn-delay: 4
 
