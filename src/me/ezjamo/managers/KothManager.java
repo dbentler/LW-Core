@@ -14,6 +14,7 @@ public class KothManager implements Listener {
 	public KothManager(Lonewolves plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
+	
 	@EventHandler
 	public void onClicked(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
@@ -49,5 +50,5 @@ public class KothManager implements Listener {
 				p.closeInventory();
 			}
 		}
-}
+	}
 }

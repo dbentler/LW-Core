@@ -1,6 +1,5 @@
 package me.ezjamo.managers;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,7 @@ public class DepthStriderManager implements Listener {
 					&& e.getNewArmorPiece().getType() != Material.AIR
 					&& e.getNewArmorPiece().containsEnchantment(Enchantment.DEPTH_STRIDER)) {
 				e.getNewArmorPiece().removeEnchantment(Enchantment.DEPTH_STRIDER);
-				e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fDepth Strider has been removed from your boots because it's currently &cdisabled."));
+				e.getPlayer().sendMessage(Messages.prefix + Messages.depthStriderDisabledMessage);
 			}
 			if (!enabled) {
 				return;

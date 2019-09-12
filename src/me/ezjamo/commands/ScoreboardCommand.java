@@ -50,7 +50,7 @@ public class ScoreboardCommand implements CommandExecutor {
 
 						getAssemble().getBoards().remove(player.getUniqueId());
 						player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fScoreboard has been turned &coff&f."));
+						player.sendMessage(Messages.prefix + Messages.scoreboardDisabled);
 						return true;
 				}
 					if (!getAssemble().getBoards().containsKey(player.getUniqueId())) {
@@ -62,7 +62,7 @@ public class ScoreboardCommand implements CommandExecutor {
 						}
 
 						getAssemble().getBoards().put(player.getUniqueId(), new AssembleBoard(player, getAssemble()));
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fScoreboard has been turned &aon&f."));
+						player.sendMessage(Messages.prefix + Messages.scoreboardEnabled);
 				}
 				}
 				if (!args[0].equalsIgnoreCase("toggle")) {

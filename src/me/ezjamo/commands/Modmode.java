@@ -70,7 +70,7 @@ public class Modmode implements CommandExecutor
                 Modmode.modmode.remove(player.getName());
                 ModModeManager.remove(Bukkit.getPlayer(player.getName()));
                 loadInventory(player);
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fStaff mode &cdisabled"));
+                player.sendMessage(Messages.prefix + Messages.modModeDisabled);
                 
                 return true;
                 }
@@ -78,7 +78,7 @@ public class Modmode implements CommandExecutor
         	this.saveInventory(player);
             Modmode.modmode.add(player.getName());
             ModModeManager.put(Bukkit.getPlayer(player.getName()));
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fStaff mode &aenabled"));
+            player.sendMessage(Messages.prefix + Messages.modModeEnabled);
         return true;
     	}
 	}

@@ -18,12 +18,10 @@ import org.bukkit.potion.PotionEffectType;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
 import net.md_5.bungee.api.ChatColor;
 
 public class LWManagers implements Listener {
-
-	   
+	
 	 // beacon shit needs to be added  
     @EventHandler
     public void onDrink(PlayerInteractEvent event) {
@@ -38,7 +36,7 @@ public class LWManagers implements Listener {
                 	boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-strength-2");
                 	if (enabled) {
                 		event.setCancelled(true);
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fStrength II is currently disabled."));
+                        player.sendMessage(Messages.prefix + Messages.strengthDisabledMessage);
                 	}
                 	if (!enabled) {
                 		return;
@@ -71,14 +69,11 @@ public class LWManagers implements Listener {
 							Location loc = new Location(w, x, y, z, yaw, pitch);
 							p.teleport(loc);
 						}
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou cannot place blocks above the nether."));
+						p.sendMessage(Messages.prefix + Messages.aboveNetherBlockPlace);
 					}
-					if (!enabled) {
+					if (!enabled || p.hasPermission("lw.nether.place")) {
 						return;
 					}
-				}
-				if (p.hasPermission("lw.nether.place")) {
-					return;
 				}
 			}
 			else
@@ -96,7 +91,7 @@ public class LWManagers implements Listener {
 					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-skeleton-spawners-nether");
 					if (enabled) {
 						e.setCancelled(true);
-						p.sendMessage(Utils.msg(Messages.prefix + "&fYou cannot spawn skeletons in the nether"));
+						p.sendMessage(Messages.prefix + Messages.netherSkeletonSpawnerPlace);
 					}
 					if (!enabled) {
 						return;
@@ -117,7 +112,7 @@ public class LWManagers implements Listener {
 			if (!enabled) {
 				if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
 					e.setCancelled(true);
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fSpawner placement is now disabled."));
+					p.sendMessage(Messages.prefix + Messages.spawnerPlacementDisabled);
 				}
 			}
 			else
