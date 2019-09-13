@@ -127,7 +127,7 @@ Scoreboard:
   Title: '&f&lLone&4&lWolves'
   Default:
     - '&7&m-----------------'
-    - '&dOnline: &f%server_online%'
+    - '&dOnline: &f%supervanish_playercount%'
     - '&dBalance: &f%vault_eco_balance_formatted%'
     - ''
     - '&aFaction: &r%factionsuuid_faction_name%'

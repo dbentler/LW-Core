@@ -6,6 +6,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import me.ezjamo.Utils;
+
  
 public class StaffOnOff implements CommandExecutor {
 
@@ -17,7 +19,7 @@ public class StaffOnOff implements CommandExecutor {
     	}
     		if (cmd.getName().equalsIgnoreCase("admin")) {
     			if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + ("Not enough args"));
+                sender.sendMessage(Utils.msg("&cUsage: &7/admin <on/off>"));
                 return true;
             }
     		
