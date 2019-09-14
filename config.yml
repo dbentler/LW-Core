@@ -130,7 +130,7 @@ Scoreboard:
     - '&dOnline: &f%supervanish_playercount%'
     - '&dBalance: &f%vault_eco_balance_formatted%'
     - ''
-    - '&aFaction: &r%factionsuuid_faction_name%'
+    - '&aFaction: &r%faction%'
     - ''
     - '&cKills: &f%statistic_player_kills%'
     - '&cDeaths: &f%statistic_deaths%'

@@ -11,6 +11,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+
 import io.github.thatkawaiisam.assemble.AssembleAdapter;
 import me.clip.placeholderapi.PlaceholderAPI;
 import subside.plugins.koth.KothPlugin;
@@ -59,9 +62,10 @@ public class ScoreboardAdapter implements AssembleAdapter {
 			  Lonewolves.plugin.getLogger().log(Level.SEVERE, "KoTH by Subside is needed for LW-Core.");
 		}
 		KothPlugin kothPlugin = (KothPlugin) koth;
+		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
 		for (String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Default")) {
 		String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-		toReturn.add(ChatColor.translateAlternateColorCodes('&', placeholders));
+		toReturn.add(ChatColor.translateAlternateColorCodes('&', placeholders.replaceAll("%faction%", fPlayer.getFaction().getTag().toString())));
 		}
 			if (!kothPlugin.getKothHandler().getRunningKoths().isEmpty()) {
 				for (String message : Lonewolves.plugin.getConfig().getStringList("Scoreboard.Koth")) {
