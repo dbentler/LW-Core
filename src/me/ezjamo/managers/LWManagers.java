@@ -145,8 +145,10 @@ public class LWManagers implements Listener {
 	            String message = Lonewolves.plugin.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
 				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
-				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " +  player.getName());
-				player.teleport(loc);
+				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " + player.getName());
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> {
+					player.teleport(loc);
+		        }, 1L);
 			}
 		}
 	}
