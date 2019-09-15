@@ -87,10 +87,10 @@ public class ChatManager implements Listener {
 			String withoutFaction = Lonewolves.plugin.getConfig().getString("chat-format.format-no-faction");
 			String setNoFaction = PlaceholderAPI.setPlaceholders(event.getPlayer(), withoutFaction);
 			if (!fPlayer.hasFaction()) {
-				event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage())));
+				event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
 			}
 			if (fPlayer.hasFaction()) {
-				event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage())));
+				event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
 			}
 		}
 		else return;
