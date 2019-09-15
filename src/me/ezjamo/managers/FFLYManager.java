@@ -8,15 +8,15 @@ import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 
 public class FFLYManager implements Listener {
-	
-    @EventHandler
-    public void onFly(PlayerMoveEvent e) {
-         if (!e.getPlayer().isFlying() || e.getPlayer().hasPermission("lw.fly.bypass") || e.getFrom().getBlockY() == e.getTo().getBlockY()) 
-             return;
-        FPlayer fPlayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
-        if (fPlayer.isInNeutralTerritory()) {
-            fPlayer.setFlying(false);
-        }
-    }
+
+	@EventHandler
+	public void onFly(PlayerMoveEvent e) {
+		if (!e.getPlayer().isFlying() || e.getPlayer().hasPermission("lw.fly.bypass") || e.getFrom().getBlockY() == e.getTo().getBlockY()) 
+			return;
+		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
+		if (fPlayer.isInNeutralTerritory()) {
+			fPlayer.setFlying(false);
+		}
+	}
 
 }

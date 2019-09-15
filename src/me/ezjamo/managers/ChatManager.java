@@ -20,30 +20,30 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ChatManager implements Listener
 {
-    public static Set<UUID> staffChat;
-    public static Set<UUID> adminChat;
-    
-    static {
-        ChatManager.staffChat = new HashSet<UUID>();
-    }
-    
-    public static Set<UUID> getStaffChat() {
-        return ChatManager.staffChat;
-    }
-    
-    @EventHandler
-    public void onStaffChat(AsyncPlayerChatEvent event) {
-        final Player player = event.getPlayer();
-        if (ChatManager.staffChat.contains(player.getUniqueId())) {
-            event.setCancelled(true);
-            for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
-                if (staff.hasPermission("lw.staffchat")) {
-                staff.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9[StaffChat] &e" + player.getName() +  ": &c" + event.getMessage()));
-                }
-            }
-        }
-    }
-    
+	public static Set<UUID> staffChat;
+	public static Set<UUID> adminChat;
+
+	static {
+		ChatManager.staffChat = new HashSet<UUID>();
+	}
+
+	public static Set<UUID> getStaffChat() {
+		return ChatManager.staffChat;
+	}
+
+	@EventHandler
+	public void onStaffChat(AsyncPlayerChatEvent event) {
+		final Player player = event.getPlayer();
+		if (ChatManager.staffChat.contains(player.getUniqueId())) {
+			event.setCancelled(true);
+			for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
+				if (staff.hasPermission("lw.staffchat")) {
+					staff.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9[StaffChat] &e" + player.getName() +  ": &c" + event.getMessage()));
+				}
+			}
+		}
+	}
+
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -56,7 +56,7 @@ public class ChatManager implements Listener
 			event.setJoinMessage(Utils.msg(placeholders));
 		}
 	}
-	
+
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		String quit = Lonewolves.plugin.getConfig().getString("quit-message");
@@ -68,15 +68,15 @@ public class ChatManager implements Listener
 			event.setQuitMessage(Utils.msg(placeholders));
 		}
 	}
-	
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
-    	Player player = (Player) event.getPlayer();
-    	for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
-    		if (event.getMessage().equalsIgnoreCase(blockedwords)) {
-    			event.setCancelled(true);
-    			player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have said a blacklisted word."));
-    		}
-    	}
-    }
+
+	@EventHandler
+	public void onChat(AsyncPlayerChatEvent event) {
+		Player player = (Player) event.getPlayer();
+		for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
+			if (event.getMessage().equalsIgnoreCase(blockedwords)) {
+				event.setCancelled(true);
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have said a blacklisted word."));
+			}
+		}
+	}
 }

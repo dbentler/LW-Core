@@ -19,11 +19,11 @@ import me.ezjamo.Messages;
 @Getter
 public class ScoreboardCommand implements CommandExecutor {
 	public static ArrayList<String> scoreboard;
-	
+
 	static {
-        ScoreboardCommand.scoreboard = new ArrayList<String>();
-    }
-	
+		ScoreboardCommand.scoreboard = new ArrayList<String>();
+	}
+
 	private Assemble assemble;
 
 	public ScoreboardCommand(Assemble assemble) {
@@ -33,7 +33,7 @@ public class ScoreboardCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
-		
+
 		if (cmd.getName().equalsIgnoreCase("scoreboard")) {
 			if (args.length < 1) {
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUsage: &7/sb toggle"));
@@ -52,7 +52,7 @@ public class ScoreboardCommand implements CommandExecutor {
 						player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 						player.sendMessage(Messages.prefix + Messages.scoreboardDisabled);
 						return true;
-				}
+					}
 					if (!getAssemble().getBoards().containsKey(player.getUniqueId())) {
 						AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
 
@@ -63,7 +63,7 @@ public class ScoreboardCommand implements CommandExecutor {
 
 						getAssemble().getBoards().put(player.getUniqueId(), new AssembleBoard(player, getAssemble()));
 						player.sendMessage(Messages.prefix + Messages.scoreboardEnabled);
-				}
+					}
 				}
 				if (!args[0].equalsIgnoreCase("toggle")) {
 					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUsage: &7/sb toggle"));
