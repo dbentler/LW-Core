@@ -87,10 +87,94 @@ public class ChatManager implements Listener {
 			String withoutFaction = Lonewolves.plugin.getConfig().getString("chat-format.format-no-faction");
 			String setNoFaction = PlaceholderAPI.setPlaceholders(event.getPlayer(), withoutFaction);
 			if (!fPlayer.hasFaction()) {
-				event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+				if (!player.hasPermission("lw.color")) {
+					if (event.getMessage().contains("&1")||
+						event.getMessage().contains("&2")||
+						event.getMessage().contains("&3")||
+						event.getMessage().contains("&4")||
+						event.getMessage().contains("&5")||
+						event.getMessage().contains("&6")||
+						event.getMessage().contains("&7")||
+						event.getMessage().contains("&8")||
+						event.getMessage().contains("&9")||
+						event.getMessage().contains("&0")||
+						event.getMessage().contains("&a")||
+						event.getMessage().contains("&e")||
+						event.getMessage().contains("&d")||
+						event.getMessage().contains("&b")||
+						event.getMessage().contains("&c")||
+						event.getMessage().contains("&o")||
+						event.getMessage().contains("&l")||
+						event.getMessage().contains("&n")||
+						event.getMessage().contains("&m")) {
+						event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage().replace("&1", "&f")
+								.replace("&2", "&f")
+								.replace("&3", "&f")
+								.replace("&4", "&f")
+								.replace("&5", "&f")
+								.replace("&6", "&f")
+								.replace("&7", "&f")
+								.replace("&8", "&f")
+								.replace("&9", "&f")
+								.replace("&0", "&f")
+								.replace("&a", "&f")
+								.replace("&e", "&f")
+								.replace("&d", "&f")
+								.replace("&b", "&f")
+								.replace("&c", "&f")
+								.replace("&o", "&f")
+								.replace("&l", "&f")
+								.replace("&n", "&f")
+								.replace("&m", "&f")).replace("%", "%%")));
+					}
+					else event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+				}
+				else event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
 			}
 			if (fPlayer.hasFaction()) {
-				event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+				if (!player.hasPermission("lw.color")) {
+					if (event.getMessage().contains("&1")||
+						event.getMessage().contains("&2")||
+						event.getMessage().contains("&3")||
+						event.getMessage().contains("&4")||
+						event.getMessage().contains("&5")||
+						event.getMessage().contains("&6")||
+						event.getMessage().contains("&7")||
+						event.getMessage().contains("&8")||
+						event.getMessage().contains("&9")||
+						event.getMessage().contains("&0")||
+						event.getMessage().contains("&a")||
+						event.getMessage().contains("&e")||
+						event.getMessage().contains("&d")||
+						event.getMessage().contains("&b")||
+						event.getMessage().contains("&c")||
+						event.getMessage().contains("&o")||
+						event.getMessage().contains("&l")||
+						event.getMessage().contains("&n")||
+						event.getMessage().contains("&m")) {
+						event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage().replace("&1", "&f")
+								.replace("&2", "&f")
+								.replace("&3", "&f")
+								.replace("&4", "&f")
+								.replace("&5", "&f")
+								.replace("&6", "&f")
+								.replace("&7", "&f")
+								.replace("&8", "&f")
+								.replace("&9", "&f")
+								.replace("&0", "&f")
+								.replace("&a", "&f")
+								.replace("&e", "&f")
+								.replace("&d", "&f")
+								.replace("&b", "&f")
+								.replace("&c", "&f")
+								.replace("&o", "&f")
+								.replace("&l", "&f")
+								.replace("&n", "&f")
+								.replace("&m", "&f")).replace("%", "%%")));
+					}
+					else event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+				}
+				else event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
 			}
 		}
 		else return;
