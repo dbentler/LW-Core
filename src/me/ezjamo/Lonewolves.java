@@ -26,14 +26,12 @@ import me.ezjamo.commands.FreezeCommand;
 import me.ezjamo.commands.HelpCommand;
 import me.ezjamo.commands.Helpop;
 import me.ezjamo.commands.HubCommand;
-import me.ezjamo.commands.KitsCommand;
 import me.ezjamo.commands.KothCommand;
 import me.ezjamo.commands.LinksCommand;
 import me.ezjamo.commands.Modmode;
 import me.ezjamo.commands.NightVisionCommand;
 import me.ezjamo.commands.PingCommand;
 import me.ezjamo.commands.PlaytimeCommand;
-import me.ezjamo.commands.PreviewCommand;
 import me.ezjamo.commands.RemoveModModeCommand;
 import me.ezjamo.commands.RulesCommand;
 import me.ezjamo.commands.ScoreboardCommand;
@@ -52,11 +50,9 @@ import me.ezjamo.managers.DispenerArmorListener;
 import me.ezjamo.managers.FFLYManager;
 import me.ezjamo.managers.FileManager;
 import me.ezjamo.managers.FreezeManager;
-import me.ezjamo.managers.KitsManager;
 import me.ezjamo.managers.KothManager;
 import me.ezjamo.managers.LWManagers;
 import me.ezjamo.managers.ModModeManager;
-import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.RespawnManager;
 import me.ezjamo.managers.SpawnManager;
 import me.ezjamo.managers.SpongeManager;
@@ -146,8 +142,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
     	this.getCommand("spawn").setExecutor(new SpawnCommand());
     	this.getCommand("startkoth").setExecutor(new KothCommand());
-    	this.getCommand("kits").setExecutor(new KitsCommand());
-    	this.getCommand("preview").setExecutor(new PreviewCommand());
     	this.getCommand("stats").setExecutor(new StatsCommand());
     	this.getCommand("demote").setExecutor(new DemoteCommand());
     	this.getCommand("removemm").setExecutor(new RemoveModModeCommand());
@@ -156,8 +150,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("commands").setExecutor(new CmdsCommand());
     	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand(assemble));
     	new KothManager(this);
-    	new KitsManager(this);
-    	new PreviewManager(this);
     	if(!(setupEconomy())) {
             getLogger().severe("LW-Core requires vault.");
             getServer().getPluginManager().disablePlugin(this);
@@ -193,6 +185,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     			if (args[0].equalsIgnoreCase("reload")) {
     				reloadConfig();
         			Messages.load();
+        			SpawnManager.getManager().reloadConfig();
         			BlockedWordsManager.getManager().reloadConfig();
         			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
     			}
@@ -203,6 +196,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     				if (args[0].equalsIgnoreCase("reload")) {
     					reloadConfig();
     					Messages.load();
+    					SpawnManager.getManager().reloadConfig();
     					BlockedWordsManager.getManager().reloadConfig();
     					player.sendMessage(Messages.prefix + Messages.reloadConfig);
     					getServer().getConsoleSender().sendMessage(Messages.prefix + Messages.reloadConfig);

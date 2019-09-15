@@ -41,9 +41,6 @@ commands:
   inv:
   ping:
   startkoth:
-  kits:
-   aliases: [kit]
-  preview:
   stats:
   demote:
   playtime:
