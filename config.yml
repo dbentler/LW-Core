@@ -9,6 +9,12 @@
 #Disables all spawner placement (use after spawner place date)
 enable-spawner-placement: true
 
+#Sets the chat format, supports placeholders.
+chat-format:
+  enabled: true
+  format: '&8[[FACTION]&8] %luckperms_prefix%%player_name%%deluxetags_tag%&7: &r%message%'
+  format-no-faction: '%luckperms_prefix%%player_name%%deluxetags_tag%&7: &r%message%'
+
 #Disables strength 2 potions
 disable-strength-2: true
 
@@ -29,11 +35,14 @@ disable-weather: true
 join-message: 'none'
 quit-message: 'none'
 
+#This is the name of the server as defined in your bungeecord config that you want the /hub command to take you to.
+hub-server: 'hub'
+
 #The amount of time it takes for a player to teleport to spawn.
 spawn-delay: 4
 
 #Name of the essentials kit new players receive when they first join
-first-join-kit: member
+first-join-kit: 'member'
 
 Messages:
   ActionBarMessage: '&aYou are invisible to other players!'
@@ -111,6 +120,12 @@ Links:
   - '&3&lStore: &ahttp://store.lonewolves.net'
   - '&3&lDiscord: &ahttps://lonewolves.net/discord'
   - '&3&lBans: &ahttps://lonewolves.net/bans'
+  
+#Custom Command Messages
+#To give players permission for these commands they need the permission "lw.customcmd.<command>"
+Custom Commands:
+  example: #This will be the the command
+    - '&6I''m an example custom command' #This is the message it will send the player. You can also do multiple lines.
 
 #/nv command.
 NightVision:
@@ -121,6 +136,28 @@ NightVision:
 Ping:
   Self: '&fPing: %player_ping%'
   Others: '&f%player_name%''s ping is %player_ping%'
+  
+#/playtime command
+Playtime:
+  Self: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+  Others: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+  
+#/stats command
+Stats:
+  Self:
+    - '&4&m--------&8[&fYour Stats&8]&4&m--------'
+    - '      &aKills: &e%statistic_player_kills%'
+    - '      &aDeaths: &e%statistic_deaths%'
+    - '      &aVotes: &e%superbvote_votes%'
+    - '      &aPlaytime: &e%statistic_time_played%'
+    - '&4&m--------------------------'
+  Others:
+    - '&4&m--------&8[&f%player_name%''s&8]&4&m--------'
+    - '      &aKills: &e%statistic_player_kills%'
+    - '      &aDeaths: &e%statistic_deaths%'
+    - '      &aVotes: &e%superbvote_votes%'
+    - '      &aPlaytime: &e%statistic_time_played%'
+    - '&4&m--------------------------'
 
 #Scoreboard messages.
 Scoreboard:
@@ -140,28 +177,6 @@ Scoreboard:
     - '&dX: &f%x%'
     - '&dZ: &f%z%'
     - '&dTime: &f%time%'
-
-#/stats command
-Stats:
-  Self:
-    - '&4&m--------&8[&fYour Stats&8]&4&m--------'
-    - '      &aKills: &e%statistic_player_kills%'
-    - '      &aDeaths: &e%statistic_deaths%'
-    - '      &aVotes: &e%superbvote_votes%'
-    - '      &aPlaytime: &e%statistic_time_played%'
-    - '&4&m--------------------------'
-  Others:
-    - '&4&m--------&8[&f%player_name%''s&8]&4&m--------'
-    - '      &aKills: &e%statistic_player_kills%'
-    - '      &aDeaths: &e%statistic_deaths%'
-    - '      &aVotes: &e%superbvote_votes%'
-    - '      &aPlaytime: &e%statistic_time_played%'
-    - '&4&m--------------------------'
-
-#/playtime command
-Playtime:
-  Self: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
-  Others: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
 
 #/worth command
 FTOP Worth:
@@ -187,12 +202,6 @@ FTOP Worth:
     - '&aEmerald Block &8- &e$500'
     - '&aBeacon &8- &e$3000'
     - '&4&m--------------------------------'
-    
-#Custom Command Messages
-#To give players permission for these commands they need the permission "lw.customcmd.<command>"
-Custom Commands:
-  example: #This will be the the command
-    - '&6I''m an example custom command' #This is the message it will send the player. You can also do multiple lines.
   
 #/commands messages
 Commands:
