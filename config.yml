@@ -29,11 +29,14 @@ disable-weather: true
 join-message: 'none'
 quit-message: 'none'
 
+#This is the name of the server as defined in your bungeecord config that you want the /hub command to take you to.
+hub-server: 'hub'
+
 #The amount of time it takes for a player to teleport to spawn.
 spawn-delay: 4
 
 #Name of the essentials kit new players receive when they first join
-first-join-kit: member
+first-join-kit: 'member'
 
 Messages:
   ActionBarMessage: '&aYou are invisible to other players!'

@@ -17,12 +17,12 @@ public class HubCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("hub")) {
+			String hub = Lonewolves.plugin.getConfig().getString("hub-server");
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
-            out.writeUTF("hub");
+            out.writeUTF(hub);
             p.sendPluginMessage(Lonewolves.plugin, "BungeeCord", out.toByteArray());
 		}
 		return false;
 	}
-
 }
