@@ -106,7 +106,8 @@ public class ChatManager implements Listener {
 						event.getMessage().contains("&o")||
 						event.getMessage().contains("&l")||
 						event.getMessage().contains("&n")||
-						event.getMessage().contains("&m")) {
+						event.getMessage().contains("&m")||
+						event.getMessage().contains("&k")) {
 						event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage().replace("&1", "&f")
 								.replace("&2", "&f")
 								.replace("&3", "&f")
@@ -125,7 +126,8 @@ public class ChatManager implements Listener {
 								.replace("&o", "&f")
 								.replace("&l", "&f")
 								.replace("&n", "&f")
-								.replace("&m", "&f")).replace("%", "%%")));
+								.replace("&m", "&f")
+								.replace("&k", "&f")).replace("%", "%%")));
 					}
 					else event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
 				}
@@ -151,7 +153,8 @@ public class ChatManager implements Listener {
 						event.getMessage().contains("&o")||
 						event.getMessage().contains("&l")||
 						event.getMessage().contains("&n")||
-						event.getMessage().contains("&m")) {
+						event.getMessage().contains("&m")||
+						event.getMessage().contains("&k")) {
 						event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage().replace("&1", "&f")
 								.replace("&2", "&f")
 								.replace("&3", "&f")
@@ -170,7 +173,8 @@ public class ChatManager implements Listener {
 								.replace("&o", "&f")
 								.replace("&l", "&f")
 								.replace("&n", "&f")
-								.replace("&m", "&f")).replace("%", "%%")));
+								.replace("&m", "&f")
+								.replace("&k", "&f")).replace("%", "%%")));
 					}
 					else event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
 				}
