@@ -77,7 +77,7 @@ public class ChatManager implements Listener {
 		for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
 			if (event.getMessage().equalsIgnoreCase(blockedwords)) {
 				event.setCancelled(true);
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fYou have said a blacklisted word."));
+				player.sendMessage(Messages.prefix + Messages.playerSaidBlockedWord);
 			}
 		}
 		boolean enabled = Lonewolves.plugin.getConfig().getBoolean("chat-format.enabled");

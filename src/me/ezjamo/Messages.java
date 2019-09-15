@@ -16,6 +16,8 @@ public class Messages extends Utils {
 	
 	public static String reloadConfig = msg("&7You have reloaded the configuration files!");
 	
+	public static String playerSaidBlockedWord = msg("&cYou have said a blacklisted word.");
+	
 	public static String distanceCommand = msg("&fYour distance from spawn is &4%distance% &fblock(s).");
 	
 	public static String modModeEnabled = msg("&fStaff mode &aenabled");
