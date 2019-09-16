@@ -53,6 +53,7 @@ commands:
     aliases:
       - fb
       - sb
+  ma:
    
 permissions:
   lw.helpop:

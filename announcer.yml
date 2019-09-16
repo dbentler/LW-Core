@@ -1,0 +1,55 @@
+announcer-enabled: true
+
+#This is the delay between each message in seconds.
+announcer-interval: 300
+
+#To add more announcements copy the format below, and make sure to NUMBER them instead of giving them names.
+Messages:
+  1:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Want free goodies? Be sure to &6&l/Vote'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  2:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Type &6&l/Wild &7to escape spawn'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  3:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Check out our website at &6&llonewolves.net'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  4:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Type &6&l/F Upgrades &7to view faction upgrades!'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  5:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Be sure to read &6&l/Rules &7to avoid being banned!'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  6:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Check out our GUI-Shop with &6&l/Shop'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  7:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Sell your items with &6&l/Sell'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+  8:
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
+    - ''
+    - '&7Check your distance from spawn with &6&l/Distance'
+    - ''
+    - '&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-&6*&e-'
