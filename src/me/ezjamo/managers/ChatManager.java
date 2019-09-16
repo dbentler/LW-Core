@@ -75,9 +75,10 @@ public class ChatManager implements Listener {
 		Player player = (Player) event.getPlayer();
 		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
 		for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
-			if (event.getMessage().equalsIgnoreCase(blockedwords)) {
+			if (event.getMessage().toLowerCase().contains(blockedwords)) {
 				event.setCancelled(true);
 				player.sendMessage(Messages.prefix + Messages.playerSaidBlockedWord);
+				return;
 			}
 		}
 		boolean enabled = Lonewolves.plugin.getConfig().getBoolean("chat-format.enabled");
