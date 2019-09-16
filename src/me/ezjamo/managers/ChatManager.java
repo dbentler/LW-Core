@@ -108,7 +108,7 @@ public class ChatManager implements Listener {
 						event.getMessage().contains("&n")||
 						event.getMessage().contains("&m")||
 						event.getMessage().contains("&k")) {
-						event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage().replace("&1", "&f")
+						event.setFormat(Utils.msg(setNoFaction.replace("%message%", event.getMessage().replace("&1", "&f")
 								.replace("&2", "&f")
 								.replace("&3", "&f")
 								.replace("&4", "&f")
@@ -129,9 +129,9 @@ public class ChatManager implements Listener {
 								.replace("&m", "&f")
 								.replace("&k", "&f")).replace("%", "%%")));
 					}
-					else event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+					else event.setFormat(Utils.msg(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 				}
-				else event.setFormat(Utils.msg(setNoFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+				else event.setFormat(Utils.msg(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 			}
 			if (fPlayer.hasFaction()) {
 				if (!player.hasPermission("lw.color")) {
@@ -155,7 +155,7 @@ public class ChatManager implements Listener {
 						event.getMessage().contains("&n")||
 						event.getMessage().contains("&m")||
 						event.getMessage().contains("&k")) {
-						event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage().replace("&1", "&f")
+						event.setFormat(Utils.msg(setFaction.replace("%message%", event.getMessage().replace("&1", "&f")
 								.replace("&2", "&f")
 								.replace("&3", "&f")
 								.replace("&4", "&f")
@@ -176,9 +176,9 @@ public class ChatManager implements Listener {
 								.replace("&m", "&f")
 								.replace("&k", "&f")).replace("%", "%%")));
 					}
-					else event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+					else event.setFormat(Utils.msg(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 				}
-				else event.setFormat(Utils.msg(setFaction.replaceAll("%message%", event.getMessage()).replace("%", "%%")));
+				else event.setFormat(Utils.msg(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 			}
 		}
 		else return;
