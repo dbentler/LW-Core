@@ -4,7 +4,7 @@ author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
 softdepend: [PlaceholderAPI, Essentials, KoTH]
 depend: [Vault]
-version: 2.8
+version: 2.9
 
 commands:
   request:

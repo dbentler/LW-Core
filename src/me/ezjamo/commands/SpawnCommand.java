@@ -15,11 +15,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpawnCommand implements CommandExecutor {
     public static Map<Player, BukkitTask> tasks;
+    private Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
     public SpawnCommand() {
         tasks = new HashMap<>();
     }
@@ -43,6 +47,8 @@ public class SpawnCommand implements CommandExecutor {
             if (player.hasPermission("lw.spawn")) {
                 if (args.length < 1) {
                 	if (player.hasPermission("lw.spawn.bypassdelay")) {
+                		User user = ess.getUser(player);
+                    	user.setLastLocation();
                     	player.teleport(spawn);
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
                         return true;
@@ -51,6 +57,8 @@ public class SpawnCommand implements CommandExecutor {
                     if (!tasks.containsKey(player)) {
                         tasks.put(player, new BukkitRunnable() {
                             public void run() {
+                            	User user = ess.getUser(player);
+                            	user.setLastLocation();
                                 player.teleport(spawn);
                                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
                                 tasks.remove(player);
@@ -66,6 +74,8 @@ public class SpawnCommand implements CommandExecutor {
             if (args.length == 1) {
                 if (player.hasPermission("lw.spawn.others")) {
                     Player target = Bukkit.getPlayer(args[0]);
+                    User user = ess.getUser(target);
+                    user.setLastLocation();
                     target.teleport(spawn);
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
