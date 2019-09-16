@@ -71,7 +71,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     public static Lonewolves plugin;
     public FileManager manager;
     public static int task = 1;
-    public static int size = 1;
+    public static int size;
     
     public HashMap<UUID, ItemStack[]> contents;
     public HashMap<UUID, ItemStack[]> armorContents;
@@ -173,6 +173,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         }
     	if (AnnouncerManager.getManager().getConfig().getBoolean("announcer-enabled")) {
     		task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
+    			size++;
                 Set<String> configMessages = AnnouncerManager.getManager().getConfig().getConfigurationSection("Messages").getKeys(false);
                 if (size > configMessages.size()) {
                     size = 1;
@@ -182,7 +183,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
                     	player.playSound(player.getLocation(), Sound.NOTE_PLING, 0.5f, 1.0f);
                     }
                     Bukkit.getServer().broadcastMessage(Utils.msg(message));
-                    size++;
                 }
             }, 5 * 20, AnnouncerManager.getManager().getConfig().getInt("announcer-interval") * 20);
     	}
@@ -230,6 +230,10 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     					BlockedWordsManager.getManager().reloadConfig();
     					player.sendMessage(Messages.prefix + Messages.reloadConfig);
     					getServer().getConsoleSender().sendMessage(Messages.prefix + Messages.reloadConfig);
+    					return true;
+    				}
+    				if (args[0].equalsIgnoreCase("version")) {
+    					player.sendMessage(Utils.msg(Messages.prefix + "&f" + plugin.getDescription().getFullName()));
     					return true;
     				}
     			}
@@ -299,13 +303,9 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 					player.sendMessage(Utils.msg("&8&m--------------------&f/help 2&8&m--------------------------"));
 					return true;
 				}
-    			else {
-    				player.sendMessage(Utils.msg(Messages.prefix + "&fInvalid command."));
-    			}
+    			else player.sendMessage(Utils.msg(Messages.prefix + "&fInvalid command."));
     		}
-    		else {
-    			player.sendMessage(Utils.msg(Messages.prefix + "&f" + plugin.getDescription().getFullName()));
-    		}
+    		else player.sendMessage(Utils.msg(Messages.prefix + "&f" + plugin.getDescription().getFullName()));
     	}
 		return true;
     }

@@ -79,20 +79,20 @@ public class AnnouncerManager implements Listener, CommandExecutor {
 					if (sender.hasPermission("lw.reload")) {
 						if (AnnouncerManager.getManager().getConfig().getBoolean("announcer-enabled")) {
 							AnnouncerManager.getManager().reloadConfig();
-							Lonewolves.size = 1;
+							Lonewolves.size = 0;
 							Bukkit.getScheduler().cancelTask(Lonewolves.task);
 							Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> Lonewolves.task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-								Set<String> configMessages = AnnouncerManager.getManager().getConfig().getConfigurationSection("Messages").getKeys(false);
-								if (Lonewolves.size > configMessages.size()) {
-									Lonewolves.size = 1;
-								}
-								for (String message : AnnouncerManager.getManager().getConfig().getStringList("Messages." + Lonewolves.size)) {
-									for (Player player : Bukkit.getOnlinePlayers()) {
+								Lonewolves.size++;
+				                Set<String> configMessages = AnnouncerManager.getManager().getConfig().getConfigurationSection("Messages").getKeys(false);
+				                if (Lonewolves.size > configMessages.size()) {
+				                	Lonewolves.size = 1;
+				                }
+				                for (String message : AnnouncerManager.getManager().getConfig().getStringList("Messages." + Lonewolves.size)) {
+				                	for (Player player : Bukkit.getOnlinePlayers()) {
 				                    	player.playSound(player.getLocation(), Sound.NOTE_PLING, 0.5f, 1.0f);
 				                    }
-									Bukkit.getServer().broadcastMessage(Utils.msg(message));
-									Lonewolves.size++;
-								}
+				                    Bukkit.getServer().broadcastMessage(Utils.msg(message));
+				                }
 							}, 1L, AnnouncerManager.getManager().getConfig().getInt("announcer-interval") * 20), 1L);
 							sender.sendMessage(Messages.prefix + Messages.reloadConfig);
 						}
