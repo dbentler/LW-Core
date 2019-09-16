@@ -1,10 +1,12 @@
 package me.ezjamo;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,6 +44,7 @@ import me.ezjamo.commands.StaffChat;
 import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
+import me.ezjamo.managers.AnnouncerManager;
 import me.ezjamo.managers.BlockedWordsManager;
 import me.ezjamo.managers.ChatManager;
 import me.ezjamo.managers.CustomCmdsManager;
@@ -63,6 +66,8 @@ import net.milkbowl.vault.economy.Economy;
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
     public static Lonewolves plugin;
     public FileManager manager;
+    public static int task = 1;
+    public static int size = 1;
     
     public HashMap<UUID, ItemStack[]> contents;
     public HashMap<UUID, ItemStack[]> armorContents;
@@ -105,6 +110,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	SpawnManager.getManager().reloadConfig();
     	BlockedWordsManager.getManager().setupFiles();
     	BlockedWordsManager.getManager().reloadConfig();
+    	AnnouncerManager.getManager().setupFiles();
+    	AnnouncerManager.getManager().reloadConfig();
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
         Bukkit.getPluginManager().registerEvents(this, (this));
         Bukkit.getPluginManager().registerEvents(new ModModeManager(), this);
@@ -122,6 +129,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new SpawnManager(), this);
         Bukkit.getPluginManager().registerEvents(new CustomCmdsManager(), this);
         Bukkit.getPluginManager().registerEvents(new BlockedWordsManager(), this);
+        Bukkit.getPluginManager().registerEvents(new AnnouncerManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
@@ -149,11 +157,27 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("worth").setExecutor(new FTopWorthCommand());
     	this.getCommand("commands").setExecutor(new CmdsCommand());
     	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand(assemble));
+    	this.getCommand("ma").setExecutor(new AnnouncerManager());
     	new KothManager(this);
     	if(!(setupEconomy())) {
             getLogger().severe("LW-Core requires vault.");
             getServer().getPluginManager().disablePlugin(this);
         }
+    	if (AnnouncerManager.getManager().getConfig().getBoolean("announcer-enabled")) {
+    		task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
+                Set<String> configMessages = AnnouncerManager.getManager().getConfig().getConfigurationSection("Messages").getKeys(false);
+                if (size > configMessages.size()) {
+                    size = 1;
+                }
+                for (String message : AnnouncerManager.getManager().getConfig().getStringList("Messages." + size)) {
+                	for (Player player : Bukkit.getOnlinePlayers()) {
+                    	player.playSound(player.getLocation(), Sound.NOTE_PLING, 0.5f, 1.0f);
+                    }
+                    Bukkit.getServer().broadcastMessage(Utils.msg(message));
+                    size++;
+                }
+            }, 5 * 20, AnnouncerManager.getManager().getConfig().getInt("announcer-interval") * 20);
+    	}
     }
 	
 	public void onDisable() {
