@@ -88,7 +88,7 @@ public class AnnouncerManager implements Listener, CommandExecutor {
 								}
 								for (String message : AnnouncerManager.getManager().getConfig().getStringList("Messages." + Lonewolves.size)) {
 									for (Player player : Bukkit.getOnlinePlayers()) {
-				                    	player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 1.0f);
+				                    	player.playSound(player.getLocation(), Sound.NOTE_PLING, 0.5f, 1.0f);
 				                    }
 									Bukkit.getServer().broadcastMessage(Utils.msg(message));
 									Lonewolves.size++;
