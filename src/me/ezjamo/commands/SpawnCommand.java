@@ -2,6 +2,7 @@ package me.ezjamo.commands;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import me.ezjamo.managers.SpawnManager;
 
 import org.bukkit.Bukkit;
@@ -47,8 +48,10 @@ public class SpawnCommand implements CommandExecutor {
             if (player.hasPermission("lw.spawn")) {
                 if (args.length < 1) {
                 	if (player.hasPermission("lw.spawn.bypassdelay")) {
-                		User user = ess.getUser(player);
-                    	user.setLastLocation();
+                		if (ess != null) {
+                            User user = ess.getUser(player);
+                            user.setLastLocation();
+                        }
                     	player.teleport(spawn);
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
                         return true;
@@ -57,8 +60,10 @@ public class SpawnCommand implements CommandExecutor {
                     if (!tasks.containsKey(player)) {
                         tasks.put(player, new BukkitRunnable() {
                             public void run() {
-                            	User user = ess.getUser(player);
-                            	user.setLastLocation();
+                            	if (ess != null) {
+                                    User user = ess.getUser(player);
+                                    user.setLastLocation();
+                                }
                                 player.teleport(spawn);
                                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
                                 tasks.remove(player);
@@ -74,8 +79,14 @@ public class SpawnCommand implements CommandExecutor {
             if (args.length == 1) {
                 if (player.hasPermission("lw.spawn.others")) {
                     Player target = Bukkit.getPlayer(args[0]);
-                    User user = ess.getUser(target);
-                    user.setLastLocation();
+                    if (target == null) {
+                    	player.sendMessage(Utils.msg(Messages.prefix + "&cPlayer not found."));
+                    	return true;
+                    }
+                    if (ess != null) {
+                        User user = ess.getUser(target);
+                        user.setLastLocation();
+                    }
                     target.teleport(spawn);
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fTeleportation successful!"));
