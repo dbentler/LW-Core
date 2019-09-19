@@ -12,7 +12,7 @@ import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
 import me.ezjamo.commands.KitsCommand;
 
-public class PreviewManager implements Listener {
+public class PreviewManager extends Utils implements Listener {
 	
 	public PreviewManager(Lonewolves plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -23,12 +23,12 @@ public class PreviewManager implements Listener {
 		Player player = (Player) event.getPlayer();
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		String title = event.getInventory().getTitle();
-		if (title.equals(Utils.msg("&eVIP Preview")) ||
-			title.equals(Utils.msg("&bVIP+ Preview")) ||
-			title.equals(Utils.msg("&cMVP Preview")) ||
-			title.equals(Utils.msg("&3Noble Preview")) ||
-			title.equals(Utils.msg("&5Mystic Preview")) ||
-			title.equals(Utils.msg("&2Kingpin Preview"))) {
+		if (title.equals(color("&eVIP Preview")) ||
+			title.equals(color("&bVIP+ Preview")) ||
+			title.equals(color("&cMVP Preview")) ||
+			title.equals(color("&3Noble Preview")) ||
+			title.equals(color("&5Mystic Preview")) ||
+			title.equals(color("&2Kingpin Preview"))) {
 			scheduler.scheduleSyncDelayedTask(Lonewolves.plugin, new Runnable() {
 	            @Override
 	            public void run() {
@@ -43,7 +43,7 @@ public class PreviewManager implements Listener {
     	Player player = (Player) e.getWhoClicked();
 		String title = e.getInventory().getTitle();
 		
-		if (title.equals(Utils.msg("&eVIP Preview"))) {
+		if (title.equals(color("&eVIP Preview"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -53,7 +53,7 @@ public class PreviewManager implements Listener {
 				KitsCommand.kits(player);
 		}
 		
-		if (title.equals(Utils.msg("&bVIP+ Preview"))) {
+		if (title.equals(color("&bVIP+ Preview"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -63,7 +63,7 @@ public class PreviewManager implements Listener {
 				KitsCommand.kits(player);
 		}
 		
-		if (title.equals(Utils.msg("&cMVP Preview"))) {
+		if (title.equals(color("&cMVP Preview"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -73,7 +73,7 @@ public class PreviewManager implements Listener {
 				KitsCommand.kits(player);
 		}
 		
-		if (title.equals(Utils.msg("&3Noble Preview"))) {
+		if (title.equals(color("&3Noble Preview"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -83,7 +83,7 @@ public class PreviewManager implements Listener {
 				KitsCommand.kits(player);
 		}
 		
-		if (title.equals(Utils.msg("&5Mystic Preview"))) {
+		if (title.equals(color("&5Mystic Preview"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -93,7 +93,7 @@ public class PreviewManager implements Listener {
 				KitsCommand.kits(player);
 		}
 		
-		if (title.equals(Utils.msg("&2Kingpin Preview"))) {
+		if (title.equals(color("&2Kingpin Preview"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;

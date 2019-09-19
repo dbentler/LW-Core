@@ -9,7 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
 
-public class KitsManager implements Listener {
+public class KitsManager extends Utils implements Listener {
 	
 	public KitsManager(Lonewolves plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -20,7 +20,7 @@ public class KitsManager implements Listener {
 		Player p = (Player) e.getWhoClicked();
 		String title = e.getInventory().getTitle();
 		
-		if (title.equals(Utils.msg("&fLone&4Wolves &fKits"))) {
+		if (title.equals(color("&fLone&4Wolves &fKits"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;

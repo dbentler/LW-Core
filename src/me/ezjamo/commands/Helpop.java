@@ -9,8 +9,7 @@ import org.bukkit.entity.Player;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
- 
-public class Helpop implements CommandExecutor {
+public class Helpop extends Utils implements CommandExecutor {
 	
 	public String allArgs(int start , String[] args){
 	    String temp = "";
@@ -22,18 +21,17 @@ public class Helpop implements CommandExecutor {
 	
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+    	Player player = (Player) sender;
     	if (cmd.getName().equalsIgnoreCase("request")) {
     		if (args.length == 0) {
-    			sender.sendMessage(Utils.msg("&cUsage: &7/request (message)"));
+    			message(player, "&cUsage: &7/request <message>");
                 return true;
     		}
-    		
-    		Player player = (Player) sender;
     		if (args.length >= 1) {
-    			player.sendMessage(Utils.msg(Messages.helpopPlayerMessage));
-    			for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
+    			message(player, Messages.helpopPlayerMessage);
+    			for (Player staff : Bukkit.getOnlinePlayers()) {
     				if (staff.hasPermission("rank.helper")) {
-    					staff.sendMessage(Utils.msg(Messages.helpopPrefix + Messages.helpopStaffMessage.replaceAll("%player_name%", player.getName()) + allArgs(0, args) + ""));
+    					message(staff, Messages.helpopPrefix + Messages.helpopStaffMessage.replaceAll("%player_name%", player.getName()) + allArgs(0, args) + "");
     				}
     			}
     		}

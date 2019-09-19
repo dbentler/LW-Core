@@ -7,9 +7,8 @@ import org.bukkit.entity.Player;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
-import net.md_5.bungee.api.ChatColor;
 
-public class HelpCommand implements CommandExecutor {
+public class HelpCommand extends Utils implements CommandExecutor {
 	
 	@Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -17,18 +16,18 @@ public class HelpCommand implements CommandExecutor {
     	if (cmd.getName().equalsIgnoreCase("help")) {
     		if (args.length == 0) {
     			for (String message : Lonewolves.plugin.getConfig().getStringList("Help.1")) {
-    				player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+    				message(player, message);
     			}
     		}
     		if (args.length == 1) {
     			String page = args[0];
     			if (args[0].equalsIgnoreCase(page)) {
     				for (String message : Lonewolves.plugin.getConfig().getStringList("Help." + page)) {
-    					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+    					message(player, message);
     				}
     			}
     			if (Lonewolves.plugin.getConfig().getStringList("Help." + page).isEmpty()) {
-    				player.sendMessage(Utils.msg("&fUnknown command. Type \"/help\" for help."));
+    				message(player, "&fUnknown command. Type \"/help\" for help.");
     			}
     		}
     	}

@@ -9,7 +9,6 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -19,56 +18,50 @@ import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
-public class AnnouncerManager implements Listener, CommandExecutor {
+public class AnnouncerManager extends Utils implements Listener, CommandExecutor {
 	public Lonewolves plugin;
-	public File announcer;
-	public YamlConfiguration messages;
+	public File file;
+	public FileConfiguration config;
 	public static AnnouncerManager manager;
-
+	
 	static {
 		AnnouncerManager.manager = new AnnouncerManager();
 	}
-
+	
 	public AnnouncerManager() {
 		plugin = Lonewolves.getPlugin(Lonewolves.class);
 	}
-
-	public AnnouncerManager(Lonewolves mainclass) {
-		plugin = Lonewolves.getPlugin(Lonewolves.class);
-	}
-
+	
 	public static AnnouncerManager getManager() {
 		return AnnouncerManager.manager;
 	}
-
-	public void setupFiles() {
-		announcer = new File(plugin.getDataFolder(), "announcer.yml");
-		if (!announcer.exists()) {
-			announcer.getParentFile().mkdirs();
+	
+	public void load() {
+		file = new File(plugin.getDataFolder(), "announcer.yml");
+		if (!file.exists()) {
+			plugin.getLogger().severe("Creating default: " + file);
+			file.getParentFile().mkdirs();
 			plugin.saveResource("announcer.yml", false);
+			plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + file));
 		}
-		messages = new YamlConfiguration();
+		config = new YamlConfiguration();
 		try {
-			messages.load(announcer);
-		}
-		catch (IOException | InvalidConfigurationException ex2) {
-			ex2.printStackTrace();
+			config.load(file);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-
-	public FileConfiguration getConfig() {
-		return (FileConfiguration)messages;
+	
+	public FileConfiguration get() {
+		return config;
 	}
-
-	public void saveConfig() {
-		try {
-			messages.save(announcer);
-		}
-		catch (IOException ex) {}
+	
+	public void reload() {
+		config = YamlConfiguration.loadConfiguration(file);
 	}
-
-	public void reloadConfig() {
-		messages = YamlConfiguration.loadConfiguration(announcer);
+	
+	public void save() throws IOException {
+		config.save(file);
 	}
 
 	@Override
@@ -77,28 +70,31 @@ public class AnnouncerManager implements Listener, CommandExecutor {
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("reload")) {
 					if (sender.hasPermission("lw.reload")) {
-						if (AnnouncerManager.getManager().getConfig().getBoolean("announcer-enabled")) {
-							AnnouncerManager.getManager().reloadConfig();
-							Lonewolves.size = 0;
-							Bukkit.getScheduler().cancelTask(Lonewolves.task);
+						getManager().reload();
+						Lonewolves.size = 0;
+						Bukkit.getScheduler().cancelTask(Lonewolves.task);
+						message(sender, Messages.prefix + Messages.reloadConfig);
+						if (!getManager().get().getBoolean("announcer-enabled")) {
+							return true;
+						}
+						if (getManager().get().getBoolean("announcer-enabled")) {
 							Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> Lonewolves.task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
 								Lonewolves.size++;
-				                Set<String> configMessages = AnnouncerManager.getManager().getConfig().getConfigurationSection("Messages").getKeys(false);
+				                Set<String> configMessages = getManager().get().getConfigurationSection("Messages").getKeys(false);
 				                if (Lonewolves.size > configMessages.size()) {
 				                	Lonewolves.size = 1;
 				                }
-				                for (String message : AnnouncerManager.getManager().getConfig().getStringList("Messages." + Lonewolves.size)) {
+				                for (String message : getManager().get().getStringList("Messages." + Lonewolves.size)) {
 				                	for (Player player : Bukkit.getOnlinePlayers()) {
-				                    	player.playSound(player.getLocation(), Sound.NOTE_PLING, 0.5f, 1.0f);
+				                    	player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 0.5f, 1.0f);
 				                    }
-				                    Bukkit.getServer().broadcastMessage(Utils.msg(message));
+				                    Bukkit.getServer().broadcastMessage(color(message));
 				                }
-							}, 1L, AnnouncerManager.getManager().getConfig().getInt("announcer-interval") * 20), 1L);
-							sender.sendMessage(Messages.prefix + Messages.reloadConfig);
+							}, 1L, getManager().get().getInt("announcer-interval") * 20), 1L);
 						}
-						else sender.sendMessage(Utils.msg(Messages.prefix + "&cThe message announcer is disabled."));
+						else message(sender, Messages.prefix + "&cThe message announcer is disabled.");
 					}
-					else sender.sendMessage(Messages.prefix + Messages.noPermission);
+					else message(sender, Messages.prefix + Messages.noPermission);
 				}
 			}
 		}

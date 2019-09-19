@@ -9,9 +9,8 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
-import net.md_5.bungee.api.ChatColor;
 
-public class CmdsCommand implements CommandExecutor {
+public class CmdsCommand extends Utils implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -19,8 +18,8 @@ public class CmdsCommand implements CommandExecutor {
 		
 		if (cmd.getName().equalsIgnoreCase("commands")) {
 			if (args.length == 0) {
-				player.sendMessage(Utils.msg("&cUsage: &7/commands <rank>"));
-				player.sendMessage(Utils.msg("&cExample: &7/commands vip"));
+				message(player, "&cUsage: &7/commands <rank>");
+				message(player, "&cExample: &7/commands vip");
 			}
 			
 			if (args.length == 1) {
@@ -28,12 +27,12 @@ public class CmdsCommand implements CommandExecutor {
 				if (args[0].equalsIgnoreCase(rank)) {
 					for (String message : Lonewolves.plugin.getConfig().getStringList("Commands." + rank)) {
 						String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
+						message(player, placeholders);
 					}
 				}
 				
 				if (Lonewolves.plugin.getConfig().getStringList("Commands." + rank).isEmpty()) {
-					player.sendMessage(Utils.msg(Messages.prefix + "&cInvalid Rank"));
+					message(player, Messages.prefix + "&cInvalid Rank");
 	    		}
 			}
 		}

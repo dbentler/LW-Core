@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -12,8 +13,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 	
-	public static String msg(String s) {
+	public static String color(String s) {
 		return ChatColor.translateAlternateColorCodes('&', s);
+	}
+	
+	public static void message(CommandSender sender, String string) {
+		string = color(string);
+		sender.sendMessage(string);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -26,9 +32,9 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -47,9 +53,9 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount, (short) byteId);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -68,10 +74,10 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		meta.addEnchant(enchant, level, false);
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -90,11 +96,11 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -113,12 +119,12 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		meta.addEnchant(enchant11, level11, false);
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -137,13 +143,13 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		meta.addEnchant(enchant11, level11, false);
 		meta.addEnchant(enchant111, level111, false);
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -162,14 +168,14 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.msg(displayName));
+		meta.setDisplayName (color(displayName));
 		meta.addEnchant(enchant, level, false);
 		meta.addEnchant(enchant1, level1, false);
 		meta.addEnchant(enchant11, level11, false);
 		meta.addEnchant(enchant111, level111, false);
 		meta.addEnchant(enchant1111, level1111, false);
 		for (String s : loreString) {
-			lore.add(Utils.msg(s));
+			lore.add(color(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);

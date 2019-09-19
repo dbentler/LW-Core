@@ -11,11 +11,11 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
  
-public class KitsCommand implements CommandExecutor {
+public class KitsCommand extends Utils implements CommandExecutor {
    
 	
     public static void kits(Player player) {
-        Inventory kits = Bukkit.createInventory(null, 45, Utils.msg("&fLone&4Wolves &fKits"));
+        Inventory kits = Bukkit.createInventory(null, 45, color("&fLone&4Wolves &fKits"));
         if (player.hasPermission("essentials.kits.vip")) {
             String unsetVIP = "%essentials_kit_time_until_available_vip%";
             String setVIP = PlaceholderAPI.setPlaceholders(player, unsetVIP);
@@ -165,7 +165,7 @@ public class KitsCommand implements CommandExecutor {
         		KitsCommand.kits(player);
         	}
         	if(!player.hasPermission("lw.kits")) {
-        		player.sendMessage(Messages.prefix + Messages.noPermission);
+        		message(player, Messages.prefix + Messages.noPermission);
         	}
         }
         return true;

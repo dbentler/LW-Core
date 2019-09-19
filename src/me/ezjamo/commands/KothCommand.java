@@ -10,11 +10,11 @@ import org.bukkit.inventory.Inventory;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
-public class KothCommand implements CommandExecutor {
+public class KothCommand extends Utils implements CommandExecutor {
 	
     public static void koth(Player p) {
 
-    	Inventory koth = Bukkit.getServer().createInventory(null, 27, Utils.msg("&fLone&4Wolves &fKoths"));
+    	Inventory koth = Bukkit.getServer().createInventory(null, 27, color("&fLone&4Wolves &fKoths"));
     	Utils.createItem(koth, 399, 1, 0, "&dCrow Koth", "&fStart &dCrow &fkoth for 5 minutes.");
     	Utils.createItem(koth, 399, 1, 1, "&dGoliath Koth", "&fStart &dGoliath &fkoth for 5 minutes.");
     	Utils.createItem(koth, 399, 1, 2, "&dTriumph Koth", "&fStart &dTriumph &fkoth for 5 minutes.");
@@ -32,7 +32,7 @@ public class KothCommand implements CommandExecutor {
         	KothCommand.koth(player);
     	
     	if(!player.hasPermission("lw.koth"))
-    		player.sendMessage(Messages.prefix + Messages.noPermission);
+    		message(player, Messages.prefix + Messages.noPermission);
     	}
 		return false;
     }

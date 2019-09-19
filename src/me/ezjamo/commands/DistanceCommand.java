@@ -10,7 +10,7 @@ import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 import me.ezjamo.managers.SpawnManager;
  
-public class DistanceCommand implements CommandExecutor {
+public class DistanceCommand extends Utils implements CommandExecutor {
 	
  
 	@Override
@@ -18,13 +18,13 @@ public class DistanceCommand implements CommandExecutor {
 		Player player = (Player) sender;
 		SpawnManager spawnCoords = SpawnManager.getManager();
 		
-		if  (!(sender instanceof Player)) {
-			sender.sendMessage("Only players may check their distance from spawn!");
+		if (player == null) {
+			message(sender, "Only players may check their distance from spawn!");
 			return true;
 		}
 		
 		if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
-			player.sendMessage(Utils.msg(Messages.prefix + "&fThere is no spawn set."));
+			message(player, Messages.prefix + "&fThere is no spawn set.");
 			return true;
 		}
 		
@@ -35,7 +35,7 @@ public class DistanceCommand implements CommandExecutor {
 		double spawnZ = spawnCoords.getConfig().getDouble("spawn.z");
 		int dist = (int) Math.sqrt((Math.pow(playerX - spawnX, 2)) + (Math.pow(playerZ - spawnZ, 2)));
 		
-		player.sendMessage(Messages.prefix + Messages.distanceCommand.replaceAll("%distance%", Integer.toString(dist)));
+		message(player, Messages.prefix + Messages.distanceCommand.replace("%distance%", Integer.toString(dist)));
 		return true;
 	}
 }

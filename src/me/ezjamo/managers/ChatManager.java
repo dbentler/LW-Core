@@ -19,9 +19,8 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
-import net.md_5.bungee.api.ChatColor;
 
-public class ChatManager implements Listener {
+public class ChatManager extends Utils implements Listener {
 	public static Set<UUID> staffChat;
 	public static Set<UUID> adminChat;
 
@@ -40,7 +39,7 @@ public class ChatManager implements Listener {
 			event.setCancelled(true);
 			for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
 				if (staff.hasPermission("lw.staffchat")) {
-					staff.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9[StaffChat] &e" + player.getName() +  ": &c" + event.getMessage()));
+					staff.sendMessage(color("&9[StaffChat] &e" + player.getName() +  ": &c" + event.getMessage()));
 				}
 			}
 		}
@@ -54,7 +53,7 @@ public class ChatManager implements Listener {
 			event.setJoinMessage(null);
 		}
 		else {
-			event.setJoinMessage(Utils.msg(placeholders));
+			event.setJoinMessage(color(placeholders));
 		}
 	}
 
@@ -66,7 +65,7 @@ public class ChatManager implements Listener {
 			event.setQuitMessage(null);
 		}
 		else {
-			event.setQuitMessage(Utils.msg(placeholders));
+			event.setQuitMessage(color(placeholders));
 		}
 	}
 
@@ -77,7 +76,7 @@ public class ChatManager implements Listener {
 		for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
 			if (event.getMessage().toLowerCase().contains(blockedwords)) {
 				event.setCancelled(true);
-				player.sendMessage(Messages.prefix + Messages.playerSaidBlockedWord);
+				message(player, Messages.prefix + Messages.playerSaidBlockedWord);
 				return;
 			}
 		}
@@ -109,7 +108,7 @@ public class ChatManager implements Listener {
 						event.getMessage().contains("&n")||
 						event.getMessage().contains("&m")||
 						event.getMessage().contains("&k")) {
-						event.setFormat(Utils.msg(setNoFaction.replace("%message%", event.getMessage().replace("&1", "&f")
+						event.setFormat(color(setNoFaction.replace("%message%", event.getMessage().replace("&1", "&f")
 								.replace("&2", "&f")
 								.replace("&3", "&f")
 								.replace("&4", "&f")
@@ -130,9 +129,9 @@ public class ChatManager implements Listener {
 								.replace("&m", "&f")
 								.replace("&k", "&f")).replace("%", "%%")));
 					}
-					else event.setFormat(Utils.msg(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+					else event.setFormat(color(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 				}
-				else event.setFormat(Utils.msg(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+				else event.setFormat(color(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 			}
 			if (fPlayer.hasFaction()) {
 				if (!player.hasPermission("lw.color")) {
@@ -156,7 +155,7 @@ public class ChatManager implements Listener {
 						event.getMessage().contains("&n")||
 						event.getMessage().contains("&m")||
 						event.getMessage().contains("&k")) {
-						event.setFormat(Utils.msg(setFaction.replace("%message%", event.getMessage().replace("&1", "&f")
+						event.setFormat(color(setFaction.replace("%message%", event.getMessage().replace("&1", "&f")
 								.replace("&2", "&f")
 								.replace("&3", "&f")
 								.replace("&4", "&f")
@@ -177,9 +176,9 @@ public class ChatManager implements Listener {
 								.replace("&m", "&f")
 								.replace("&k", "&f")).replace("%", "%%")));
 					}
-					else event.setFormat(Utils.msg(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+					else event.setFormat(color(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 				}
-				else event.setFormat(Utils.msg(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+				else event.setFormat(color(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
 			}
 		}
 		else return;
