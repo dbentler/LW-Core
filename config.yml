@@ -126,6 +126,12 @@ Links:
 Custom Commands:
   example: #This will be the the command
     - '&6I''m an example custom command' #This is the message it will send the player. You can also do multiple lines.
+  forums:
+    - '&3&lForums: &ahttps://lonewolves.net'
+  store:
+    - '&3&lStore: &ahttp://store.lonewolves.net'
+  bans:
+    - '&3&lBans: &ahttps://lonewolves.net/bans'
 
 #/nv command.
 NightVision:

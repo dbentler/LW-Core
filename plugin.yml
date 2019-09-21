@@ -23,7 +23,7 @@ commands:
   distance:
    aliases: [dist]
   links:
-   aliases: [link, forums] 
+   aliases: [link] 
   help:
   lw:
   rules:
