@@ -1,5 +1,6 @@
 package me.ezjamo;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
@@ -59,6 +60,7 @@ import me.ezjamo.managers.KitsManager;
 import me.ezjamo.managers.KothManager;
 import me.ezjamo.managers.LWManagers;
 import me.ezjamo.managers.ModModeManager;
+import me.ezjamo.managers.PlayerdataManager;
 import me.ezjamo.managers.PreviewManager;
 import me.ezjamo.managers.RespawnManager;
 import me.ezjamo.managers.SpawnManager;
@@ -105,9 +107,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
 		manager = new FileManager(this);
-		Assemble assemble = new Assemble(this, new ScoreboardAdapter());
-		assemble.setTicks(16);
-		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
     	this.saveDefaultConfig();
     	Messages.load();
     	SpawnManager.getManager().setupFiles();
@@ -115,6 +114,10 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	BlockedWordsManager.getManager().setupFiles();
     	BlockedWordsManager.getManager().reloadConfig();
     	AnnouncerManager.getManager().load();
+    	PlayerdataManager.getManager().load();
+    	Assemble assemble = new Assemble(this, new ScoreboardAdapter());
+		assemble.setTicks(16);
+		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
         Bukkit.getPluginManager().registerEvents(this, (this));
         Bukkit.getPluginManager().registerEvents(new ModModeManager(), this);
@@ -133,6 +136,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         Bukkit.getPluginManager().registerEvents(new CustomCmdsManager(), this);
         Bukkit.getPluginManager().registerEvents(new BlockedWordsManager(), this);
         Bukkit.getPluginManager().registerEvents(new AnnouncerManager(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerdataManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	this.getCommand("request").setExecutor(new Helpop());
@@ -194,12 +198,19 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getServer().getConsoleSender().sendMessage(Utils.color("&cDisabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
-    	for (Player staff : Bukkit.getServer().getOnlinePlayers()) {
-    		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-    		staff.setGameMode(GameMode.SURVIVAL);
-    	}
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
+    	for (Player staff : Bukkit.getOnlinePlayers()) {
+    		PlayerdataManager data = PlayerdataManager.getManager();
+    		staff.setGameMode(GameMode.SURVIVAL);
+    		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+    		data.get().set("players", null);
+    		try {
+				data.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
 	}
 	    	
 	public String getMessage(String path) {
