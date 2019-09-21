@@ -12,8 +12,8 @@ enable-spawner-placement: true
 #Sets the chat format, supports placeholders.
 chat-format:
   enabled: true
-  format: '&8[[FACTION]&8] %luckperms_prefix%%essentials_nickname%%deluxetags_tag%&7: &r%message%'
-  format-no-faction: '%luckperms_prefix%%essentials_nickname%%deluxetags_tag%&7: &r%message%'
+  format: '&8[[FACTION]&8] %luckperms_prefix%%player_nickname%%deluxetags_tag%&7: &r%message%'
+  format-no-faction: '%luckperms_prefix%%player_nickname%%deluxetags_tag%&7: &r%message%'
 
 #Disables strength 2 potions
 disable-strength-2: true

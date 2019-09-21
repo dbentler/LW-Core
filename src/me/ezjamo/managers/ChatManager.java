@@ -12,6 +12,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 
@@ -71,6 +73,7 @@ public class ChatManager extends Utils implements Listener {
 
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent event) {
+		Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
 		Player player = (Player) event.getPlayer();
 		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
 		for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
@@ -81,6 +84,7 @@ public class ChatManager extends Utils implements Listener {
 			}
 		}
 		boolean enabled = Lonewolves.plugin.getConfig().getBoolean("chat-format.enabled");
+		User user = ess.getUser(player);
 		if (enabled) {
 			String withFaction = Lonewolves.plugin.getConfig().getString("chat-format.format");
 			String setFaction = PlaceholderAPI.setPlaceholders(event.getPlayer(), withFaction);
@@ -108,30 +112,72 @@ public class ChatManager extends Utils implements Listener {
 						event.getMessage().contains("&n")||
 						event.getMessage().contains("&m")||
 						event.getMessage().contains("&k")) {
-						event.setFormat(color(setNoFaction.replace("%message%", event.getMessage().replace("&1", "&f")
-								.replace("&2", "&f")
-								.replace("&3", "&f")
-								.replace("&4", "&f")
-								.replace("&5", "&f")
-								.replace("&6", "&f")
-								.replace("&7", "&f")
-								.replace("&8", "&f")
-								.replace("&9", "&f")
-								.replace("&0", "&f")
-								.replace("&a", "&f")
-								.replace("&e", "&f")
-								.replace("&d", "&f")
-								.replace("&b", "&f")
-								.replace("&c", "&f")
-								.replace("&o", "&f")
-								.replace("&l", "&f")
-								.replace("&n", "&f")
-								.replace("&m", "&f")
-								.replace("&k", "&f")).replace("%", "%%")));
+						if (user._getNickname() != null) {
+							event.setFormat(color(setNoFaction.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage().replace("&1", "&f")
+									.replace("&2", "&f")
+									.replace("&3", "&f")
+									.replace("&4", "&f")
+									.replace("&5", "&f")
+									.replace("&6", "&f")
+									.replace("&7", "&f")
+									.replace("&8", "&f")
+									.replace("&9", "&f")
+									.replace("&0", "&f")
+									.replace("&a", "&f")
+									.replace("&e", "&f")
+									.replace("&d", "&f")
+									.replace("&b", "&f")
+									.replace("&c", "&f")
+									.replace("&o", "&f")
+									.replace("&l", "&f")
+									.replace("&n", "&f")
+									.replace("&m", "&f")
+									.replace("&k", "&f")).replace("%", "%%")));
+							return;
+						}
+						if (user._getNickname() == null) {
+							event.setFormat(color(setNoFaction.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage().replace("&1", "&f")
+									.replace("&2", "&f")
+									.replace("&3", "&f")
+									.replace("&4", "&f")
+									.replace("&5", "&f")
+									.replace("&6", "&f")
+									.replace("&7", "&f")
+									.replace("&8", "&f")
+									.replace("&9", "&f")
+									.replace("&0", "&f")
+									.replace("&a", "&f")
+									.replace("&e", "&f")
+									.replace("&d", "&f")
+									.replace("&b", "&f")
+									.replace("&c", "&f")
+									.replace("&o", "&f")
+									.replace("&l", "&f")
+									.replace("&n", "&f")
+									.replace("&m", "&f")
+									.replace("&k", "&f")).replace("%", "%%")));
+							return;
+						}
 					}
-					else event.setFormat(color(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+					else {
+						if (user._getNickname() != null) {
+							event.setFormat(color(setNoFaction.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							return;
+						}
+						if (user._getNickname() == null) {
+							event.setFormat(color(setNoFaction.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							return;
+						}
+					}
 				}
-				else event.setFormat(color(setNoFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+				if (user._getNickname() != null) {
+					event.setFormat(color(setNoFaction.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					return;
+				}
+				if (user._getNickname() == null) {
+					event.setFormat(color(setNoFaction.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					return;
+				}
 			}
 			if (fPlayer.hasFaction()) {
 				if (!player.hasPermission("lw.color")) {
@@ -155,30 +201,72 @@ public class ChatManager extends Utils implements Listener {
 						event.getMessage().contains("&n")||
 						event.getMessage().contains("&m")||
 						event.getMessage().contains("&k")) {
-						event.setFormat(color(setFaction.replace("%message%", event.getMessage().replace("&1", "&f")
-								.replace("&2", "&f")
-								.replace("&3", "&f")
-								.replace("&4", "&f")
-								.replace("&5", "&f")
-								.replace("&6", "&f")
-								.replace("&7", "&f")
-								.replace("&8", "&f")
-								.replace("&9", "&f")
-								.replace("&0", "&f")
-								.replace("&a", "&f")
-								.replace("&e", "&f")
-								.replace("&d", "&f")
-								.replace("&b", "&f")
-								.replace("&c", "&f")
-								.replace("&o", "&f")
-								.replace("&l", "&f")
-								.replace("&n", "&f")
-								.replace("&m", "&f")
-								.replace("&k", "&f")).replace("%", "%%")));
+						if (user._getNickname() != null) {
+							event.setFormat(color(setFaction.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage().replace("&1", "&f")
+									.replace("&2", "&f")
+									.replace("&3", "&f")
+									.replace("&4", "&f")
+									.replace("&5", "&f")
+									.replace("&6", "&f")
+									.replace("&7", "&f")
+									.replace("&8", "&f")
+									.replace("&9", "&f")
+									.replace("&0", "&f")
+									.replace("&a", "&f")
+									.replace("&e", "&f")
+									.replace("&d", "&f")
+									.replace("&b", "&f")
+									.replace("&c", "&f")
+									.replace("&o", "&f")
+									.replace("&l", "&f")
+									.replace("&n", "&f")
+									.replace("&m", "&f")
+									.replace("&k", "&f")).replace("%", "%%")));
+							return;
+						}
+						if (user._getNickname() == null) {
+							event.setFormat(color(setFaction.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage().replace("&1", "&f")
+									.replace("&2", "&f")
+									.replace("&3", "&f")
+									.replace("&4", "&f")
+									.replace("&5", "&f")
+									.replace("&6", "&f")
+									.replace("&7", "&f")
+									.replace("&8", "&f")
+									.replace("&9", "&f")
+									.replace("&0", "&f")
+									.replace("&a", "&f")
+									.replace("&e", "&f")
+									.replace("&d", "&f")
+									.replace("&b", "&f")
+									.replace("&c", "&f")
+									.replace("&o", "&f")
+									.replace("&l", "&f")
+									.replace("&n", "&f")
+									.replace("&m", "&f")
+									.replace("&k", "&f")).replace("%", "%%")));
+							return;
+						}
 					}
-					else event.setFormat(color(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+					else {
+						if (user._getNickname() != null) {
+							event.setFormat(color(setFaction.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							return;
+						}
+						if (user._getNickname() == null) {
+							event.setFormat(color(setFaction.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							return;
+						}
+					}
 				}
-				else event.setFormat(color(setFaction.replace("%message%", event.getMessage()).replace("%", "%%")));
+				if (user._getNickname() != null) {
+					event.setFormat(color(setFaction.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					return;
+				}
+				if (user._getNickname() == null) {
+					event.setFormat(color(setFaction.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					return;
+				}
 			}
 		}
 		else return;
