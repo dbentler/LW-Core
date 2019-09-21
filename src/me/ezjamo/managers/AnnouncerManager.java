@@ -67,7 +67,7 @@ public class AnnouncerManager extends Utils implements Listener, CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("ma")) {
-			if (args.length != 1) {
+			if (args.length != 1 || !args[0].equalsIgnoreCase("reload")) {
 				message(sender, "&cUsage: &7/ma reload");
 				return true;
 			}
