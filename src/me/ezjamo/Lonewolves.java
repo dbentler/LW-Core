@@ -229,6 +229,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         			Messages.load();
         			BlockedWordsManager.getManager().reloadConfig();
         			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
+        			return true;
     			}
     		}
     		Player player = (Player) sender;

@@ -144,9 +144,7 @@ Ping:
   Others: '&f%player_name%''s ping is %player_ping%'
   
 #/playtime command
-Playtime:
-  Self: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
-  Others: '&4%player_name%''s &fplaytime is &4%statistic_time_played%'
+Playtime: '&4%player_name%''s &fplaytime is &4%playtime%'
   
 #/stats command
 Stats:
