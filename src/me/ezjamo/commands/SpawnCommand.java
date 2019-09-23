@@ -30,8 +30,41 @@ public class SpawnCommand extends Utils implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    	SpawnManager spawnCoords = SpawnManager.getManager();
+    	if (!(sender instanceof Player)) {
+        	if (args.length != 1) {
+        		message(sender, "&cUsage: &7/spawn <player>");
+        		return true;
+        	}
+        	if (args.length == 1) {
+        		if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
+            		message(sender, Messages.prefix + "&cSpawn not set. Use &f/setspawn &cin-game to set a spawnpoint.");
+            		return true;
+            	}
+        		World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
+                double x = spawnCoords.getConfig().getDouble("spawn.x");
+                double y = spawnCoords.getConfig().getDouble("spawn.y");
+                double z = spawnCoords.getConfig().getDouble("spawn.z");
+                float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
+                float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
+                Location spawn = new Location(w, x, y, z, yaw, pitch);
+        		Player target = Bukkit.getPlayer(args[0]);
+                if (target == null) {
+                	message(sender, Messages.prefix + "&cPlayer not found.");
+                	return true;
+                }
+                if (ess != null) {
+                    User user = ess.getUser(target);
+                    user.setLastLocation();
+                }
+                target.teleport(spawn);
+                message(sender, Messages.prefix + "&fTeleportation successful!");
+                message(target, Messages.prefix + "&fTeleportation successful!");
+                return true;
+        	}
+        	return true;
+        }
         Player player = (Player) sender;
-        SpawnManager spawnCoords = SpawnManager.getManager();
         if (cmd.getName().equalsIgnoreCase("spawn")) {
         	if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
         		message(player, Messages.prefix + "&cSpawn not set. Use &f/setspawn &cto set a spawnpoint.");

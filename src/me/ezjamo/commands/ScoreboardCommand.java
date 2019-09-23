@@ -2,7 +2,6 @@ package me.ezjamo.commands;
 
 import java.io.IOException;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,10 +13,11 @@ import io.github.thatkawaiisam.assemble.events.AssembleBoardCreateEvent;
 import io.github.thatkawaiisam.assemble.events.AssembleBoardDestroyEvent;
 import lombok.Getter;
 import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import me.ezjamo.managers.PlayerdataManager;
 
 @Getter
-public class ScoreboardCommand implements CommandExecutor {
+public class ScoreboardCommand extends Utils implements CommandExecutor {
 	private Assemble assemble;
 
 	public ScoreboardCommand(Assemble assemble) {
@@ -26,11 +26,15 @@ public class ScoreboardCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
+		}
 		Player player = (Player) sender;
 		PlayerdataManager data = PlayerdataManager.getManager();
 		if (cmd.getName().equalsIgnoreCase("scoreboard")) {
 			if (args.length < 1) {
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUsage: &7/sb toggle"));
+				message(player, "&cUsage: &7/sb toggle");
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("toggle")) {
@@ -50,7 +54,7 @@ public class ScoreboardCommand implements CommandExecutor {
 
 						getAssemble().getBoards().remove(player.getUniqueId());
 						player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
-						player.sendMessage(Messages.prefix + Messages.scoreboardDisabled);
+						message(player, Messages.prefix + Messages.scoreboardDisabled);
 						return true;
 					}
 					if (data.get().get("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) {
@@ -68,11 +72,11 @@ public class ScoreboardCommand implements CommandExecutor {
 						}
 
 						getAssemble().getBoards().put(player.getUniqueId(), new AssembleBoard(player, getAssemble()));
-						player.sendMessage(Messages.prefix + Messages.scoreboardEnabled);
+						message(player, Messages.prefix + Messages.scoreboardEnabled);
 					}
 				}
 				if (!args[0].equalsIgnoreCase("toggle")) {
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUsage: &7/sb toggle"));
+					message(player, "&cUsage: &7/sb toggle");
 				}
 			}
 		}

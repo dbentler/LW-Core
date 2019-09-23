@@ -14,14 +14,16 @@ public class CmdsCommand extends Utils implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
+		}
 		Player player = (Player) sender;
-		
 		if (cmd.getName().equalsIgnoreCase("commands")) {
 			if (args.length == 0) {
 				message(player, "&cUsage: &7/commands <rank>");
 				message(player, "&cExample: &7/commands vip");
 			}
-			
 			if (args.length == 1) {
 				String rank = args[0];
 				if (args[0].equalsIgnoreCase(rank)) {
@@ -30,10 +32,10 @@ public class CmdsCommand extends Utils implements CommandExecutor {
 						message(player, placeholders);
 					}
 				}
-				
+
 				if (Lonewolves.plugin.getConfig().getStringList("Commands." + rank).isEmpty()) {
 					message(player, Messages.prefix + "&cInvalid Rank");
-	    		}
+				}
 			}
 		}
 		return true;

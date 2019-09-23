@@ -12,7 +12,24 @@ import me.ezjamo.Messages;
 import me.ezjamo.Utils;
  
 public class KitsCommand extends Utils implements CommandExecutor {
-   
+	
+	@Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    	if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
+		}
+        Player player = (Player) sender;
+        if (cmd.getName().equalsIgnoreCase("kits")) {
+        	if (player.hasPermission("lw.kits")) {
+        		KitsCommand.kits(player);
+        	}
+        	if(!player.hasPermission("lw.kits")) {
+        		message(player, Messages.prefix + Messages.noPermission);
+        	}
+        }
+        return true;
+    }
 	
     public static void kits(Player player) {
         Inventory kits = Bukkit.createInventory(null, 45, color("&fLone&4Wolves &fKits"));
@@ -154,20 +171,5 @@ public class KitsCommand extends Utils implements CommandExecutor {
         if (!player.hasPermission("essentials.kits.beta")) {
         }
         player.openInventory(kits);
-    }
-   
- 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player player = (Player) sender;
-        if (cmd.getName().equalsIgnoreCase("kits")) {
-        	if (player.hasPermission("lw.kits")) {
-        		KitsCommand.kits(player);
-        	}
-        	if(!player.hasPermission("lw.kits")) {
-        		message(player, Messages.prefix + Messages.noPermission);
-        	}
-        }
-        return true;
     }
 }

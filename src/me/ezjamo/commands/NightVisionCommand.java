@@ -12,30 +12,34 @@ import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
 public class NightVisionCommand extends Utils implements CommandExecutor {
-
-
-public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-     Player p = (Player) sender;
-    if (cmd.getName().equalsIgnoreCase("nv")) {
-        if (!p.hasPermission("lw.nv")) {
-            p.sendMessage(Messages.prefix + Messages.noPermission);
-            return true;
-        }
-        if (args.length < 1) {
-        	if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
-        		String disabled = Lonewolves.plugin.getConfig().getString("NightVision.Disabled");
-        		message(p, Messages.prefix + disabled);
-                p.removePotionEffect(PotionEffectType.NIGHT_VISION);
-                return true;
-        	}
-        	else {
-        		String enabled = Lonewolves.plugin.getConfig().getString("NightVision.Enabled");
-        		message(p, Messages.prefix + enabled);
-    			p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 9000000, 2));
-    			return true;
-        	}
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
 		}
-    }
-    return true;
+		Player p = (Player) sender;
+		if (cmd.getName().equalsIgnoreCase("nv")) {
+			if (!p.hasPermission("lw.nv")) {
+				p.sendMessage(Messages.prefix + Messages.noPermission);
+				return true;
+			}
+			if (args.length < 1) {
+				if (p.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
+					String disabled = Lonewolves.plugin.getConfig().getString("NightVision.Disabled");
+					message(p, Messages.prefix + disabled);
+					p.removePotionEffect(PotionEffectType.NIGHT_VISION);
+					return true;
+				}
+				else {
+					String enabled = Lonewolves.plugin.getConfig().getString("NightVision.Enabled");
+					message(p, Messages.prefix + enabled);
+					p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 9000000, 2));
+					return true;
+				}
+			}
+		}
+		return true;
 	}
 }

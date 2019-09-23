@@ -13,6 +13,54 @@ import me.ezjamo.Utils;
 
 public class PreviewCommand extends Utils implements CommandExecutor {
 	
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
+		}
+		Player player = (Player) sender;
+		if (cmd.getName().equalsIgnoreCase("preview")) {
+			if (player.hasPermission("lw.preview")) {
+				if (args.length == 0) {
+					message(player, Messages.prefix + "&cUsage: &7/preview <kit>");
+				}
+				if (args.length == 1) {
+					if (args[0].equalsIgnoreCase("vip")) {
+						PreviewCommand.vip(player);
+					}
+					if (args[0].equalsIgnoreCase("vip+")) {
+						PreviewCommand.vipplus(player);
+					}
+					if (args[0].equalsIgnoreCase("mvp")) {
+						PreviewCommand.mvp(player);
+					}
+					if (args[0].equalsIgnoreCase("noble")) {
+						PreviewCommand.noble(player);
+					}
+					if (args[0].equalsIgnoreCase("mystic")) {
+						PreviewCommand.mystic(player);
+					}
+					if (args[0].equalsIgnoreCase("kingpin")) {
+						PreviewCommand.kingpin(player);
+					}
+					if (!args[0].equalsIgnoreCase("vip"))
+						if (!args[0].equalsIgnoreCase("vip+"))
+							if (!args[0].equalsIgnoreCase("mvp"))
+								if (!args[0].equalsIgnoreCase("noble"))
+									if (!args[0].equalsIgnoreCase("mystic"))
+										if (!args[0].equalsIgnoreCase("kingpin")) {
+											message(player, Messages.prefix + "&cInvalid kit.");
+										}
+				}
+			}
+			if(!player.hasPermission("lw.preview")) {
+				message(player, Messages.prefix + Messages.noPermission);
+			}
+		}
+		return true;
+	}
+
 	public static void vip(Player player) {
 		Inventory vip = Bukkit.createInventory(null, 54, color("&eVIP Preview"));
 		Utils.createItem(vip, 310, 1, 0, "", "");
@@ -31,7 +79,7 @@ public class PreviewCommand extends Utils implements CommandExecutor {
 		Utils.createItem(vip, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(vip);
 	}
-	
+
 	public static void vipplus(Player player) {
 		Inventory vipplus = Bukkit.createInventory(null, 54, color("&bVIP+ Preview"));
 		Utils.Enchant1(vipplus, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 0, "", "");
@@ -52,7 +100,7 @@ public class PreviewCommand extends Utils implements CommandExecutor {
 		Utils.createItem(vipplus, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(vipplus);
 	}
-	
+
 	public static void mvp(Player player) {
 		Inventory mvp = Bukkit.createInventory(null, 54, color("&cMVP Preview"));
 		Utils.Enchant1(mvp, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 0, "", "");
@@ -97,7 +145,7 @@ public class PreviewCommand extends Utils implements CommandExecutor {
 		Utils.createItem(noble, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(noble);
 	}
-	
+
 	public static void mystic(Player player) {
 		Inventory mystic = Bukkit.createInventory(null, 54, color("&5Mystic Preview"));
 		Utils.Enchant1(mystic, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 0, "", "");
@@ -122,7 +170,7 @@ public class PreviewCommand extends Utils implements CommandExecutor {
 		Utils.createItem(mystic, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(mystic);
 	}
-	
+
 	public static void kingpin(Player player) {
 		Inventory kingpin = Bukkit.createInventory(null, 54, color("&2Kingpin Preview"));
 		Utils.Enchant2(kingpin, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 0, "", "");
@@ -148,47 +196,4 @@ public class PreviewCommand extends Utils implements CommandExecutor {
 		Utils.createItem(kingpin, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(kingpin);
 	}
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player player = (Player) sender;
-        if (cmd.getName().equalsIgnoreCase("preview")) {
-        	if (player.hasPermission("lw.preview")) {
-        		if (args.length == 0) {
-        			message(player, Messages.prefix + "&cUsage: &7/preview <kit>");
-        		}
-        		if (args.length == 1) {
-        			if (args[0].equalsIgnoreCase("vip")) {
-        				PreviewCommand.vip(player);
-        			}
-        			if (args[0].equalsIgnoreCase("vip+")) {
-        				PreviewCommand.vipplus(player);
-        			}
-        			if (args[0].equalsIgnoreCase("mvp")) {
-        				PreviewCommand.mvp(player);
-        			}
-        			if (args[0].equalsIgnoreCase("noble")) {
-        				PreviewCommand.noble(player);
-        			}
-        			if (args[0].equalsIgnoreCase("mystic")) {
-        				PreviewCommand.mystic(player);
-        			}
-        			if (args[0].equalsIgnoreCase("kingpin")) {
-        				PreviewCommand.kingpin(player);
-        			}
-        			if (!args[0].equalsIgnoreCase("vip"))
-        				if (!args[0].equalsIgnoreCase("vip+"))
-        					if (!args[0].equalsIgnoreCase("mvp"))
-        						if (!args[0].equalsIgnoreCase("noble"))
-        							if (!args[0].equalsIgnoreCase("mystic"))
-        								if (!args[0].equalsIgnoreCase("kingpin")) {
-        									message(player, Messages.prefix + "&cInvalid kit.");
-        								}
-        		}
-        	}
-        	if(!player.hasPermission("lw.preview")) {
-        		message(player, Messages.prefix + Messages.noPermission);
-        	}
-        }
-        return true;
-    }
 }

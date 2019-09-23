@@ -1,18 +1,22 @@
 package me.ezjamo.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import me.ezjamo.managers.SpawnManager;
 
-public class SetSpawnCommand implements CommandExecutor {
+public class SetSpawnCommand extends Utils implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
+		}
 		Player player = (Player) sender;
 		SpawnManager spawnCoords = SpawnManager.getManager();
 		if (cmd.getName().equalsIgnoreCase("setspawn")) {
@@ -24,10 +28,10 @@ public class SetSpawnCommand implements CommandExecutor {
 				spawnCoords.getConfig().set("spawn.yaw", player.getLocation().getYaw());
 				spawnCoords.getConfig().set("spawn.pitch", player.getLocation().getPitch());
 				spawnCoords.saveConfig();
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', Messages.prefix + "&fSpawn set."));
+				message(player, Messages.prefix + "&fSpawn set.");
 			}
 			if (!player.hasPermission("lw.setspawn")) {
-				player.sendMessage(Messages.prefix + Messages.noPermission);
+				message(player, Messages.prefix + Messages.noPermission);
 			}
 		}
 		return true;

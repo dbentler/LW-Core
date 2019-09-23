@@ -1,5 +1,5 @@
 package me.ezjamo.commands;
- 
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,9 +12,13 @@ import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
 public class PingCommand extends Utils implements CommandExecutor {
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
+		if (!(sender instanceof Player)) {
+			message(sender, "&cThis command can only be used by players!");
+			return true;
+		}
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("ping")) {
 			if (args.length < 1) {
