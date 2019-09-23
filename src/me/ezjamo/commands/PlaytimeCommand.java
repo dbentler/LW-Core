@@ -1,5 +1,6 @@
 package me.ezjamo.commands;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -19,7 +20,6 @@ import me.ezjamo.managers.TimeFormat;
 import me.ezjamo.managers.UUIDFetcher;
 
 public class PlaytimeCommand extends Utils implements CommandExecutor {
-	static String message = Lonewolves.plugin.getConfig().getString("Playtime");
 	UUID target;
 	
 	@SuppressWarnings("deprecation")
@@ -73,17 +73,26 @@ public class PlaytimeCommand extends Utils implements CommandExecutor {
 	}
 	
 	public static void playerMessage(Player player) {
-		String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-		message(player, color(placeholders).replace("%player%", player.getName()).replace("%playtime%", TimeFormat.getTime(player.getStatistic(Statistic.PLAY_ONE_TICK) / 20)));
+		List<String> message = Lonewolves.plugin.getConfig().getStringList("Playtime");
+		for (String msg : message) {
+			String placeholders = PlaceholderAPI.setPlaceholders(player, msg);
+			message(player, color(placeholders).replace("%player%", player.getName()).replace("%playtime%", TimeFormat.getTime(player.getStatistic(Statistic.PLAY_ONE_TICK) / 20)));
+		}
 	}
 	
 	public static void otherPlayerMessage(Player player, Player other) {
-		String placeholders = PlaceholderAPI.setPlaceholders(other, message);
-		message(player, color(placeholders).replace("%player%", other.getName()).replace("%playtime%", TimeFormat.getTime(other.getStatistic(Statistic.PLAY_ONE_TICK) / 20)));
+		List<String> message = Lonewolves.plugin.getConfig().getStringList("Playtime");
+		for (String msg : message) {
+			String placeholders = PlaceholderAPI.setPlaceholders(other, msg);
+			message(player, color(placeholders).replace("%player%", other.getName()).replace("%playtime%", TimeFormat.getTime(other.getStatistic(Statistic.PLAY_ONE_TICK) / 20)));
+		}
 	}
 	
 	public static void offlinePlayerMessage(Player player, OfflinePlayer offline, UUID target) {
-		String placeholders = PlaceholderAPI.setPlaceholders(offline, message);
-		message(player, color(placeholders).replace("%player%", offline.getName()).replace("%playtime%", TimeFormat.getTime(PlayerdataManager.getPlayerStatistic(target, "PLAYTIME", Statistic.PLAY_ONE_TICK) / 20L)));
+		List<String> message = Lonewolves.plugin.getConfig().getStringList("Playtime");
+		for (String msg : message) {
+			String placeholders = PlaceholderAPI.setPlaceholders(offline, msg);
+			message(player, color(placeholders).replace("%player%", offline.getName()).replace("%playtime%", TimeFormat.getTime(PlayerdataManager.getPlayerStatistic(target, "PLAYTIME", Statistic.PLAY_ONE_TICK) / 20L)));
+		}
 	}
 }
