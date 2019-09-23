@@ -144,24 +144,17 @@ Ping:
   Others: '&f%player_name%''s ping is %player_ping%'
   
 #/playtime command
-Playtime: '&4%player_name%''s &fplaytime is &4%playtime%'
+Playtime:
+  - '&4%player_name%''s &fplaytime is &4%playtime%'
   
 #/stats command
 Stats:
-  Self:
-    - '&4&m--------&8[&fYour Stats&8]&4&m--------'
-    - '      &aKills: &e%statistic_player_kills%'
-    - '      &aDeaths: &e%statistic_deaths%'
-    - '      &aVotes: &e%superbvote_votes%'
-    - '      &aPlaytime: &e%statistic_time_played%'
-    - '&4&m--------------------------'
-  Others:
-    - '&4&m--------&8[&f%player_name%''s&8]&4&m--------'
-    - '      &aKills: &e%statistic_player_kills%'
-    - '      &aDeaths: &e%statistic_deaths%'
-    - '      &aVotes: &e%superbvote_votes%'
-    - '      &aPlaytime: &e%statistic_time_played%'
-    - '&4&m--------------------------'
+  - '&4&m--------&8[&f%player_name%&8]&4&m--------'
+  - '      &aKills: &e%kills%'
+  - '      &aDeaths: &e%deaths%'
+  - '      &aVotes: &e%superbvote_votes%'
+  - '      &aPlaytime: &e%playtime%'
+  - '&4&m--------------------------'
 
 #Scoreboard messages.
 Scoreboard:
