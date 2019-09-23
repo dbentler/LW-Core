@@ -2,8 +2,8 @@ name: LW-Core
 main: me.ezjamo.Lonewolves
 author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
-softdepend: [PlaceholderAPI, Essentials, KoTH]
-depend: [Vault]
+softdepend: [Essentials, KoTH]
+depend: [Vault, PlaceholderAPI]
 version: 2.9
 
 commands:
