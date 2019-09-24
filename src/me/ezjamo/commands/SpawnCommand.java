@@ -79,7 +79,7 @@ public class SpawnCommand extends Utils implements CommandExecutor {
             Location spawn = new Location(w, x, y, z, yaw, pitch);
             if (player.hasPermission("lw.spawn")) {
                 if (args.length < 1) {
-                	if (player.hasPermission("lw.spawn.bypassdelay")) {
+                	if (player.hasPermission("lw.bypass.teleportdelay")) {
                 		if (ess != null) {
                             User user = ess.getUser(player);
                             user.setLastLocation();
