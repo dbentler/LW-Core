@@ -4,7 +4,7 @@ author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
 softdepend: [Essentials, KoTH]
 depend: [Vault, PlaceholderAPI]
-version: 2.9
+version: 3.0
 
 commands:
   request:
@@ -54,6 +54,13 @@ commands:
       - fb
       - sb
   ma:
+  setwarp:
+  delwarp:
+  warp:
+    aliases:
+      - warps
+      - ewarp
+      - ewarps
    
 permissions:
   lw.helpop:

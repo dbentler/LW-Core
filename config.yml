@@ -13,7 +13,6 @@ enable-spawner-placement: true
 chat-format:
   enabled: true
   format: '&8[[FACTION]&8] %luckperms_prefix%%player_nickname%%deluxetags_tag%&7: &r%message%'
-  format-no-faction: '%luckperms_prefix%%player_nickname%%deluxetags_tag%&7: &r%message%'
 
 #Disables strength 2 potions
 disable-strength-2: true
@@ -38,7 +37,13 @@ quit-message: 'none'
 #This is the name of the server as defined in your bungeecord config that you want the /hub command to take you to.
 hub-server: 'hub'
 
-#The amount of time it takes for a player to teleport to spawn.
+#If enabled then each warp will have its own permission like this "lw.warp.<WarpName>"
+per-warp-permissions: false
+
+#The amount of time it takes for a player to teleport to a warp in seconds.
+warp-delay: 4
+
+#The amount of time it takes for a player to teleport to spawn in seconds.
 spawn-delay: 4
 
 #Name of the essentials kit new players receive when they first join
