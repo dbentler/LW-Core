@@ -213,7 +213,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     		PlayerdataManager data = PlayerdataManager.getManager();
     		staff.setGameMode(GameMode.SURVIVAL);
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-    		data.get().set("players", null);
+    		data.get().set("players." + staff.getUniqueId() + ".scoreboard", null);
     		try {
 				data.save();
 			} catch (IOException e) {
