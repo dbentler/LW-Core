@@ -1,7 +1,9 @@
 package me.ezjamo.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -9,7 +11,9 @@ import org.bukkit.Statistic;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
@@ -19,7 +23,7 @@ import me.ezjamo.managers.PlayerdataManager;
 import me.ezjamo.managers.TimeFormat;
 import me.ezjamo.managers.UUIDFetcher;
 
-public class PlaytimeCommand extends Utils implements CommandExecutor {
+public class PlaytimeCommand extends Utils implements CommandExecutor, TabCompleter {
 	UUID target;
 	
 	@SuppressWarnings("deprecation")
@@ -70,6 +74,18 @@ public class PlaytimeCommand extends Utils implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> players = PlayerdataManager.getManager().get().getConfigurationSection("players").getKeys(false).stream().map(key ->
+		Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], players, completions);
+			return completions;
+		}
+		return null;
 	}
 	
 	public static void playerMessage(Player player) {

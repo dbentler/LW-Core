@@ -42,8 +42,12 @@ public class PlayerdataManager extends Utils implements Listener {
 		if (!file.exists()) {
 			plugin.getLogger().severe("Creating default: " + file);
 			file.getParentFile().mkdirs();
-			plugin.saveResource("playerdata.yml", false);
-			plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + file));
+			try {
+				file.createNewFile();
+				plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + file));
+			} catch (Exception e) {
+				plugin.getServer().getConsoleSender().sendMessage(color("&cCould not create: " + file));
+			}
 		}
 		config = new YamlConfiguration();
 		try {
@@ -61,8 +65,12 @@ public class PlayerdataManager extends Utils implements Listener {
 		config = YamlConfiguration.loadConfiguration(file);
 	}
 	
-	public void save() throws IOException {
-		config.save(file);
+	public void save() {
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static long getPlayerStatistic(UUID player, String stat, Statistic statistic) {

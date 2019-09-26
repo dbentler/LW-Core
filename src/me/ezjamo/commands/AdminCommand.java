@@ -1,14 +1,19 @@
 package me.ezjamo.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.util.StringUtil;
 
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
-public class StaffOnOff extends Utils implements CommandExecutor {
+public class AdminCommand extends Utils implements CommandExecutor, TabCompleter {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -44,5 +49,19 @@ public class StaffOnOff extends Utils implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> admin = new ArrayList<>();
+		admin.add("on");
+		admin.add("off");
+		List<String> empty = new ArrayList<>();
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], admin, completions);
+			return completions;
+		}
+		return empty;
 	}
 }

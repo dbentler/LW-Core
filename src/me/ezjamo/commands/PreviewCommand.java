@@ -1,17 +1,21 @@
 package me.ezjamo.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.util.StringUtil;
 
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
-public class PreviewCommand extends Utils implements CommandExecutor {
+public class PreviewCommand extends Utils implements CommandExecutor, TabCompleter {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -59,6 +63,24 @@ public class PreviewCommand extends Utils implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> preview = new ArrayList<>();
+		preview.add("vip");
+		preview.add("vip+");
+		preview.add("mvp");
+		preview.add("noble");
+		preview.add("mystic");
+		preview.add("kingpin");
+		List<String> empty = new ArrayList<>();
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], preview, completions);
+			return completions;
+		}
+		return empty;
 	}
 
 	public static void vip(Player player) {

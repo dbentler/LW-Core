@@ -1,7 +1,8 @@
 package me.ezjamo;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,16 +17,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import org.bukkit.util.StringUtil;
 
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.AdminChat;
+import me.ezjamo.commands.AdminCommand;
 import me.ezjamo.commands.CmdsCommand;
 import me.ezjamo.commands.DelWarpCommand;
 import me.ezjamo.commands.DemoteCommand;
 import me.ezjamo.commands.DistanceCommand;
-import me.ezjamo.commands.FTopWorthCommand;
 import me.ezjamo.commands.FreezeCommand;
 import me.ezjamo.commands.HelpCommand;
 import me.ezjamo.commands.Helpop;
@@ -46,10 +48,10 @@ import me.ezjamo.commands.SetSpawnCommand;
 import me.ezjamo.commands.SetWarpCommand;
 import me.ezjamo.commands.SpawnCommand;
 import me.ezjamo.commands.StaffChat;
-import me.ezjamo.commands.StaffOnOff;
 import me.ezjamo.commands.StatsCommand;
 import me.ezjamo.commands.SwitchInventoryCommand;
 import me.ezjamo.commands.WarpCommand;
+import me.ezjamo.commands.WorthCommand;
 import me.ezjamo.managers.AnnouncerManager;
 import me.ezjamo.managers.BlockedWordsManager;
 import me.ezjamo.managers.ChatManager;
@@ -75,6 +77,7 @@ import net.milkbowl.vault.economy.Economy;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
     public static Lonewolves plugin;
+    Assemble assemble;
     public FileManager manager;
     public static int task = 1;
     public static int size;
@@ -114,13 +117,11 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.saveDefaultConfig();
     	Messages.load();
     	SpawnManager.getManager().setupFiles();
-    	SpawnManager.getManager().reloadConfig();
     	BlockedWordsManager.getManager().setupFiles();
-    	BlockedWordsManager.getManager().reloadConfig();
     	AnnouncerManager.getManager().load();
     	PlayerdataManager.getManager().load();
     	WarpManager.getManager().load();
-    	Assemble assemble = new Assemble(this, new ScoreboardAdapter());
+    	assemble = new Assemble(this, new ScoreboardAdapter());
 		assemble.setTicks(16);
 		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
 		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
@@ -156,7 +157,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("setslots").setExecutor(new SetSlotsCommand());
     	this.getCommand("nv").setExecutor(new NightVisionCommand());
     	this.getCommand("freeze").setExecutor(new FreezeCommand());
-    	this.getCommand("admin").setExecutor(new StaffOnOff());
+    	this.getCommand("admin").setExecutor(new AdminCommand());
     	this.getCommand("inv").setExecutor(new SwitchInventoryCommand());
     	this.getCommand("ping").setExecutor(new PingCommand());
     	this.getCommand("hub").setExecutor(new HubCommand());
@@ -169,13 +170,14 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	this.getCommand("demote").setExecutor(new DemoteCommand());
     	this.getCommand("removemm").setExecutor(new RemoveModModeCommand());
     	this.getCommand("playtime").setExecutor(new PlaytimeCommand());
-    	this.getCommand("worth").setExecutor(new FTopWorthCommand());
+    	this.getCommand("worth").setExecutor(new WorthCommand());
     	this.getCommand("commands").setExecutor(new CmdsCommand());
     	this.getCommand("scoreboard").setExecutor(new ScoreboardCommand(assemble));
     	this.getCommand("ma").setExecutor(new AnnouncerManager());
     	this.getCommand("setwarp").setExecutor(new SetWarpCommand());
     	this.getCommand("delwarp").setExecutor(new DelWarpCommand());
     	this.getCommand("warp").setExecutor(new WarpCommand());
+    	loadTabCompleters();
     	new KothManager(this);
     	new KitsManager(this);
     	new PreviewManager(this);
@@ -214,12 +216,22 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     		staff.setGameMode(GameMode.SURVIVAL);
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     		data.get().set("players." + staff.getUniqueId() + ".scoreboard", null);
-    		try {
-				data.save();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+    		data.save();
     	}
+	}
+	
+	private void loadTabCompleters() {
+		getCommand("delwarp").setTabCompleter(new DelWarpCommand());
+		getCommand("warp").setTabCompleter(new WarpCommand());
+		getCommand("playtime").setTabCompleter(new PlaytimeCommand());
+		getCommand("stats").setTabCompleter(new StatsCommand());
+		getCommand("commands").setTabCompleter(new CmdsCommand());
+		getCommand("worth").setTabCompleter(new WorthCommand());
+		getCommand("help").setTabCompleter(new HelpCommand());
+		getCommand("preview").setTabCompleter(new PreviewCommand());
+		getCommand("Scoreboard").setTabCompleter(new ScoreboardCommand(assemble));
+		getCommand("admin").setTabCompleter(new AdminCommand());
+		getCommand("inv").setTabCompleter(new SwitchInventoryCommand());
 	}
 	    	
 	public String getMessage(String path) {
@@ -329,6 +341,34 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	}
 		return true;
     }
+    
+    @Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> empty = new ArrayList<>();
+		if (args.length == 1) {
+			List<String> lw = new ArrayList<>();
+			lw.add("help");
+			lw.add("ver");
+			lw.add("version");
+			lw.add("reload");
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], lw, completions);
+			return completions;
+		}
+		if (args.length == 2) {
+			if (args[0].equalsIgnoreCase("help")) {
+				List<String> lw = new ArrayList<>();
+				lw.add("1");
+				lw.add("2");
+				lw.add("3");
+				List<String> completions = new ArrayList<>();
+				StringUtil.copyPartialMatches(args[1], lw, completions);
+				return completions;
+			}
+			return empty;
+		}
+		return empty;
+	}
 
     public void onPluginMessageReceived(String channel, Player player, byte[] bytemessage) {
         if (!channel.equals("BungeeCord"))

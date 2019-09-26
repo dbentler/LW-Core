@@ -1,16 +1,22 @@
 package me.ezjamo.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
-public class CmdsCommand extends Utils implements CommandExecutor {
+public class CmdsCommand extends Utils implements CommandExecutor, TabCompleter {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -39,5 +45,17 @@ public class CmdsCommand extends Utils implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> commands = Lonewolves.plugin.getConfig().getConfigurationSection("Commands").getKeys(false).stream().collect(Collectors.toList());
+		List<String> empty = new ArrayList<>();
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], commands, completions);
+			return completions;
+		}
+		return empty;
 	}
 }

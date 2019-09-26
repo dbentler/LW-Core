@@ -2,6 +2,7 @@ package me.ezjamo.managers;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import me.ezjamo.commands.SpawnCommand;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
 
-public class SpawnManager implements Listener {
+public class SpawnManager extends Utils implements Listener {
     public Lonewolves plugin;
     public File location;
     public YamlConfiguration spawnCoords;
@@ -42,9 +43,15 @@ public class SpawnManager implements Listener {
     public void setupFiles() {
         location = new File(plugin.getDataFolder(), "locations.yml");
         if (!location.exists()) {
-            location.getParentFile().mkdirs();
-            plugin.saveResource("locations.yml", false);
-        }
+			plugin.getLogger().severe("Creating default: " + location);
+			location.getParentFile().mkdirs();
+			try {
+				location.createNewFile();
+				plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + location));
+			} catch (Exception e) {
+				plugin.getServer().getConsoleSender().sendMessage(color("&cCould not create: " + location));
+			}
+		}
         spawnCoords = new YamlConfiguration();
         try {
             spawnCoords.load(location);

@@ -181,7 +181,7 @@ Scoreboard:
     - '&dTime: &f%time%'
 
 #/worth command
-FTOP Worth:
+Worth:
   1:
     - '&4&m--------&8[&2Faction Top Worth&8]&4&m--------'
     - '&aCave Spider Spawner &8- &e$5,000'

@@ -8,14 +8,16 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.StringUtil;
 
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 
-public class SwitchInventoryCommand extends Utils implements CommandExecutor {
+public class SwitchInventoryCommand extends Utils implements CommandExecutor, TabCompleter {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -36,7 +38,7 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor {
 				message(p, "&cPlayer only command.");
 				return true;
 			}
-			if (args.length == 0) {
+			if (args.length != 1) {
 				message(p, "&cUsage: &7Use /inv new to switch to a blank inventory.");
 				message(p, "&cUsage: &7Use /inv prev to switch to your previous inventory");
 				return true;
@@ -73,8 +75,20 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor {
 							}
 							p.getInventory().clear();
 							message(p, Messages.prefix + "&fYou have switched to a blank inventory.");
-
+							return true;
 						}
+			if (!file.exists()) {
+				if (args.length == 1 && args[0].equalsIgnoreCase("prev")) {
+					message(p, Messages.prefix + "&cYou already have your previous inventory.");
+					return true;
+				}
+			}
+			if (file.exists()) {
+				if (args.length == 1 && args[0].equalsIgnoreCase("new")) {
+					message(p, Messages.prefix + "&cYou already have a blank inventory.");
+					return true;
+				}
+			}
 		}
 		if (label.equalsIgnoreCase("inv")) {
 			if (args.length == 1)
@@ -95,6 +109,20 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor {
 						}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> inv = new ArrayList<>();
+		inv.add("new");
+		inv.add("prev");
+		List<String> empty = new ArrayList<>();
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], inv, completions);
+			return completions;
+		}
+		return empty;
 	}
 
 	public void checkOrder() {

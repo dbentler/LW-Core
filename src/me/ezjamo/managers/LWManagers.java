@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
+
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
@@ -124,6 +125,11 @@ public class LWManagers implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		SpawnManager spawnCoords = SpawnManager.getManager();
+		PlayerdataManager data = PlayerdataManager.getManager();
+		if (data.get().get("players." + player.getUniqueId().toString()) == null) {
+			data.get().set("players." + player.getUniqueId().toString() + ".Name", player.getName());
+    		data.save();
+		}
 		if (!player.hasPlayedBefore()) {
 			if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");

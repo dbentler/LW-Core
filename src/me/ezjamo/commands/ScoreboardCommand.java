@@ -1,11 +1,15 @@
 package me.ezjamo.commands;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleBoard;
@@ -17,7 +21,7 @@ import me.ezjamo.Utils;
 import me.ezjamo.managers.PlayerdataManager;
 
 @Getter
-public class ScoreboardCommand extends Utils implements CommandExecutor {
+public class ScoreboardCommand extends Utils implements CommandExecutor, TabCompleter {
 	private Assemble assemble;
 
 	public ScoreboardCommand(Assemble assemble) {
@@ -40,11 +44,7 @@ public class ScoreboardCommand extends Utils implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("toggle")) {
 					if (data.get().get("players." + player.getUniqueId().toString() + ".scoreboard") == null) {
 						data.get().set("players." + player.getUniqueId().toString() + ".scoreboard", "disabled");
-						try {
-							data.save();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						data.save();
 						AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
 
 						Bukkit.getPluginManager().callEvent(destroyEvent);
@@ -59,11 +59,7 @@ public class ScoreboardCommand extends Utils implements CommandExecutor {
 					}
 					if (data.get().get("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) {
 						data.get().set("players." + player.getUniqueId().toString() + ".scoreboard", null);
-						try {
-							data.save();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						data.save();
 						AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
 
 						Bukkit.getPluginManager().callEvent(createEvent);
@@ -81,5 +77,18 @@ public class ScoreboardCommand extends Utils implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> scoreboard = new ArrayList<>();
+		scoreboard.add("toggle");
+		List<String> empty = new ArrayList<>();
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], scoreboard, completions);
+			return completions;
+		}
+		return empty;
 	}
 }

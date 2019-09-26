@@ -1,8 +1,11 @@
 package me.ezjamo.commands;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,9 +13,11 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.StringUtil;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
@@ -22,7 +27,7 @@ import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 import me.ezjamo.managers.WarpManager;
 
-public class WarpCommand extends Utils implements CommandExecutor {
+public class WarpCommand extends Utils implements CommandExecutor, TabCompleter {
 	public static Map<Player, BukkitTask> tasks = new HashMap<>();
 	private Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
 
@@ -191,5 +196,16 @@ public class WarpCommand extends Utils implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		List<String> warps = WarpManager.getManager().get().getConfigurationSection("Warps").getKeys(false).stream().collect(Collectors.toList());
+		if (args.length == 1) {
+			List<String> completions = new ArrayList<>();
+			StringUtil.copyPartialMatches(args[0], warps, completions);
+			return completions;
+		}
+		return null;
 	}
 }
