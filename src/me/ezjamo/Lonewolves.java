@@ -1,11 +1,11 @@
 package me.ezjamo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import io.github.thatkawaiisam.assemble.Assemble;
+import io.github.thatkawaiisam.assemble.AssembleStyle;
+import me.ezjamo.armorequipevent.ArmorListener;
+import me.ezjamo.commands.*;
+import me.ezjamo.managers.*;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -13,86 +13,23 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.util.StringUtil;
 
-import io.github.thatkawaiisam.assemble.Assemble;
-import io.github.thatkawaiisam.assemble.AssembleStyle;
-import me.ezjamo.armorequipevent.ArmorListener;
-import me.ezjamo.commands.AdminChat;
-import me.ezjamo.commands.AdminCommand;
-import me.ezjamo.commands.CmdsCommand;
-import me.ezjamo.commands.DelWarpCommand;
-import me.ezjamo.commands.DemoteCommand;
-import me.ezjamo.commands.DistanceCommand;
-import me.ezjamo.commands.FreezeCommand;
-import me.ezjamo.commands.HelpCommand;
-import me.ezjamo.commands.Helpop;
-import me.ezjamo.commands.HubCommand;
-import me.ezjamo.commands.KitsCommand;
-import me.ezjamo.commands.KothCommand;
-import me.ezjamo.commands.LinksCommand;
-import me.ezjamo.commands.Modmode;
-import me.ezjamo.commands.NightVisionCommand;
-import me.ezjamo.commands.PingCommand;
-import me.ezjamo.commands.PlaytimeCommand;
-import me.ezjamo.commands.PreviewCommand;
-import me.ezjamo.commands.RemoveModModeCommand;
-import me.ezjamo.commands.RulesCommand;
-import me.ezjamo.commands.ScoreboardCommand;
-import me.ezjamo.commands.SetSlotsCommand;
-import me.ezjamo.commands.SetSpawnCommand;
-import me.ezjamo.commands.SetWarpCommand;
-import me.ezjamo.commands.SpawnCommand;
-import me.ezjamo.commands.StaffChat;
-import me.ezjamo.commands.StatsCommand;
-import me.ezjamo.commands.SwitchInventoryCommand;
-import me.ezjamo.commands.WarpCommand;
-import me.ezjamo.commands.WorthCommand;
-import me.ezjamo.managers.AnnouncerManager;
-import me.ezjamo.managers.BlockedWordsManager;
-import me.ezjamo.managers.ChatManager;
-import me.ezjamo.managers.CustomCmdsManager;
-import me.ezjamo.managers.DepthStriderManager;
-import me.ezjamo.managers.DispenerArmorListener;
-import me.ezjamo.managers.FFLYManager;
-import me.ezjamo.managers.FileManager;
-import me.ezjamo.managers.FreezeManager;
-import me.ezjamo.managers.KitsManager;
-import me.ezjamo.managers.KothManager;
-import me.ezjamo.managers.LWManagers;
-import me.ezjamo.managers.ModModeManager;
-import me.ezjamo.managers.PlayerdataManager;
-import me.ezjamo.managers.PreviewManager;
-import me.ezjamo.managers.RespawnManager;
-import me.ezjamo.managers.SpawnManager;
-import me.ezjamo.managers.SpongeManager;
-import me.ezjamo.managers.WarpManager;
-import me.ezjamo.managers.WeatherManager;
-import me.ezjamo.managers.WildToolsFixManager;
-import net.milkbowl.vault.economy.Economy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
     public static Lonewolves plugin;
-    Assemble assemble;
-    public FileManager manager;
+    private Assemble assemble;
+    FileManager manager;
     public static int task = 1;
     public static int size;
-    
-    public HashMap<UUID, ItemStack[]> contents;
-    public HashMap<UUID, ItemStack[]> armorContents;
-    
-    public Lonewolves() {
-        this.contents = new HashMap<UUID, ItemStack[]>();
-        this.armorContents = new HashMap<UUID, ItemStack[]>();
-    }
-    
-    public static Economy econ = null;
 
-    private boolean setupEconomy() {
+	private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
@@ -100,7 +37,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         if (rsp == null) {
             return false;
         }
-        econ = rsp.getProvider();
+		Economy econ = rsp.getProvider();
         return econ != null;
     }
     
@@ -219,7 +156,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     		data.save();
     	}
 	}
-	
+
 	private void loadTabCompleters() {
 		getCommand("delwarp").setTabCompleter(new DelWarpCommand());
 		getCommand("warp").setTabCompleter(new WarpCommand());
@@ -229,7 +166,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		getCommand("worth").setTabCompleter(new WorthCommand());
 		getCommand("help").setTabCompleter(new HelpCommand());
 		getCommand("preview").setTabCompleter(new PreviewCommand());
-		getCommand("Scoreboard").setTabCompleter(new ScoreboardCommand(assemble));
+		getCommand("scoreboard").setTabCompleter(new ScoreboardCommand(assemble));
 		getCommand("admin").setTabCompleter(new AdminCommand());
 		getCommand("inv").setTabCompleter(new SwitchInventoryCommand());
 	}

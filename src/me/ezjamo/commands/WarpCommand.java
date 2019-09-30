@@ -1,12 +1,11 @@
 package me.ezjamo.commands;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
+import me.ezjamo.managers.WarpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,13 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.StringUtil;
 
-import com.earth2me.essentials.Essentials;
-import com.earth2me.essentials.User;
-
-import me.ezjamo.Lonewolves;
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
-import me.ezjamo.managers.WarpManager;
+import java.util.*;
 
 public class WarpCommand extends Utils implements CommandExecutor, TabCompleter {
 	public static Map<Player, BukkitTask> tasks = new HashMap<>();
@@ -90,7 +83,12 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 					message(player, Messages.prefix + "&cThere are no warps available.");
 					return true;
 				}
-				Set<String> warpList = warps.get().getConfigurationSection("Warps").getKeys(false);
+				List<String> warpList = new ArrayList<>();
+				for (String warpNames : warps.get().getConfigurationSection("Warps").getKeys(false)) {
+					if (player.hasPermission("lw.warp." + warpNames)) {
+						warpList.add(warpNames);
+					}
+				}
 				message(player, "&cWarps: &f" + warpList.toString().replace("[", "").replace("]", ""));
 				return true;
 			}
@@ -197,13 +195,18 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 		}
 		return true;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		List<String> warps = WarpManager.getManager().get().getConfigurationSection("Warps").getKeys(false).stream().collect(Collectors.toList());
+		List<String> warpList = new ArrayList<>();
 		if (args.length == 1) {
+			for (String warps : WarpManager.getWarps().getConfigurationSection("Warps").getKeys(false)) {
+				if (sender.hasPermission("lw.warp." + warps)) {
+					warpList.add(warps);
+				}
+			}
 			List<String> completions = new ArrayList<>();
-			StringUtil.copyPartialMatches(args[0], warps, completions);
+			StringUtil.copyPartialMatches(args[0], warpList, completions);
 			return completions;
 		}
 		return null;

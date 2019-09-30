@@ -19,7 +19,7 @@ import me.ezjamo.commands.WarpCommand;
 public class WarpManager extends Utils implements Listener {
 	public Lonewolves plugin;
 	public File file;
-	public FileConfiguration config;
+	public static FileConfiguration config;
 	public static WarpManager manager;
 	
 	static {
@@ -32,6 +32,10 @@ public class WarpManager extends Utils implements Listener {
 	
 	public static WarpManager getManager() {
 		return WarpManager.manager;
+	}
+
+	public static FileConfiguration getWarps() {
+		return WarpManager.config;
 	}
 	
 	public void load() {
