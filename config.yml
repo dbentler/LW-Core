@@ -137,6 +137,9 @@ Custom Commands:
     - '&3&lStore: &ahttp://store.lonewolves.net'
   bans:
     - '&3&lBans: &ahttps://lonewolves.net/bans'
+  vote:
+    - '&bVote Links:'
+    - '&ahttps://lonewolves.net/vote'
 
 #/nv command.
 NightVision:
@@ -168,6 +171,7 @@ Scoreboard:
     - '&7&m-----------------'
     - '&dOnline: &f%supervanish_playercount%'
     - '&dBalance: &f%vault_eco_balance_formatted%'
+    - '&dVote Party: &f%lw_current_votes%/%lw_needed_votes%'
     - ''
     - '&aFaction: &r%faction%'
     - ''
