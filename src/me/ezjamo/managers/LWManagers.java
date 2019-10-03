@@ -1,5 +1,9 @@
 package me.ezjamo.managers;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,20 +14,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
-import me.clip.placeholderapi.PlaceholderAPI;
-import me.ezjamo.Lonewolves;
-import me.ezjamo.Messages;
-import net.md_5.bungee.api.ChatColor;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LWManagers implements Listener {
-	
-	 // beacon shit needs to be added  
+
+	 // TODO: beacon shit needs to be added
     @EventHandler
     public void onDrink(PlayerInteractEvent event) {
         Action action = event.getAction();
@@ -39,20 +43,17 @@ public class LWManagers implements Listener {
                 		event.setCancelled(true);
                         player.sendMessage(Messages.prefix + Messages.strengthDisabledMessage);
                 	}
-                	if (!enabled) {
-                		return;
-                	}
                 }
             }
         }
     }
-	   
+
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {
-		Player p = (Player) e.getPlayer();
+		Player p = e.getPlayer();
 		SpawnManager spawnCoords = SpawnManager.getManager();
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
-			if (!p.hasPermission("lw.nether.place")) {
+			if (!p.hasPermission("lw.bypass.nethertopplace")) {
 				if (p.getLocation().getBlockY() >= 128) {
 					boolean enabled = Lonewolves.plugin.getConfig().getBoolean("disable-top-of-nether-place");
 					if (enabled) {
@@ -72,19 +73,14 @@ public class LWManagers implements Listener {
 						}
 						p.sendMessage(Messages.prefix + Messages.aboveNetherBlockPlace);
 					}
-					if (!enabled || p.hasPermission("lw.nether.place")) {
-						return;
-					}
 				}
 			}
-			else
-				return;
 		}
 	}
 	
 	@EventHandler
 	public void onSpawnerPlace(PlayerInteractEvent e) {
-		Player p = (Player) e.getPlayer();
+		Player p = e.getPlayer();
 		ItemStack i = e.getPlayer().getItemInHand();
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether")) {
 			if (e.getAction() == Action.RIGHT_CLICK_BLOCK && i.getType() == Material.MOB_SPAWNER && i.getItemMeta().hasDisplayName()) {
@@ -94,9 +90,6 @@ public class LWManagers implements Listener {
 						e.setCancelled(true);
 						p.sendMessage(Messages.prefix + Messages.netherSkeletonSpawnerPlace);
 					}
-					if (!enabled) {
-						return;
-					}
 				}
 			}
 		}
@@ -104,20 +97,15 @@ public class LWManagers implements Listener {
 	
 	@EventHandler
 	public void SpawnerToggle(BlockPlaceEvent e) {
-		Player p = (Player) e.getPlayer();
+		Player p = e.getPlayer();
 		if (p.getWorld().getName().equalsIgnoreCase("world_nether") || p.getWorld().getName().equalsIgnoreCase("world")) {
 			boolean enabled = Lonewolves.plugin.getConfig().getBoolean("enable-spawner-placement");
-			if (enabled) {
-				return;
-			}
 			if (!enabled) {
 				if (e.getBlockPlaced().getType() == Material.MOB_SPAWNER) {
 					e.setCancelled(true);
 					p.sendMessage(Messages.prefix + Messages.spawnerPlacementDisabled);
 				}
 			}
-			else
-				return;
 		}
 	}
 	
@@ -135,9 +123,10 @@ public class LWManagers implements Listener {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
 	            String message = Lonewolves.plugin.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
+				event.setJoinMessage(Utils.color(placeholders));
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " +  player.getName());
 				player.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
+				return;
 			}
 			if (spawnCoords.getConfig().getConfigurationSection("spawn") != null) {
 				World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
@@ -150,11 +139,30 @@ public class LWManagers implements Listener {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
 	            String message = Lonewolves.plugin.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-				event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', placeholders));
+				event.setJoinMessage(Utils.color(placeholders));
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " + player.getName());
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> {
-					player.teleport(loc);
-		        }, 1L);
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> player.teleport(loc), 1L);
+			}
+		}
+	}
+
+	@EventHandler
+	public void onSpawnerMove(InventoryClickEvent event) {
+		Set<Material> blockedItems = new HashSet<>();
+		for (String s : Lonewolves.plugin.getConfig().getStringList("chest-blocked-items.items")) {
+			Material material = Material.matchMaterial(s);
+			if (material != null) {
+				blockedItems.add(material);
+			}
+		}
+		boolean enabled = Lonewolves.plugin.getConfig().getBoolean("chest-blocked-items.enabled");
+		if (enabled) {
+			if (event.getInventory().getType() == InventoryType.ENDER_CHEST || event.getInventory().getTitle().contains("Faction Chest")) {
+				if (event.getCurrentItem() != null && blockedItems.contains(event.getCurrentItem().getType())) {
+					if (!event.getWhoClicked().hasPermission("lw.bypass.blockeditems")) {
+						event.setCancelled(true);
+					}
+				}
 			}
 		}
 	}
@@ -163,7 +171,7 @@ public class LWManagers implements Listener {
 	public void onPlayerKill(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 		Player killer = player.getKiller();
-		if (!(killer == null)) {
+		if (killer != null) {
 			if (killer.hasPermission("lw.lightning")) {
 				Location loc = new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY() + 1.0, player.getLocation().getZ());
 				loc.getWorld().strikeLightningEffect(loc);

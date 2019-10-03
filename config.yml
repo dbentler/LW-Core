@@ -46,7 +46,7 @@ warp-delay: 4
 #The amount of time it takes for a player to teleport to spawn in seconds.
 spawn-delay: 4
 
-#Name of the essentials kit new players receive when they first join
+#Name of the kit new players receive when they first join.
 first-join-kit: 'member'
 
 Messages:
@@ -97,7 +97,7 @@ Rules:
     - '&c[3] &7No disrespecting players or staff.'
     - '&c[4] &7No death remarks/threats.'
     - '&c[5] &7No racism.'
-    - '&c[6] &7No inapproriate nicknames or links.'
+    - '&c[6] &7No inappropriate nicknames or links.'
     - '&c[7] &7No abusing helpop.'
     - '&c[8] &7No impersonating players or staff.'
     - '&c[9] &7No hacking.'
@@ -322,6 +322,12 @@ Commands:
     - '&2/sethome &f(22 homes)'
     - '&2/pv 3'
     - '&7&m--------------------&2Last Page&7&m-----------------------'
+
+#Blocks specified items from being placed in enderchests and Faction Chests.
+chest-blocked-items:
+  enabled: true
+  items:
+    - MOB_SPAWNER
 
 #All blocks with an inventory or any blocks that when right clicked shouldn't equip armor.
 #This shouldn't have to be messed with.
