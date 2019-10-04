@@ -122,7 +122,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
             getLogger().severe("LW-Core requires vault.");
             getServer().getPluginManager().disablePlugin(this);
         }
-    	if (AnnouncerManager.getManager().get().getBoolean("announcer-enabled")) {
+    	if (AnnouncerManager.getManager().get().getBoolean("announcer-settings.enabled")) {
     		task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
     			size++;
                 Set<String> configMessages = AnnouncerManager.getManager().get().getConfigurationSection("Messages").getKeys(false);
@@ -131,11 +131,11 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
                 }
                 for (String message : AnnouncerManager.getManager().get().getStringList("Messages." + size)) {
                 	for (Player player : Bukkit.getOnlinePlayers()) {
-                    	player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 0.5f, 1.0f);
+                    	player.playSound(player.getLocation(), Sound.valueOf(AnnouncerManager.getManager().get().getString("announcer-settings.sound")), 0.5f, 1.0f);
                     }
                     Bukkit.getServer().broadcastMessage(Utils.color(message));
                 }
-            }, 5 * 20, AnnouncerManager.getManager().get().getInt("announcer-interval") * 20);
+            }, 5 * 20, AnnouncerManager.getManager().get().getInt("announcer-settings.interval") * 20);
     	}
     }
 	
@@ -178,7 +178,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         }
         return message;
     }
-	
+
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	if (cmd.getName().equalsIgnoreCase("lw")) {
     		if (!(sender instanceof Player)) {
@@ -189,6 +189,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
         			return true;
     			}
+    			else Utils.message(sender, "&cUsage: &7/lw reload");
     		}
     		Player player = (Player) sender;
     		if (player.hasPermission("lw.reload")) {

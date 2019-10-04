@@ -1,7 +1,7 @@
-announcer-enabled: true
-
-#This is the delay between each message in seconds.
-announcer-interval: 300
+announcer-settings:
+  enabled: true
+  interval: 300 #The delay between each announcement in seconds.
+  sound: SUCCESSFUL_HIT #The sound that plays when an announcement happens.
 
 #To add more announcements copy the format below, and make sure to NUMBER them instead of giving them names.
 Messages:

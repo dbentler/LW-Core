@@ -71,35 +71,32 @@ public class AnnouncerManager extends Utils implements Listener, CommandExecutor
 				message(sender, "&cUsage: &7/ma reload");
 				return true;
 			}
-			if (args.length == 1) {
-				if (args[0].equalsIgnoreCase("reload")) {
-					if (sender.hasPermission("lw.reload")) {
-						getManager().reload();
-						Lonewolves.size = 0;
-						Bukkit.getScheduler().cancelTask(Lonewolves.task);
-						message(sender, Messages.prefix + Messages.reloadConfig);
-						if (!getManager().get().getBoolean("announcer-enabled")) {
-							return true;
-						}
-						if (getManager().get().getBoolean("announcer-enabled")) {
-							Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> Lonewolves.task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-								Lonewolves.size++;
-				                Set<String> configMessages = getManager().get().getConfigurationSection("Messages").getKeys(false);
-				                if (Lonewolves.size > configMessages.size()) {
-				                	Lonewolves.size = 1;
-				                }
-				                for (String message : getManager().get().getStringList("Messages." + Lonewolves.size)) {
-				                	for (Player player : Bukkit.getOnlinePlayers()) {
-				                    	player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 0.5f, 1.0f);
-				                    }
-				                    Bukkit.getServer().broadcastMessage(color(message));
-				                }
-							}, 1L, getManager().get().getInt("announcer-interval") * 20), 1L);
-						}
-						else message(sender, Messages.prefix + "&cThe message announcer is disabled.");
+			if (args[0].equalsIgnoreCase("reload")) {
+				if (sender.hasPermission("lw.reload")) {
+					getManager().reload();
+					Lonewolves.size = 0;
+					Bukkit.getScheduler().cancelTask(Lonewolves.task);
+					message(sender, Messages.prefix + Messages.reloadConfig);
+					if (!getManager().get().getBoolean("announcer-settings.enabled")) {
+						return true;
 					}
-					else message(sender, Messages.prefix + Messages.noPermission);
+					if (getManager().get().getBoolean("announcer-settings.enabled")) {
+						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> Lonewolves.task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+							Lonewolves.size++;
+							Set<String> configMessages = getManager().get().getConfigurationSection("Messages").getKeys(false);
+							if (Lonewolves.size > configMessages.size()) {
+								Lonewolves.size = 1;
+							}
+							for (String message : getManager().get().getStringList("Messages." + Lonewolves.size)) {
+								for (Player player : Bukkit.getOnlinePlayers()) {
+									player.playSound(player.getLocation(), Sound.valueOf(getManager().get().getString("announcer-settings.sound")), 0.5f, 1.0f);
+								}
+								Bukkit.getServer().broadcastMessage(color(message));
+							}
+						}, 1L, getManager().get().getInt("announcer-settings.interval") * 20), 1L);
+					}
 				}
+				else message(sender, Messages.prefix + Messages.noPermission);
 			}
 		}
 		return true;
