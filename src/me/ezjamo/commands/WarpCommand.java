@@ -65,12 +65,11 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 				target.teleport(warpLoc);
 				message(sender, Messages.prefix + "&fWarped &c" + target.getName() + " &fto &c" + args[0]);
 				message(target, Messages.prefix + "&fWarped to &c" + args[0]);
-				return true;
 			}
 			else {
 				message(sender, "&cUsage: &7/warp <warp> <player>");
-				return true;
 			}
+			return true;
 		}
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("warp")) {
