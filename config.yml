@@ -130,16 +130,23 @@ Links:
 #To give players permission for these commands they need the permission "lw.customcmd.<command>"
 Custom Commands:
   example: #This will be the the command
-    - '&6I''m an example custom command' #This is the message it will send the player. You can also do multiple lines.
+    alias: exampleAlias #This will be the alias that you can use for this command.
+    message:
+      - '&6I''m an example custom command' #This is the message it will send the player. You can also do multiple lines.
   forums:
-    - '&3&lForums: &ahttps://lonewolves.net'
+    alias: website
+    message:
+      - '&3&lForums: &ahttps://lonewolves.net'
   store:
-    - '&3&lStore: &ahttp://store.lonewolves.net'
+    message:
+      - '&3&lStore: &ahttp://store.lonewolves.net'
   bans:
-    - '&3&lBans: &ahttps://lonewolves.net/bans'
+    message:
+      - '&3&lBans: &ahttps://lonewolves.net/bans'
   vote:
-    - '&bVote Links:'
-    - '&ahttps://lonewolves.net/vote'
+    message:
+      - '&bVote Links:'
+      - '&ahttps://lonewolves.net/vote'
 
 #/nv command.
 NightVision:

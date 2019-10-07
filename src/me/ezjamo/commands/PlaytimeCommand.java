@@ -24,8 +24,7 @@ import me.ezjamo.managers.TimeFormat;
 import me.ezjamo.managers.UUIDFetcher;
 
 public class PlaytimeCommand extends Utils implements CommandExecutor, TabCompleter {
-	UUID target;
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -51,6 +50,7 @@ public class PlaytimeCommand extends Utils implements CommandExecutor, TabComple
 							message(player, "&cPlayer not found.");
 							return true;
 						}
+						UUID target;
 						try {
 							target = UUIDFetcher.getUUID(args[0]);
 						} catch (Exception e) {
@@ -88,7 +88,7 @@ public class PlaytimeCommand extends Utils implements CommandExecutor, TabComple
 		return null;
 	}
 	
-	public static void playerMessage(Player player) {
+	private static void playerMessage(Player player) {
 		List<String> message = Lonewolves.plugin.getConfig().getStringList("Playtime");
 		for (String msg : message) {
 			String placeholders = PlaceholderAPI.setPlaceholders(player, msg);
@@ -96,7 +96,7 @@ public class PlaytimeCommand extends Utils implements CommandExecutor, TabComple
 		}
 	}
 	
-	public static void otherPlayerMessage(Player player, Player other) {
+	private static void otherPlayerMessage(Player player, Player other) {
 		List<String> message = Lonewolves.plugin.getConfig().getStringList("Playtime");
 		for (String msg : message) {
 			String placeholders = PlaceholderAPI.setPlaceholders(other, msg);
@@ -104,7 +104,7 @@ public class PlaytimeCommand extends Utils implements CommandExecutor, TabComple
 		}
 	}
 	
-	public static void offlinePlayerMessage(Player player, OfflinePlayer offline, UUID target) {
+	private static void offlinePlayerMessage(Player player, OfflinePlayer offline, UUID target) {
 		List<String> message = Lonewolves.plugin.getConfig().getStringList("Playtime");
 		for (String msg : message) {
 			String placeholders = PlaceholderAPI.setPlaceholders(offline, msg);
