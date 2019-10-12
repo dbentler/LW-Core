@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LWManagers implements Listener {
+	private Utils utils = new Utils();
 
 	 // TODO: beacon shit needs to be added
     @EventHandler
@@ -123,7 +124,7 @@ public class LWManagers implements Listener {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
 	            String message = Lonewolves.plugin.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-				event.setJoinMessage(Utils.color(placeholders));
+				event.setJoinMessage(utils.color(placeholders));
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " +  player.getName());
 				player.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
 				return;
@@ -139,7 +140,7 @@ public class LWManagers implements Listener {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
 	            String message = Lonewolves.plugin.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
-				event.setJoinMessage(Utils.color(placeholders));
+				event.setJoinMessage(utils.color(placeholders));
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " + player.getName());
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> player.teleport(loc), 1L);
 			}

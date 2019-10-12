@@ -13,17 +13,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 	
-	public static String color(String s) {
+	public String color(String s) {
 		return ChatColor.translateAlternateColorCodes('&', s);
 	}
 	
-	public static void message(CommandSender sender, String string) {
+	public void message(CommandSender sender, String string) {
 		string = color(string);
 		sender.sendMessage(string);
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack createItem(Inventory punish, int materialId, int amount, int invSlot, String displayName, String... loreString) {
+	public void createItem(Inventory punish, int materialId, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -36,15 +36,14 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack createItemByte(Inventory punish, int materialId, int byteId, int amount, int invSlot, String displayName, String... loreString) {
+	public void createItemByte(Inventory punish, int materialId, int byteId, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -57,15 +56,14 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack Enchant1(Inventory punish, int materialId, Enchantment enchant, int level, int amount, int invSlot, String displayName, String... loreString) {
+	public void Enchant1(Inventory punish, int materialId, Enchantment enchant, int level, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -79,15 +77,14 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack Enchant2(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, int amount, int invSlot, String displayName, String... loreString) {
+	public void Enchant2(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -102,15 +99,14 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack Enchant3(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, Enchantment enchant11, int level11, int amount, int invSlot, String displayName, String... loreString) {
+	public void Enchant3(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, Enchantment enchant11, int level11, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -126,15 +122,14 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack Enchant4(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, Enchantment enchant11, int level11, Enchantment enchant111, int level111, int amount, int invSlot, String displayName, String... loreString) {
+	public void Enchant4(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, Enchantment enchant11, int level11, Enchantment enchant111, int level111, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -151,15 +146,14 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static ItemStack Enchant5(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, Enchantment enchant11, int level11, Enchantment enchant111, int level111, Enchantment enchant1111, int level1111, int amount, int invSlot, String displayName, String... loreString) {
+	public void Enchant5(Inventory punish, int materialId, Enchantment enchant, int level, Enchantment enchant1, int level1, Enchantment enchant11, int level11, Enchantment enchant111, int level111, Enchantment enchant1111, int level1111, int amount, int invSlot, String displayName, String... loreString) {
 		
 		ItemStack item;
 		@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -177,10 +171,9 @@ public class Utils {
 		for (String s : loreString) {
 			lore.add(color(s));
 		}
-		meta.setLore(lore);;
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		
 		punish.setItem(invSlot, item);
-		return item;
 	}
 }

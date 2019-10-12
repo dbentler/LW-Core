@@ -1,9 +1,13 @@
 package me.ezjamo.managers;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,22 +16,15 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import com.earth2me.essentials.Essentials;
-import com.earth2me.essentials.User;
-import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.FPlayers;
-
-import me.clip.placeholderapi.PlaceholderAPI;
-import me.ezjamo.Lonewolves;
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class ChatManager extends Utils implements Listener {
 	public static Set<UUID> staffChat;
-	public static Set<UUID> adminChat;
 
 	static {
-		ChatManager.staffChat = new HashSet<UUID>();
+		ChatManager.staffChat = new HashSet<>();
 	}
 
 	public static Set<UUID> getStaffChat() {
@@ -74,7 +71,7 @@ public class ChatManager extends Utils implements Listener {
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent event) {
 		Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
-		Player player = (Player) event.getPlayer();
+		Player player = event.getPlayer();
 		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
 		for (String blockedwords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
 			if (event.getMessage().toLowerCase().contains(blockedwords)) {
@@ -89,30 +86,31 @@ public class ChatManager extends Utils implements Listener {
 			String format = Lonewolves.plugin.getConfig().getString("chat-format.format");
 			String setFormat = PlaceholderAPI.setPlaceholders(event.getPlayer(), format);
 			if (!fPlayer.hasFaction()) {
+				String faction = setFormat.replaceFirst("\\[", "").replaceFirst("]", "").replace("FACTION", "");
 				if (!player.hasPermission("lw.color")) {
 					if (event.getMessage().contains("&1")||
-						event.getMessage().contains("&2")||
-						event.getMessage().contains("&3")||
-						event.getMessage().contains("&4")||
-						event.getMessage().contains("&5")||
-						event.getMessage().contains("&6")||
-						event.getMessage().contains("&7")||
-						event.getMessage().contains("&8")||
-						event.getMessage().contains("&9")||
-						event.getMessage().contains("&0")||
-						event.getMessage().contains("&a")||
-						event.getMessage().contains("&e")||
-						event.getMessage().contains("&d")||
-						event.getMessage().contains("&b")||
-						event.getMessage().contains("&c")||
-						event.getMessage().contains("&o")||
-						event.getMessage().contains("&l")||
-						event.getMessage().contains("&n")||
-						event.getMessage().contains("&m")||
-						event.getMessage().contains("&k")) {
+							event.getMessage().contains("&2")||
+							event.getMessage().contains("&3")||
+							event.getMessage().contains("&4")||
+							event.getMessage().contains("&5")||
+							event.getMessage().contains("&6")||
+							event.getMessage().contains("&7")||
+							event.getMessage().contains("&8")||
+							event.getMessage().contains("&9")||
+							event.getMessage().contains("&0")||
+							event.getMessage().contains("&a")||
+							event.getMessage().contains("&e")||
+							event.getMessage().contains("&d")||
+							event.getMessage().contains("&b")||
+							event.getMessage().contains("&c")||
+							event.getMessage().contains("&o")||
+							event.getMessage().contains("&l")||
+							event.getMessage().contains("&n")||
+							event.getMessage().contains("&m")||
+							event.getMessage().contains("&k")) {
 						if (user._getNickname() != null) {
-							event.setFormat(color(setFormat.replaceFirst("\\[", "").replaceFirst("\\]", "").replace("FACTION", "").replaceFirst("\\[", "").replaceFirst("\\] ", "")
-									.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage().replace("&1", "&f")
+							event.setFormat(color(faction.replaceFirst("\\[", "").replaceFirst("] ", "")
+									.replace("%player_nickname%", "~" + user._getNickname()) + event.getMessage().replace("&1", "&f")
 									.replace("&2", "&f")
 									.replace("&3", "&f")
 									.replace("&4", "&f")
@@ -131,12 +129,12 @@ public class ChatManager extends Utils implements Listener {
 									.replace("&l", "&f")
 									.replace("&n", "&f")
 									.replace("&m", "&f")
-									.replace("&k", "&f")).replace("%", "%%")));
+									.replace("&k", "&f")).replace("%", "%%"));
 							return;
 						}
 						if (user._getNickname() == null) {
-							event.setFormat(color(setFormat.replaceFirst("\\[", "").replaceFirst("\\]", "").replace("FACTION", "").replaceFirst("\\[", "").replaceFirst("\\] ", "")
-									.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage().replace("&1", "&f")
+							event.setFormat(color(faction.replaceFirst("\\[", "").replaceFirst("] ", "")
+									.replace("%player_nickname%", player.getName()) + event.getMessage().replace("&1", "&f")
 									.replace("&2", "&f")
 									.replace("&3", "&f")
 									.replace("&4", "&f")
@@ -155,58 +153,58 @@ public class ChatManager extends Utils implements Listener {
 									.replace("&l", "&f")
 									.replace("&n", "&f")
 									.replace("&m", "&f")
-									.replace("&k", "&f")).replace("%", "%%")));
+									.replace("&k", "&f")).replace("%", "%%"));
 							return;
 						}
 					}
 					else {
 						if (user._getNickname() != null) {
-							event.setFormat(color(setFormat.replaceFirst("\\[", "").replaceFirst("\\]", "").replace("FACTION", "").replaceFirst("\\[", "").replaceFirst("\\] ", "")
-									.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							event.setFormat(color(faction.replaceFirst("\\[", "").replaceFirst("] ", "")
+									.replace("%player_nickname%", "~" + user._getNickname()) + event.getMessage()).replace("%", "%%"));
 							return;
 						}
 						if (user._getNickname() == null) {
-							event.setFormat(color(setFormat.replaceFirst("\\[", "").replaceFirst("\\]", "").replace("FACTION", "").replaceFirst("\\[", "").replaceFirst("\\] ", "")
-									.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							event.setFormat(color(faction.replaceFirst("\\[", "").replaceFirst("] ", "")
+									.replace("%player_nickname%", player.getName()) + event.getMessage()).replace("%", "%%"));
 							return;
 						}
 					}
 				}
 				if (user._getNickname() != null) {
-					event.setFormat(color(setFormat.replaceFirst("\\[", "").replaceFirst("\\]", "").replace("FACTION", "").replaceFirst("\\[", "").replaceFirst("\\] ", "")
-							.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					event.setFormat(color(faction.replaceFirst("\\[", "").replaceFirst("] ", "")
+							.replace("%player_nickname%", "~" + user._getNickname()) + event.getMessage()).replace("%", "%%"));
 					return;
 				}
 				if (user._getNickname() == null) {
-					event.setFormat(color(setFormat.replaceFirst("\\[", "").replaceFirst("\\]", "").replace("FACTION", "").replaceFirst("\\[", "").replaceFirst("\\] ", "")
-							.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					event.setFormat(color(faction.replaceFirst("\\[", "").replaceFirst("] ", "")
+							.replace("%player_nickname%", player.getName()) + event.getMessage()).replace("%", "%%"));
 					return;
 				}
 			}
 			if (fPlayer.hasFaction()) {
 				if (!player.hasPermission("lw.color")) {
 					if (event.getMessage().contains("&1")||
-						event.getMessage().contains("&2")||
-						event.getMessage().contains("&3")||
-						event.getMessage().contains("&4")||
-						event.getMessage().contains("&5")||
-						event.getMessage().contains("&6")||
-						event.getMessage().contains("&7")||
-						event.getMessage().contains("&8")||
-						event.getMessage().contains("&9")||
-						event.getMessage().contains("&0")||
-						event.getMessage().contains("&a")||
-						event.getMessage().contains("&e")||
-						event.getMessage().contains("&d")||
-						event.getMessage().contains("&b")||
-						event.getMessage().contains("&c")||
-						event.getMessage().contains("&o")||
-						event.getMessage().contains("&l")||
-						event.getMessage().contains("&n")||
-						event.getMessage().contains("&m")||
-						event.getMessage().contains("&k")) {
+							event.getMessage().contains("&2")||
+							event.getMessage().contains("&3")||
+							event.getMessage().contains("&4")||
+							event.getMessage().contains("&5")||
+							event.getMessage().contains("&6")||
+							event.getMessage().contains("&7")||
+							event.getMessage().contains("&8")||
+							event.getMessage().contains("&9")||
+							event.getMessage().contains("&0")||
+							event.getMessage().contains("&a")||
+							event.getMessage().contains("&e")||
+							event.getMessage().contains("&d")||
+							event.getMessage().contains("&b")||
+							event.getMessage().contains("&c")||
+							event.getMessage().contains("&o")||
+							event.getMessage().contains("&l")||
+							event.getMessage().contains("&n")||
+							event.getMessage().contains("&m")||
+							event.getMessage().contains("&k")) {
 						if (user._getNickname() != null) {
-							event.setFormat(color(setFormat.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage().replace("&1", "&f")
+							event.setFormat(color(setFormat.replace("%player_nickname%", "~" + user._getNickname()) + event.getMessage().replace("&1", "&f")
 									.replace("&2", "&f")
 									.replace("&3", "&f")
 									.replace("&4", "&f")
@@ -225,11 +223,11 @@ public class ChatManager extends Utils implements Listener {
 									.replace("&l", "&f")
 									.replace("&n", "&f")
 									.replace("&m", "&f")
-									.replace("&k", "&f")).replace("%", "%%")));
+									.replace("&k", "&f")).replace("%", "%%"));
 							return;
 						}
 						if (user._getNickname() == null) {
-							event.setFormat(color(setFormat.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage().replace("&1", "&f")
+							event.setFormat(color(setFormat.replace("%player_nickname%", player.getName()) + event.getMessage().replace("&1", "&f")
 									.replace("&2", "&f")
 									.replace("&3", "&f")
 									.replace("&4", "&f")
@@ -248,31 +246,29 @@ public class ChatManager extends Utils implements Listener {
 									.replace("&l", "&f")
 									.replace("&n", "&f")
 									.replace("&m", "&f")
-									.replace("&k", "&f")).replace("%", "%%")));
+									.replace("&k", "&f")).replace("%", "%%"));
 							return;
 						}
 					}
 					else {
 						if (user._getNickname() != null) {
-							event.setFormat(color(setFormat.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							event.setFormat(color(setFormat.replace("%player_nickname%", "~" + user._getNickname()) + event.getMessage()).replace("%", "%%"));
 							return;
 						}
 						if (user._getNickname() == null) {
-							event.setFormat(color(setFormat.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
+							event.setFormat(color(setFormat.replace("%player_nickname%", player.getName()) + event.getMessage()).replace("%", "%%"));
 							return;
 						}
 					}
 				}
 				if (user._getNickname() != null) {
-					event.setFormat(color(setFormat.replace("%player_nickname%", "~" + user._getNickname()).replace("%message%", event.getMessage()).replace("%", "%%")));
+					event.setFormat(color(setFormat.replace("%player_nickname%", "~" + user._getNickname()) + event.getMessage()).replace("%", "%%"));
 					return;
 				}
 				if (user._getNickname() == null) {
-					event.setFormat(color(setFormat.replace("%player_nickname%", player.getName()).replace("%message%", event.getMessage()).replace("%", "%%")));
-					return;
+					event.setFormat(color(setFormat.replace("%player_nickname%", player.getName()) + event.getMessage()).replace("%", "%%"));
 				}
 			}
 		}
-		else return;
 	}
 }

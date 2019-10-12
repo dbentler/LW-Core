@@ -29,12 +29,13 @@ public class KothCommand extends Utils implements CommandExecutor {
 	}
 
 	public static void koth(Player p) {
-		Inventory koth = Bukkit.getServer().createInventory(null, 27, color("&fLone&4Wolves &fKoths"));
-		Utils.createItem(koth, 399, 1, 0, "&dCrow Koth", "&fStart &dCrow &fkoth for 5 minutes.");
-		Utils.createItem(koth, 399, 1, 1, "&dGoliath Koth", "&fStart &dGoliath &fkoth for 5 minutes.");
-		Utils.createItem(koth, 399, 1, 2, "&dTriumph Koth", "&fStart &dTriumph &fkoth for 5 minutes.");
-		Utils.createItem(koth, 399, 1, 3, "&dEnd Koth", "&fStart &dEnd &fkoth for 5 minutes.");
-		Utils.createItem(koth, 399, 1, 4, "&dMines Koth", "&fStart &dMines &fkoth for 5 minutes.");
+		Utils utils = new Utils();
+		Inventory koth = Bukkit.getServer().createInventory(null, 27, utils.color("&fLone&4Wolves &fKoths"));
+		utils.createItem(koth, 399, 1, 0, "&dCrow Koth", "&fStart &dCrow &fkoth for 5 minutes.");
+		utils.createItem(koth, 399, 1, 1, "&dGoliath Koth", "&fStart &dGoliath &fkoth for 5 minutes.");
+		utils.createItem(koth, 399, 1, 2, "&dTriumph Koth", "&fStart &dTriumph &fkoth for 5 minutes.");
+		utils.createItem(koth, 399, 1, 3, "&dEnd Koth", "&fStart &dEnd &fkoth for 5 minutes.");
+		utils.createItem(koth, 399, 1, 4, "&dMines Koth", "&fStart &dMines &fkoth for 5 minutes.");
 		p.openInventory(koth);
 	}
 }

@@ -22,6 +22,7 @@ public class AnnouncerManager extends Utils implements Listener, CommandExecutor
 	public Lonewolves plugin;
 	public File file;
 	public FileConfiguration config;
+	private Utils utils = new Utils();
 	public static AnnouncerManager manager;
 	
 	static {
@@ -91,7 +92,9 @@ public class AnnouncerManager extends Utils implements Listener, CommandExecutor
 								for (Player player : Bukkit.getOnlinePlayers()) {
 									player.playSound(player.getLocation(), Sound.valueOf(getManager().get().getString("announcer-settings.sound")), 0.5f, 1.0f);
 								}
-								Bukkit.getServer().broadcastMessage(color(message));
+								for (Player online : Bukkit.getOnlinePlayers()) {
+									online.sendMessage(utils.color(message));
+								}
 							}
 						}, 1L, getManager().get().getInt("announcer-settings.interval") * 20), 1L);
 					}

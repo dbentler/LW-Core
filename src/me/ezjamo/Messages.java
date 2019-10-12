@@ -1,6 +1,11 @@
 package me.ezjamo;
 
-public class Messages extends Utils {
+import org.bukkit.ChatColor;
+
+public class Messages {
+	private static String color(String s) {
+		return ChatColor.translateAlternateColorCodes('&', s);
+	}
 	
 	private static transient Messages instance = new Messages();
 	

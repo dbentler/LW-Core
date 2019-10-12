@@ -1,7 +1,7 @@
 package me.ezjamo.commands;
 
-import java.util.ArrayList;
-import java.util.List;
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,10 +12,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.util.StringUtil;
 
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PreviewCommand extends Utils implements CommandExecutor, TabCompleter {
+	private static Utils utils = new Utils();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -84,138 +85,138 @@ public class PreviewCommand extends Utils implements CommandExecutor, TabComplet
 	}
 
 	public static void vip(Player player) {
-		Inventory vip = Bukkit.createInventory(null, 54, color("&eVIP Preview"));
-		Utils.createItem(vip, 310, 1, 0, "", "");
-		Utils.createItem(vip, 311, 1, 1, "", "");
-		Utils.createItem(vip, 312, 1, 2, "", "");
-		Utils.createItem(vip, 313, 1, 3, "", "");
-		Utils.Enchant2(vip, 267, Enchantment.DAMAGE_ALL, 1, Enchantment.DURABILITY, 1, 1, 4, "", "");
-		Utils.createItem(vip, 261, 1, 5, "", "");
-		Utils.createItem(vip, 262, 64, 6, "", "");
-		Utils.createItem(vip, 384, 64, 7, "", "");
-		Utils.createItem(vip, 384, 64, 8, "", "");
-		Utils.Enchant1(vip, 257, Enchantment.DIG_SPEED, 1, 1, 9, "", "");
-		Utils.Enchant1(vip, 258, Enchantment.DIG_SPEED, 1, 1, 10, "", "");
-		Utils.Enchant1(vip, 256, Enchantment.DIG_SPEED, 1, 1, 11, "", "");
-		Utils.createItem(vip, 264, 14, 12, "", "");
-		Utils.createItem(vip, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
+		Inventory vip = Bukkit.createInventory(null, 54, utils.color("&eVIP Preview"));
+		utils.createItem(vip, 310, 1, 0, "", "");
+		utils.createItem(vip, 311, 1, 1, "", "");
+		utils.createItem(vip, 312, 1, 2, "", "");
+		utils.createItem(vip, 313, 1, 3, "", "");
+		utils.Enchant2(vip, 267, Enchantment.DAMAGE_ALL, 1, Enchantment.DURABILITY, 1, 1, 4, "", "");
+		utils.createItem(vip, 261, 1, 5, "", "");
+		utils.createItem(vip, 262, 64, 6, "", "");
+		utils.createItem(vip, 384, 64, 7, "", "");
+		utils.createItem(vip, 384, 64, 8, "", "");
+		utils.Enchant1(vip, 257, Enchantment.DIG_SPEED, 1, 1, 9, "", "");
+		utils.Enchant1(vip, 258, Enchantment.DIG_SPEED, 1, 1, 10, "", "");
+		utils.Enchant1(vip, 256, Enchantment.DIG_SPEED, 1, 1, 11, "", "");
+		utils.createItem(vip, 264, 14, 12, "", "");
+		utils.createItem(vip, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(vip);
 	}
 
 	public static void vipplus(Player player) {
-		Inventory vipplus = Bukkit.createInventory(null, 54, color("&bVIP+ Preview"));
-		Utils.Enchant1(vipplus, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 0, "", "");
-		Utils.Enchant1(vipplus, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 1, "", "");
-		Utils.Enchant1(vipplus, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 2, "", "");
-		Utils.Enchant1(vipplus, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 3, "", "");
-		Utils.Enchant2(vipplus, 276, Enchantment.DAMAGE_ALL, 1, Enchantment.DURABILITY, 1, 1, 4, "", "");
-		Utils.Enchant1(vipplus, 261, Enchantment.ARROW_DAMAGE, 1, 1, 5, "", "");
-		Utils.createItem(vipplus, 262, 64, 6, "", "");
-		Utils.createItem(vipplus, 384, 64, 7, "", "");
-		Utils.createItem(vipplus, 384, 64, 8, "", "");
-		Utils.createItem(vipplus, 384, 32, 9, "", "");
-		Utils.Enchant1(vipplus, 278, Enchantment.DIG_SPEED, 1, 1, 10, "", "");
-		Utils.Enchant1(vipplus, 279, Enchantment.DIG_SPEED, 1, 1, 11, "", "");
-		Utils.Enchant1(vipplus, 277, Enchantment.DIG_SPEED, 1, 1, 12, "", "");
-		Utils.createItem(vipplus, 49, 16, 13, "", "");
-		Utils.createItem(vipplus, 264, 24, 14, "", "");
-		Utils.createItem(vipplus, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
+		Inventory vipplus = Bukkit.createInventory(null, 54, utils.color("&bVIP+ Preview"));
+		utils.Enchant1(vipplus, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 0, "", "");
+		utils.Enchant1(vipplus, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 1, "", "");
+		utils.Enchant1(vipplus, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 2, "", "");
+		utils.Enchant1(vipplus, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 1, 1, 3, "", "");
+		utils.Enchant2(vipplus, 276, Enchantment.DAMAGE_ALL, 1, Enchantment.DURABILITY, 1, 1, 4, "", "");
+		utils.Enchant1(vipplus, 261, Enchantment.ARROW_DAMAGE, 1, 1, 5, "", "");
+		utils.createItem(vipplus, 262, 64, 6, "", "");
+		utils.createItem(vipplus, 384, 64, 7, "", "");
+		utils.createItem(vipplus, 384, 64, 8, "", "");
+		utils.createItem(vipplus, 384, 32, 9, "", "");
+		utils.Enchant1(vipplus, 278, Enchantment.DIG_SPEED, 1, 1, 10, "", "");
+		utils.Enchant1(vipplus, 279, Enchantment.DIG_SPEED, 1, 1, 11, "", "");
+		utils.Enchant1(vipplus, 277, Enchantment.DIG_SPEED, 1, 1, 12, "", "");
+		utils.createItem(vipplus, 49, 16, 13, "", "");
+		utils.createItem(vipplus, 264, 24, 14, "", "");
+		utils.createItem(vipplus, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(vipplus);
 	}
 
 	public static void mvp(Player player) {
-		Inventory mvp = Bukkit.createInventory(null, 54, color("&cMVP Preview"));
-		Utils.Enchant1(mvp, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 0, "", "");
-		Utils.Enchant1(mvp, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 1, "", "");
-		Utils.Enchant1(mvp, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 2, "", "");
-		Utils.Enchant1(mvp, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 3, "", "");
-		Utils.Enchant2(mvp, 276, Enchantment.DAMAGE_ALL, 2, Enchantment.DURABILITY, 1, 1, 4, "", "");
-		Utils.Enchant2(mvp, 278, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 5, "", "");
-		Utils.Enchant2(mvp, 277, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 6, "", "");
-		Utils.Enchant2(mvp, 279, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 7, "", "");
-		Utils.Enchant3(mvp, 261, Enchantment.ARROW_DAMAGE, 2, Enchantment.ARROW_KNOCKBACK, 1, Enchantment.DURABILITY, 1, 1, 8, "", "");
-		Utils.createItem(mvp, 262, 64, 9, "", "");
-		Utils.createItem(mvp, 264, 34, 10, "", "");
-		Utils.createItem(mvp, 322, 5, 11, "", "");
-		Utils.createItem(mvp, 384, 64, 12, "", "");
-		Utils.createItem(mvp, 384, 64, 13, "", "");
-		Utils.createItem(mvp, 384, 64, 14, "", "");
-		Utils.createItem(mvp, 49, 32, 15, "", "");
-		Utils.createItem(mvp, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
+		Inventory mvp = Bukkit.createInventory(null, 54, utils.color("&cMVP Preview"));
+		utils.Enchant1(mvp, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 0, "", "");
+		utils.Enchant1(mvp, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 1, "", "");
+		utils.Enchant1(mvp, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 2, "", "");
+		utils.Enchant1(mvp, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 2, 1, 3, "", "");
+		utils.Enchant2(mvp, 276, Enchantment.DAMAGE_ALL, 2, Enchantment.DURABILITY, 1, 1, 4, "", "");
+		utils.Enchant2(mvp, 278, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 5, "", "");
+		utils.Enchant2(mvp, 277, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 6, "", "");
+		utils.Enchant2(mvp, 279, Enchantment.DIG_SPEED, 2, Enchantment.DURABILITY, 1, 1, 7, "", "");
+		utils.Enchant3(mvp, 261, Enchantment.ARROW_DAMAGE, 2, Enchantment.ARROW_KNOCKBACK, 1, Enchantment.DURABILITY, 1, 1, 8, "", "");
+		utils.createItem(mvp, 262, 64, 9, "", "");
+		utils.createItem(mvp, 264, 34, 10, "", "");
+		utils.createItem(mvp, 322, 5, 11, "", "");
+		utils.createItem(mvp, 384, 64, 12, "", "");
+		utils.createItem(mvp, 384, 64, 13, "", "");
+		utils.createItem(mvp, 384, 64, 14, "", "");
+		utils.createItem(mvp, 49, 32, 15, "", "");
+		utils.createItem(mvp, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(mvp);
 	}
 
 	public static void noble(Player player) {
-		Inventory noble = Bukkit.createInventory(null, 54, color("&3Noble Preview"));
-		Utils.Enchant2(noble, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 0, "", "");
-		Utils.Enchant2(noble, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 1, "", "");
-		Utils.Enchant2(noble, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 2, "", "");
-		Utils.Enchant2(noble, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 3, "", "");
-		Utils.Enchant3(noble, 276, Enchantment.DAMAGE_ALL, 3, Enchantment.DURABILITY, 2, Enchantment.FIRE_ASPECT, 1, 1, 4, "", "");
-		Utils.Enchant4(noble, 261, Enchantment.ARROW_DAMAGE, 2, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 2, 1, 5, "", "");
-		Utils.createItem(noble, 262, 64, 6, "", "");
-		Utils.Enchant2(noble, 278, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 7, "", "");
-		Utils.Enchant2(noble, 279, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 8, "", "");
-		Utils.Enchant2(noble, 277, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 9, "", "");
-		Utils.createItem(noble, 384, 64, 10, "", "");
-		Utils.createItem(noble, 384, 64, 11, "", "");
-		Utils.createItem(noble, 384, 64, 12, "", "");
-		Utils.createItem(noble, 384, 32, 13, "", "");
-		Utils.createItem(noble, 49, 64, 14, "", "");
-		Utils.createItem(noble, 264, 44, 15, "", "");
-		Utils.createItem(noble, 322, 10, 16, "", "");
-		Utils.createItem(noble, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
+		Inventory noble = Bukkit.createInventory(null, 54, utils.color("&3Noble Preview"));
+		utils.Enchant2(noble, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 0, "", "");
+		utils.Enchant2(noble, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 1, "", "");
+		utils.Enchant2(noble, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 2, "", "");
+		utils.Enchant2(noble, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 3, Enchantment.DURABILITY, 1, 1, 3, "", "");
+		utils.Enchant3(noble, 276, Enchantment.DAMAGE_ALL, 3, Enchantment.DURABILITY, 2, Enchantment.FIRE_ASPECT, 1, 1, 4, "", "");
+		utils.Enchant4(noble, 261, Enchantment.ARROW_DAMAGE, 2, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 2, 1, 5, "", "");
+		utils.createItem(noble, 262, 64, 6, "", "");
+		utils.Enchant2(noble, 278, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 7, "", "");
+		utils.Enchant2(noble, 279, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 8, "", "");
+		utils.Enchant2(noble, 277, Enchantment.DIG_SPEED, 3, Enchantment.DURABILITY, 2, 1, 9, "", "");
+		utils.createItem(noble, 384, 64, 10, "", "");
+		utils.createItem(noble, 384, 64, 11, "", "");
+		utils.createItem(noble, 384, 64, 12, "", "");
+		utils.createItem(noble, 384, 32, 13, "", "");
+		utils.createItem(noble, 49, 64, 14, "", "");
+		utils.createItem(noble, 264, 44, 15, "", "");
+		utils.createItem(noble, 322, 10, 16, "", "");
+		utils.createItem(noble, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(noble);
 	}
 
 	public static void mystic(Player player) {
-		Inventory mystic = Bukkit.createInventory(null, 54, color("&5Mystic Preview"));
-		Utils.Enchant1(mystic, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 0, "", "");
-		Utils.Enchant1(mystic, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 1, "", "");
-		Utils.Enchant1(mystic, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 2, "", "");
-		Utils.Enchant1(mystic, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 3, "", "");
-		Utils.Enchant3(mystic, 276, Enchantment.DAMAGE_ALL, 4, Enchantment.DURABILITY, 3, Enchantment.FIRE_ASPECT, 1, 1, 4, "", "");
-		Utils.Enchant2(mystic, 278, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 5, "", "");
-		Utils.Enchant2(mystic, 279, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 6, "", "");
-		Utils.Enchant2(mystic, 277, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 7, "", "");
-		Utils.Enchant5(mystic, 261, Enchantment.ARROW_DAMAGE, 3, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 3, Enchantment.ARROW_INFINITE, 1, 1, 8, "", "");
-		Utils.createItem(mystic, 262, 64, 9, "", "");
-		Utils.createItem(mystic, 384, 64, 10, "", "");
-		Utils.createItem(mystic, 384, 64, 11, "", "");
-		Utils.createItem(mystic, 384, 64, 12, "", "");
-		Utils.createItem(mystic, 384, 64, 13, "", "");
-		Utils.createItem(mystic, 49, 64, 14, "", "");
-		Utils.createItem(mystic, 49, 16, 15, "", "");
-		Utils.createItem(mystic, 264, 54, 16, "", "");
-		Utils.createItemByte(mystic, 322, 1, 1, 17, "", "");
-		Utils.createItem(mystic, 322, 16, 18, "", "");
-		Utils.createItem(mystic, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
+		Inventory mystic = Bukkit.createInventory(null, 54, utils.color("&5Mystic Preview"));
+		utils.Enchant1(mystic, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 0, "", "");
+		utils.Enchant1(mystic, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 1, "", "");
+		utils.Enchant1(mystic, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 2, "", "");
+		utils.Enchant1(mystic, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 4, 1, 3, "", "");
+		utils.Enchant3(mystic, 276, Enchantment.DAMAGE_ALL, 4, Enchantment.DURABILITY, 3, Enchantment.FIRE_ASPECT, 1, 1, 4, "", "");
+		utils.Enchant2(mystic, 278, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 5, "", "");
+		utils.Enchant2(mystic, 279, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 6, "", "");
+		utils.Enchant2(mystic, 277, Enchantment.DIG_SPEED, 4, Enchantment.DURABILITY, 3, 1, 7, "", "");
+		utils.Enchant5(mystic, 261, Enchantment.ARROW_DAMAGE, 3, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 3, Enchantment.ARROW_INFINITE, 1, 1, 8, "", "");
+		utils.createItem(mystic, 262, 64, 9, "", "");
+		utils.createItem(mystic, 384, 64, 10, "", "");
+		utils.createItem(mystic, 384, 64, 11, "", "");
+		utils.createItem(mystic, 384, 64, 12, "", "");
+		utils.createItem(mystic, 384, 64, 13, "", "");
+		utils.createItem(mystic, 49, 64, 14, "", "");
+		utils.createItem(mystic, 49, 16, 15, "", "");
+		utils.createItem(mystic, 264, 54, 16, "", "");
+		utils.createItemByte(mystic, 322, 1, 1, 17, "", "");
+		utils.createItem(mystic, 322, 16, 18, "", "");
+		utils.createItem(mystic, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(mystic);
 	}
 
 	public static void kingpin(Player player) {
-		Inventory kingpin = Bukkit.createInventory(null, 54, color("&2Kingpin Preview"));
-		Utils.Enchant2(kingpin, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 0, "", "");
-		Utils.Enchant2(kingpin, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 1, "", "");
-		Utils.Enchant2(kingpin, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 2, "", "");
-		Utils.Enchant2(kingpin, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 3, "", "");
-		Utils.Enchant3(kingpin, 276, Enchantment.DAMAGE_ALL, 5, Enchantment.DURABILITY, 3, Enchantment.FIRE_ASPECT, 2, 1, 4, "", "");
-		Utils.Enchant5(kingpin, 261, Enchantment.ARROW_DAMAGE, 5, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 3, Enchantment.ARROW_INFINITE, 1, 1, 5, "", "");
-		Utils.createItem(kingpin, 262, 64, 6, "", "");
-		Utils.Enchant2(kingpin, 278, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 7, "", "");
-		Utils.Enchant2(kingpin, 279, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 8, "", "");
-		Utils.Enchant2(kingpin, 277, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 9, "", "");
-		Utils.createItem(kingpin, 384, 64, 10, "", "");
-		Utils.createItem(kingpin, 384, 64, 11, "", "");
-		Utils.createItem(kingpin, 384, 64, 12, "", "");
-		Utils.createItem(kingpin, 384, 64, 13, "", "");
-		Utils.createItem(kingpin, 384, 32, 14, "", "");
-		Utils.createItem(kingpin, 49, 64, 15, "", "");
-		Utils.createItem(kingpin, 49, 32, 16, "", "");
-		Utils.createItem(kingpin, 264, 64, 17, "", "");
-		Utils.createItemByte(kingpin, 322, 1, 4, 18, "", "");
-		Utils.createItem(kingpin, 322, 32, 19, "", "");
-		Utils.createItem(kingpin, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
+		Inventory kingpin = Bukkit.createInventory(null, 54, utils.color("&2Kingpin Preview"));
+		utils.Enchant2(kingpin, 310, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 0, "", "");
+		utils.Enchant2(kingpin, 311, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 1, "", "");
+		utils.Enchant2(kingpin, 312, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 2, "", "");
+		utils.Enchant2(kingpin, 313, Enchantment.PROTECTION_ENVIRONMENTAL, 4, Enchantment.DURABILITY, 3, 1, 3, "", "");
+		utils.Enchant3(kingpin, 276, Enchantment.DAMAGE_ALL, 5, Enchantment.DURABILITY, 3, Enchantment.FIRE_ASPECT, 2, 1, 4, "", "");
+		utils.Enchant5(kingpin, 261, Enchantment.ARROW_DAMAGE, 5, Enchantment.ARROW_KNOCKBACK, 2, Enchantment.ARROW_FIRE, 1, Enchantment.DURABILITY, 3, Enchantment.ARROW_INFINITE, 1, 1, 5, "", "");
+		utils.createItem(kingpin, 262, 64, 6, "", "");
+		utils.Enchant2(kingpin, 278, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 7, "", "");
+		utils.Enchant2(kingpin, 279, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 8, "", "");
+		utils.Enchant2(kingpin, 277, Enchantment.DIG_SPEED, 5, Enchantment.DURABILITY, 3, 1, 9, "", "");
+		utils.createItem(kingpin, 384, 64, 10, "", "");
+		utils.createItem(kingpin, 384, 64, 11, "", "");
+		utils.createItem(kingpin, 384, 64, 12, "", "");
+		utils.createItem(kingpin, 384, 64, 13, "", "");
+		utils.createItem(kingpin, 384, 32, 14, "", "");
+		utils.createItem(kingpin, 49, 64, 15, "", "");
+		utils.createItem(kingpin, 49, 32, 16, "", "");
+		utils.createItem(kingpin, 264, 64, 17, "", "");
+		utils.createItemByte(kingpin, 322, 1, 4, 18, "", "");
+		utils.createItem(kingpin, 322, 32, 19, "", "");
+		utils.createItem(kingpin, 399, 1, 49, "&dBack", "&fGo back to the kits menu.");
 		player.openInventory(kingpin);
 	}
 }
