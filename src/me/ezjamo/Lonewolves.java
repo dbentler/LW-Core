@@ -82,7 +82,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         pm.registerEvents(new CustomCmdsManager(), this);
         pm.registerEvents(new BlockedWordsManager(), this);
         pm.registerEvents(new AnnouncerManager(), this);
-        pm.registerEvents(new PlayerdataManager(), this);
         pm.registerEvents(new WarpManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -142,6 +141,10 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
                 }
             }, 5 * 20, AnnouncerManager.getManager().get().getInt("announcer-settings.interval") * 20);
     	}
+    	for (Player disabled : Bukkit.getOnlinePlayers()) {
+			ScoreboardCommand scoreboard = new ScoreboardCommand(assemble);
+			scoreboard.removeScoreboard(disabled);
+		}
     }
 	
 	public void onDisable() {
@@ -154,11 +157,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
     	for (Player staff : Bukkit.getOnlinePlayers()) {
-    		PlayerdataManager data = PlayerdataManager.getManager();
     		staff.setGameMode(GameMode.SURVIVAL);
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-    		data.get().set("players." + staff.getUniqueId() + ".scoreboard", null);
-    		data.save();
     	}
 	}
 

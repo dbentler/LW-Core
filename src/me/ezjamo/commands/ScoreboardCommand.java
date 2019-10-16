@@ -1,16 +1,5 @@
 package me.ezjamo.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
-
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleBoard;
 import io.github.thatkawaiisam.assemble.events.AssembleBoardCreateEvent;
@@ -19,9 +8,20 @@ import lombok.Getter;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 import me.ezjamo.managers.PlayerdataManager;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class ScoreboardCommand extends Utils implements CommandExecutor, TabCompleter {
+	private PlayerdataManager data = PlayerdataManager.getManager();
 	private Assemble assemble;
 
 	public ScoreboardCommand(Assemble assemble) {
@@ -35,15 +35,14 @@ public class ScoreboardCommand extends Utils implements CommandExecutor, TabComp
 			return true;
 		}
 		Player player = (Player) sender;
-		PlayerdataManager data = PlayerdataManager.getManager();
 		if (cmd.getName().equalsIgnoreCase("scoreboard")) {
 			if (args.length < 1) {
 				message(player, "&cUsage: &7/sb toggle");
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("toggle")) {
-					if (data.get().get("players." + player.getUniqueId().toString() + ".scoreboard") == null) {
-						data.get().set("players." + player.getUniqueId().toString() + ".scoreboard", "disabled");
+					if (data.getData().get("players." + player.getUniqueId().toString() + ".scoreboard") == null) {
+						data.getData().set("players." + player.getUniqueId().toString() + ".scoreboard", "disabled");
 						data.save();
 						AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
 
@@ -57,8 +56,8 @@ public class ScoreboardCommand extends Utils implements CommandExecutor, TabComp
 						message(player, Messages.prefix + Messages.scoreboardDisabled);
 						return true;
 					}
-					if (data.get().get("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) {
-						data.get().set("players." + player.getUniqueId().toString() + ".scoreboard", null);
+					if (data.getData().get("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) {
+						data.getData().set("players." + player.getUniqueId().toString() + ".scoreboard", null);
 						data.save();
 						AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
 
@@ -90,5 +89,17 @@ public class ScoreboardCommand extends Utils implements CommandExecutor, TabComp
 			return completions;
 		}
 		return empty;
+	}
+
+	public void removeScoreboard(Player player) {
+		if (data.getData().getString("players." + player.getUniqueId().toString() + ".scoreboard") == null) return;
+		if (!data.getData().getString("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) return;
+		AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
+		Bukkit.getPluginManager().callEvent(destroyEvent);
+		if (destroyEvent.isCancelled()) {
+			return;
+		}
+		getAssemble().getBoards().remove(player.getUniqueId());
+		player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 	}
 }

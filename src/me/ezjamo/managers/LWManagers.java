@@ -115,8 +115,8 @@ public class LWManagers implements Listener {
 		Player player = event.getPlayer();
 		SpawnManager spawnCoords = SpawnManager.getManager();
 		PlayerdataManager data = PlayerdataManager.getManager();
-		if (data.get().get("players." + player.getUniqueId().toString()) == null) {
-			data.get().set("players." + player.getUniqueId().toString() + ".Name", player.getName());
+		if (data.getData().get("players." + player.getUniqueId().toString()) == null) {
+			data.getData().set("players." + player.getUniqueId().toString() + ".Name", player.getName());
     		data.save();
 		}
 		if (!player.hasPlayedBefore()) {

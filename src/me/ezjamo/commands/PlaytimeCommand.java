@@ -78,7 +78,7 @@ public class PlaytimeCommand extends Utils implements CommandExecutor, TabComple
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		List<String> players = PlayerdataManager.getManager().get().getConfigurationSection("players").getKeys(false).stream().map(key ->
+		List<String> players = PlayerdataManager.getManager().getData().getConfigurationSection("players").getKeys(false).stream().map(key ->
 		Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
 		if (args.length == 1) {
 			List<String> completions = new ArrayList<>();

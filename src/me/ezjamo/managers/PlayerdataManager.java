@@ -22,7 +22,7 @@ import me.ezjamo.Utils;
 public class PlayerdataManager extends Utils implements Listener {
 	public Lonewolves plugin;
 	public File file;
-	public FileConfiguration config;
+	public static FileConfiguration config;
 	public static PlayerdataManager manager;
 	
 	static {
@@ -36,6 +36,10 @@ public class PlayerdataManager extends Utils implements Listener {
 	public static PlayerdataManager getManager() {
 		return PlayerdataManager.manager;
 	}
+
+	public FileConfiguration getData() {
+	    return config;
+    }
 	
 	public void load() {
 		file = new File(plugin.getDataFolder(), "playerdata.yml");
