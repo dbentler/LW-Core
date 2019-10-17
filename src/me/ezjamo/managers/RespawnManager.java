@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
@@ -13,6 +14,14 @@ import com.massivecraft.factions.FPlayers;
 import me.ezjamo.Lonewolves;
 
 public class RespawnManager implements Listener {
+
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent event) {
+		boolean enabled = Lonewolves.plugin.getConfig().getBoolean("instant-respawn");
+		if (enabled) {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> event.getEntity().spigot().respawn(), 1L);
+		}
+	}
 	
 	@EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
@@ -24,12 +33,10 @@ public class RespawnManager implements Listener {
 			double homeX = fPlayer.getFaction().getHome().getX();
 			double homeY = fPlayer.getFaction().getHome().getY();
 			double homeZ = fPlayer.getFaction().getHome().getZ();
-			float homeYaw = (float)fPlayer.getFaction().getHome().getYaw();
-			float homePitch = (float)fPlayer.getFaction().getHome().getPitch();
+			float homeYaw = fPlayer.getFaction().getHome().getYaw();
+			float homePitch = fPlayer.getFaction().getHome().getPitch();
 			Location home = new Location(homeW, homeX, homeY, homeZ, homeYaw, homePitch);
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> {
-				player.teleport(home);
-	        }, 1L);
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> player.teleport(home), 1L);
 		}
         else if (spawnCoords.getConfig().getConfigurationSection("spawn") != null) {
 			World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
@@ -39,9 +46,7 @@ public class RespawnManager implements Listener {
 			float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
 			float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
 			Location loc = new Location(w, x, y, z, yaw, pitch);
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> {
-				player.teleport(loc);
-	        }, 1L);
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Lonewolves.plugin, () -> player.teleport(loc), 1L);
 		}
 	}
 }
