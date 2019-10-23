@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class EnchantmentManager implements Listener {
 
     @EventHandler
-    public void onEnchant(InventoryOpenEvent event) {
+    public void onEnchantOpen(InventoryOpenEvent event) {
         Inventory inv = event.getInventory();
         if (inv.getType() == InventoryType.ENCHANTING) {
             inv.setItem(1, new ItemStack(Material.INK_SACK, 64, (short) 4));
