@@ -41,7 +41,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		Economy econ = rsp.getProvider();
         return econ != null;
     }
-    
+
     @Override
 	public void onEnable() {
     	plugin = this;
@@ -83,6 +83,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         pm.registerEvents(new AnnouncerManager(), this);
         pm.registerEvents(new PlayerdataManager(), this);
         pm.registerEvents(new WarpManager(), this);
+        pm.registerEvents(new EnchantmentManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	getCommand("request").setExecutor(new Helpop());
@@ -140,7 +141,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
             }, 5 * 20, AnnouncerManager.getManager().get().getInt("announcer-settings.interval") * 20);
     	}
     }
-	
+
 	public void onDisable() {
 		this.getServer().getConsoleSender().sendMessage("");
 		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
@@ -172,7 +173,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		getCommand("admin").setTabCompleter(new AdminCommand());
 		getCommand("inv").setTabCompleter(new SwitchInventoryCommand());
 	}
-	    	
+
 	public String getMessage(String path) {
         String message = getConfig().getString("Messages." + path);
         if (message == null) {
@@ -282,7 +283,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	}
 		return true;
     }
-    
+
     @Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		List<String> empty = new ArrayList<>();
