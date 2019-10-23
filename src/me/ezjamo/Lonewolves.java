@@ -27,6 +27,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     public static Lonewolves plugin;
     private Assemble assemble;
     FileManager manager;
+	private Utils utils = new Utils();
     public static int task = 1;
     public static int size;
 
@@ -47,8 +48,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	plugin = this;
     	this.getServer().getConsoleSender().sendMessage("");
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.color("&fLone&4Wolves-&fCore " + this.getDescription().getVersion()));
-    	this.getServer().getConsoleSender().sendMessage(Utils.color("&aEnabled"));
+    	this.getServer().getConsoleSender().sendMessage(utils.color("&fLone&4Wolves-&fCore " + this.getDescription().getVersion()));
+    	this.getServer().getConsoleSender().sendMessage(utils.color("&aEnabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
 		manager = new FileManager(this);
@@ -81,7 +82,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         pm.registerEvents(new CustomCmdsManager(), this);
         pm.registerEvents(new BlockedWordsManager(), this);
         pm.registerEvents(new AnnouncerManager(), this);
-        pm.registerEvents(new PlayerdataManager(), this);
         pm.registerEvents(new WarpManager(), this);
         pm.registerEvents(new EnchantmentManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
@@ -136,27 +136,30 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
                 	for (Player player : Bukkit.getOnlinePlayers()) {
                     	player.playSound(player.getLocation(), Sound.valueOf(AnnouncerManager.getManager().get().getString("announcer-settings.sound")), 0.5f, 1.0f);
                     }
-                    Bukkit.getServer().broadcastMessage(Utils.color(message));
+                	for (Player online : Bukkit.getOnlinePlayers()) {
+                		online.sendMessage(utils.color(message));
+					}
                 }
             }, 5 * 20, AnnouncerManager.getManager().get().getInt("announcer-settings.interval") * 20);
     	}
+    	for (Player disabled : Bukkit.getOnlinePlayers()) {
+			ScoreboardCommand scoreboard = new ScoreboardCommand(assemble);
+			scoreboard.removeScoreboard(disabled);
+		}
     }
 
 	public void onDisable() {
 		this.getServer().getConsoleSender().sendMessage("");
 		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
-    	this.getServer().getConsoleSender().sendMessage(Utils.color("&fLone&4Wolves-&fCore " + this.getDescription().getVersion()));
-    	this.getServer().getConsoleSender().sendMessage(Utils.color("&cDisabled"));
+    	this.getServer().getConsoleSender().sendMessage(utils.color("&fLone&4Wolves-&fCore " + this.getDescription().getVersion()));
+    	this.getServer().getConsoleSender().sendMessage(utils.color("&cDisabled"));
     	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
     	this.getServer().getConsoleSender().sendMessage("");
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
     	for (Player staff : Bukkit.getOnlinePlayers()) {
-    		PlayerdataManager data = PlayerdataManager.getManager();
     		staff.setGameMode(GameMode.SURVIVAL);
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-    		data.get().set("players." + staff.getUniqueId() + ".scoreboard", null);
-    		data.save();
     	}
 	}
 
@@ -189,10 +192,11 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     				reloadConfig();
         			Messages.load();
         			BlockedWordsManager.getManager().reloadConfig();
+        			SpawnManager.getManager().reloadConfig();
         			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
         			return true;
     			}
-    			else Utils.message(sender, "&cUsage: &7/lw reload");
+    			else utils.message(sender, "&cUsage: &7/lw reload");
     			return true;
     		}
     		Player player = (Player) sender;
@@ -202,84 +206,85 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     					reloadConfig();
     					Messages.load();
     					BlockedWordsManager.getManager().reloadConfig();
+						SpawnManager.getManager().reloadConfig();
     					player.sendMessage(Messages.prefix + Messages.reloadConfig);
     					getServer().getConsoleSender().sendMessage(Messages.prefix + Messages.reloadConfig);
     					return true;
     				}
     				if (args[0].equalsIgnoreCase("version") || args[0].equalsIgnoreCase("ver")) {
-    					Utils.message(player, Messages.prefix + "&f" + getDescription().getFullName());
+    					utils.message(player, Messages.prefix + "&f" + getDescription().getFullName());
     					return true;
     				}
     			}
     			if (args.length == 2) {
     				if (args[0].equalsIgnoreCase("help") && args[1].equals("1")) {
-    					player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-    					player.sendMessage(Utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(1/3)"));
-    					player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-    					player.sendMessage(Utils.color("&c/request &8- &fSends a message to all online staff."));
-    					player.sendMessage(Utils.color("&c/mod &8- &fToggles mod mode."));
-    					player.sendMessage(Utils.color("&c/sc &8- &fToggles staff chat."));
-    					player.sendMessage(Utils.color("&c/acc &8- &fToggles admin chat."));
-    					player.sendMessage(Utils.color("&c/distance &8- &fShows your distance from /spawn"));
-    					player.sendMessage(Utils.color("&c/help &8- &fShows help pages that are set in config."));
-    					player.sendMessage(Utils.color("&c/links &8- &fShows links that are set in config."));
-    					player.sendMessage(Utils.color("&c/rules &8- &fShows rules that are set in config."));
-    					player.sendMessage(Utils.color("&c/setslots &8- &fSets the maximum players allowed on the server."));
-    					player.sendMessage(Utils.color("&c/nv &8- &fToggles night vision effect."));
-    					player.sendMessage(Utils.color("&8&m--------------------&f/help 2&8&m--------------------------"));
+    					player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+    					player.sendMessage(utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(1/3)"));
+    					player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+    					player.sendMessage(utils.color("&c/request &8- &fSends a message to all online staff."));
+    					player.sendMessage(utils.color("&c/mod &8- &fToggles mod mode."));
+    					player.sendMessage(utils.color("&c/sc &8- &fToggles staff chat."));
+    					player.sendMessage(utils.color("&c/acc &8- &fToggles admin chat."));
+    					player.sendMessage(utils.color("&c/distance &8- &fShows your distance from /spawn"));
+    					player.sendMessage(utils.color("&c/help &8- &fShows help pages that are set in config."));
+    					player.sendMessage(utils.color("&c/links &8- &fShows links that are set in config."));
+    					player.sendMessage(utils.color("&c/rules &8- &fShows rules that are set in config."));
+    					player.sendMessage(utils.color("&c/setslots &8- &fSets the maximum players allowed on the server."));
+    					player.sendMessage(utils.color("&c/nv &8- &fToggles night vision effect."));
+    					player.sendMessage(utils.color("&8&m--------------------&f/help 2&8&m--------------------------"));
     				}
     				if (args[0].equalsIgnoreCase("help") && args[1].equals("2")) {
-        				player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-    					player.sendMessage(Utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(2/3)"));
-    					player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-    					player.sendMessage(Utils.color("&c/freeze &8- &fFreezes and unfreezes a player."));
-    					player.sendMessage(Utils.color("&c/admin &8- &fGives and removes * permission and OP."));
-    					player.sendMessage(Utils.color("&c/inv &8- &fSwitch between a new and your previous inventory."));
-    					player.sendMessage(Utils.color("&c/ping &8- &fShows your ping to the server."));
-    					player.sendMessage(Utils.color("&c/hub &8- &fTakes you to your network hub defined in the config."));
-    					player.sendMessage(Utils.color("&c/setspawn &8- &fSets the server spawnpoint."));
-    					player.sendMessage(Utils.color("&c/spawn &8- &fTakes you to the set spawnpoint."));
-    					player.sendMessage(Utils.color("&c/startkoth &8- &fOpens a GUI that lets you start a koth."));
-    					player.sendMessage(Utils.color("&c/kits &8- &fOpens a GUI that lets you select a kit."));
-    					player.sendMessage(Utils.color("&c/preview &8- &fOpens a GUI that lets you preview the defined kit."));
-    					player.sendMessage(Utils.color("&8&m--------------------&f/help 3&8&m--------------------------"));
+        				player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+    					player.sendMessage(utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(2/3)"));
+    					player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+    					player.sendMessage(utils.color("&c/freeze &8- &fFreezes and unfreezes a player."));
+    					player.sendMessage(utils.color("&c/admin &8- &fGives and removes * permission and OP."));
+    					player.sendMessage(utils.color("&c/inv &8- &fSwitch between a new and your previous inventory."));
+    					player.sendMessage(utils.color("&c/ping &8- &fShows your ping to the server."));
+    					player.sendMessage(utils.color("&c/hub &8- &fTakes you to your network hub defined in the config."));
+    					player.sendMessage(utils.color("&c/setspawn &8- &fSets the server spawnpoint."));
+    					player.sendMessage(utils.color("&c/spawn &8- &fTakes you to the set spawnpoint."));
+    					player.sendMessage(utils.color("&c/startkoth &8- &fOpens a GUI that lets you start a koth."));
+    					player.sendMessage(utils.color("&c/kits &8- &fOpens a GUI that lets you select a kit."));
+    					player.sendMessage(utils.color("&c/preview &8- &fOpens a GUI that lets you preview the defined kit."));
+    					player.sendMessage(utils.color("&8&m--------------------&f/help 3&8&m--------------------------"));
         			}
         			if (args[0].equalsIgnoreCase("help") && args[1].equals("3")) {
-        				player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-    					player.sendMessage(Utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(3/3)"));
-    					player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-    					player.sendMessage(Utils.color("&c/stats &8- &fShows the stats of a player that are set in the config."));
-    					player.sendMessage(Utils.color("&c/demote &8- &fDemotes the specified player."));
-    					player.sendMessage(Utils.color("&c/removemm &8- &fRemoves mod mode from the specified player."));
-    					player.sendMessage(Utils.color("&c/playtime &8- &fShows the playtime of the specified player."));
-    					player.sendMessage(Utils.color("&c/worth &8- &fShows the worth of blocks for FTop set in config."));
-    					player.sendMessage(Utils.color("&c/commands &8- &fShows the commands other ranks have access to."));
-    					player.sendMessage(Utils.color("&c/scoreboard &8- &fToggles the scoreboard on and off."));
-    					player.sendMessage(Utils.color("&c/lw reload &8- &fReloads all configuration files for this plugin."));
-    					player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
+        				player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+    					player.sendMessage(utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(3/3)"));
+    					player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+    					player.sendMessage(utils.color("&c/stats &8- &fShows the stats of a player that are set in the config."));
+    					player.sendMessage(utils.color("&c/demote &8- &fDemotes the specified player."));
+    					player.sendMessage(utils.color("&c/removemm &8- &fRemoves mod mode from the specified player."));
+    					player.sendMessage(utils.color("&c/playtime &8- &fShows the playtime of the specified player."));
+    					player.sendMessage(utils.color("&c/worth &8- &fShows the worth of blocks for FTop set in config."));
+    					player.sendMessage(utils.color("&c/commands &8- &fShows the commands other ranks have access to."));
+    					player.sendMessage(utils.color("&c/scoreboard &8- &fToggles the scoreboard on and off."));
+    					player.sendMessage(utils.color("&c/lw reload &8- &fReloads all configuration files for this plugin."));
+    					player.sendMessage(utils.color("&8&m----------------------------------------------------"));
         			}
         			return true;
     			}
     			if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
-    				player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-					player.sendMessage(Utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(1/3)"));
-					player.sendMessage(Utils.color("&8&m----------------------------------------------------"));
-					player.sendMessage(Utils.color("&c/request &8- &fSends a message to all online staff."));
-					player.sendMessage(Utils.color("&c/mod &8- &fToggles mod mode."));
-					player.sendMessage(Utils.color("&c/sc &8- &fToggles staff chat."));
-					player.sendMessage(Utils.color("&c/acc &8- &fToggles admin chat."));
-					player.sendMessage(Utils.color("&c/distance &8- &fShows your distance from /spawn"));
-					player.sendMessage(Utils.color("&c/help &8- &fShows help pages that are set in config."));
-					player.sendMessage(Utils.color("&c/links &8- &fShows links that are set in config."));
-					player.sendMessage(Utils.color("&c/rules &8- &fShows rules that are set in config."));
-					player.sendMessage(Utils.color("&c/setslots &8- &fSets the maximum players allowed on the server."));
-					player.sendMessage(Utils.color("&c/nv &8- &fToggles night vision effect."));
-					player.sendMessage(Utils.color("&8&m--------------------&f/help 2&8&m--------------------------"));
+    				player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+					player.sendMessage(utils.color("&fLone&4Wolves&8-&fCore Help &8- &f(1/3)"));
+					player.sendMessage(utils.color("&8&m----------------------------------------------------"));
+					player.sendMessage(utils.color("&c/request &8- &fSends a message to all online staff."));
+					player.sendMessage(utils.color("&c/mod &8- &fToggles mod mode."));
+					player.sendMessage(utils.color("&c/sc &8- &fToggles staff chat."));
+					player.sendMessage(utils.color("&c/acc &8- &fToggles admin chat."));
+					player.sendMessage(utils.color("&c/distance &8- &fShows your distance from /spawn"));
+					player.sendMessage(utils.color("&c/help &8- &fShows help pages that are set in config."));
+					player.sendMessage(utils.color("&c/links &8- &fShows links that are set in config."));
+					player.sendMessage(utils.color("&c/rules &8- &fShows rules that are set in config."));
+					player.sendMessage(utils.color("&c/setslots &8- &fSets the maximum players allowed on the server."));
+					player.sendMessage(utils.color("&c/nv &8- &fToggles night vision effect."));
+					player.sendMessage(utils.color("&8&m--------------------&f/help 2&8&m--------------------------"));
 					return true;
 				}
-    			else Utils.message(player, Messages.prefix + "&fInvalid command.");
+    			else utils.message(player, Messages.prefix + "&fInvalid command.");
     		}
-    		else Utils.message(player, Messages.prefix + "&f" + getDescription().getFullName());
+    		else utils.message(player, Messages.prefix + "&f" + getDescription().getFullName());
     	}
 		return true;
     }
@@ -313,7 +318,5 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 	}
 
     public void onPluginMessageReceived(String channel, Player player, byte[] bytemessage) {
-        if (!channel.equals("BungeeCord"))
-            return;
     }
 }

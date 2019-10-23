@@ -25,6 +25,7 @@ import me.ezjamo.managers.UUIDFetcher;
 
 public class StatsCommand extends Utils implements CommandExecutor, TabCompleter {
 	UUID target;
+	private static Utils utils = new Utils();
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -66,19 +67,18 @@ public class StatsCommand extends Utils implements CommandExecutor, TabCompleter
 			}
 			if (args.length > 1) {
 				message(player, "&cUsage: &7/stats <player>");
-				return true;
 			}
 			else {
 				message(player, Messages.prefix + Messages.noPermission);
-				return true;
 			}
+			return true;
 		}
 		return true;
 	}
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		List<String> players = PlayerdataManager.getManager().get().getConfigurationSection("players").getKeys(false).stream().map(key ->
+		List<String> players = PlayerdataManager.getManager().getData().getConfigurationSection("players").getKeys(false).stream().map(key ->
 		Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
 		if (args.length == 1) {
 			List<String> completions = new ArrayList<>();
@@ -92,7 +92,7 @@ public class StatsCommand extends Utils implements CommandExecutor, TabCompleter
 		List<String> message = Lonewolves.plugin.getConfig().getStringList("Stats");
 		for (String msg : message) {
 			String placeholders = PlaceholderAPI.setPlaceholders(player, msg);
-			message(player, color(placeholders).replace("%player%", player.getName()).replace("%playtime%", TimeFormat.getTime(player.getStatistic(Statistic.PLAY_ONE_TICK) / 20))
+			utils.message(player, utils.color(placeholders).replace("%player%", player.getName()).replace("%playtime%", TimeFormat.getTime(player.getStatistic(Statistic.PLAY_ONE_TICK) / 20))
 					.replace("%kills%", String.valueOf(player.getStatistic(Statistic.PLAYER_KILLS)))
 					.replace("%deaths%", String.valueOf(player.getStatistic(Statistic.DEATHS))));
 		}
@@ -102,7 +102,7 @@ public class StatsCommand extends Utils implements CommandExecutor, TabCompleter
 		List<String> message = Lonewolves.plugin.getConfig().getStringList("Stats");
 		for (String msg : message) {
 			String placeholders = PlaceholderAPI.setPlaceholders(other, msg);
-			message(player, color(placeholders).replace("%player%", other.getName()).replace("%playtime%", TimeFormat.getTime(other.getStatistic(Statistic.PLAY_ONE_TICK) / 20))
+			utils.message(player, utils.color(placeholders).replace("%player%", other.getName()).replace("%playtime%", TimeFormat.getTime(other.getStatistic(Statistic.PLAY_ONE_TICK) / 20))
 					.replace("%kills%", String.valueOf(other.getStatistic(Statistic.PLAYER_KILLS)))
 					.replace("%deaths%", String.valueOf(other.getStatistic(Statistic.DEATHS))));
 		}
@@ -112,7 +112,7 @@ public class StatsCommand extends Utils implements CommandExecutor, TabCompleter
 		List<String> message = Lonewolves.plugin.getConfig().getStringList("Stats");
 		for (String msg : message) {
 			String placeholders = PlaceholderAPI.setPlaceholders(offline, msg);
-			message(player, color(placeholders).replace("%player%", offline.getName()).replace("%playtime%", TimeFormat.getTime(PlayerdataManager.getPlayerStatistic(target, "PLAYTIME", Statistic.PLAY_ONE_TICK) / 20L))
+			utils.message(player, utils.color(placeholders).replace("%player%", offline.getName()).replace("%playtime%", TimeFormat.getTime(PlayerdataManager.getPlayerStatistic(target, "PLAYTIME", Statistic.PLAY_ONE_TICK) / 20L))
 					.replace("%kills%", String.valueOf(PlayerdataManager.getPlayerStatistic(target, "KILLS", Statistic.PLAYER_KILLS)))
 					.replace("%deaths%", String.valueOf(PlayerdataManager.getPlayerStatistic(target, "DEATHS", Statistic.DEATHS))));
 		}

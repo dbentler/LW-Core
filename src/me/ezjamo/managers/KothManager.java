@@ -10,6 +10,7 @@ import me.ezjamo.Lonewolves;
 import me.ezjamo.Utils;
 
 public class KothManager implements Listener {
+	private Utils utils = new Utils();
 	
 	public KothManager(Lonewolves plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -20,7 +21,7 @@ public class KothManager implements Listener {
 		Player p = (Player) e.getWhoClicked();
 		String title = e.getInventory().getTitle();
 		
-		if (title.equals(Utils.color("&fLone&4Wolves &fKoths"))) {
+		if (title.equals(utils.color("&fLone&4Wolves &fKoths"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;

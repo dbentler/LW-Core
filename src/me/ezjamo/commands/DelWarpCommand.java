@@ -1,9 +1,8 @@
 package me.ezjamo.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
+import me.ezjamo.managers.WarpManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,9 +10,8 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
-import me.ezjamo.managers.WarpManager;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DelWarpCommand extends Utils implements CommandExecutor, TabCompleter {
 
@@ -33,13 +31,12 @@ public class DelWarpCommand extends Utils implements CommandExecutor, TabComplet
                 warps.get().set("Warps." + args[0], null);
                 warps.save();
                 message(sender, Messages.prefix + "&cRemoved warp &f" + args[0].toLowerCase());
-                return true;
             }
     		else {
     			message(sender, "&cUsage: &7/delwarp <warp>");
-    			return true;
-    		}
-    	}
+            }
+            return true;
+        }
         Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("delwarp")) {
             if (!player.hasPermission("lw.delwarp")) {
@@ -65,7 +62,7 @@ public class DelWarpCommand extends Utils implements CommandExecutor, TabComplet
     
     @Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		List<String> warps = WarpManager.getManager().get().getConfigurationSection("Warps").getKeys(false).stream().collect(Collectors.toList());
+		List<String> warps = new ArrayList<>(WarpManager.getManager().get().getConfigurationSection("Warps").getKeys(false));
 		List<String> empty = new ArrayList<>();
 		if (args.length == 1) {
 			List<String> completions = new ArrayList<>();

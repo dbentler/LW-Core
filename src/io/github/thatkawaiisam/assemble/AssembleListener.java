@@ -23,7 +23,7 @@ public class AssembleListener implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		PlayerdataManager data = PlayerdataManager.getManager();
-		if (data.get().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard") == null) {
+		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard") == null) {
 			AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(event.getPlayer());
 
 			Bukkit.getPluginManager().callEvent(createEvent);
@@ -34,7 +34,7 @@ public class AssembleListener implements Listener {
 			getAssemble().getBoards().put(event.getPlayer().getUniqueId(), new AssembleBoard(event.getPlayer(), getAssemble()));
 			return;
 		}
-		if (data.get().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard").equals("disabled")) {
+		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard").equals("disabled")) {
 			return;
 		}
 		else {
@@ -52,7 +52,7 @@ public class AssembleListener implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		PlayerdataManager data = PlayerdataManager.getManager();
-		if (data.get().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard") == null) {
+		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard") == null) {
 			AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(event.getPlayer());
 
 			Bukkit.getPluginManager().callEvent(destroyEvent);
@@ -64,7 +64,7 @@ public class AssembleListener implements Listener {
 			event.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 			return;
 		}
-		if (data.get().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard").equals("disabled")) {
+		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard").equals("disabled")) {
 			return;
 		}
 		else {
