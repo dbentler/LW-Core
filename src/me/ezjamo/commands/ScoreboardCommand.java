@@ -21,7 +21,6 @@ import java.util.List;
 
 @Getter
 public class ScoreboardCommand extends Utils implements CommandExecutor, TabCompleter {
-	private PlayerdataManager data = PlayerdataManager.getManager();
 	private Assemble assemble;
 
 	public ScoreboardCommand(Assemble assemble) {
@@ -35,15 +34,16 @@ public class ScoreboardCommand extends Utils implements CommandExecutor, TabComp
 			return true;
 		}
 		Player player = (Player) sender;
+		PlayerdataManager data = new PlayerdataManager(player.getUniqueId());
 		if (cmd.getName().equalsIgnoreCase("scoreboard")) {
 			if (args.length < 1) {
 				message(player, "&cUsage: &7/sb toggle");
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("toggle")) {
-					if (data.getData().get("players." + player.getUniqueId().toString() + ".scoreboard") == null) {
-						data.getData().set("players." + player.getUniqueId().toString() + ".scoreboard", "disabled");
-						data.save();
+					if (data.loadUser().getString(player.getUniqueId().toString() + ".scoreboard").equals("enabled")) {
+						data.loadUser().set(player.getUniqueId().toString() + ".scoreboard", "disabled");
+						data.saveUser();
 						AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
 
 						Bukkit.getPluginManager().callEvent(destroyEvent);
@@ -56,9 +56,9 @@ public class ScoreboardCommand extends Utils implements CommandExecutor, TabComp
 						message(player, Messages.prefix + Messages.scoreboardDisabled);
 						return true;
 					}
-					if (data.getData().get("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) {
-						data.getData().set("players." + player.getUniqueId().toString() + ".scoreboard", null);
-						data.save();
+					if (data.loadUser().getString(player.getUniqueId().toString() + ".scoreboard").equals("disabled")) {
+						data.loadUser().set(player.getUniqueId().toString() + ".scoreboard", "enabled");
+						data.saveUser();
 						AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
 
 						Bukkit.getPluginManager().callEvent(createEvent);
@@ -92,8 +92,10 @@ public class ScoreboardCommand extends Utils implements CommandExecutor, TabComp
 	}
 
 	public void removeScoreboard(Player player) {
-		if (data.getData().getString("players." + player.getUniqueId().toString() + ".scoreboard") == null) return;
-		if (!data.getData().getString("players." + player.getUniqueId().toString() + ".scoreboard").equals("disabled")) return;
+		PlayerdataManager data = new PlayerdataManager(player.getUniqueId());
+		if (data.loadUser() == null) return;
+		if (data.loadUser().getString(player.getUniqueId().toString() + ".scoreboard") == null) return;
+		if (data.loadUser().getString(player.getUniqueId().toString() + ".scoreboard").equals("enabled")) return;
 		AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
 		Bukkit.getPluginManager().callEvent(destroyEvent);
 		if (destroyEvent.isCancelled()) {

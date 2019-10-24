@@ -1,6 +1,8 @@
 package me.ezjamo.commands;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -75,17 +77,24 @@ public class StatsCommand extends Utils implements CommandExecutor, TabCompleter
 		}
 		return true;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		List<String> players = PlayerdataManager.getManager().getData().getConfigurationSection("players").getKeys(false).stream().map(key ->
-		Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
+		File file = new File(Lonewolves.plugin.getDataFolder(), "playerdata");
+		String[] files = file.list();
+		List<String> players = new ArrayList<>();
+		if (files != null) {
+			for (String s : files) {
+				players.add(s.replace(".yml", ""));
+			}
+		}
+		List<String> list = players.stream().map(key -> Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
 		if (args.length == 1) {
 			List<String> completions = new ArrayList<>();
-			StringUtil.copyPartialMatches(args[0], players, completions);
+			StringUtil.copyPartialMatches(args[0], list, completions);
 			return completions;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 	
 	public static void playerMessage(Player player) {

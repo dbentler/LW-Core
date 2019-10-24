@@ -1,10 +1,12 @@
 package me.ezjamo.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
+import me.ezjamo.managers.PlayerdataManager;
+import me.ezjamo.managers.TimeFormat;
+import me.ezjamo.managers.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
@@ -15,13 +17,9 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import me.clip.placeholderapi.PlaceholderAPI;
-import me.ezjamo.Lonewolves;
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
-import me.ezjamo.managers.PlayerdataManager;
-import me.ezjamo.managers.TimeFormat;
-import me.ezjamo.managers.UUIDFetcher;
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PlaytimeCommand extends Utils implements CommandExecutor, TabCompleter {
 	private static Utils utils = new Utils();
@@ -75,17 +73,24 @@ public class PlaytimeCommand extends Utils implements CommandExecutor, TabComple
 		}
 		return true;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		List<String> players = PlayerdataManager.getManager().getData().getConfigurationSection("players").getKeys(false).stream().map(key ->
-		Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
+		File file = new File(Lonewolves.plugin.getDataFolder(), "playerdata");
+		String[] files = file.list();
+		List<String> players = new ArrayList<>();
+		if (files != null) {
+			for (String s : files) {
+				players.add(s.replace(".yml", ""));
+			}
+		}
+		List<String> list = players.stream().map(key -> Bukkit.getOfflinePlayer(UUID.fromString(key))).map(OfflinePlayer::getName).collect(Collectors.toList());
 		if (args.length == 1) {
 			List<String> completions = new ArrayList<>();
-			StringUtil.copyPartialMatches(args[0], players, completions);
+			StringUtil.copyPartialMatches(args[0], list, completions);
 			return completions;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 	
 	private static void playerMessage(Player player) {

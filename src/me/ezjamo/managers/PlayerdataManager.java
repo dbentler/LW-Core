@@ -1,82 +1,60 @@
 package me.ezjamo.managers;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.UUID;
-import java.util.logging.Level;
-
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import me.ezjamo.Lonewolves;
-import me.ezjamo.Utils;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.UUID;
+import java.util.logging.Level;
 
 public class PlayerdataManager extends Utils implements Listener {
-	public Lonewolves plugin;
-	public File file;
-	public static FileConfiguration config;
-	public static PlayerdataManager manager;
-	
-	static {
-		PlayerdataManager.manager = new PlayerdataManager();
-	}
-	
-	public PlayerdataManager() {
-		plugin = Lonewolves.getPlugin(Lonewolves.class);
-	}
-	
-	public static PlayerdataManager getManager() {
-		return PlayerdataManager.manager;
-	}
+    private Lonewolves plugin = Lonewolves.getPlugin(Lonewolves.class);
+	private File file;
+	private FileConfiguration config;
 
-	public FileConfiguration getData() {
-	    return config;
-    }
-	
-	public void load() {
-		file = new File(plugin.getDataFolder(), "playerdata.yml");
-		if (!file.exists()) {
-			plugin.getLogger().severe("Creating default: " + file);
-			file.getParentFile().mkdirs();
-			try {
-				file.createNewFile();
-				plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + file));
-			} catch (Exception e) {
-				plugin.getServer().getConsoleSender().sendMessage(color("&cCould not create: " + file));
-			}
-		}
-		config = new YamlConfiguration();
-		try {
-			config.load(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public FileConfiguration get() {
-		return config;
-	}
-	
-	public void reload() {
+	public PlayerdataManager(UUID uuid) {
+		file = new File(plugin.getDataFolder() + File.separator + "playerdata", uuid + ".yml");
 		config = YamlConfiguration.loadConfiguration(file);
 	}
-	
-	public void save() {
+
+	public void createUser(Player player) {
+		if (!file.exists()) {
+            plugin.getLogger().info("Creating default: " + file);
+			try {
+				YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+				config.set(player.getUniqueId().toString() + ".name", player.getName());
+				config.set(player.getUniqueId().toString() + ".scoreboard", "enabled");
+				config.save(file);
+                plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + file));
+			} catch (IOException e) {
+                plugin.getServer().getConsoleSender().sendMessage(color("&cCould not create: " + file));
+			}
+		}
+	}
+
+	public FileConfiguration loadUser() {
+		return config;
+	}
+
+	public void saveUser() {
 		try {
-			config.save(file);
+			loadUser().save(file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static long getPlayerStatistic(UUID player, String stat, Statistic statistic) {
         File worldFolder = new File(Bukkit.getServer().getWorlds().get(0).getWorldFolder(), "stats");
         File playerStatistics = new File(worldFolder, player + ".json");
@@ -87,7 +65,7 @@ public class PlayerdataManager extends Utils implements Listener {
         JSONObject jsonObject = null;
         try {
             try {
-                jsonObject = (JSONObject)parser.parse((Reader)new FileReader(playerStatistics));
+                jsonObject = (JSONObject)parser.parse(new FileReader(playerStatistics));
             }
             catch (ParseException e) {
                 e.printStackTrace();
@@ -98,9 +76,11 @@ public class PlayerdataManager extends Utils implements Listener {
         }
         if (stat.equalsIgnoreCase("PLAYTIME")) {
             StringBuilder statisticNmsName = new StringBuilder("stat.playOneMinute");
-            if (jsonObject.containsKey((Object)statisticNmsName.toString())) {
-                return (long)jsonObject.get((Object)statisticNmsName.toString());
-            }
+            if (jsonObject != null) {
+				if (jsonObject.containsKey(statisticNmsName.toString())) {
+					return (long)jsonObject.get(statisticNmsName.toString());
+				}
+			}
             return 0L;
         }
         else {
@@ -115,9 +95,11 @@ public class PlayerdataManager extends Utils implements Listener {
                     statisticNmsName.append(Character.toLowerCase(character));
                 }
             }
-            if (jsonObject.containsKey((Object)statisticNmsName.toString())) {
-                return (long)jsonObject.get((Object)statisticNmsName.toString());
-            }
+            if (jsonObject != null) {
+				if (jsonObject.containsKey(statisticNmsName.toString())) {
+					return (long)jsonObject.get(statisticNmsName.toString());
+				}
+			}
             return 0L;
         }
     }

@@ -58,7 +58,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	SpawnManager.getManager().setupFiles();
     	BlockedWordsManager.getManager().setupFiles();
     	AnnouncerManager.getManager().load();
-    	PlayerdataManager.getManager().load();
     	WarpManager.getManager().load();
     	assemble = new Assemble(this, new ScoreboardAdapter());
 		assemble.setTicks(16);

@@ -114,11 +114,8 @@ public class LWManagers implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		SpawnManager spawnCoords = SpawnManager.getManager();
-		PlayerdataManager data = PlayerdataManager.getManager();
-		if (data.getData().get("players." + player.getUniqueId().toString()) == null) {
-			data.getData().set("players." + player.getUniqueId().toString() + ".Name", player.getName());
-    		data.save();
-		}
+		PlayerdataManager data = new PlayerdataManager(player.getUniqueId());
+		data.createUser(player);
 		if (!player.hasPlayedBefore()) {
 			if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");

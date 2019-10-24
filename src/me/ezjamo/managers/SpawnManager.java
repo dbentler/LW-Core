@@ -43,7 +43,7 @@ public class SpawnManager extends Utils implements Listener {
     public void setupFiles() {
         location = new File(plugin.getDataFolder(), "locations.yml");
         if (!location.exists()) {
-			plugin.getLogger().severe("Creating default: " + location);
+			plugin.getLogger().info("Creating default: " + location);
 			location.getParentFile().mkdirs();
 			try {
 				location.createNewFile();

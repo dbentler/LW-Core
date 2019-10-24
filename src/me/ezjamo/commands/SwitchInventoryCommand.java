@@ -1,10 +1,7 @@
 package me.ezjamo.commands;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,8 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.StringUtil;
 
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SwitchInventoryCommand extends Utils implements CommandExecutor, TabCompleter {
 
@@ -34,10 +33,6 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor, Ta
 					message(p, Messages.prefix + Messages.noPermission);
 					return true;
 				}
-			if (!(p instanceof Player)) {
-				message(p, "&cPlayer only command.");
-				return true;
-			}
 			if (args.length != 1) {
 				message(p, "&cUsage: &7Use /inv new to switch to a blank inventory.");
 				message(p, "&cUsage: &7Use /inv prev to switch to your previous inventory");
@@ -110,7 +105,7 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor, Ta
 		}
 		return true;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		List<String> inv = new ArrayList<>();

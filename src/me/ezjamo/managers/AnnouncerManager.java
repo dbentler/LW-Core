@@ -40,7 +40,7 @@ public class AnnouncerManager extends Utils implements Listener, CommandExecutor
 	public void load() {
 		file = new File(plugin.getDataFolder(), "announcer.yml");
 		if (!file.exists()) {
-			plugin.getLogger().severe("Creating default: " + file);
+			plugin.getLogger().info("Creating default: " + file);
 			file.getParentFile().mkdirs();
 			plugin.saveResource("announcer.yml", false);
 			plugin.getServer().getConsoleSender().sendMessage(color("&aSuccessfully created: " + file));

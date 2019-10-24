@@ -41,7 +41,7 @@ public class WarpManager extends Utils implements Listener {
 	public void load() {
 		file = new File(plugin.getDataFolder(), "warps.yml");
 		if (!file.exists()) {
-			plugin.getLogger().severe("Creating default: " + file);
+			plugin.getLogger().info("Creating default: " + file);
 			file.getParentFile().mkdirs();
 			try {
 				file.createNewFile();

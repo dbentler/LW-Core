@@ -4,8 +4,8 @@ import io.github.thatkawaiisam.assemble.events.AssembleBoardCreateEvent;
 import io.github.thatkawaiisam.assemble.events.AssembleBoardDestroyEvent;
 import lombok.Getter;
 import me.ezjamo.managers.PlayerdataManager;
-
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -22,62 +22,36 @@ public class AssembleListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		PlayerdataManager data = PlayerdataManager.getManager();
-		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard") == null) {
-			AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(event.getPlayer());
-
+		Player player = event.getPlayer();
+		PlayerdataManager data = new PlayerdataManager(player.getUniqueId());
+		if (data.loadUser().getString(player.getUniqueId().toString() + ".scoreboard") == null) {
+			AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
 			Bukkit.getPluginManager().callEvent(createEvent);
 			if (createEvent.isCancelled()) {
 				return;
 			}
-
-			getAssemble().getBoards().put(event.getPlayer().getUniqueId(), new AssembleBoard(event.getPlayer(), getAssemble()));
+			getAssemble().getBoards().put(player.getUniqueId(), new AssembleBoard(player, getAssemble()));
 			return;
 		}
-		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard").equals("disabled")) {
+		if (data.loadUser().getString(player.getUniqueId().toString() + ".scoreboard").equals("disabled")) return;
+		AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
+		Bukkit.getPluginManager().callEvent(createEvent);
+		if (createEvent.isCancelled()) {
 			return;
 		}
-		else {
-			AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(event.getPlayer());
-
-			Bukkit.getPluginManager().callEvent(createEvent);
-			if (createEvent.isCancelled()) {
-				return;
-			}
-
-			getAssemble().getBoards().put(event.getPlayer().getUniqueId(), new AssembleBoard(event.getPlayer(), getAssemble()));
-		}
+		getAssemble().getBoards().put(player.getUniqueId(), new AssembleBoard(player, getAssemble()));
 	}
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		PlayerdataManager data = PlayerdataManager.getManager();
-		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard") == null) {
-			AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(event.getPlayer());
-
-			Bukkit.getPluginManager().callEvent(destroyEvent);
-			if (destroyEvent.isCancelled()) {
-				return;
-			}
-
-			getAssemble().getBoards().remove(event.getPlayer().getUniqueId());
-			event.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+		Player player = event.getPlayer();
+		AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(player);
+		Bukkit.getPluginManager().callEvent(destroyEvent);
+		if (destroyEvent.isCancelled()) {
 			return;
 		}
-		if (data.getData().get("players." + event.getPlayer().getUniqueId().toString() + ".scoreboard").equals("disabled")) {
-			return;
-		}
-		else {
-			AssembleBoardDestroyEvent destroyEvent = new AssembleBoardDestroyEvent(event.getPlayer());
-
-			Bukkit.getPluginManager().callEvent(destroyEvent);
-			if (destroyEvent.isCancelled()) {
-				return;
-			}
-
-			getAssemble().getBoards().remove(event.getPlayer().getUniqueId());
-			event.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
-		}
+		getAssemble().getBoards().remove(player.getUniqueId());
+		player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 	}
 
 	//TODO see how we can make this better

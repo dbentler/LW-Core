@@ -74,7 +74,7 @@ public class FileManager {
 
     public <T> T loadOrSaveDefault(T def, Class<T> clazz, File file) {
         if (!file.exists()) {
-            p.getLogger().severe("Creating default: " + file);
+            p.getLogger().info("Creating default: " + file);
             this.save(def, file);
             return def;
         }
