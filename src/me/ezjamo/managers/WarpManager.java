@@ -1,8 +1,11 @@
 package me.ezjamo.managers;
 
-import java.io.File;
-import java.io.IOException;
-
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
+import me.ezjamo.Utils;
+import me.ezjamo.commands.WarpCommand;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -11,10 +14,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
 
-import me.ezjamo.Lonewolves;
-import me.ezjamo.Messages;
-import me.ezjamo.Utils;
-import me.ezjamo.commands.WarpCommand;
+import java.io.File;
+import java.io.IOException;
 
 public class WarpManager extends Utils implements Listener {
 	public Lonewolves plugin;
@@ -72,6 +73,14 @@ public class WarpManager extends Utils implements Listener {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public static Location getCenteredLocation(Location loc) {
+		World world = loc.getWorld();
+		int x = loc.getBlockX();
+		int y = (int) Math.round(loc.getY());
+		int z = loc.getBlockZ();
+		return new Location(world, x + 0.5, y, z + 0.5, loc.getYaw(), loc.getPitch());
 	}
 	
 	@EventHandler

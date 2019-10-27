@@ -4,11 +4,9 @@ import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
 import me.ezjamo.Utils;
 import me.ezjamo.commands.SpawnCommand;
-
-import java.io.File;
-import java.io.IOException;
-
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -17,6 +15,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitTask;
+
+import java.io.File;
+import java.io.IOException;
 
 public class SpawnManager extends Utils implements Listener {
     public Lonewolves plugin;
@@ -74,6 +75,14 @@ public class SpawnManager extends Utils implements Listener {
     
     public void reloadConfig() {
         spawnCoords = YamlConfiguration.loadConfiguration(location);
+    }
+
+    public static Location getCenteredLocation(Location loc) {
+        World world = loc.getWorld();
+        int x = loc.getBlockX();
+        int y = (int) Math.round(loc.getY());
+        int z = loc.getBlockZ();
+        return new Location(world, x + 0.5, y, z + 0.5, loc.getYaw(), loc.getPitch());
     }
 
     @EventHandler

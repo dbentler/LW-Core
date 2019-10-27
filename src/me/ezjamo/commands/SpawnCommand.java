@@ -36,33 +36,33 @@ public class SpawnCommand extends Utils implements CommandExecutor {
         		message(sender, "&cUsage: &7/spawn <player>");
         		return true;
         	}
-        	if (args.length == 1) {
-        		if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
-            		message(sender, Messages.prefix + "&cSpawn not set. Use &f/setspawn &cin-game to set a spawnpoint.");
-            		return true;
-            	}
-        		World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
-                double x = spawnCoords.getConfig().getDouble("spawn.x");
-                double y = spawnCoords.getConfig().getDouble("spawn.y");
-                double z = spawnCoords.getConfig().getDouble("spawn.z");
-                float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
-                float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
-                Location spawn = new Location(w, x, y, z, yaw, pitch);
-        		Player target = Bukkit.getPlayer(args[0]);
-                if (target == null) {
-                	message(sender, Messages.prefix + "&cPlayer not found.");
-                	return true;
-                }
-                if (ess != null) {
-                    User user = ess.getUser(target);
-                    user.setLastLocation();
-                }
-                target.teleport(spawn);
-                message(sender, Messages.prefix + "&fTeleportation successful!");
-                message(target, Messages.prefix + "&fTeleportation successful!");
+            if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
+                message(sender, Messages.prefix + "&cSpawn not set. Use &f/setspawn &cin-game to set a spawnpoint.");
                 return true;
-        	}
-        	return true;
+}
+            World w = Bukkit.getServer().getWorld(spawnCoords.getConfig().getString("spawn.world"));
+            double x = spawnCoords.getConfig().getDouble("spawn.x");
+            double y = spawnCoords.getConfig().getDouble("spawn.y");
+            double z = spawnCoords.getConfig().getDouble("spawn.z");
+            float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
+            float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
+            Location spawn = new Location(w, x, y, z, yaw, pitch);
+            if (Lonewolves.plugin.getConfig().getBoolean("teleport-to-center")) {
+                spawn = SpawnManager.getCenteredLocation(spawn);
+            }
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target == null) {
+                message(sender, Messages.prefix + "&cPlayer not found.");
+                return true;
+            }
+            if (ess != null) {
+                User user = ess.getUser(target);
+                user.setLastLocation();
+            }
+            target.teleport(spawn);
+            message(sender, Messages.prefix + "&fTeleportation successful!");
+            message(target, Messages.prefix + "&fTeleportation successful!");
+            return true;
         }
         Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("spawn")) {
@@ -77,6 +77,9 @@ public class SpawnCommand extends Utils implements CommandExecutor {
             float yaw = (float)spawnCoords.getConfig().getDouble("spawn.yaw");
             float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
             Location spawn = new Location(w, x, y, z, yaw, pitch);
+            if (Lonewolves.plugin.getConfig().getBoolean("teleport-to-center")) {
+                spawn = SpawnManager.getCenteredLocation(spawn);
+            }
             if (player.hasPermission("lw.spawn")) {
                 if (args.length < 1) {
                 	if (player.hasPermission("lw.bypass.teleportdelay")) {
@@ -90,13 +93,14 @@ public class SpawnCommand extends Utils implements CommandExecutor {
                     }
                 	message(player, Messages.prefix + "&fYou will be teleported in &c" + Lonewolves.plugin.getConfig().getInt("spawn-delay") + " &fseconds.");
                     if (!tasks.containsKey(player)) {
+                        Location finalSpawn = spawn;
                         tasks.put(player, new BukkitRunnable() {
                             public void run() {
                             	if (ess != null) {
                                     User user = ess.getUser(player);
                                     user.setLastLocation();
                                 }
-                                player.teleport(spawn);
+                                player.teleport(finalSpawn);
                                 message(player, Messages.prefix + "&fTeleportation successful!");
                                 tasks.remove(player);
                             }

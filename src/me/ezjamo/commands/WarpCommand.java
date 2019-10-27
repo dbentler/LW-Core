@@ -53,6 +53,9 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 				float yaw = (float)warps.get().getDouble("Warps." + args[0].toLowerCase() + ".yaw");
 				float pitch = (float)warps.get().getDouble("Warps." + args[0].toLowerCase() + ".pitch");
 				Location warpLoc = new Location(w, x, y, z, yaw, pitch);
+				if (Lonewolves.plugin.getConfig().getBoolean("teleport-to-center")) {
+					warpLoc = WarpManager.getCenteredLocation(warpLoc);
+				}
 				Player target = Bukkit.getPlayer(args[1]);
 				if (target == null) {
 					message(sender, "&cPlayer not found.");
@@ -103,6 +106,9 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 				float yaw = (float)warps.get().getDouble("Warps." + args[0].toLowerCase() + ".yaw");
 				float pitch = (float)warps.get().getDouble("Warps." + args[0].toLowerCase() + ".pitch");
 				Location warpLoc = new Location(w, x, y, z, yaw, pitch);
+				if (Lonewolves.plugin.getConfig().getBoolean("teleport-to-center")) {
+					warpLoc = WarpManager.getCenteredLocation(warpLoc);
+				}
 				if (Lonewolves.plugin.getConfig().getBoolean("per-warp-permissions")) {
 					if (player.hasPermission("lw.warp." + args[0])) {
 						if (player.hasPermission("lw.bypass.teleportdelay")) {
@@ -116,13 +122,14 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 						}
 						message(player, Messages.prefix + "&fYou will be teleported in &c" + Lonewolves.plugin.getConfig().getInt("warp-delay") + " &fseconds.");
 						if (!tasks.containsKey(player)) {
+							Location finalWarpLoc = warpLoc;
 							tasks.put(player, new BukkitRunnable() {
 								public void run() {
 									if (ess != null) {
 										User user = ess.getUser(player);
 										user.setLastLocation();
 									}
-									player.teleport(warpLoc);
+									player.teleport(finalWarpLoc);
 									message(player, Messages.prefix + "&fWarped to &c" + args[0]);
 									tasks.remove(player);
 								}
@@ -147,13 +154,14 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 					}
 					message(player, Messages.prefix + "&fYou will be teleported in &c" + Lonewolves.plugin.getConfig().getInt("warp-delay") + " &fseconds.");
 					if (!tasks.containsKey(player)) {
+						Location finalWarpLoc = warpLoc;
 						tasks.put(player, new BukkitRunnable() {
 							public void run() {
 								if (ess != null) {
 									User user = ess.getUser(player);
 									user.setLastLocation();
 								}
-								player.teleport(warpLoc);
+								player.teleport(finalWarpLoc);
 								message(player, Messages.prefix + "&fWarped to &c" + args[0]);
 								tasks.remove(player);
 							}
@@ -178,6 +186,9 @@ public class WarpCommand extends Utils implements CommandExecutor, TabCompleter 
 				float yaw = (float)warps.get().getDouble("Warps." + args[0].toLowerCase() + ".yaw");
 				float pitch = (float)warps.get().getDouble("Warps." + args[0].toLowerCase() + ".pitch");
 				Location warpLoc = new Location(w, x, y, z, yaw, pitch);
+				if (Lonewolves.plugin.getConfig().getBoolean("teleport-to-center")) {
+					warpLoc = WarpManager.getCenteredLocation(warpLoc);
+				}
 				Player target = Bukkit.getPlayer(args[1]);
 				if (target == null) {
 					message(player, "&cPlayer not found.");

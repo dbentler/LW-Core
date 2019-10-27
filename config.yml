@@ -40,6 +40,9 @@ quit-message: 'none'
 #This is the name of the server as defined in your bungeecord config that you want the /hub command to take you to.
 hub-server: 'hub'
 
+#If enabled you will be teleported to the center of blocks when using /warp and /spawn
+teleport-to-center: true
+
 #If enabled then each warp will have its own permission like this "lw.warp.<WarpName>"
 per-warp-permissions: false
 

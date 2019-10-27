@@ -26,7 +26,7 @@ import java.util.Set;
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
     public static Lonewolves plugin;
     private Assemble assemble;
-    FileManager manager;
+    public FileManager manager;
 	private Utils utils = new Utils();
     public static int task = 1;
     public static int size;
