@@ -12,10 +12,29 @@ enable-spawner-placement: true
 #Sets the chat format, supports placeholders.
 chat-format:
   enabled: true
-  format: '&8[[FACTION]&8] %luckperms_prefix%%player_nickname%%deluxetags_tag%&7:&r '
+
+  channel: '&8[[FACTION]&8] '
+  prefix: '%luckperms_prefix%'
+  name: '%player_nickname%'
+  suffix: '%deluxetags_tag%: '
+
+  #To start a new line use "|"
+  channel-tooltip:
+    - '&aName: &f%player_name%|&aBalance: &f%vault_eco_balance_formatted%||&aClick to view %factionsuuid_faction_name%'
+  prefix-tooltip:
+    - '&aName: &f%player_name%|&aBalance: &f%vault_eco_balance_formatted%||&aClick to message &f%player_name%'
+  name-tooltip:
+    - '&aName: &f%player_name%|&aBalance: &f%vault_eco_balance_formatted%||&aClick to message &f%player_name%'
+  suffix-tooltip:
+    - '&aName: &f%player_name%|&aBalance: &f%vault_eco_balance_formatted%||&aClick to view your tags.'
+
+  channel-click-command: '/f show %factionsuuid_faction_name%'
+  prefix-click-command: '/msg %player_name%'
+  name-click-command: '/msg %player_name%'
+  suffix-click-command: '/tags'
 
 #If enabled then players will automatically respawn upon dying.
-instant-respawn: false
+instant-respawn: true
 
 #Disables strength 2 potions
 disable-strength-2: true
