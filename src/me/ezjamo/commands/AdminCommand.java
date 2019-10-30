@@ -11,7 +11,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.util.StringUtil;
 
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class AdminCommand extends Utils implements CommandExecutor, TabCompleter {
 	

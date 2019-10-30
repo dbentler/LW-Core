@@ -7,7 +7,7 @@ import com.massivecraft.factions.FPlayers;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;

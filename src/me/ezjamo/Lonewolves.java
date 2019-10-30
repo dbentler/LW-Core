@@ -5,6 +5,7 @@ import io.github.thatkawaiisam.assemble.AssembleStyle;
 import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.*;
 import me.ezjamo.managers.*;
+import me.ezjamo.utils.Utils;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -111,8 +112,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	getCommand("setspawn").setExecutor(new SetSpawnCommand());
     	getCommand("spawn").setExecutor(new SpawnCommand());
     	getCommand("startkoth").setExecutor(new KothCommand());
-    	getCommand("kits").setExecutor(new KitsCommand());
-    	getCommand("preview").setExecutor(new PreviewCommand());
     	getCommand("stats").setExecutor(new StatsCommand());
     	getCommand("demote").setExecutor(new DemoteCommand());
     	getCommand("removemm").setExecutor(new RemoveModModeCommand());
@@ -127,8 +126,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	getCommand("staff").setExecutor(new StaffCommand());
     	loadTabCompleters();
     	new KothManager(this);
-    	new KitsManager(this);
-    	new PreviewManager(this);
     	if(!(setupEconomy())) {
             getLogger().severe("LW-Core requires vault.");
             getServer().getPluginManager().disablePlugin(this);
@@ -182,7 +179,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		getCommand("commands").setTabCompleter(new CmdsCommand());
 		getCommand("worth").setTabCompleter(new WorthCommand());
 		getCommand("help").setTabCompleter(new HelpCommand());
-		getCommand("preview").setTabCompleter(new PreviewCommand());
 		getCommand("scoreboard").setTabCompleter(new ScoreboardCommand(assemble));
 		getCommand("admin").setTabCompleter(new AdminCommand());
 		getCommand("inv").setTabCompleter(new SwitchInventoryCommand());

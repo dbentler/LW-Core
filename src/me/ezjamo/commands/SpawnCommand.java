@@ -2,7 +2,7 @@ package me.ezjamo.commands;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import me.ezjamo.managers.SpawnManager;
 
 import org.bukkit.Bukkit;

@@ -2,7 +2,7 @@ package me.ezjamo.managers;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import me.ezjamo.commands.SpawnCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

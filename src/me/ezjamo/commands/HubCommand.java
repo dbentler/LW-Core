@@ -9,7 +9,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 import me.ezjamo.Lonewolves;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 
 public class HubCommand extends Utils implements CommandExecutor {

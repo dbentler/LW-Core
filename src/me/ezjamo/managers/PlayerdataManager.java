@@ -1,7 +1,7 @@
 package me.ezjamo.managers;
 
 import me.ezjamo.Lonewolves;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;

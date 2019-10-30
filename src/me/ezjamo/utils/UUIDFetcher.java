@@ -1,4 +1,4 @@
-package me.ezjamo.managers;
+package me.ezjamo.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

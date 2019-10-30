@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class PingCommand extends Utils implements CommandExecutor {
 

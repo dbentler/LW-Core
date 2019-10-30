@@ -14,8 +14,8 @@ chat-format:
   enabled: true
 
   channel: '&8[[FACTION]&8] '
-  prefix: '%luckperms_prefix%'
-  name: '%player_nickname%'
+  prefix: '%luckperms_prefix% '
+  name: '%vault_prefix_color%%player_nickname%'
   suffix: '%deluxetags_tag%: '
 
   #To start a new line use "|"

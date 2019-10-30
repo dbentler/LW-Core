@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import me.ezjamo.Lonewolves;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class KothManager implements Listener {
 	private Utils utils = new Utils();

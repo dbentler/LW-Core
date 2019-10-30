@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import me.ezjamo.Lonewolves;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class RulesCommand extends Utils implements CommandExecutor {
 

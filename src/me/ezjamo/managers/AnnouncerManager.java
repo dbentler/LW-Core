@@ -16,7 +16,7 @@ import org.bukkit.event.Listener;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class AnnouncerManager extends Utils implements Listener, CommandExecutor {
 	public Lonewolves plugin;

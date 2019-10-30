@@ -1,10 +1,10 @@
 package me.ezjamo.commands;
 
 import me.ezjamo.Lonewolves;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import me.ezjamo.managers.PlayerdataManager;
-import me.ezjamo.managers.TimeFormat;
-import me.ezjamo.managers.UUIDFetcher;
+import me.ezjamo.utils.TimeFormat;
+import me.ezjamo.utils.UUIDFetcher;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.HeldPermission;
 import me.lucko.luckperms.api.LuckPermsApi;

@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class NightVisionCommand extends Utils implements CommandExecutor {
 	

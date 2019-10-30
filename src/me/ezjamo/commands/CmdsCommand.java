@@ -14,7 +14,7 @@ import org.bukkit.util.StringUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 
 public class CmdsCommand extends Utils implements CommandExecutor, TabCompleter {
 

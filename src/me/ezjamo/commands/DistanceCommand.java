@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import me.ezjamo.managers.SpawnManager;
 
 public class DistanceCommand extends Utils implements CommandExecutor {

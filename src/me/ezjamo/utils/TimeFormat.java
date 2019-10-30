@@ -1,4 +1,4 @@
-package me.ezjamo.managers;
+package me.ezjamo.utils;
 
 public class TimeFormat {
 	static String sec = "s";

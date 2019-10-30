@@ -6,7 +6,7 @@ import io.github.thatkawaiisam.assemble.events.AssembleBoardCreateEvent;
 import io.github.thatkawaiisam.assemble.events.AssembleBoardDestroyEvent;
 import lombok.Getter;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import me.ezjamo.managers.PlayerdataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

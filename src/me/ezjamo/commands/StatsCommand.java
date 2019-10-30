@@ -20,10 +20,10 @@ import org.bukkit.util.StringUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import me.ezjamo.managers.PlayerdataManager;
-import me.ezjamo.managers.TimeFormat;
-import me.ezjamo.managers.UUIDFetcher;
+import me.ezjamo.utils.TimeFormat;
+import me.ezjamo.utils.UUIDFetcher;
 
 public class StatsCommand extends Utils implements CommandExecutor, TabCompleter {
 	UUID target;

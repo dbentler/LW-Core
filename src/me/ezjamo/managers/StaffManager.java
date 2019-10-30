@@ -1,6 +1,6 @@
 package me.ezjamo.managers;
 
-import me.ezjamo.Utils;
+import me.ezjamo.utils.Utils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
