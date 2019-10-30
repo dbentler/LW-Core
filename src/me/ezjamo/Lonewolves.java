@@ -6,6 +6,7 @@ import me.ezjamo.armorequipevent.ArmorListener;
 import me.ezjamo.commands.*;
 import me.ezjamo.managers.*;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -25,6 +26,7 @@ import java.util.Set;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
     public static Lonewolves plugin;
+    public static Permission perms;
     private Assemble assemble;
     public FileManager manager;
 	private Utils utils = new Utils();
@@ -42,6 +44,11 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		Economy econ = rsp.getProvider();
         return econ != null;
     }
+
+    private void setupPermissions() {
+		RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+		perms = rsp.getProvider();
+	}
 
     @Override
 	public void onEnable() {
@@ -83,6 +90,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         pm.registerEvents(new AnnouncerManager(), this);
         pm.registerEvents(new WarpManager(), this);
         pm.registerEvents(new EnchantmentManager(), this);
+        pm.registerEvents(new StaffManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	getCommand("request").setExecutor(new Helpop());
@@ -116,6 +124,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	getCommand("setwarp").setExecutor(new SetWarpCommand());
     	getCommand("delwarp").setExecutor(new DelWarpCommand());
     	getCommand("warp").setExecutor(new WarpCommand());
+    	getCommand("staff").setExecutor(new StaffCommand());
     	loadTabCompleters();
     	new KothManager(this);
     	new KitsManager(this);
@@ -124,6 +133,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
             getLogger().severe("LW-Core requires vault.");
             getServer().getPluginManager().disablePlugin(this);
         }
+    	setupPermissions();
     	if (AnnouncerManager.getManager().get().getBoolean("announcer-settings.enabled")) {
     		task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
     			size++;
@@ -157,7 +167,9 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(this, "BungeeCord", this);
     	Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
     	for (Player staff : Bukkit.getOnlinePlayers()) {
-    		staff.setGameMode(GameMode.SURVIVAL);
+    		if (!staff.hasPermission("lw.bypass.reload")) {
+				staff.setGameMode(GameMode.SURVIVAL);
+			}
     		staff.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     	}
 	}

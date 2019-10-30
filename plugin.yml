@@ -4,7 +4,7 @@ author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
 softdepend: [Essentials, KoTH]
 depend: [Vault, PlaceholderAPI]
-version: 3.0
+version: 3.1
 
 commands:
   request:
@@ -61,6 +61,8 @@ commands:
       - warps
       - ewarp
       - ewarps
+  staff:
+    description: Opens a GUI that shows all staff.
    
 permissions:
   lw.helpop:
