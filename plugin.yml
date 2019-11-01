@@ -2,93 +2,83 @@ name: LW-Core
 main: me.ezjamo.Lonewolves
 author: EzJamo & DeathRealms
 description: Multipurpose essentials plugin coded by the LoneWolves Development Team.
-softdepend: [Essentials, KoTH]
+softdepend: [Essentials, KoTH, LuckPerms]
 depend: [Vault, PlaceholderAPI]
-version: 3.2
+version: "3.2"
 
 commands:
-  request:
-    aliases:
-      - helpop
-  mod:
-    aliases:
-      - h
-      - staff
-  sc:
-    aliases:
-      - staffchat
-  acc:
-    aliases:
-      - adminchat
-  distance:
-   aliases: [dist]
-  links:
-   aliases: [link] 
-  help:
   lw:
+    description: Main command for this plugin.
+    aliases: [lonewolves]
+  request:
+    description: Sends a message to online staff.
+    aliases: [helpop]
+  mod:
+    description: Toggles your mod mode.
+    aliases: [h, staff]
+  sc:
+    description: Toggles your staff chat.
+    aliases: [staffchat]
+  acc:
+    description: Toggles your admin chat.
+    aliases: [adminchat]
+  distance:
+    description: Shows your distance from spawn.
+    aliases: [dist]
+  help:
+    description: Shows you a help page.
+  links:
+    description: Shows you server related links.
+    aliases: [link]
   rules:
+    description: Shows you the server rules.
   setslots:
-  setspawn:
-  spawn:
-   aliases: [espawn]
-  freeze:
+    description: Sets the maximum slots for the server.
   nv:
-  hub:
+    description: Toggles your nightvision effects.
+    aliases: [nightvision]
+  freeze:
+    description: Freezes the player specified.
   admin:
-  removemm:
-  commands:
-   aliases: [cmds]
+    description: Toggles your admin permissions.
   inv:
+    description: Switches between your previous and a blank inventory.
   ping:
+    description: Shows your ping to the server.
+  hub:
+    description: Takes you to your hub server.
+  setspawn:
+    description: Sets the server spawn at your location.
+  spawn:
+    description: Teleports you to the server spawn.
+    aliases: [espawn]
   startkoth:
+    description: Opens a GUI that lets you start a koth.
   stats:
+    description: Shows your server stats.
   demote:
+    description: Removes all staff permissions from a player.
+  removemm:
+    description: Removes mod mode from a player.
   playtime:
-   aliases: [pt]
+    description: Shows your total playtime on the server.
+    aliases: [pt]
   worth:
+    description: Shows you the worth of certain items.
+  commands:
+    description: Shows you all the commands of a rank.
+    aliases: [cmds]
   scoreboard:
-    aliases:
-      - fb
-      - sb
+    description: Toggles the scoreboard.
+    aliases: [sb, fb]
   ma:
+    description: Reloads the announcer config.
   setwarp:
+    description: Sets a warp at your location.
   delwarp:
+    description: Deletes a warp.
   warp:
-    aliases:
-      - warps
-      - ewarp
-      - ewarps
+    description: Teleports you to a warp.
+    aliases: [ewarp, warps, ewarps]
   staff:
     description: Opens a GUI that shows all staff.
-   
-permissions:
-  lw.helpop:
-    description: Helpop/request.
-    default: op
-  lw.mod:
-    description: 'Toggle mod mode.'
-    default: op
-  lw.color:
-    description: 'Chat color.'
-    default: op
-  lw.helpopr:
-    description: 'Helpop receive.'
-    default: op
-  lw.staffchat:
-    description: 'Chat for staff.'
-  lw.slots:
-    description: 'Set server slots.'
-  lw.nv:
-    description: 'Gives nightvision.'
-  lw.switchinv:
-    description: 'Switches between a blank inventory and your previous one.'
-  lw.koth:
-    description: 'Opens a GUI to start a koth.'
-  lw.kits:
-    description: 'Opens a kits GUI.'
-  lw.preview:
-    description: 'Shows a preview of the selected kit.'
-  lw.demote:
-    description: 'Demotes the specified user.'
-  lw.fly.bypass:
-    description: 'Lets user bypass fly disable in other faction claims.'
