@@ -74,7 +74,6 @@ public class ChatManager extends Utils implements Listener {
 
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent event) {
-		event.setCancelled(true);
 		Essentials ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
 		Player player = event.getPlayer();
 		FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
@@ -82,11 +81,13 @@ public class ChatManager extends Utils implements Listener {
 		boolean enabled = Lonewolves.plugin.getConfig().getBoolean("chat-format.enabled");
 		for (String blockedWords : BlockedWordsManager.getManager().getConfig().getStringList("Blocked Words")) {
 			if (event.getMessage().toLowerCase().contains(blockedWords)) {
+				event.setCancelled(true);
 				message(player, Messages.prefix + Messages.playerSaidBlockedWord);
 				return;
 			}
 		}
 		if (enabled) {
+			event.setCancelled(true);
 			String channelString = Lonewolves.plugin.getConfig().getString("chat-format.channel");
 			String setChannel = PlaceholderAPI.setPlaceholders(player, channelString);
 
