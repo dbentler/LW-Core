@@ -67,6 +67,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     	BlockedWordsManager.getManager().setupFiles();
     	AnnouncerManager.getManager().load();
     	WarpManager.getManager().load();
+    	CmdAliasManager.getManager().load();
     	assemble = new Assemble(this, new ScoreboardAdapter());
 		assemble.setTicks(16);
 		assemble.setAssembleStyle(AssembleStyle.LONEWOLVES);
@@ -92,6 +93,7 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         pm.registerEvents(new WarpManager(), this);
         pm.registerEvents(new EnchantmentManager(), this);
         pm.registerEvents(new StaffManager(), this);
+        pm.registerEvents(new CmdAliasManager(), this);
         Bukkit.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     	getCommand("request").setExecutor(new Helpop());
@@ -200,6 +202,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
         			Messages.load();
         			BlockedWordsManager.getManager().reloadConfig();
         			SpawnManager.getManager().reloadConfig();
+        			WarpManager.getManager().reload();
+        			CmdAliasManager.getManager().reloadConfig();
         			sender.sendMessage(Messages.prefix + Messages.reloadConfig);
         			return true;
     			}
@@ -214,6 +218,8 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
     					Messages.load();
     					BlockedWordsManager.getManager().reloadConfig();
 						SpawnManager.getManager().reloadConfig();
+                        WarpManager.getManager().reload();
+                        CmdAliasManager.getManager().reloadConfig();
     					player.sendMessage(Messages.prefix + Messages.reloadConfig);
     					getServer().getConsoleSender().sendMessage(Messages.prefix + Messages.reloadConfig);
     					return true;

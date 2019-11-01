@@ -1,0 +1,2 @@
+lot: //The command alias
+  command: 'lottery' //The command your alias will perform.
