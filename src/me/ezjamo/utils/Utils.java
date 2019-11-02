@@ -1,6 +1,7 @@
 package me.ezjamo.utils;
 
 import com.google.common.collect.Lists;
+import me.ezjamo.Lonewolves;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -19,6 +20,14 @@ public class Utils {
 	public void message(CommandSender sender, String string) {
 		string = color(string);
 		sender.sendMessage(string);
+	}
+
+	public String getMessage(String path) {
+		String message = Lonewolves.plugin.getConfig().getString("Messages." + path);
+		if (message == null) {
+			message = Lonewolves.plugin.getConfig().getString("Messages." + path);
+		}
+		return message;
 	}
 
 	public void createItem(Inventory punish, Material material, int amount, int invSlot, String displayName, String... loreString) {

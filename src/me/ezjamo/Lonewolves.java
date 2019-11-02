@@ -182,14 +182,6 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
 		getCommand("inv").setTabCompleter(new SwitchInventoryCommand());
 	}
 
-	public String getMessage(String path) {
-        String message = getConfig().getString("Messages." + path);
-        if (message == null) {
-            message = getConfig().getString("Messages." + path);
-        }
-        return message;
-    }
-
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	if (cmd.getName().equalsIgnoreCase("lw")) {
     		if (!(sender instanceof Player)) {

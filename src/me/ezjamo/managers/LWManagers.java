@@ -119,7 +119,7 @@ public class LWManagers implements Listener {
 		if (!player.hasPlayedBefore()) {
 			if (spawnCoords.getConfig().getConfigurationSection("spawn") == null) {
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
-	            String message = Lonewolves.plugin.getMessage("welcome-message");
+	            String message = utils.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
 				event.setJoinMessage(utils.color(placeholders));
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " +  player.getName());
@@ -135,7 +135,7 @@ public class LWManagers implements Listener {
 				float pitch = (float)spawnCoords.getConfig().getDouble("spawn.pitch");
 				Location loc = new Location(w, x, y, z, yaw, pitch);
 				String firstKit = Lonewolves.plugin.getConfig().getString("first-join-kit");
-	            String message = Lonewolves.plugin.getMessage("welcome-message");
+	            String message = utils.getMessage("welcome-message");
 	            String placeholders = PlaceholderAPI.setPlaceholders(player, message);
 				event.setJoinMessage(utils.color(placeholders));
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), "ekit " + firstKit + " " + player.getName());

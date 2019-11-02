@@ -6,9 +6,6 @@
 #------------------------------------------------------------------------
 
 #Server Options
-#Disables all spawner placement (use after spawner place date)
-enable-spawner-placement: true
-
 #Sets the chat format, supports placeholders.
 chat-format:
   enabled: true
@@ -32,6 +29,9 @@ chat-format:
   prefix-click-command: '/msg %player_name%'
   name-click-command: '/msg %player_name%'
   suffix-click-command: '/tags'
+
+#Disables all spawner placement on the server.
+enable-spawner-placement: true
 
 #If enabled then players will automatically respawn upon dying.
 instant-respawn: true
@@ -75,7 +75,6 @@ spawn-delay: 4
 first-join-kit: 'member'
 
 Messages:
-  ActionBarMessage: '&aYou are invisible to other players!'
   welcome-message: '&fWelcome &4%player_name% &fto &lLone&4&lWolves&f! &4#%server_unique_joins%'
 
 #/help command
