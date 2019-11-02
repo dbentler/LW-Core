@@ -1,5 +1,6 @@
 package me.ezjamo.commands;
 
+import me.ezjamo.Lonewolves;
 import me.ezjamo.Messages;
 import me.ezjamo.utils.Utils;
 import org.bukkit.command.Command;
@@ -42,7 +43,7 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor, Ta
 
 		ArrayList<ItemStack> list = new ArrayList<>();
 		String playername = p.getName();
-		File file = new File("plugins//LW-Core//Inventories//" + playername + ".yml");
+		File file = new File(Lonewolves.plugin.getDataFolder() + File.separator + "Inventories" + File.separator + playername + ".yml");
 
 		if (label.equalsIgnoreCase("inv")) {
 			if (args.length == 1)
@@ -121,7 +122,7 @@ public class SwitchInventoryCommand extends Utils implements CommandExecutor, Ta
 	}
 
 	public void checkOrder() {
-		File file = new File("plugins//LW-Core//Inventories");
+		File file = new File(Lonewolves.plugin.getDataFolder() + File.separator + "Inventories");
 		if(!file.exists()) {
 			file.mkdir();
 		}

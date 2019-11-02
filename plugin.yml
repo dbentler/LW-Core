@@ -82,3 +82,63 @@ commands:
     aliases: [ewarp, warps, ewarps]
   staff:
     description: Opens a GUI that shows all staff.
+
+permissions:
+  lw.bypass.*:
+    description: Gives all bypass permissions.
+    children:
+      - lw.bypass.teleportdelay
+      - lw.bypass.reload
+
+  lw.reload:
+    description: Gives permission for /lw
+  rank.helper:
+    description: Gives permission to see /helpop messages.
+  lw.mod:
+    description: Gives permission for /mod
+  lw.staffchat:
+    description: Gives permission for /sc
+  lw.adminchat:
+    description: Gives permission for /acc
+  lw.slots:
+    description: Gives permission for /setslots
+  lw.nv:
+    description: Gives permission for /nv
+  lw.freeze:
+    description: Gives permission for /freeze
+  admin.on:
+    description: Gives permission for /admin
+  lw.switchinv:
+    description: Gives permission for /inv
+  lw.setspawn:
+    description: Gives permission for /setspawn
+  lw.spawn:
+    description: Gives permission for /spawn
+  lw.bypass.teleportdelay:
+    description: Gives permission to bypass teleport delays.
+  lw.bypass.reload:
+    description: Gives permission to keep gamemode on plugin reload.
+  lw.spawn.others:
+    description: Gives permission to teleport other players to spawn.
+  lw.koth:
+    description: Gives permission for /startkoth
+  lw.stats:
+    description: Gives permission for /stats
+  lw.stats.others:
+    description: Gives permission to check other players stats.
+  lw.demote:
+    description: Gives permission for /demote
+  lw.removemm:
+    description: Gives permission for /removemm
+  lw.playtime:
+    description: Gives permission for /playtime
+  lw.playtime.others:
+    description: Gives permission to check other players playtime.
+  lw.setwarp:
+    description: Gives permission for /setwarp
+  lw.delwarp:
+    description: Gives permission for /delwarp
+  lw.warp:
+    description: Gives permission for /warp
+  lw.warp.others:
+    description: Gives permission to warp other players.
