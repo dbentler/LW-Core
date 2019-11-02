@@ -90,13 +90,11 @@ public class AnnouncerManager extends Utils implements Listener, CommandExecutor
 							}
 							for (String message : getManager().get().getStringList("Messages." + Lonewolves.size)) {
 								for (Player player : Bukkit.getOnlinePlayers()) {
+									player.sendMessage(utils.color(message));
 									player.playSound(player.getLocation(), Sound.valueOf(getManager().get().getString("announcer-settings.sound")), 0.5f, 1.0f);
 								}
-								for (Player online : Bukkit.getOnlinePlayers()) {
-									online.sendMessage(utils.color(message));
-								}
 							}
-						}, 1L, getManager().get().getInt("announcer-settings.interval") * 20), 1L);
+						}, 0, getManager().get().getInt("announcer-settings.interval") * 20), 1L);
 					}
 				}
 				else message(sender, Messages.prefix + Messages.noPermission);

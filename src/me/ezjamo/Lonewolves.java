@@ -26,13 +26,13 @@ import java.util.List;
 import java.util.Set;
 
 public class Lonewolves extends JavaPlugin implements Listener, PluginMessageListener {
-    public static Lonewolves plugin;
-    public static Permission perms;
-    private Assemble assemble;
-    public FileManager manager;
+	public static Lonewolves plugin;
+	public static Permission perms;
+	public static int task = 1;
+	public static int size;
+	public FileManager manager;
+	private Assemble assemble;
 	private Utils utils = new Utils();
-    public static int task = 1;
-    public static int size;
 
 	private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -142,18 +142,14 @@ public class Lonewolves extends JavaPlugin implements Listener, PluginMessageLis
                 }
                 for (String message : AnnouncerManager.getManager().get().getStringList("Messages." + size)) {
                 	for (Player player : Bukkit.getOnlinePlayers()) {
+						player.sendMessage(utils.color(message));
                     	player.playSound(player.getLocation(), Sound.valueOf(AnnouncerManager.getManager().get().getString("announcer-settings.sound")), 0.5f, 1.0f);
+						ScoreboardCommand scoreboard = new ScoreboardCommand(assemble);
+						scoreboard.removeScoreboard(player);
                     }
-                	for (Player online : Bukkit.getOnlinePlayers()) {
-                		online.sendMessage(utils.color(message));
-					}
                 }
-            }, 5 * 20, AnnouncerManager.getManager().get().getInt("announcer-settings.interval") * 20);
+            }, 0, AnnouncerManager.getManager().get().getInt("announcer-settings.interval") * 20);
     	}
-    	for (Player disabled : Bukkit.getOnlinePlayers()) {
-			ScoreboardCommand scoreboard = new ScoreboardCommand(assemble);
-			scoreboard.removeScoreboard(disabled);
-		}
     }
 
 	public void onDisable() {
