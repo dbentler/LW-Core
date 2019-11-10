@@ -1,5 +1,8 @@
 package me.ezjamo.commands;
 
+import me.ezjamo.Lonewolves;
+import me.ezjamo.Messages;
+import me.ezjamo.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -7,12 +10,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import me.ezjamo.Messages;
-import me.ezjamo.utils.Utils;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
+import subside.plugins.koth.KothPlugin;
+import subside.plugins.koth.areas.Koth;
 
 public class KothCommand extends Utils implements CommandExecutor {
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!(sender instanceof Player)) {
@@ -20,23 +25,29 @@ public class KothCommand extends Utils implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) sender;
-		if (cmd.getName().equalsIgnoreCase("startkoth")) {
-			if (player.hasPermission("lw.koth"))
-				KothCommand.koth(player);
-			if(!player.hasPermission("lw.koth"))
-				message(player, Messages.prefix + Messages.noPermission);
+		if (!player.hasPermission("lw.koth")) {
+			message(player, Messages.prefix + Messages.noPermission);
+			return true;
 		}
+		koth(player);
 		return true;
 	}
 
-	public static void koth(Player p) {
+	public void koth(Player p) {
+		Plugin plugin = Lonewolves.plugin.getServer().getPluginManager().getPlugin("KoTH");
+		KothPlugin kothPlugin = (KothPlugin) plugin;
 		Utils utils = new Utils();
-		Inventory koth = Bukkit.getServer().createInventory(null, 27, utils.color("&fLone&4Wolves &fKoths"));
-		utils.createItem(koth, Material.NETHER_STAR, 1, 0, "&dCrow Koth", "&fStart &dCrow &fkoth for 5 minutes.");
-		utils.createItem(koth, Material.NETHER_STAR, 1, 1, "&dGoliath Koth", "&fStart &dGoliath &fkoth for 5 minutes.");
-		utils.createItem(koth, Material.NETHER_STAR, 1, 2, "&dTriumph Koth", "&fStart &dTriumph &fkoth for 5 minutes.");
-		utils.createItem(koth, Material.NETHER_STAR, 1, 3, "&dEnd Koth", "&fStart &dEnd &fkoth for 5 minutes.");
-		utils.createItem(koth, Material.NETHER_STAR, 1, 4, "&dMines Koth", "&fStart &dMines &fkoth for 5 minutes.");
-		p.openInventory(koth);
+		int slot = 0;
+		Inventory inv = Bukkit.getServer().createInventory(null, 27, utils.color(Messages.prefix.replace("[", "").replace("]", "") + "&fKoths"));
+		for (Koth koths : kothPlugin.getKothHandler().getAvailableKoths()) {
+			String koth = koths.getName();
+			ItemStack item = new ItemStack(Material.NETHER_STAR, 1);
+			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName(color("&d" + koth));
+			item.setItemMeta(meta);
+			++slot;
+			inv.setItem(slot - 1, item);
+		}
+		p.openInventory(inv);
 	}
 }
