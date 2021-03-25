@@ -15,3 +15,5 @@ Contains built in:
 And much more.
 
 # This plugin is no longer being updated. Feel free to fork.
+
+Released to the public March 25th, 2021.
