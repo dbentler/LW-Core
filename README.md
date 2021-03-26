@@ -1,18 +1,33 @@
 # LW-Core
 LW-Core is a plugin that utilizes the Spigot 1.8.8 API to fulfill the needs of the Administrative team and the players.
+
 Contains built in:
-- King of the Hill
-- Warps
-- Set Spawn
-- Night Vision
-- Staff Mode
+- HelpOp
+- Request
+- Mod (Requires LuckPerms)
+- Staff Chat
+- Alt viewer
+- Distance from point (0,0)
+- Built in /help
+- Rules
+- Set Player Slots
+- Night vision
+- Freeze (Moderator/Admin enforcement)
+- Inventory Checker (/invsee)
 - Ping
+- Hub (Requires LW-Hub)
+- setspawn and /spawn
+- King of the Hill GUI
+- New KOTHs
+- Demote (Admin)
+- Stats (K/D)
+- Remove Mod Mod (Two separate inventories for Gamemodes)
+- Worth (See what an item is worth in your hand. Requires an Economy plugin)
+- Scoreboard (ArmorHUD, durability display, Faction information, active KOTH, etc)
 - Announcements
-- /Wild
-- In game staff management system
-- Mod mode
-- Staff chat(?)
-And much more.
+- Chat Filter
+- Warps (setting and deleting)
+- Staff display (Shows which staff is online
 
 # This plugin is no longer being updated. Feel free to fork.
 
