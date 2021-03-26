@@ -21,7 +21,7 @@ Contains built in:
 - New KOTHs
 - Demote (Admin)
 - Stats (K/D)
-- Remove Mod Mod (Two separate inventories for Gamemodes)
+- Mod Mode (Two separate inventories for Gamemodes)
 - Worth (See what an item is worth in your hand. Requires an Economy plugin)
 - Scoreboard (ArmorHUD, durability display, Faction information, active KOTH, etc)
 - Announcements
