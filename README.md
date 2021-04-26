@@ -6,7 +6,7 @@ Contains built in:
 - Request
 - Mod (Requires LuckPerms)
 - Staff Chat
-- Alt viewer
+- Ban Evasion check
 - Distance from point (0,0)
 - Built in /help
 - Rules
